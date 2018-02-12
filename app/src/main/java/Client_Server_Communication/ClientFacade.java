@@ -1,5 +1,7 @@
 package Client_Server_Communication;
 
+import java.util.Timer;
+
 import Models.Command;
 import Models.Request;
 import Models.Result;
@@ -9,14 +11,22 @@ import Models.Result;
  */
 
 
-//this will become the clientFacade:
-    //(1) - use this to confirm that everything on the server works
-    //(2) - adapt to then communicate with the poller and the server proxy:
 
 
 public class ClientFacade {
     public static void main(String[] args) {
 //        Scanner in = new Scanner(System.in);
+
+
+
+
+        Timer timer = new Timer();
+        timer.schedule(new Poller(), 0, 1000);
+
+
+
+
+
 
         //TEST LOGIN
         Request loginRequest = new Request();
@@ -81,55 +91,6 @@ public class ClientFacade {
 
 
 
-
-//        System.out.println();
-
-//        while (true)
-//        {
-//            System.out.println("Welcome to Phase 0.5! Prepare to have your strings processed! (Enter Q to quit)");
-//            System.out.print("Enter a method to process: ");
-//            String type = in.nextLine().toLowerCase().trim();
-//            if(type.equals("q")) { break; }
-////            else if(!type.equals("parseinteger")
-////                    && !type.equals("trim")
-////                    && !type.equals("tolowercase"))
-////            {
-////                System.out.println("Sorry, that's not a valid suffix. Valid options include: toLowerCase, trim, and parseInteger.");
-////            }
-//            else
-//            {
-//                if(type.equals("parseinteger") || type.equals("parse")){
-//                    type = "parseInteger";
-//                }
-//                else if(type.equals("tolowercase") || type.equals("lower"))
-//                {
-//                    type = "toLowerCase";
-//                }
-//                System.out.print("Enter the string: ");
-//
-//                String input = in.nextLine();
-//                if(input.toLowerCase().equals("q")) { break; }
-//
-//                Command command = new Command("Interfaces.IStringProcessor", type,
-//                        new String[]{ "Models.Request" }, new Request[]{new Request(input)});
-//
-////                GenericCommand move = new GenericCommand("VideoGame", "move",
-////                        new Class<?>[]{ int.class, Request.class },
-////                        new Object[] { 3 , new Location(75, 12) });
-//
-//                Result result = ClientCommunicator.getInstance().sendCommand(command);
-//
-//                if (result.isSuccessful())
-//                {
-//                    System.out.println(result.getData());
-//                }
-//                else
-//                {
-//                    System.out.println(result.getErrorMsg());
-//                }
-//                System.out.println();
-//            }
-//        }
     }
 
     //login function:

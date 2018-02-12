@@ -29,42 +29,6 @@ public class GameServices implements IServerGame {
 
         System.out.println("COMMAND EXECUTED - CREATE GAME");
 
-//        //check if requesting client is an active (logged in) client
-//        if(Database.getInstance().getClients().contains(authToken))
-//        {
-//            //check if gameId already exists
-//            if(!Database.getInstance().getGames().containsKey(gameId))
-//            {
-//                //if it doesn't exist yet, create it
-//                Game newGame = new Game(gameId);
-//                //add the creator to the game
-//                String username = Database.getInstance().getUsername(authToken);
-//                newGame.getPlayers().add(username);
-//                //add the game to the database
-//                Database.getInstance().getGames().put(gameId, newGame);
-////                result.setGameId(gameId); //do we want to return anything other than a boolean?
-//                result.setSuccess(true);
-//
-//                //create commands for other active clients
-//                Request clientRequest = new Request();
-//                clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
-//                clientRequest.setUsername(username); //This is specific to createGame()
-//                clientRequest.setGameId(gameId); //This is specific to createGame()
-//                //add command for other clients
-//                //creates a command object for each client except the requesting client
-//                ClientProxy.getInstance().createGame(request);
-//            }
-//            else
-//            {
-//                result.setSuccess(false);
-//                result.setErrorMsg("The requested game ID already exists.");
-//            }
-//        }
-//        else
-//        {
-//            result.setSuccess(false);
-//            result.setErrorMsg("Invalid authorization token.");
-//        }
         return null;
     }
 
@@ -77,7 +41,8 @@ public class GameServices implements IServerGame {
     @Override
     public Result startGame(Request request) { //(String authToken, String gameId);
 
-        System.out.println("COMMAND EXECUTED - START GAME");return null;
+        System.out.println("COMMAND EXECUTED - START GAME");
+        return null;
     }
 
     @Override //polling response
