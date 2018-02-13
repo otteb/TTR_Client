@@ -23,7 +23,7 @@ public class Poller extends TimerTask{
         //build request:
 
         //the execute method will call the doinbackground and on post execute
-        clientFacade.updateClient();
+//        clientFacade.updateClient();
 
     }
 
