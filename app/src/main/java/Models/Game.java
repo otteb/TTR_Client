@@ -20,6 +20,17 @@ public class Game {
         players = new ArrayList<>();
     }
 
+    public Game(ArrayList<String> p, String i)
+    {
+        id = i;
+        if(p != null) {
+            players = p;
+        }
+        else {
+            players= new ArrayList<String>();
+        }
+    }
+
     public String getId() {
         return id;
     }
@@ -28,13 +39,17 @@ public class Game {
         this.id = id;
     }
 
-//    public Map<String, String> getPlayers() {
-//        return players;
-//    }
-
-//    public void setPlayers(Map<String, String> players) {
-//        this.players = players;
-//    }
+    public String addPlayer(String p){
+        if(players.size() <= 5)
+        {
+            players.add(p);
+        }
+        else
+        {
+            return "the player could not be added the Game is full";
+        }
+        return null;
+    }
 
     public ArrayList<String> getPlayers() {
         return players;

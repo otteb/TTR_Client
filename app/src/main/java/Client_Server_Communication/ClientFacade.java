@@ -16,72 +16,69 @@ import Models.Result;
 
 public class ClientFacade {
     public static void main(String[] args) {
-//        Scanner in = new Scanner(System.in);
 
 
 
+
+//        //TEST LOGIN
+//        Request loginRequest = new Request();
+////        loginRequest.setUsername("jordan");
+////        loginRequest.setPassword("jf");
+//        loginRequest.setUsername("brian");
+//        loginRequest.setPassword("bo");
+//        login(loginRequest);
+//        //END LOGIN TEST
+//
+//        //TEST REGISTER
+//        Request registerRequest = new Request();
+//        registerRequest.setUsername("chipper");
+//        registerRequest.setPassword("tacos");
+////        register(registerRequest);
+//        //END REGISTER TEST
+//
+//        //TEST CREATE GAME
+//        Request gameRequest = new Request();
+////        gameRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+//        gameRequest.setAuthToken("01b7cb2c-24c1-4c82-8f6f-c6ee8ab39d2e");
+//        gameRequest.setGameId("Brian's Game");
+//        int temp = Client.getInstance().getCommandNum();
+//        gameRequest.setCommandNum(temp);
+//        createGame(gameRequest);
+////        //END CREATE GAME TEST
+//
+//
+//        //login a new user:
+//        loginRequest.setUsername("jordan");
+//        loginRequest.setPassword("jf");
+//        login(loginRequest);
+//
+//
+//        //TEST JOIN GAME
+//        Request joinRequest = new Request();
+//        //brian's authToken
+//        joinRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+//        joinRequest.setGameId("Brian's Game");
+//        temp = Client.getInstance().getCommandNum();
+//        joinRequest.setCommandNum(temp);
+//        joinGame(joinRequest);
+//        //END JOIN GAME TEST
+//
+//        loginRequest.setUsername("kip");
+//        loginRequest.setPassword("kh");
+//        login(loginRequest);
+//
+//
+//        //TEST START GAME
+//        Request startRequest = new Request();
+//        startRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+//        startRequest.setGameId("Brian's Game");
+//        temp = Client.getInstance().getCommandNum();
+//        startRequest.setCommandNum(temp);
+//        startGame(startRequest);
+//        //END START GAME TEST
 
 //        Timer timer = new Timer();
 //        timer.schedule(new Poller(), 0, 1000);
-
-
-
-        //TEST LOGIN
-        Request loginRequest = new Request();
-//        loginRequest.setUsername("jordan");
-//        loginRequest.setPassword("jf");
-        loginRequest.setUsername("brian");
-        loginRequest.setPassword("bo");
-        login(loginRequest);
-        //END LOGIN TEST
-
-        //TEST REGISTER
-        Request registerRequest = new Request();
-        registerRequest.setUsername("chipper");
-        registerRequest.setPassword("tacos");
-//        register(registerRequest);
-        //END REGISTER TEST
-
-        //TEST CREATE GAME
-        Request gameRequest = new Request();
-//        gameRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
-        gameRequest.setAuthToken("01b7cb2c-24c1-4c82-8f6f-c6ee8ab39d2e");
-        gameRequest.setGameId("Brian's Game");
-        gameRequest.setCommandNum(0);
-        createGame(gameRequest);
-//        //END CREATE GAME TEST
-
-
-        //login a new user:
-        loginRequest.setUsername("jordan");
-        loginRequest.setPassword("jf");
-        login(loginRequest);
-
-
-        //TEST JOIN GAME
-        Request joinRequest = new Request();
-        //brian's authToken
-        joinRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
-        joinRequest.setGameId("Brian's Game");
-        joinRequest.setCommandNum(0);
-        joinGame(joinRequest);
-        //END JOIN GAME TEST
-
-        loginRequest.setUsername("kip");
-        loginRequest.setPassword("kh");
-        login(loginRequest);
-
-
-        //TEST START GAME
-        Request startRequest = new Request();
-        startRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
-        startRequest.setGameId("Brian's Game");
-        startRequest.setCommandNum(0);
-        startGame(startRequest);
-        //END START GAME TEST
-
-        Poller p = Poller.getInstance();
-        p.runLobbyCommands();
 
 
 //        //TEST UPDATE CLIENT COMMAND
@@ -96,7 +93,7 @@ public class ClientFacade {
     }
 
     //login function:
-    public static void login(Request request){
+    public static Result login(Request request){
 
         Command loginCommand = new Command("Interfaces.IServerUser", "login",
                 new String[]{ "Models.Request" }, new Request[]{ request });
@@ -115,10 +112,11 @@ public class ClientFacade {
             System.out.println("Error:");
             System.out.println(result.getErrorMsg());
         }
+        return result;
     }
 
 
-    public static void register(Request request){
+    public static Result register(Request request){
         Command registerCommand = new Command("Interfaces.IServerUser", "register",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
@@ -136,9 +134,10 @@ public class ClientFacade {
             System.out.println(regResult.getErrorMsg());
         }
         System.out.println();
+        return regResult;
     }
 
-    public static void createGame(Request request){
+    public static Result createGame(Request request){
         Command gameCommand = new Command("Interfaces.IServerGame", "createGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
@@ -147,6 +146,8 @@ public class ClientFacade {
         if (gameResult.isSuccessful())
         {
             for(int i = 0; i < gameResult.getUpdateCommands().size(); i++){
+                int temp = Client.getInstance().getCommandNum();
+                Client.getInstance().setCommandNum(++temp);
 //                System.out.println(gameResult.getUpdateCommands().get(i).getClass());
                 try {
                     gameResult.getUpdateCommands().get(i).execute();
@@ -165,9 +166,10 @@ public class ClientFacade {
             System.out.println(gameResult.getErrorMsg());
         }
         System.out.println();
+        return gameResult;
     }
 
-    public static void joinGame(Request request){
+    public static Result joinGame(Request request){
         Command gameCommand = new Command("Interfaces.IServerGame", "joinGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
@@ -175,6 +177,8 @@ public class ClientFacade {
         {
 //            System.out.println(request.getGameId() + " successfully joined!");
             for(int i = 0; i < gameResult.getUpdateCommands().size(); i++){
+                int temp = Client.getInstance().getCommandNum();
+                Client.getInstance().setCommandNum(++temp);
                 try {
                     gameResult.getUpdateCommands().get(i).execute();
                 }catch (Exception e)
@@ -192,10 +196,11 @@ public class ClientFacade {
             System.out.println(gameResult.getErrorMsg());
         }
         System.out.println();
+        return gameResult;
     }
 
 
-    public static void startGame(Request request){
+    public static Result startGame(Request request){
         Command gameCommand = new Command("Interfaces.IServerGame", "startGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
@@ -203,6 +208,9 @@ public class ClientFacade {
         {
             System.out.println(gameResult.getGameId() + " successfully started!");
             for(int i = 0; i < gameResult.getUpdateCommands().size(); i++){
+                int temp = Client.getInstance().getCommandNum();
+                ++temp;
+                Client.getInstance().setCommandNum(temp);
                 try {
                     gameResult.getUpdateCommands().get(i).execute();
                 }catch (Exception e)
@@ -210,8 +218,6 @@ public class ClientFacade {
                     System.out.println("ERROR");
                     e.printStackTrace();
                 }
-
-
             }
         }
         else
@@ -220,6 +226,7 @@ public class ClientFacade {
             System.out.println(gameResult.getErrorMsg());
         }
         System.out.println();
+        return gameResult;
     }
 
     public static Result updateClient(Request request){
@@ -227,7 +234,7 @@ public class ClientFacade {
                 new String[]{ "Models.Request" }, new Request[]{ request });
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
 
-        System.out.println(gameResult.isSuccessful());
+//        System.out.println(gameResult.isSuccessful());
         if (gameResult.isSuccessful())
         {
 //            System.out.println(gameResult.getUpdateCommands().size());

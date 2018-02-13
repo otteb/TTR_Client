@@ -9,11 +9,11 @@ import java.util.List;
  */
 
 public class Client {
-    private static Client single_instance = null;
+    private static Client single_instance = new Client();
 
 
 
-    private HashMap<String, Game> gameMap = new HashMap<>();
+    private HashMap<String, Game> gameMap;
     private Game activeGame = new Game();
     private Boolean isLoggedIn;
     private Boolean isRegistered;
@@ -26,14 +26,13 @@ public class Client {
 
 
     //constructor
-    Client(){}
+    Client(){
+        this.commandNum = 0;
+        this.gameMap = new HashMap<>();
+    }
 
     public static Client getInstance()
     {
-        if (single_instance == null)
-        {
-            single_instance= new Client();
-        }
         return single_instance;
     }
 
@@ -111,6 +110,13 @@ public class Client {
     }
     public void setGameMap(HashMap<String, Game> gameMap) {
         this.gameMap = gameMap;
+    }
+    public ArrayList<Game> getGameList(){
+        ArrayList<Game> returnList = new ArrayList<>();
+        for(String i: this.gameMap.keySet()){
+            returnList.add(this.gameMap.get(i));
+        }
+        return returnList;
     }
 
 
