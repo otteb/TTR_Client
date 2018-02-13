@@ -7,7 +7,7 @@ public class Game {
 
     private String id;
     //    private Map<String,String> players; // not sure what the key and value are
-    private List<String> players; //list of players' usernames
+    private ArrayList<String> players; //list of players' usernames
     private boolean joinable;
 
     public Game(){
@@ -36,11 +36,11 @@ public class Game {
 //        this.players = players;
 //    }
 
-    public List<String> getPlayers() {
+    public ArrayList<String> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<String> players) {
+    public void setPlayers(ArrayList<String> players) {
         this.players = players;
     }
 

@@ -2,6 +2,7 @@ package Client_Server_Communication;
 
 import java.util.Timer;
 
+import Models.Client;
 import Models.Command;
 import Models.Request;
 import Models.Result;
@@ -20,11 +21,8 @@ public class ClientFacade {
 
 
 
-        Timer timer = new Timer();
-        timer.schedule(new Poller(), 0, 1000);
-
-
-
+//        Timer timer = new Timer();
+//        timer.schedule(new Poller(), 0, 1000);
 
 
 
@@ -82,12 +80,16 @@ public class ClientFacade {
         startGame(startRequest);
         //END START GAME TEST
 
-        //TEST UPDATE CLIENT COMMAND
-        Request updateClientRequest = new Request();
-        updateClientRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
-        updateClientRequest.setCommandNum(0);
-        updateClient(updateClientRequest);
-        //END UPDATE CLIENT COMMAND
+        Poller p = Poller.getInstance();
+        p.runLobbyCommands();
+
+
+//        //TEST UPDATE CLIENT COMMAND
+//        Request updateClientRequest = new Request();
+//        updateClientRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+//        updateClientRequest.setCommandNum(0);
+//        updateClient(updateClientRequest);
+//        //END UPDATE CLIENT COMMAND
 
 
 
@@ -103,6 +105,8 @@ public class ClientFacade {
 
         if (result.isSuccessful())
         {
+            //save the authToken in the Client Model for future use:
+            Client.getInstance().setAuthToken(result.getAuthToken());
             System.out.println("Login successful!");
             System.out.println(result.getAuthToken());
         }
@@ -122,6 +126,7 @@ public class ClientFacade {
 
         if (regResult.isSuccessful())
         {
+            Client.getInstance().setAuthToken(regResult.getAuthToken());
             System.out.println("Registration successful!");
             System.out.println(regResult.getAuthToken());
         }
@@ -217,7 +222,7 @@ public class ClientFacade {
         System.out.println();
     }
 
-    public static void updateClient(Request request){
+    public static Result updateClient(Request request){
         Command gameCommand = new Command("Interfaces.IServerGame", "updateClient",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
@@ -227,17 +232,7 @@ public class ClientFacade {
         {
 //            System.out.println(gameResult.getUpdateCommands().size());
             //loop through and execute commands:
-            for(int i = 0; i < gameResult.getUpdateCommands().size(); i++){
-                try {
-                    gameResult.getUpdateCommands().get(i).execute();
-                }catch (Exception e)
-                {
-                    System.out.println("ERROR");
-                    e.printStackTrace();
-                }
-
-
-            }
+            return gameResult;
         }
         else
         {
@@ -245,6 +240,8 @@ public class ClientFacade {
             System.out.println(gameResult.getErrorMsg());
         }
         System.out.println();
+        return gameResult;
     }
+
 
 }
