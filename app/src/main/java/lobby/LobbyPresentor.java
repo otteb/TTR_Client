@@ -28,7 +28,8 @@ public class LobbyPresentor implements ILobbyPresentor {
         boolean vacant = false;
         if(currentGame.getPlayers().size()<5)
         {
-         currentGame= guiFacade.joinGame(currentGame, name);
+         currentGame = new Game();
+                 guiFacade.joinGame(currentGame, name);
         }
        /* for (int i = 0; i < players.length; i++) {
             if (players[i].getText().equals("")) {
