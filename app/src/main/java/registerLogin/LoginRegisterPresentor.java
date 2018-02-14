@@ -23,7 +23,8 @@ public class LoginRegisterPresentor implements ILoginRegisterPresentor {
         }
         else
         {
-           Result r =  guiFacade.login(username, password);
+            guiFacade.login(username, password);
+           Result r =  new Result();
            if(r.getErrorMsg()==null)
            {
                //Toast.makeText(c, "You successfully logged in", Toast.LENGTH_SHORT).show();
@@ -48,7 +49,9 @@ public class LoginRegisterPresentor implements ILoginRegisterPresentor {
     {
         if (password.equals(confpswd) && !username.equals("") & !password.equals(""))
         {
-            Result r =  guiFacade.register(username, password);
+            //attach to Observable:
+            Result r =  new Result();
+                    guiFacade.register(username, password);
             if(r.getErrorMsg()==null){
                 Toast.makeText(c, "You successfully registered", Toast.LENGTH_SHORT).show();
                 return r;

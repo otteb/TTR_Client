@@ -1,5 +1,7 @@
 package Services;
 
+import AsyncTasks.LoginAsyncTask;
+import AsyncTasks.RegisterAsyncTask;
 import Client_Server_Communication.ClientFacade;
 import Models.*;
 
@@ -13,24 +15,28 @@ public class GuiFacade {
     ClientFacade clientFacade = new ClientFacade();
 //    public Client clientModel= new Client();
 
-    public Result login (String username, String password)
+    public void login (String username, String password)
     {
         Request loginRequest = new Request();
         loginRequest.setUsername(username);
         loginRequest.setPassword(password);
 //        clientModel.setLoginRequest(loginRequest);
 //        return clientModel.loginTest();
-        return clientFacade.login(loginRequest);
+        LoginAsyncTask loginAsyncTask = new LoginAsyncTask();
+        loginAsyncTask.execute(loginRequest);
+//        clientFacade.login(loginRequest);
     }
 
-    public Result register (String username, String password)
+    public void register (String username, String password)
     {
         Request registerRequest = new Request();
         registerRequest.setUsername(username);
         registerRequest.setPassword(password);
 //        clientModel.setRegisterRequest(registerRequest);
 //        return clientModel.registerTest();
-        return clientFacade.register(registerRequest);
+        RegisterAsyncTask registerAsyncTask = new RegisterAsyncTask();
+        registerAsyncTask.execute(registerRequest);
+//        return clientFacade.register(registerRequest);
     }
     public ArrayList<Game> createGame (Game game)
     {
