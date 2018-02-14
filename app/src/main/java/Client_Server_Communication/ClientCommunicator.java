@@ -17,6 +17,7 @@ import java.net.URL;
 import Models.Command;
 import Models.Result;
 
+
 import static java.net.HttpURLConnection.HTTP_OK;
 
 public class ClientCommunicator {
@@ -25,7 +26,7 @@ public class ClientCommunicator {
 
     public static ClientCommunicator getInstance() { return myInstance; }
 
-    private String serverHost = "10.24.70.221"; //"10.24.66.130";
+    private String serverHost = "10.14.178.40"; //"10.24.66.130";
     private String serverPort = "8888";
 
     private ClientCommunicator() {}
@@ -58,6 +59,7 @@ public class ClientCommunicator {
             //REQUEST
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
+            //can't connect at this point:
             conn.connect();
 
             OutputStream reqBody = conn.getOutputStream();

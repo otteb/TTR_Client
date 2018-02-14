@@ -156,8 +156,6 @@ public class ClientFacade {
                     System.out.println("ERROR");
                     e.printStackTrace();
                 }
-
-
             }
         }
         else

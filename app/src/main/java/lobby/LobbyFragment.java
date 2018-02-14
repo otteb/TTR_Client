@@ -13,8 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import cs340.ttr_client.R;
+import Activities.R;
 import game.GameFragment;
 import Models.Game;
 import Models.Client;

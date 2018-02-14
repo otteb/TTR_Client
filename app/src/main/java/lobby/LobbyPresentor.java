@@ -3,10 +3,11 @@ package lobby;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.fjameson.got_ttr.GuiFacade;
-import com.example.fjameson.got_ttr.game.Game;
 
 import java.util.ArrayList;
+
+import Models.Game;
+import Services.GuiFacade;
 
 
 /**

@@ -1,3 +1,5 @@
+package Activities;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 
-import cs340.ttr_client.R;
 
 /**
  * Created by fjameson on 2/9/18.
