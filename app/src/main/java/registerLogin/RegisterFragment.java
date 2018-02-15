@@ -13,6 +13,7 @@ import android.widget.TextView;
 import Activities.R;
 import Models.Result;
 import lobby.LobbyFragment;
+import Client_Server_Communication.Poller;
 
 
 /**
@@ -33,6 +34,9 @@ import lobby.LobbyFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Poller poller = new Poller();
+        poller.runLobbyCommands();
+
         View view = inflater.inflate(R.layout.register_fragment, container, false);
         username= (EditText)view.findViewById(R.id.editText_username1);
         password= (EditText)view.findViewById(R.id.editText2_password1);
