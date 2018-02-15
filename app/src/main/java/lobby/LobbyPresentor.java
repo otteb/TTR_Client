@@ -40,39 +40,22 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
     @Override
     public Game joinGame(Context context, Game currentGame, String name) {
 
-        for (int i = 0; i < currentGame.getPlayers().size(); i++) {
-            if (currentGame.getPlayers().get(i).equals(name)) {
-                Toast.makeText(context, "Cannot join same game twice", Toast.LENGTH_SHORT).show();
-                return currentGame;
+
+        if (currentGame != null) {
+            for (int i = 0; i < currentGame.getPlayers().size(); i++) {
+                if (currentGame.getPlayers().get(i).equals(name)) {
+                    Toast.makeText(context, "Cannot join same game twice", Toast.LENGTH_SHORT).show();
+                    return currentGame;
+                }
             }
         }
+        else return currentGame;
 
         boolean vacant = false;
         if(currentGame.getPlayers().size()<5)
         {
-         //currentGame = new Game();
                  guiFacade.joinGame(currentGame, name);
         }
-
-
-
-
-       /* for (int i = 0; i < players.length; i++) {
-            if (players[i].getText().equals("")) {
-                players[i].setText(name);
-                players[i].setVisibility(View.VISIBLE);
-                currentGame.addPlayer(name);
-                Toast.makeText(context, "game joined", Toast.LENGTH_SHORT).show();
-                vacant = true;
-                break;
-            }
-
-        }*/
-
-        //if (!vacant) Toast.makeText(context, "game not joined", Toast.LENGTH_SHORT).show();
-        //if (currentGame.getPlayers().size() > 1) {
-         //   currentGame.setStartable(true);
-       // }
 
         return currentGame;
     }

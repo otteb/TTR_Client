@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     public void updateCreate(Game currentGame)
     {
         //currentGame = lobbyP.createGame(getActivity(), play, gameName.getText().toString());
+
         lobbyFragment.createGame = currentGame;
         lobbyFragment.createUpdate= true;
     }

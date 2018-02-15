@@ -105,22 +105,23 @@ public class LobbyFragment extends Fragment {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(currentGame != null) {
+                if (currentGame != null) {
                     currentGame = lobbyP.joinGame(getActivity(), currentGame, acceptedUser.getString("username"));
                     if (currentGame.isJoinable()) {
                         start.setEnabled(true);
                     }
-                }
-                else
-                {
+                } else {
                     Toast.makeText(getActivity(), "you can't join a game that doesn't exist", Toast.LENGTH_LONG).show();
                 }
 
-                for (int i = 0; i < currentGame.getPlayers().size(); i++) {
-                    players.get(i).setText(currentGame.getPlayers().get(i));
-                }
+                if (currentGame != null) {
+                    for (int i = 0; i < currentGame.getPlayers().size(); i++) {
+                        players.get(i).setText(currentGame.getPlayers().get(i));
+                    }
+                } else Toast.makeText(getActivity(), "no game selected", Toast.LENGTH_SHORT).show();
 
             }
+
         });
 
         start.setOnClickListener(new View.OnClickListener() {
@@ -155,22 +156,6 @@ public class LobbyFragment extends Fragment {
                 else {
                     //question for Finn -
                     currentGame = lobbyP.createGame(getActivity(), play, gameName.getText().toString(),  acceptedUser.getString("username"));
-                    newGame.setVisibility(View.GONE);
-                    gameName.setText(null);
-                    gamesAdapter.addGametoView(currentGame);
-                    gamesAdapter.notifyDataSetChanged();
-                    curGame.setText(currentGame.getId());
-
-                    for (int i = 0; i < currentGame.getPlayers().size(); i++) {
-
-                        players.get(i).setText(currentGame.getPlayers().get(i));
-
-                        if (!players.get(i).getText().equals("")) {
-                            players.get(i).setVisibility(View.VISIBLE);
-                            players.get(i).setText(currentGame.getPlayers().get(i));
-                        }
-                        else players.get(i).setVisibility(View.GONE);
-                    }
 
 
                 }
@@ -180,9 +165,21 @@ public class LobbyFragment extends Fragment {
         if(createUpdate == true){
             newGame.setVisibility(View.GONE);
             gameName.setText(null);
-            gamesAdapter.addGametoView(currentGame);
+            gamesAdapter.addGametoView(createGame);
             gamesAdapter.notifyDataSetChanged();
-            createUpdate = false;
+            curGame.setText(createGame.getId());
+
+            for (int i = 0; i < createGame.getPlayers().size(); i++) {
+
+                players.get(i).setText(createGame.getPlayers().get(i));
+
+                if (!players.get(i).getText().equals("")) {
+                    players.get(i).setVisibility(View.VISIBLE);
+                    players.get(i).setText(createGame.getPlayers().get(i));
+                }
+                else players.get(i).setVisibility(View.GONE);
+            }
+
         }
 
         return view;
