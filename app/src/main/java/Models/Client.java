@@ -133,6 +133,7 @@ public class Client extends Observable {
     {
         setChanged();
         notifyObservers("create");
+        clearChanged();
     }
 
     public void joinGame ()

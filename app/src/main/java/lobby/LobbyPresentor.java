@@ -31,8 +31,8 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
     public LobbyPresentor(Context c)
     {
         context = c;
-        Poller poller = new Poller();
-        poller.runLobbyCommands();
+        //Poller poller = new Poller();
+        //poller.runLobbyCommands();
         guiFacade.addObserver(this);
     }
 
@@ -94,7 +94,7 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
         MainActivity lobbyFragment= (MainActivity)((Activity)context);
         if(result.equals("create"))
         {
-            lobbyFragment.updateCreate(Client.getInstance().getActiveGame());
+            //lobbyFragment.updateCreate(Client.getInstance().getActiveGame());
 
         }
         else if(result.equals("join"))

@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         lobbyFragment.createGame = currentGame;
         lobbyFragment.createUpdate= true;
+        lobbyFragment.getView();
     }
 
     public void updateJoin (Game currentGame)

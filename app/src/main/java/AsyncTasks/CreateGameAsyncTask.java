@@ -31,7 +31,7 @@ public class CreateGameAsyncTask extends AsyncTask<Request, Void, Result> {
             HashMap<String, Game> temp = Client.getInstance().getGameMap();
             temp.put(result.getGameId(), game);
             Client.getInstance().setGameMap(temp);
-            Client.getInstance().createGame();
+            //Client.getInstance().createGame();
         }else {
             Client.getInstance().sendMessage(result.getErrorMsg());
         }

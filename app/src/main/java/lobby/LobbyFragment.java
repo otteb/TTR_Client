@@ -156,29 +156,45 @@ public class LobbyFragment extends Fragment {
                 else {
                     //question for Finn -
                     currentGame = lobbyP.createGame(getActivity(), play, gameName.getText().toString(),  acceptedUser.getString("username"));
+                    newGame.setVisibility(View.GONE);
+                    gameName.setText(null);
+                    gamesAdapter.addGametoView(currentGame);
+                    gamesAdapter.notifyDataSetChanged();
+                    curGame.setText(currentGame.getId());
+
+                    /*for (int i = 0; i < currentGame.getPlayers().size(); i++) {
+
+                        players.get(i).setText(currentGame.getPlayers().get(i));
+
+                        if (!players.get(i).getText().equals("")) {
+                            players.get(i).setVisibility(View.VISIBLE);
+                            players.get(i).setText(currentGame.getPlayers().get(i));
+                        }
+                        else players.get(i).setVisibility(View.GONE);
+                    }*/
 
 
                 }
             }
         });
 
-        if(createUpdate == true){
+        if( createUpdate == true){
             newGame.setVisibility(View.GONE);
             gameName.setText(null);
-            gamesAdapter.addGametoView(createGame);
+            gamesAdapter.addGametoView(currentGame);
             gamesAdapter.notifyDataSetChanged();
-            curGame.setText(createGame.getId());
+            curGame.setText(currentGame.getId());
 
-            for (int i = 0; i < createGame.getPlayers().size(); i++) {
+           /* for (int i = 0; i < currentGame.getPlayers().size(); i++) {
 
-                players.get(i).setText(createGame.getPlayers().get(i));
+                players.get(i).setText(currentGame.getPlayers().get(i));
 
                 if (!players.get(i).getText().equals("")) {
                     players.get(i).setVisibility(View.VISIBLE);
-                    players.get(i).setText(createGame.getPlayers().get(i));
+                    players.get(i).setText(currentGame.getPlayers().get(i));
                 }
-                else players.get(i).setVisibility(View.GONE);
-            }
+                else players.get(i).setVisibility(View.GONE);*/
+           // }
 
         }
 
