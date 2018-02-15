@@ -2,6 +2,8 @@ package AsyncTasks;
 
 import android.os.AsyncTask;
 
+import java.sql.ClientInfoStatus;
+
 import Client_Server_Communication.ClientFacade;
 import Models.Client;
 import Models.Request;
@@ -21,7 +23,11 @@ public class LoginAsyncTask extends AsyncTask <Request, Void, Result> {
     //onPostExecute updates the Client model:
     @Override
     protected void onPostExecute(Result result){
-        Client.getInstance().setAuthToken(result.getAuthToken());
+        if(result.getErrorMsg() == null) {
+            Client.getInstance().setAuthToken(result.getAuthToken());
+        }else {
+            Client.getInstance().sendMessage(result.getErrorMsg());
+        }
         System.out.println("Logged in - AsyncTask");
     }
 }

@@ -29,36 +29,29 @@ import java.util.Timer;
 
 public class LobbyFragment extends Fragment {
 
-//    Timer timer = new Timer();
-//        timer.schedule(new Poller(), 0, 1000);
-
-    /*public LobbyFragment()
-    {}
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.lobby_fragment, container, false);
-        return view;
-    }*/
-
     private GamesAdapter gamesAdapter;
     private RecyclerView mGamesRecView;
+    public Game createGame = new Game();
     TextView curName;
     TextView p1;
     TextView p2;
     TextView p3;
     TextView p4;
     TextView p5;
+    TextView curGame;
     Button join;
     Button start;
     Button done;
     Button create;
     LinearLayout newGame;
     EditText gameName;
+    View view;
+    public boolean createUpdate = false;
     Game currentGame = null;
+
+
+    ArrayList<TextView> players = new ArrayList<>(5);
     ArrayList<Game> games = new ArrayList<>();
-    TextView players[] = {p1, p2, p3, p4, p5};
     ArrayList<String> play;
     public LobbyFragment()
     {
@@ -66,7 +59,7 @@ public class LobbyFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.lobby_fragment, container, false);
+        view = inflater.inflate(R.layout.lobby_fragment, container, false);
         final ArrayList<String>playernames = new ArrayList<String>();
 
         final Bundle acceptedUser = getArguments();
@@ -81,7 +74,14 @@ public class LobbyFragment extends Fragment {
         p3 = (TextView) view.findViewById(R.id.p3);
         p4 = (TextView) view.findViewById(R.id.p4);
         p5 = (TextView) view.findViewById(R.id.p5);
-        final LobbyPresentor lobbyP = new LobbyPresentor();
+        TextView gLabel = (TextView) view.findViewById(R.id.gameLabel);
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+        players.add(p4);
+        players.add(p5);
+        curGame = (TextView) view.findViewById(R.id.curGame);
+        final LobbyPresentor lobbyP = new LobbyPresentor(getActivity());
         final  TextView numPlayers = (TextView) view.findViewById(R.id.numPlayers);
         numPlayers.setVisibility(View.GONE);
         join= (Button) view.findViewById(R.id.join);
@@ -92,6 +92,7 @@ public class LobbyFragment extends Fragment {
         mGamesRecView = (RecyclerView) view.findViewById(R.id.game_list);
         mGamesRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
         final ArrayList<Game> games = Client.getInstance().getGameList();
 
         gamesAdapter = new GamesAdapter(games);
@@ -99,8 +100,7 @@ public class LobbyFragment extends Fragment {
 
 
         //starting to add people
-        p1.setText(acceptedUser.getString("username"));
-        p2.setText("loser");
+
 
         join.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +115,11 @@ public class LobbyFragment extends Fragment {
                 {
                     Toast.makeText(getActivity(), "you can't join a game that doesn't exist", Toast.LENGTH_LONG).show();
                 }
+
+                for (int i = 0; i < currentGame.getPlayers().size(); i++) {
+                    players.get(i).setText(currentGame.getPlayers().get(i));
+                }
+
             }
         });
 
@@ -122,12 +127,7 @@ public class LobbyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (currentGame != null) {
-                    boolean start = lobbyP.startGame(getActivity(), currentGame);
-                    if (start) {
-                        FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                        Fragment fragment = new GameFragment();
-                        headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
-                    }
+                  lobbyP.startGame(getActivity(), currentGame);
                 }
                 else
                 {
@@ -154,29 +154,51 @@ public class LobbyFragment extends Fragment {
                 }
                 else {
                     //question for Finn -
-                    currentGame = lobbyP.createGame(getActivity(), play, gameName.getText().toString());
+                    currentGame = lobbyP.createGame(getActivity(), play, gameName.getText().toString(),  acceptedUser.getString("username"));
                     newGame.setVisibility(View.GONE);
                     gameName.setText(null);
                     gamesAdapter.addGametoView(currentGame);
                     gamesAdapter.notifyDataSetChanged();
+                    curGame.setText(currentGame.getId());
+
+                    for (int i = 0; i < currentGame.getPlayers().size(); i++) {
+
+                        players.get(i).setText(currentGame.getPlayers().get(i));
+
+                        if (!players.get(i).getText().equals("")) {
+                            players.get(i).setVisibility(View.VISIBLE);
+                            players.get(i).setText(currentGame.getPlayers().get(i));
+                        }
+                        else players.get(i).setVisibility(View.GONE);
+                    }
+
+
                 }
             }
         });
+
+        if(createUpdate == true){
+            newGame.setVisibility(View.GONE);
+            gameName.setText(null);
+            gamesAdapter.addGametoView(currentGame);
+            gamesAdapter.notifyDataSetChanged();
+            createUpdate = false;
+        }
 
         return view;
     }
 
     private class GamesHolder extends RecyclerView.ViewHolder {
 
-        private TextView gameName;
+        private TextView mGameName;
         private Game mGame;
 
         public GamesHolder(View itemView) {
             super(itemView);
 
-            gameName = (TextView) itemView.findViewById(R.id.game_name);
+            mGameName = (TextView) itemView.findViewById(R.id.game_name);
 
-            gameName.setOnClickListener(new View.OnClickListener() {
+            mGameName.setOnClickListener(new View.OnClickListener() {
 
 
                 @Override
@@ -184,22 +206,26 @@ public class LobbyFragment extends Fragment {
                     //This needs to be adjusted in the client model;
                     ArrayList<Game> tempGlist = Client.getInstance().getGameList();
                     int gListSize = tempGlist.size();
+                    String changeString = mGameName.getText().toString();
 
                     for (int i = 0; i <gListSize; i++) {
 
-                        if (tempGlist.get(i).equals(gameName.getText().toString())) {
+                        if (tempGlist.get(i).getId().equals(changeString)) {
                             currentGame = tempGlist.get(i);
+                            curGame.setText(currentGame.getId());
                         }
 
                     }
 
-                    for (int i = 0; i < players.length; i++) {
-                        players[i].setText((CharSequence) currentGame.getPlayers().get(i));
+                    for (int i = 0; i < currentGame.getPlayers().size(); i++) {
 
-                        if (!players[i].getText().equals("")) {
-                            players[i].setVisibility(View.VISIBLE);
+                        players.get(i).setText(currentGame.getPlayers().get(i));
+
+                        if (!players.get(i).getText().equals("")) {
+                            players.get(i).setVisibility(View.VISIBLE);
+                            players.get(i).setText(currentGame.getPlayers().get(i));
                         }
-                        else players[i].setVisibility(View.GONE);
+                        else players.get(i).setVisibility(View.GONE);
                     }
 
 
@@ -211,7 +237,7 @@ public class LobbyFragment extends Fragment {
 
         public void bindGame(Game game) {
             mGame = game;
-            gameName.setText(mGame.getId());
+            mGameName.setText(mGame.getId());
 
         }
     }

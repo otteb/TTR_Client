@@ -27,11 +27,12 @@ public class LoginFragment extends Fragment {
 
     public LoginFragment()
     {
-        l = new LoginRegisterPresentor();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        l = new LoginRegisterPresentor(getContext());
         View view = inflater.inflate(R.layout.login_fragment, container, false);
         username= (EditText)view.findViewById(R.id.editText_username);
         password= (EditText)view.findViewById(R.id.editText2_password);
@@ -71,5 +72,18 @@ public class LoginFragment extends Fragment {
 
         return view;
     }
+
+    public void switchToLobby()
+    {
+        FragmentManager headfrag = getActivity().getSupportFragmentManager();
+        Fragment fragment = new LobbyFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username.getText().toString());
+        bundle.putString("password", password.getText().toString());
+        //bundle.putString("authToken", r.getAuthToken());
+        fragment.setArguments(bundle);
+        headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+    }
+
 
 }

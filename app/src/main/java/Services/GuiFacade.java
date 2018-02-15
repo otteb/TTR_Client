@@ -9,6 +9,7 @@ import Client_Server_Communication.ClientFacade;
 import Models.*;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 /**
  * Created by fjameson on 2/9/18.
@@ -86,6 +87,11 @@ public class GuiFacade {
         StartGameAsyncTask startGameAsyncTask = new StartGameAsyncTask();
         //executes the startGameAsyncTask:
         startGameAsyncTask.execute(request);
+    }
+
+    public void addObserver(Observer o)
+    {
+        Client.getInstance().addObserver(o);
     }
 
 }

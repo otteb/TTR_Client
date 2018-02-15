@@ -21,7 +21,11 @@ public class RegisterAsyncTask extends AsyncTask<Request, Void, Result> {
     //onPostExecute updates the Client model:
     @Override
     protected void onPostExecute(Result result){
-        Client.getInstance().setAuthToken(result.getAuthToken());
+        if(result.getErrorMsg() == null) {
+            Client.getInstance().setAuthToken(result.getAuthToken());
+        }else {
+            Client.getInstance().sendMessage(result.getErrorMsg());
+        }
         System.out.println("Registered new user - AsyncTask");
     }
 }

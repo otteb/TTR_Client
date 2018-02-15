@@ -3,12 +3,13 @@ package Models;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * Created by brianotte on 2/12/18.
  */
 
-public class Client {
+public class Client extends Observable {
     private static Client single_instance = new Client();
 
 
@@ -29,6 +30,8 @@ public class Client {
     Client(){
         this.commandNum = 0;
         this.gameMap = new HashMap<>();
+        isLoggedIn = false;
+        isRegistered = false;
     }
 
     public static Client getInstance()
@@ -43,11 +46,6 @@ public class Client {
         isLoggedIn= b;
     }
 
-    public void setIsRegistered(Boolean b)
-    {
-        isLoggedIn= b;
-    }
-
     public void setUserName(String u)
     {
         userName = u;
@@ -56,6 +54,8 @@ public class Client {
     public void setAuthToken(String a)
     {
         authToken=a;
+        setChanged();
+        notifyObservers(a);
     }
 
     public void setPassword(String p)
@@ -91,8 +91,17 @@ public class Client {
 
     public void setLoginRequest(Request l)
     {
+
         loginRequest=l;
+
     }
+
+    public void sendMessage(String m)
+    {
+        setChanged();
+        notifyObservers(m);
+    }
+
 
     public Request getRegisterRequest() {
         return registerRequest;
@@ -118,6 +127,29 @@ public class Client {
         }
         return returnList;
     }
+
+    //observables:
+    public void createGame ()
+    {
+        setChanged();
+        notifyObservers("create");
+    }
+
+    public void joinGame ()
+    {
+        setChanged();
+        notifyObservers("join");
+    }
+
+    public void startGame ()
+    {
+        setChanged();
+        notifyObservers("start");
+    }
+
+
+
+
 
 
     public void setRegisterRequest(Request r){ registerRequest=r; }

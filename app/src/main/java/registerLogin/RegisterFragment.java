@@ -11,15 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import Activities.R;
+import Client_Server_Communication.Poller;
 import Models.Result;
 import lobby.LobbyFragment;
-import Client_Server_Communication.Poller;
 
 
 /**
  * Created by fjameson on 2/2/18.
  */
- public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment {
     EditText username;
     EditText password;
     EditText confpswd;
@@ -29,14 +29,11 @@ import Client_Server_Communication.Poller;
 
     public RegisterFragment()
     {
-        l = new LoginRegisterPresentor();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Poller poller = new Poller();
-        poller.runLobbyCommands();
-
+        l = new LoginRegisterPresentor(getContext());
         View view = inflater.inflate(R.layout.register_fragment, container, false);
         username= (EditText)view.findViewById(R.id.editText_username1);
         password= (EditText)view.findViewById(R.id.editText2_password1);
@@ -44,21 +41,21 @@ import Client_Server_Communication.Poller;
         register= (Button)view.findViewById(R.id.button2_register1);
         backToLogin= (TextView) view.findViewById(R.id.login1);
 
-       register.setOnClickListener(new View.OnClickListener() {
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Result r=  l.register(getActivity(), username.getText().toString(), password.getText().toString(), confpswd.getText().toString());
-                if(r!= null)
-                {
-                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                    Fragment fragment = new LobbyFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("username", username.getText().toString());
-                    bundle.putString("password", password.getText().toString());
-                    bundle.putString("authToken", r.getAuthToken());
-                    fragment.setArguments(bundle);
-                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
-                }
+                Result r=  l.register(getActivity(), username.getText().toString(), password.getText().toString(), confpswd.getText().toString());
+//                if(r!= null)
+//                {
+//                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
+//                    Fragment fragment = new LobbyFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("username", username.getText().toString());
+//                    bundle.putString("password", password.getText().toString());
+//                    bundle.putString("authToken", r.getAuthToken());
+//                    fragment.setArguments(bundle);
+//                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+//                }
 
             }
         });
@@ -66,7 +63,7 @@ import Client_Server_Communication.Poller;
         backToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // l.switchToRegister(getActivity());
+                // l.switchToRegister(getActivity());
                 LoginFragment fragment = new LoginFragment();
                 FragmentManager headfrag = getActivity().getSupportFragmentManager();
                 headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
@@ -74,6 +71,18 @@ import Client_Server_Communication.Poller;
         });
 
         return view;
+    }
+
+    public void switchToLobby()
+    {
+        FragmentManager headfrag = getActivity().getSupportFragmentManager();
+        Fragment fragment = new LobbyFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username.getText().toString());
+        bundle.putString("password", password.getText().toString());
+        //bundle.putString("authToken", r.getAuthToken());
+        fragment.setArguments(bundle);
+        headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
     }
 
 
