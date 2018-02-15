@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import Activities.MainActivity;
-import Client_Server_Communication.Poller;
+import activities.MainActivity;
 import Models.Client;
 import Models.Game;
 import Services.GuiFacade;
+
+import static Models.Client.getInstance;
 
 
 /**
@@ -94,12 +95,12 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
         MainActivity lobbyFragment= (MainActivity)((Activity)context);
         if(result.equals("create"))
         {
-            //lobbyFragment.updateCreate(Client.getInstance().getActiveGame());
+            lobbyFragment.updateCreate(getInstance().getActiveGame());
 
         }
         else if(result.equals("join"))
         {
-            lobbyFragment.updateJoin(Client.getInstance().getActiveGame());
+            lobbyFragment.updateJoin(getInstance().getActiveGame());
         }
         else if (result.equals("start"))
         {

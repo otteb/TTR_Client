@@ -123,6 +123,7 @@ public class Client extends Observable {
     public ArrayList<Game> getGameList(){
         ArrayList<Game> returnList = new ArrayList<>();
         for(String i: this.gameMap.keySet()){
+
             returnList.add(this.gameMap.get(i));
         }
         return returnList;

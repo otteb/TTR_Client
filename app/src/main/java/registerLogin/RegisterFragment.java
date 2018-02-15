@@ -10,8 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import Activities.R;
-import Client_Server_Communication.Poller;
+import activities.R;
 import Models.Result;
 import lobby.LobbyFragment;
 

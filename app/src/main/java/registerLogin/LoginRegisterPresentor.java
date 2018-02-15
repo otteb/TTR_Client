@@ -6,7 +6,7 @@ import android.widget.Toast;
 import java.util.Observable;
 import java.util.Observer;
 
-import Activities.MainActivity;
+import activities.MainActivity;
 import Models.Request;
 import Models.Result;
 

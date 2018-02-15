@@ -1,6 +1,5 @@
-package Activities;
+package activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +9,6 @@ import Models.Request;
 import registerLogin.LoginFragment;
 import lobby.LobbyFragment;
 import game.GameFragment;
-import registerLogin.LoginRegisterPresentor;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import Models.Result;
 import lobby.LobbyFragment;
 
-import Activities.R;
+import activities.R;
 
 /**
  * Created by fjameson on 2/2/18.
