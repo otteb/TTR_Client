@@ -117,7 +117,11 @@ public class Client extends Observable {
         return gameMap;
     }
     public void setGameMap(HashMap<String, Game> gameMap) {
-        this.gameMap = gameMap;
+        //if(gameMap !=) {
+            this.gameMap = gameMap;
+            createGame();
+       // }
+
     }
     public ArrayList<Game> getGameList(){
         ArrayList<Game> returnList = new ArrayList<>();
@@ -133,7 +137,6 @@ public class Client extends Observable {
     {
         setChanged();
         notifyObservers("create");
-        clearChanged();
     }
 
     public void joinGame ()

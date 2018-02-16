@@ -96,6 +96,7 @@ public class LoginRegisterPresentor implements ILoginRegisterPresentor, Observer
                 MainActivity mainActivity = (MainActivity) context;
                 mainActivity.switchToLobby(user);
                 authToken = a;
+                user = null;
             }
         }
     }

@@ -69,6 +69,7 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
 
         if (game.getPlayers().size() > 1) {
             Toast.makeText(context, "game started", Toast.LENGTH_SHORT).show();
+            guiFacade.startGame(game.getId());
             return true;
         }
         else Toast.makeText(context, "game not started", Toast.LENGTH_SHORT).show();

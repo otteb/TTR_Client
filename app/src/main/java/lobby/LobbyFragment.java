@@ -159,6 +159,9 @@ public class LobbyFragment extends Fragment {
                     gamesAdapter.addGametoView(currentGame);
                     gamesAdapter.notifyDataSetChanged();
                     curGame.setText(currentGame.getId());
+                    for(int i=0; i<Client.getInstance().getGameList().size(); i++)
+                        gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
+                    gamesAdapter.notifyDataSetChanged();
 
                     for (int i = 0; i < currentGame.getPlayers().size(); i++) {
 
@@ -185,7 +188,10 @@ public class LobbyFragment extends Fragment {
             gameName.setText(null);
             gamesAdapter.addGametoView(currentGame);
             gamesAdapter.notifyDataSetChanged();
-            curGame.setText(currentGame.getId());
+            for (int i=0; i< Client.getInstance().getGameList().size(); i++){
+
+           curGame.setText( Client.getInstance().getGameList().get(i).getId());
+            }
 
             for (int i = 0; i < currentGame.getPlayers().size(); i++) {
 
@@ -198,6 +204,12 @@ public class LobbyFragment extends Fragment {
                 else players.get(i).setVisibility(View.GONE);
             }
 
+        }
+        if (Client.getInstance().getGameList().size()>0)
+        {
+            for(int i=0; i<Client.getInstance().getGameList().size(); i++)
+            gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
+            gamesAdapter.notifyDataSetChanged();
         }
 
         return view;
