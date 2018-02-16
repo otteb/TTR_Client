@@ -2,7 +2,6 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Observable;
 
 /**
@@ -16,14 +15,14 @@ public class Client extends Observable {
 
     private HashMap<String, Game> gameMap;
     private Game activeGame = new Game();
-    private Boolean isLoggedIn;
-    private Boolean isRegistered;
+    private boolean isLoggedIn;
+    private boolean isRegistered;
     private String userName;
     private String password;
     private String authToken;
     private Request loginRequest;
     private Request registerRequest;
-    private Integer commandNum;
+    private int commandNum;
 
 
     //constructor
@@ -41,7 +40,7 @@ public class Client extends Observable {
 
 
 
-    public void setIsLoggedIn(Boolean b)
+    public void setIsLoggedIn(boolean b)
     {
         isLoggedIn= b;
     }
@@ -69,7 +68,7 @@ public class Client extends Observable {
         return activeGame;
     }
 
-    public Boolean getIsLoggedIn()
+    public boolean getIsLoggedIn()
     {
         return isLoggedIn;
     }
@@ -162,11 +161,11 @@ public class Client extends Observable {
     }
 
 
-    public Integer getCommandNum() {
+    public int getCommandNum() {
         return commandNum;
     }
 
-    public void setCommandNum(Integer commandNum) {
+    public void setCommandNum(int commandNum) {
         this.commandNum = commandNum;
     }
 }
