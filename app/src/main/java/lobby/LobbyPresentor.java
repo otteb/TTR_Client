@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import Client_Server_Communication.Poller;
 import activities.MainActivity;
 import Models.Client;
 import Models.Game;
@@ -32,8 +33,8 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
     public LobbyPresentor(Context c)
     {
         context = c;
-        //Poller poller = new Poller();
-        //poller.runLobbyCommands();
+        Poller poller = new Poller();
+        poller.runLobbyCommands();
         guiFacade.addObserver(this);
     }
 

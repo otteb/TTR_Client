@@ -62,7 +62,8 @@ public class LoginRegisterPresentor implements ILoginRegisterPresentor, Observer
         if (password.equals(confpswd) && !username.equals("") & !password.equals(""))
         {
             user = new Request();
-            //attach to Observable:
+            user.setUsername(username);
+            user.setPassword(password);
             Result r =  new Result();
             guiFacade.register(username, password);
 //            if(r.getErrorMsg()==null){
@@ -85,17 +86,17 @@ public class LoginRegisterPresentor implements ILoginRegisterPresentor, Observer
     @Override
     public void update(Observable o, Object authToken) {
 
-        if(authToken.equals("ERROR: Invalid Registration") || authToken.equals("ERROR: Incorrect username/password combination"))
-        {
-            Toast.makeText(context, (CharSequence) authToken, Toast.LENGTH_SHORT).show();
-        }
-        else {
-            String a = (String) authToken;
-            user.setAuthToken(a);
-            user.setAuthToken((String) authToken);
-            MainActivity mainActivity = (MainActivity) context;
-            mainActivity.switchToLobby(user);
-            authToken = a;
+        if (user != null) {
+            if (authToken.equals("ERROR: Invalid Registration") || authToken.equals("ERROR: Incorrect username/password combination")) {
+                Toast.makeText(context, (CharSequence) authToken, Toast.LENGTH_SHORT).show();
+            } else {
+                String a = (String) authToken;
+                user.setAuthToken(a);
+                user.setAuthToken((String) authToken);
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.switchToLobby(user);
+                authToken = a;
+            }
         }
     }
 }

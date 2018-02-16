@@ -44,17 +44,17 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Result r=  l.register(getActivity(), username.getText().toString(), password.getText().toString(), confpswd.getText().toString());
-//                if(r!= null)
-//                {
-//                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
-//                    Fragment fragment = new LobbyFragment();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("username", username.getText().toString());
-//                    bundle.putString("password", password.getText().toString());
-//                    bundle.putString("authToken", r.getAuthToken());
-//                    fragment.setArguments(bundle);
-//                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
-//                }
+                if(r!= null)
+                {
+                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
+                    Fragment fragment = new LobbyFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("username", username.getText().toString());
+                    bundle.putString("password", password.getText().toString());
+                    bundle.putString("authToken", r.getAuthToken());
+                    fragment.setArguments(bundle);
+                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+                }
 
             }
         });
