@@ -117,6 +117,7 @@ public class Client extends Observable {
     public HashMap<String, Game> getGameMap() {
         return gameMap;
     }
+
     public void setGameMap(HashMap<String, Game> gameMap) {
         //if(gameMap !=) {
             this.gameMap = gameMap;

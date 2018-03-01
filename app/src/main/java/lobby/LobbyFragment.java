@@ -18,6 +18,7 @@ import Models.Client;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -96,8 +97,10 @@ public class LobbyFragment extends Fragment {
 
         gamesAdapter = new GamesAdapter(games);
         mGamesRecView.setAdapter(gamesAdapter);
-
-
+        List<Game> gameList = Client.getInstance().getGameList();
+        for(int i=0; i<gameList.size(); i++)
+            gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
+        gamesAdapter.notifyDataSetChanged();
         //starting to add people
 
 

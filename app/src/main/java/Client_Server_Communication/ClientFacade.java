@@ -1,5 +1,6 @@
 package Client_Server_Communication;
 
+import java.util.ArrayList;
 import java.util.Timer;
 
 import Models.Client;
@@ -106,6 +107,12 @@ public class ClientFacade {
             Client.getInstance().setAuthToken(result.getAuthToken());
             System.out.println("Login successful!");
             System.out.println(result.getAuthToken());
+            //Request request = new Request();
+            request.setAuthToken(result.getAuthToken());
+            request.setCommandNum(Client.getInstance().getCommandNum());
+            //call the client facade updateClient() - use the current index;
+            ArrayList<Command> returnList = updateClient(request).getUpdateCommands();
+
         }
         else
         {
