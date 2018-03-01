@@ -21,7 +21,7 @@ public class CreateGameAsyncTask extends AsyncTask<Request, Void, Result> {
         Result result = clientFacade.createGame(requests[0]);
         return result;
     }
-    //onPostExecute updates the Client model:
+    //onPostExjordaecute updates the Client model:
     @Override
     protected void onPostExecute(Result result){
         if(result.getErrorMsg() == null) {

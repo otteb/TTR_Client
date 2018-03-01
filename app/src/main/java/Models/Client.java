@@ -173,4 +173,8 @@ public class Client extends Observable {
     public void setCommandNum(int commandNum) {
         this.commandNum = commandNum;
     }
+
+    public void incCommandNum(int num) {
+        commandNum += num;
+    }
 }
