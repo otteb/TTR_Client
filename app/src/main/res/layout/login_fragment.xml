@@ -1,191 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lobby_activity"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:columnCount="2"
-    android:background = "@drawable/scroll">
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+ <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnCount="2"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        tools:targetApi="ice_cream_sandwich">
-
+        tools:context="com.example.fjameson.got_ttr.registerLogin.LoginFragment">
+        <!-- TODO: Update blank fragment layout -->
         <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="0"
-            android:text="Your Name: " />
-
-        <TextView
-            android:id="@+id/yourName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="0"
-            android:text="Daniel" />
-
-
-        <TextView
-            android:id="@+id/tvPlayers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="1"
-            android:text="Players: " />
-
-        <TextView
-            android:id="@+id/numPlayers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="1"
-            android:text="0"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/list_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Player List:"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-            <TextView
-                android:id="@+id/p1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="vacant" />
-
-            <TextView
-                android:id="@+id/p2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="vacant" />
-
-            <TextView
-                android:id="@+id/p3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="vacant" />
-
-            <TextView
-                android:id="@+id/p4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="vacant" />
-
-            <TextView
-                android:id="@+id/p5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="vacant" />
-        </LinearLayout>
-
-
-
-
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:columnCount="2"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:layout_column="1"
-            android:layout_row="3"/>
-
-
-        <Button
-            android:id="@+id/join"
-            android:layout_column="0"
-            android:layout_row="3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Join Game" />
-
-
-        <Button
-            android:id="@+id/start"
-            android:layout_row="4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start Game" />
-
-        />
-
-        <Button
-            android:id="@+id/create"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create Game" />
-
-        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:text="" />
+
+     <LinearLayout
             android:orientation="vertical"
-            android:id="@+id/newGame"
-            android:visibility="gone">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <TextView
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Game Name:" />
-
-            <EditText
+                android:layout_height="45dp">
+                <TextView
+                    android:text="Username"
+                    android:layout_width="173dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView"
+                    tools:text="Username" />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:text="FINN"
+                    android:ems="10"
+                    android:id="@+id/editText_username" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/gName"
-                />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Done"
-                android:id="@+id/done"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:orientation="vertical"
-        tools:ignore="GridLayout">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Games List:"
-            android:id="@+id/gList"
-            android:textStyle="bold"
-            />
-
-        <android.support.v7.widget.RecyclerView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/game_list"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            />
-
-    </LinearLayout>
+                android:layout_height="45dp">
+                <TextView
+                    android:text="Password"
+                    android:layout_width="176dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/textView3"
+                    tools:text="Password" />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/editText2_password"
+                    android:layout_weight="1"
+                    android:text="FINES" />
+            </LinearLayout>
 
 
-</GridLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+            </LinearLayout>
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:layout_gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/button_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_centerInParent="true"
+                    android:text="Login" />
+
+
+            </RelativeLayout>
+
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="horizontal">
+
+             <TextView
+                 android:id="@+id/register"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:layout_weight="2"
+                 android:text="Register Instead?" />
+         </LinearLayout>
+     </LinearLayout>
+
+</FrameLayout>
