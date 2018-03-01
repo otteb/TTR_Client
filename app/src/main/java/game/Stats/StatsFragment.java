@@ -1,30 +1,30 @@
-package game;
+package game.Stats;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+
 import Models.Result;
 import activities.R;
-import lobby.LobbyFragment;
-import registerLogin.LoginRegisterPresentor;
+import game.GameFragment;
+
+import static java.security.AccessController.getContext;
 
 /**
- * Created by fjameson on 2/2/18.
+ * Created by fjameson on 2/28/18.
  */
 
-public class GameFragment extends Fragment {
-    Button returnToLobby;
-    Button claimRoute;
-    Button goToStats;
-    GamePresenter gamePresenter;
+public class StatsFragment extends Fragment {
+    Button returnToGame;
+    Button chatMenu;
+    Button gameHistory;
+    StatsPresenter statsPresenter;
 
-    public GameFragment()
+    public StatsFragment()
     {}
 
     @Override
@@ -35,19 +35,19 @@ public class GameFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        gamePresenter = new GamePresenter(getContext());
-        View view = inflater.inflate(R.layout.game, container, false);
+        statsPresenter = new StatsPresenter(getContext());
+        View view = inflater.inflate(R.layout.stats, container, false);
 
-        returnToLobby= (Button)view.findViewById(R.id.returntolobby);
-        returnToLobby.setOnClickListener(new View.OnClickListener() {
+        returnToGame= (Button)view.findViewById(R.id.returntogame);
+        returnToGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Result r = gamePresenter.switchToLobby(getActivity());
+                Result r = statsPresenter.returnToGame(getActivity());
                 if(r != null)
                 {
 
                     FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                    Fragment fragment = new LobbyFragment();
+                    Fragment fragment = new GameFragment();
 
                     //need something along these lines for the game and users in it?
                     /*bundle.putString("username", username.getText().toString());
@@ -61,16 +61,16 @@ public class GameFragment extends Fragment {
             }
         });
 
-        claimRoute= (Button)view.findViewById(R.id.claim);
-        claimRoute.setOnClickListener(new View.OnClickListener() {
+        chatMenu= (Button)view.findViewById(R.id.chatMenu);
+        chatMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Result r = gamePresenter.claimRoute(getActivity());
+                Result r = statsPresenter.viewChat(getActivity());
                 if(r != null)
                 {
 
                     FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                    Fragment fragment = new LobbyFragment();
+                    // Fragment fragment = new LobbyFragment();
 
                     //need something along these lines for the game and users in it?
                     /*bundle.putString("username", username.getText().toString());
@@ -78,22 +78,22 @@ public class GameFragment extends Fragment {
                     bundle.putString("authToken", r.getAuthToken());
                     fragment.setArguments(bundle);*/
 
-                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+                    // headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
                 }
 
             }
         });
 
-        goToStats= (Button)view.findViewById(R.id.stats);
-        goToStats.setOnClickListener(new View.OnClickListener() {
+        gameHistory= (Button)view.findViewById(R.id.gamehistory);
+        gameHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Result r = gamePresenter.switchToStats(getActivity());
+                Result r = statsPresenter.viewGameHistory(getActivity());
                 if(r != null)
                 {
 
                     FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                    Fragment fragment = new LobbyFragment();
+                    //Fragment fragment = new LobbyFragment();
 
                     //need something along these lines for the game and users in it?
                     /*bundle.putString("username", username.getText().toString());
@@ -101,7 +101,7 @@ public class GameFragment extends Fragment {
                     bundle.putString("authToken", r.getAuthToken());
                     fragment.setArguments(bundle);*/
 
-                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+                    // headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
                 }
 
             }

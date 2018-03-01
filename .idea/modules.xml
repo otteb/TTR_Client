@@ -3,8 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TTR_Client.iml" filepath="$PROJECT_DIR$/TTR_Client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TTR_Client.iml" filepath="$PROJECT_DIR$/TTR_Client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/gson-2.6.2/gson-2.6.2.iml" filepath="$PROJECT_DIR$/gson-2.6.2/gson-2.6.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gson-2.6.2/gson-2.6.2.iml" filepath="$PROJECT_DIR$/gson-2.6.2/gson-2.6.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/http-20070405/http-20070405.iml" filepath="$PROJECT_DIR$/http-20070405/http-20070405.iml" />
       <module fileurl="file://$PROJECT_DIR$/http-20070405/http-20070405.iml" filepath="$PROJECT_DIR$/http-20070405/http-20070405.iml" />
     </modules>
   </component>
