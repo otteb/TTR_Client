@@ -79,6 +79,7 @@ public class ClientCommunicator {
             {
                 response.setSuccess(false);
                 response.setErrorMsg("ERROR: " + conn.getResponseMessage());
+                System.out.println("Post failed");
             }
 
             Reader read = new InputStreamReader(conn.getInputStream());

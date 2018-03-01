@@ -16,7 +16,7 @@ public class JoinGameAsyncTask extends AsyncTask<Request, Void, Result> {
     ClientFacade clientFacade = new ClientFacade();
     @Override
     protected Result doInBackground(Request... requests) {
-        Result result = clientFacade.createGame(requests[0]);
+        Result result = clientFacade.joinGame(requests[0]);
         return result;
     }
     //onPostExecute updates the Client model:

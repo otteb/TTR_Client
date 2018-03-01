@@ -66,10 +66,11 @@ public class GuiFacade {
     public void joinGame (Game game, String player)
     {
         Request request = new Request();
+        request.setAuthToken(Client.getInstance().getAuthToken());
         request.setGameId(game.getId());
         request.setUsername(player);
-        Result result = clientFacade.joinGame(request);
-        Game joinGame = Client.getInstance().getGameMap().get(result.getGameId());
+//        Result result = clientFacade.joinGame(request);
+//        Game joinGame = Client.getInstance().getGameMap().get(result.getGameId());
         JoinGameAsyncTask joinGameAsyncTask = new JoinGameAsyncTask();
         joinGameAsyncTask.execute(request);
 //        return joinGame;
