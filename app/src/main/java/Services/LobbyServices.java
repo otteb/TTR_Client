@@ -3,25 +3,25 @@ package Services;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import Interfaces.IServerGame;
+import Interfaces.ILobby;
 import Models.Client;
 import Models.Game;
 import Models.Request;
 import Models.Result;
 
-public class GameServices implements IServerGame {
+public class LobbyServices implements ILobby {
 
     //this is going to be the client facade: THIS IS FOR TESTING
 
-    private static GameServices theGS = new GameServices();
+    private static LobbyServices theGS = new LobbyServices();
 
-    public static GameServices getInstance() {
+    public static LobbyServices getInstance() {
         return theGS;
     }
 
-    private GameServices() {}
+    private LobbyServices() {}
 
-    //TODO: Finish implementing IServerGame and adding functionality to methods
+    //TODO: Finish implementing ILobby and adding functionality to methods
 
     //TODO: Remember to add the authToken to each request in order to skip it while adding commands
 

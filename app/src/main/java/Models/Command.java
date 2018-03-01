@@ -3,7 +3,7 @@ package Models;
 import java.lang.reflect.Method;
 
 import Interfaces.ICommand;
-import Services.GameServices;
+import Services.LobbyServices;
 
 public class Command implements ICommand {
     private String _className;
@@ -31,9 +31,9 @@ public class Command implements ICommand {
 //            {
 //                result = (Result) method.invoke(UserServices.getInstance(), _paramValues);
 //            }
-            if(_className.equals("Interfaces.IServerGame"))
+            if(_className.equals("Interfaces.ILobby"))
             {
-                result = (Result) method.invoke(GameServices.getInstance(), _paramValues);
+                result = (Result) method.invoke(LobbyServices.getInstance(), _paramValues);
             }
 //            else //if(_className.equals("Interfaces.IClient"))
 //            {

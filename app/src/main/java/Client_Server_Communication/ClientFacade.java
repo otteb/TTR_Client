@@ -138,7 +138,7 @@ public class ClientFacade {
     }
 
     public static Result createGame(Request request){
-        Command gameCommand = new Command("Interfaces.IServerGame", "createGame",
+        Command gameCommand = new Command("Interfaces.ILobby", "createGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
@@ -168,7 +168,7 @@ public class ClientFacade {
     }
 
     public static Result joinGame(Request request){
-        Command gameCommand = new Command("Interfaces.IServerGame", "joinGame",
+        Command gameCommand = new Command("Interfaces.ILobby", "joinGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
         if (gameResult.isSuccessful())
@@ -199,7 +199,7 @@ public class ClientFacade {
 
 
     public static Result startGame(Request request){
-        Command gameCommand = new Command("Interfaces.IServerGame", "startGame",
+        Command gameCommand = new Command("Interfaces.ILobby", "startGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
         if (gameResult.isSuccessful())
@@ -228,7 +228,7 @@ public class ClientFacade {
     }
 
     public static Result updateClient(Request request){
-        Command gameCommand = new Command("Interfaces.IServerGame", "updateClient",
+        Command gameCommand = new Command("Interfaces.ILobby", "updateClient",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
 
