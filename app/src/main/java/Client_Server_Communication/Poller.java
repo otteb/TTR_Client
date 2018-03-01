@@ -79,6 +79,7 @@ public class Poller {
             super.onPostExecute(commands);
             //create for loop and execute all of the commands;
             if(commands != null){
+                Client.getInstance().incCommandNum(commands.size());
                 for(int i = 0; i < commands.size(); i++){
                     try {
 //                    gameResult.getUpdateCommands().get(i).execute();
