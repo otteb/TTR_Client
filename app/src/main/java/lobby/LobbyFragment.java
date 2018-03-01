@@ -27,7 +27,7 @@ import java.util.List;
 
 public class LobbyFragment extends Fragment {
 
-    private GamesAdapter gamesAdapter;
+    public GamesAdapter gamesAdapter;
     private RecyclerView mGamesRecView;
     public Game createGame = new Game();
     TextView curName;
@@ -37,6 +37,7 @@ public class LobbyFragment extends Fragment {
     TextView p4;
     TextView p5;
 
+    public  List<Game> gameList;
     TextView curGame;
     Button join;
     Button start;
@@ -97,7 +98,7 @@ public class LobbyFragment extends Fragment {
 
         gamesAdapter = new GamesAdapter(games);
         mGamesRecView.setAdapter(gamesAdapter);
-        List<Game> gameList = Client.getInstance().getGameList();
+        gameList = Client.getInstance().getGameList();
         for(int i=0; i<gameList.size(); i++)
             gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
         gamesAdapter.notifyDataSetChanged();

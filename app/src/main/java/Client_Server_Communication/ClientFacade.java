@@ -111,8 +111,8 @@ public class ClientFacade {
             request.setAuthToken(result.getAuthToken());
             request.setCommandNum(Client.getInstance().getCommandNum());
             //call the client facade updateClient() - use the current index;
-            ArrayList<Command> returnList = updateClient(request).getUpdateCommands();
-
+            Poller.LobbyPolling lobbyPoller = new Poller.LobbyPolling();
+            lobbyPoller.execute();
         }
         else
         {

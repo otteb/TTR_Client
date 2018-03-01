@@ -99,6 +99,7 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
             MainActivity lobbyFragment= (MainActivity)((Activity)context);
             result = "";
             lobbyFragment.updateCreate(getInstance().getActiveGame());
+            //lobbyFragment.updateCreate(getInstance().getActiveGame());
 
         }
         else if(result.equals("join"))

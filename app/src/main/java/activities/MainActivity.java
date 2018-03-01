@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import Models.Client;
 import Models.Game;
 import Models.Request;
+import lobby.LobbyPresentor;
 import registerLogin.LoginFragment;
 import lobby.LobbyFragment;
 import game.GameFragment;
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         //currentGame = lobbyP.createGame(getActivity(), play, gameName.getText().toString());
 
         lobbyFragment.createGame = currentGame;
+        lobbyFragment.gameList = Client.getInstance().getGameList();
         lobbyFragment.createUpdate= true;
         lobbyFragment.getView();
     }
