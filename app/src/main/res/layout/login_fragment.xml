@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:text="FINN"
+                    android:text=""
                     android:ems="10"
                     android:id="@+id/editText_username" />
             </LinearLayout>
@@ -50,7 +50,7 @@
                     android:ems="10"
                     android:id="@+id/editText2_password"
                     android:layout_weight="1"
-                    android:text="FINES" />
+                    android:text="" />
             </LinearLayout>
 
 
