@@ -7,7 +7,7 @@ public class Request {
     private String authToken;
     private String gameId;
     private boolean status; //Game started or not?, etc.
-    private Integer commandNum;
+    private int commandNum;
 
 
     public Request(){
@@ -53,11 +53,11 @@ public class Request {
         this.status = status;
     }
 
-    public Integer getCommandNum() {
+    public int getCommandNum() {
         return commandNum;
     }
 
-    public void setCommandNum(Integer commmandNum) {
+    public void setCommandNum(int commmandNum) {
         this.commandNum = commmandNum;
     }
 }

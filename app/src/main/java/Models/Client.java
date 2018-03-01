@@ -9,6 +9,7 @@ import java.util.Observable;
  */
 
 public class Client extends Observable {
+
     private static Client single_instance = new Client();
 
 

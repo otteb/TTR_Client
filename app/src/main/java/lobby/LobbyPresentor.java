@@ -94,28 +94,39 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
 
     @Override
     public void update(Observable observable, Object result) {
-        MainActivity lobbyFragment= (MainActivity)((Activity)context);
         if(result.equals("create"))
         {
+            MainActivity lobbyFragment= (MainActivity)((Activity)context);
+            result = "";
             lobbyFragment.updateCreate(getInstance().getActiveGame());
 
         }
         else if(result.equals("join"))
         {
+            MainActivity lobbyFragment= (MainActivity)((Activity)context);
+            result= "";
             lobbyFragment.updateJoin(getInstance().getActiveGame());
         }
         else if (result.equals("start"))
         {
             //start a game
             MainActivity mainActivity = (MainActivity) context;
+            result = "";
             mainActivity.openGame();
         }
         else
         {
             Toast.makeText(context, (CharSequence) result, Toast.LENGTH_SHORT).show();
         }
+        observable.hasChanged();
 //        Result newResult = (Result)result;
         //      newResult.getErrorMsg();
     }
+
+    public void addPlayer(String player)
+    {
+
+    }
+
 }
 

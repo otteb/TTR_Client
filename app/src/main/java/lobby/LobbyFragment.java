@@ -35,6 +35,7 @@ public class LobbyFragment extends Fragment {
     TextView p3;
     TextView p4;
     TextView p5;
+
     TextView curGame;
     Button join;
     Button start;
@@ -79,7 +80,7 @@ public class LobbyFragment extends Fragment {
         players.add(p4);
         players.add(p5);
         curGame = (TextView) view.findViewById(R.id.curGame);
-        final LobbyPresentor lobbyP = new LobbyPresentor(getActivity());
+        final LobbyPresentor lobbyPresenter = new LobbyPresentor(getActivity());
         final  TextView numPlayers = (TextView) view.findViewById(R.id.numPlayers);
         numPlayers.setVisibility(View.GONE);
         join= (Button) view.findViewById(R.id.join);
@@ -104,7 +105,7 @@ public class LobbyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (currentGame != null) {
-                    currentGame = lobbyP.joinGame(getActivity(), currentGame, acceptedUser.getString("username"));
+                    currentGame = lobbyPresenter.joinGame(getActivity(), currentGame, acceptedUser.getString("username"));
                     if (currentGame.isJoinable()) {
                         start.setEnabled(true);
                     }
@@ -126,7 +127,7 @@ public class LobbyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (currentGame != null) {
-                  lobbyP.startGame(getActivity(), currentGame);
+                  lobbyPresenter.startGame(getActivity(), currentGame);
                 }
                 else
                 {
@@ -147,13 +148,14 @@ public class LobbyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 newGame.setVisibility(View.VISIBLE);
-                if (gameName.getText().equals(null))
+                if (gameName.getText() == null)
                 {
                     Toast.makeText(getActivity(), "The game needs a name", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     //question for Finn -
-                    currentGame = lobbyP.createGame(getActivity(), play, gameName.getText().toString(),  acceptedUser.getString("username"));
+                    currentGame = lobbyPresenter.createGame(getActivity(), play, gameName.getText().toString(),  acceptedUser.getString("username"));
+
                     newGame.setVisibility(View.GONE);
                     gameName.setText(null);
                     gamesAdapter.addGametoView(currentGame);
@@ -175,7 +177,6 @@ public class LobbyFragment extends Fragment {
                     }
 
                     ArrayList<Game> temp = Client.getInstance().getGameList();
-                    int asfd = 0;
 
 
 
@@ -312,6 +313,7 @@ public class LobbyFragment extends Fragment {
             return games.size();
         }
     }
+
 
 
 
