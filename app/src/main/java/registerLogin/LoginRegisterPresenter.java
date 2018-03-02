@@ -16,12 +16,12 @@ import Services.GuiFacade;
  * Created by fjameson on 2/2/18.
  */
 
-public class LoginRegisterPresentor implements ILoginRegisterPresentor, Observer {
+public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer {
 
     public Context context;
     public Request user;
     public GuiFacade guiFacade = new GuiFacade();
-    public LoginRegisterPresentor(Context c) {
+    public LoginRegisterPresenter(Context c) {
         context=c;
         guiFacade.addObserver(this);
         //make a login frag

@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import Client_Server_Communication.Poller;
 import activities.MainActivity;
-import Models.Client;
 import Models.Game;
 import Services.GuiFacade;
 
@@ -22,7 +20,7 @@ import static Models.Client.getInstance;
  * Created by krommend on 2/1/18.
  */
 
-public class LobbyPresentor implements ILobbyPresentor, Observer {
+public class LobbyPresenter implements ILobbyPresenter, Observer {
 
     private GuiFacade guiFacade = new GuiFacade();
     ArrayList<String> players = new ArrayList<String>();
@@ -30,7 +28,7 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
     String p[] = {"p1", "p2", "p3", "p4", "p5"};
     private Context context;
 
-    public LobbyPresentor(Context c)
+    public LobbyPresenter(Context c)
     {
         context = c;
         guiFacade.addObserver(this);

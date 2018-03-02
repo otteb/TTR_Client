@@ -24,7 +24,7 @@ public class RegisterFragment extends Fragment {
     EditText confpswd;
     Button register;
     TextView backToLogin;
-    LoginRegisterPresentor l;
+    LoginRegisterPresenter l;
 
     public RegisterFragment()
     {
@@ -32,7 +32,7 @@ public class RegisterFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        l = new LoginRegisterPresentor(getContext());
+        l = new LoginRegisterPresenter(getContext());
         View view = inflater.inflate(R.layout.register_fragment, container, false);
         username= (EditText)view.findViewById(R.id.editText_username1);
         password= (EditText)view.findViewById(R.id.editText2_password1);

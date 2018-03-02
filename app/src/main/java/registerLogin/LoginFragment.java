@@ -22,7 +22,7 @@ public class LoginFragment extends Fragment {
     EditText username;
     EditText password;
     Button login;
-    LoginRegisterPresentor l;
+    LoginRegisterPresenter l;
     TextView register;
 
     public LoginFragment()
@@ -32,7 +32,7 @@ public class LoginFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        l = new LoginRegisterPresentor(getContext());
+        l = new LoginRegisterPresenter(getContext());
         View view = inflater.inflate(R.layout.login_fragment, container, false);
         username= (EditText)view.findViewById(R.id.editText_username);
         password= (EditText)view.findViewById(R.id.editText2_password);

@@ -7,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+
 import Models.Result;
 import activities.R;
 import lobby.LobbyFragment;
-import registerLogin.LoginRegisterPresentor;
 
 /**
  * Created by fjameson on 2/2/18.

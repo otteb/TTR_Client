@@ -82,7 +82,7 @@ public class LobbyFragment extends Fragment {
         players.add(p4);
         players.add(p5);
         curGame = (TextView) view.findViewById(R.id.curGame);
-        final LobbyPresentor lobbyPresenter = new LobbyPresentor(getActivity());
+        final LobbyPresenter lobbyPresenter = new LobbyPresenter(getActivity());
         final  TextView numPlayers = (TextView) view.findViewById(R.id.numPlayers);
         numPlayers.setVisibility(View.GONE);
         join= (Button) view.findViewById(R.id.join);

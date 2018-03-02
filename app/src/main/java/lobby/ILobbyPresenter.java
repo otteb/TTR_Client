@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Created by fjameson on 2/12/18.
  */
 
-public interface ILobbyPresentor {
+public interface ILobbyPresenter {
     public ArrayList<String> Players= new ArrayList<String>();
     boolean GameStarted = false;
 
