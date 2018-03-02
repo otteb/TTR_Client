@@ -1,7 +1,5 @@
-package Models;
+package Models.Cards;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TrainDeck {

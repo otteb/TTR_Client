@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import activities.R;
-import Models.Game;
+import Models.Gameplay.Game;
 import Models.Client;
 
 

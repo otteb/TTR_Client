@@ -2,11 +2,8 @@ package AsyncTasks;
 
 import android.os.AsyncTask;
 
-import java.util.HashMap;
-
 import Client_Server_Communication.ClientFacade;
 import Models.Client;
-import Models.Game;
 import Models.Request;
 import Models.Result;
 

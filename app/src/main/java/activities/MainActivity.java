@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import Models.Client;
-import Models.Game;
+import Models.Gameplay.Game;
 import Models.Request;
 import registerLogin.LoginFragment;
 import lobby.LobbyFragment;

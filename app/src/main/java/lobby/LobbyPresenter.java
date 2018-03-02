@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import Interfaces.ILobbyPresenter;
 import activities.MainActivity;
-import Models.Game;
+import Models.Gameplay.Game;
 import Services.GuiFacade;
 
 import static Models.Client.getInstance;

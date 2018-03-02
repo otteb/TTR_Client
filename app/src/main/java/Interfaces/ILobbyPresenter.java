@@ -1,8 +1,8 @@
-package lobby;
+package Interfaces;
 
 import android.content.Context;
 
-import Models.Game;
+import Models.Gameplay.Game;
 
 import java.util.ArrayList;
 

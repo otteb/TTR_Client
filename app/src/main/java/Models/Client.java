@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
+import Models.Gameplay.Game;
+
 /**
  * Created by brianotte on 2/12/18.
  */

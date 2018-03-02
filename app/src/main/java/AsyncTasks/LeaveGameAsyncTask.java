@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 
 import Client_Server_Communication.ClientFacade;
 import Models.Client;
-import Models.Game;
 import Models.Request;
 import Models.Result;
 /**

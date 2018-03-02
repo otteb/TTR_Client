@@ -7,8 +7,8 @@ import AsyncTasks.RegisterAsyncTask;
 import AsyncTasks.StartGameAsyncTask;
 import Client_Server_Communication.ClientFacade;
 import Models.*;
+import Models.Gameplay.Game;
 
-import java.util.ArrayList;
 import java.util.Observer;
 
 /**
