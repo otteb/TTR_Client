@@ -32,17 +32,16 @@ public class LobbyServices implements ILobby {
         //return a game, gameId, and message;
         System.out.println("COMMAND EXECUTED - CREATE GAME");
 
-
         Game newGame = new Game(request.getGameId());
         //add players to the newGame:
         ArrayList<String> tempList = newGame.getPlayers();
         tempList.add(request.getUsername());
         newGame.setPlayers(tempList);
         //add the game into the Client Model's HashMap:
-        HashMap<String, Game> tempGameMap = Client.getInstance().getGameMap();
-        tempGameMap.put(request.getGameId(),newGame);
-        Client.getInstance().setGameMap(tempGameMap);
-
+        Client.getInstance().addGameToMap(request.getGameId(), newGame);
+//        HashMap<String, Game> tempGameMap = Client.getInstance().getGameMap();
+//        tempGameMap.put(request.getGameId(),newGame);
+//        Client.getInstance().setGameMap(tempGameMap);
 
         //do we actually need to return anything??
         return null;
@@ -50,16 +49,28 @@ public class LobbyServices implements ILobby {
 
     @Override
     public Result joinGame(Request request) { //(String authToken, String gameId);
-        System.out.println("COMMAND EXECUTED - JOIN GAME");
-        Game currentGame = Client.getInstance().getGameMap().get(request.getGameId());
-        ArrayList<String> tempList = currentGame.getPlayers();
-        tempList.add(request.getUsername());
-        currentGame.setPlayers(tempList);
+        System.out.println("COMMAND EXECUTING - JOIN GAME");
+//        Game currentGame = Client.getInstance().getGameMap().get(request.getGameId());
+//        ArrayList<String> tempList = currentGame.getPlayers();
+//        tempList.add(request.getUsername());
+//        currentGame.setPlayers(tempList);
         //add the game into the Client Model's HashMap:
-        HashMap<String, Game> tempGameMap = Client.getInstance().getGameMap();
-        tempGameMap.put(request.getGameId(),currentGame);
-        Client.getInstance().setGameMap(tempGameMap);
+//        HashMap<String, Game> tempGameMap = Client.getInstance().getGameMap();
+//        tempGameMap.put(request.getGameId(),currentGame);
+//        Client.getInstance().setGameMap(tempGameMap);
+        Client.getInstance().addPlayerToGame(request.getGameId(), request.getUsername());
 
+        Client.getInstance().setActiveGame(Client.getInstance().getGameMap().get(request.getGameId()));
+//        Client.getInstance().addGameToMap(request.getGameId(), currentGame);
+
+        return null;
+    }
+
+    @Override
+    public Result leaveGame(Request request) {
+        System.out.println("COMMAND EXECUTING - LEAVE GAME");
+        Client.getInstance().removePlayerFromGame(request.getGameId(), request.getUsername());
+//        Client.getInstance().getGameMap().get(request.getGameId()).getPlayers().remove(request.getUsername());
         return null;
     }
 

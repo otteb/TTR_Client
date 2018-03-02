@@ -11,11 +11,10 @@ import Models.Result;
  */
 
 public class StartGameAsyncTask extends AsyncTask<Request, Void, Result> {
-    ClientFacade clientFacade = new ClientFacade();
+    private ClientFacade clientFacade = new ClientFacade();
     @Override
     protected Result doInBackground(Request... requests) {
-        Result result = clientFacade.startGame(requests[0]);
-        return result;
+        return clientFacade.startGame(requests[0]);
     }
     //onPostExecute updates the Client model:
     @Override

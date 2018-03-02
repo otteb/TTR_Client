@@ -82,6 +82,16 @@ public class LoginRegisterPresentor implements ILoginRegisterPresentor, Observer
         return null;
     }
 
+    public void switchToLobby(Context c, String username, String password, String authToken)
+    {
+        user.setAuthToken(authToken);
+        user.setPassword(password);
+        user.setUsername(username);
+        MainActivity mainActivity = (MainActivity) c;
+        mainActivity.switchToLobby(user);
+        user = null;
+    }
+
 
     @Override
     public void update(Observable o, Object authToken) {

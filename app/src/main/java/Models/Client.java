@@ -12,10 +12,8 @@ public class Client extends Observable {
 
     private static Client single_instance = new Client();
 
-
-
     private HashMap<String, Game> gameMap;
-    private Game activeGame = new Game();
+    private Game activeGame;
     private boolean isLoggedIn;
     private boolean isRegistered;
     private String userName;
@@ -25,21 +23,19 @@ public class Client extends Observable {
     private Request registerRequest;
     private int commandNum;
 
-
     //constructor
-    Client(){
+    private Client(){
         this.commandNum = 0;
         this.gameMap = new HashMap<>();
         isLoggedIn = false;
         isRegistered = false;
+        activeGame = null;
     }
 
     public static Client getInstance()
     {
         return single_instance;
     }
-
-
 
     public void setIsLoggedIn(boolean b)
     {
@@ -51,8 +47,7 @@ public class Client extends Observable {
         userName = u;
     }
 
-    public void setAuthToken(String a)
-    {
+    public void setAuthToken(String a) {
         authToken=a;
         setChanged();
         notifyObservers(a);
@@ -62,7 +57,6 @@ public class Client extends Observable {
     {
         password=p;
     }
-
 
     public Game getActiveGame()
     {
@@ -91,17 +85,13 @@ public class Client extends Observable {
 
     public void setLoginRequest(Request l)
     {
-
         loginRequest=l;
-
     }
 
-    public void sendMessage(String m)
-    {
+    public void sendMessage(String m) {
         setChanged();
         notifyObservers(m);
     }
-
 
     public Request getRegisterRequest() {
         return registerRequest;
@@ -114,26 +104,49 @@ public class Client extends Observable {
     public void setActiveGame(Game activeGame) {
         this.activeGame = activeGame;
     }
+
     public HashMap<String, Game> getGameMap() {
         return gameMap;
     }
 
     public void setGameMap(HashMap<String, Game> gameMap) {
-        //if(gameMap !=) {
             this.gameMap = gameMap;
-            createGame();
-       // }
-
+//            createGame();
     }
+
     public ArrayList<Game> getGameList(){
-        ArrayList<Game> returnList = new ArrayList<>();
-        for(String i: this.gameMap.keySet()){
-
-            returnList.add(this.gameMap.get(i));
+        ArrayList<Game> gameList = new ArrayList<>();
+        for(Game g : gameMap.values())
+        {
+            gameList.add(g);
         }
-        return returnList;
+//        for(String i: this.gameMap.keySet()){
+//
+//            returnList.add(this.gameMap.get(i));
+//        }
+        return gameList;
     }
 
+    //can this be in joinGame()?
+    public void addPlayerToGame(String gameId, String username)
+    {
+        gameMap.get(gameId).addPlayer(username);
+        joinGame();
+    }
+
+    public void removePlayerFromGame(String gameId, String username)
+    {
+        gameMap.get(gameId).getPlayers().remove(username);
+        leaveGame();
+    }
+
+    //Can we just add this to createGame() instead?
+    public void addGameToMap(String gameId, Game game) {
+        gameMap.put(gameId, game);
+        createGame();
+    }
+
+    //TODO: Can we pass parameters into these and add functionality? Or are these only to notify?
     //observables:
     public void createGame ()
     {
@@ -147,24 +160,25 @@ public class Client extends Observable {
         notifyObservers("join");
     }
 
+    public void leaveGame ()
+    {
+        setChanged();
+        notifyObservers("leave");
+    }
+
     public void startGame ()
     {
         setChanged();
         notifyObservers("start");
     }
 
-
-
-
-
-
     public void setRegisterRequest(Request r){ registerRequest=r; }
+
     //This is for users that are not get officially login to the system
     public void clientLogin(Request lR)
     {
         loginRequest = lR;
     }
-
 
     public int getCommandNum() {
         return commandNum;

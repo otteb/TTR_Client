@@ -1,9 +1,5 @@
 package Client_Server_Communication;
 
-/**
- * Created by ferrell3 on 2/6/18.
- */
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -26,18 +22,10 @@ public class ClientCommunicator {
 
     public static ClientCommunicator getInstance() { return myInstance; }
 
-    private String serverHost = "192.168.2.169"; //"10.24.66.130";
+    private String serverHost = "192.168.2.118"; //"192.168.2.169"; //"10.24.66.130";
     private String serverPort = "8888";
 
     private ClientCommunicator() {}
-
-//    public Result send(String urlPath, Request reqInfo){
-//        String url = "http://" + serverHost + ":" + serverPort + "/" + urlPath;
-//
-//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//        String jsonStr = gson.toJson(reqInfo);
-//        return post(url, jsonStr);
-//    }
 
     public Result sendCommand(Command command){
         String url = "http://" + serverHost + ":" + serverPort + "/";

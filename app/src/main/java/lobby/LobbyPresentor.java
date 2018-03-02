@@ -24,25 +24,21 @@ import static Models.Client.getInstance;
 
 public class LobbyPresentor implements ILobbyPresentor, Observer {
 
-    GuiFacade guiFacade = new GuiFacade();
+    private GuiFacade guiFacade = new GuiFacade();
     ArrayList<String> players = new ArrayList<String>();
     boolean gameStarted;
     String p[] = {"p1", "p2", "p3", "p4", "p5"};
-    Context context;
+    private Context context;
 
     public LobbyPresentor(Context c)
     {
         context = c;
-        Poller poller = new Poller();
-        poller.runLobbyCommands();
         guiFacade.addObserver(this);
     }
 
-
     @Override
-    public Game joinGame(Context context, Game currentGame, String name) {
-
-
+    public Game joinGame(Context context, Game currentGame, String name)
+    {
         if (currentGame != null) {
             for (int i = 0; i < currentGame.getPlayers().size(); i++) {
                 if (currentGame.getPlayers().get(i).equals(name)) {
@@ -51,22 +47,19 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
                 }
             }
         }
-        else return currentGame;
+        else return null;
 
-        boolean vacant = false;
+//        boolean vacant = false;
         if(currentGame.getPlayers().size()<5)
         {
-                 guiFacade.joinGame(currentGame, name);
+            guiFacade.joinGame(currentGame, name);
         }
-
         return currentGame;
     }
 
 
     @Override
     public boolean startGame(Context context, Game game) {
-
-
         if (game.getPlayers().size() > 1) {
             Toast.makeText(context, "game started", Toast.LENGTH_SHORT).show();
             guiFacade.startGame(game.getId());
@@ -78,12 +71,14 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
 
     @Override
     public Game createGame(Context context, ArrayList<String> players, String id, String username) {
-
+        //TODO: FIGURE OUT WHAT TO RETURN HERE
+        //This currently returns a new game and does not check with the server
+        //How can we get access to the proper game object here?
         Game myGame = new Game(players, id);
         myGame.addPlayer(username);
-        guiFacade.createGame(myGame);
+        guiFacade.createGame(id);
         Toast.makeText(context, "game created", Toast.LENGTH_SHORT).show();
-        return myGame;
+        return myGame; //Client.getInstance().getActiveGame();
     }
 
     @Override
@@ -99,7 +94,6 @@ public class LobbyPresentor implements ILobbyPresentor, Observer {
             MainActivity lobbyFragment= (MainActivity)((Activity)context);
             result = "";
             lobbyFragment.updateCreate(getInstance().getActiveGame());
-            //lobbyFragment.updateCreate(getInstance().getActiveGame());
 
         }
         else if(result.equals("join"))

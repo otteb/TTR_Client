@@ -44,11 +44,11 @@ public class GuiFacade {
         registerAsyncTask.execute(registerRequest);
 //        return clientFacade.register(registerRequest);
     }
-    public void createGame (Game game)
+    public void createGame (String gameId)
     {
         Request request = new Request();
         request.setAuthToken(Client.getInstance().getAuthToken());
-        request.setGameId(game.getId());
+        request.setGameId(gameId);
         int temp = Client.getInstance().getCommandNum();
         request.setCommandNum(temp);
         //have no need for the result:

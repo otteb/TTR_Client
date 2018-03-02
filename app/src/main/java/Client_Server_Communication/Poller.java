@@ -70,7 +70,6 @@ public class Poller {
             request.setCommandNum(Client.getInstance().getCommandNum());
             //call the client facade updateClient() - use the current index;
             ArrayList<Command> returnList = clientFacade.updateClient(request).getUpdateCommands();
-
             return returnList;
         }
 

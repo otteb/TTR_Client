@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import java.sql.ClientInfoStatus;
 
 import Client_Server_Communication.ClientFacade;
+import Client_Server_Communication.Poller;
 import Models.Client;
 import Models.Request;
 import Models.Result;
@@ -14,11 +15,11 @@ import Models.Result;
  */
 
 public class LoginAsyncTask extends AsyncTask <Request, Void, Result> {
-    ClientFacade clientFacade = new ClientFacade();
+    private ClientFacade clientFacade = new ClientFacade();
     @Override
     protected Result doInBackground(Request... requests) {
-        Result result = clientFacade.login(requests[0]);
-        return result;
+        return clientFacade.login(requests[0]);
+//        return result;
     }
     //onPostExecute updates the Client model:
     @Override

@@ -15,27 +15,26 @@ import Models.Result;
  */
 
 public class CreateGameAsyncTask extends AsyncTask<Request, Void, Result> {
-    ClientFacade clientFacade = new ClientFacade();
+    private ClientFacade clientFacade = new ClientFacade();
+
     @Override
     protected Result doInBackground(Request... requests) {
-        Result result = clientFacade.createGame(requests[0]);
-        return result;
+        return clientFacade.createGame(requests[0]);
+//        return result;
     }
-    //onPostExjordaecute updates the Client model:
+
+    //onPostExecute updates the Client model:
     @Override
     protected void onPostExecute(Result result){
-        if(result.getErrorMsg() == null) {
-            Game game = new Game();
-            game.setId(result.getGameId());
-            game.addPlayer(Client.getInstance().getUserName());
-            HashMap<String, Game> temp = Client.getInstance().getGameMap();
-            temp.put(result.getGameId(), game);
-            Client.getInstance().setGameMap(temp);
-            //Client.getInstance().createGame();
-        }else {
+//        if(result.isSuccessful()) { System.out.println("Created a game - This is the asyncTask"); }
+        if(result.getErrorMsg() == null)
+        {
+            System.out.println("Created a game - This is the asyncTask");
+        }
+        else
+        {
             Client.getInstance().sendMessage(result.getErrorMsg());
         }
-        System.out.println("Created a game - This is the asyncTask");
     }
 
 }

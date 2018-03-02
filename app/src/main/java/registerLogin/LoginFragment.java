@@ -45,14 +45,16 @@ public class LoginFragment extends Fragment {
                 Result r = l.login(getActivity(), username.getText().toString(), password.getText().toString());
                 if(r != null)
                 {
-                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                    Fragment fragment = new LobbyFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("username", username.getText().toString());
-                    bundle.putString("password", password.getText().toString());
-                    bundle.putString("authToken", r.getAuthToken());
-                    fragment.setArguments(bundle);
-                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+                    l.switchToLobby(getActivity(), username.getText().toString(), password.getText().toString(),
+                            r.getAuthToken());
+//                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
+//                    Fragment fragment = new LobbyFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("username", username.getText().toString());
+//                    bundle.putString("password", password.getText().toString());
+//                    bundle.putString("authToken", r.getAuthToken());
+//                    fragment.setArguments(bundle);
+//                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
                 }
 
             }

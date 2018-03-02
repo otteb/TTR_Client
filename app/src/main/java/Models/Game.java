@@ -27,7 +27,7 @@ public class Game {
             players = p;
         }
         else {
-            players= new ArrayList<String>();
+            players = new ArrayList<String>();
         }
     }
 
@@ -39,16 +39,18 @@ public class Game {
         this.id = id;
     }
 
-    public String addPlayer(String p){
-        if(players.size() <= 5)
-        {
-            players.add(p);
-        }
-        else
-        {
-            return "the player could not be added the Game is full";
-        }
-        return null;
+    public boolean addPlayer(String p){
+        return players.size() < 5 && !players.contains(p) && players.add(p);
+//        if(players.size() < 5)
+//        {
+//            return players.add(p);
+//        }
+//        else
+//        {
+//            return false;
+////            return "the player could not be added, the Game is full";
+//        }
+//        return "";
     }
 
     public ArrayList<String> getPlayers() {
@@ -62,7 +64,6 @@ public class Game {
     public boolean isJoinable() {
         return joinable;
     }
-
 
     public void setJoinable(boolean joinable) {
         this.joinable = joinable;

@@ -143,7 +143,7 @@ public class LobbyFragment extends Fragment {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"You're creating a game", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(),"You're creating a game", Toast.LENGTH_SHORT).show();
                 newGame.setVisibility(View.VISIBLE);
             }
         });
