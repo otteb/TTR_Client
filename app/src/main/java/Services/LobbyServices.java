@@ -79,6 +79,7 @@ public class LobbyServices implements ILobby {
         System.out.println("COMMAND EXECUTED - START GAME");
         Game activeGame = new Game(request.getGameId());
         Client.getInstance().setActiveGame(activeGame);
+        Client.getInstance().startGame();
         return null;
     }
 
