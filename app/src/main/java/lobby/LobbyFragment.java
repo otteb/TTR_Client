@@ -12,12 +12,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import Models.Gameplay.Player;
 import activities.R;
 import Models.Gameplay.Game;
 import Models.Client;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -46,7 +49,6 @@ public class LobbyFragment extends Fragment {
     LinearLayout newGame;
     EditText gameName;
     View view;
-    public boolean createUpdate = false;
     Game currentGame = null;
 
 
@@ -103,31 +105,21 @@ public class LobbyFragment extends Fragment {
         mGamesRecView.setAdapter(gamesAdapter);
         gameList = Client.getInstance().getGameList();
 
-        //sets Games List initially in the view
-        /*gamesAdapter.clearGames();
-        gamesAdapter.notifyDataSetChanged();
-        for(int i=0; i<gameList.size(); i++)
-            gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
-        gamesAdapter.notifyDataSetChanged();*/
-        //starting to add people
-
 
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateGameList();
                 if (currentGame != null) {
+                    currentGame = Client.getInstance().getGameMap().get(currentGame.getId());
                     currentGame = lobbyPresenter.joinGame(getActivity(), currentGame, acceptedUser.getString("username"));
                     currentGame = Client.getInstance().getGameMap().get(currentGame.getId());
-                    if (currentGame.isJoinable()) {
-                        start.setEnabled(true);
-                    }
+
                 } else {
                     Toast.makeText(getActivity(), "you can't join a game that doesn't exist", Toast.LENGTH_LONG).show();
                 }
 
                 if (currentGame != null) {
-                    updateGameList();
-                    updatePlayers();
                 } else Toast.makeText(getActivity(), "no game selected", Toast.LENGTH_SHORT).show();
 
             }
@@ -137,12 +129,14 @@ public class LobbyFragment extends Fragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentGame != null) {
+                currentGame = Client.getInstance().getGameMap().get(currentGame.getId());
+                if (currentGame != null && currentGame.isJoinable()) {
+                    start.setEnabled(true);
                   lobbyPresenter.startGame(getActivity(), currentGame);
                 }
                 else
                 {
-                    Toast.makeText(getActivity(), "you can't join a game that doesn't exist", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "you can't start this game", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -150,7 +144,6 @@ public class LobbyFragment extends Fragment {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getActivity(),"You're creating a game", Toast.LENGTH_SHORT).show();
                 newGame.setVisibility(View.VISIBLE);
             }
         });
@@ -165,6 +158,7 @@ public class LobbyFragment extends Fragment {
                 }
                 else {
                     //question for Finn -
+                    play = new ArrayList<String>();
                     currentGame = lobbyPresenter.createGame(getActivity(), play, gameName.getText().toString());
 
                     newGame.setVisibility(View.GONE);
@@ -172,91 +166,87 @@ public class LobbyFragment extends Fragment {
                     curGame.setText(currentGame.getId());
 
                     //updating game list
-                    gamesAdapter.clearGames();
+               /*     gamesAdapter.clearGames();
                     for(int i=0; i<Client.getInstance().getGameList().size(); i++)
                         gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
-                    gamesAdapter.notifyDataSetChanged();
+                    gamesAdapter.notifyDataSetChanged();*/
 
-                    /*for (int i = 0; i < currentGame.getPlayers().size(); i++) {
-
-                        players.get(i).setText(currentGame.getPlayers().get(i));
-
-                        if (!players.get(i).getText().equals("")) {
-                            players.get(i).setVisibility(View.VISIBLE);
-                            players.get(i).setText(currentGame.getPlayers().get(i));
-                        }
-                        else players.get(i).setVisibility(View.GONE);
-                    }*/
-                    updatePlayers();
-
+                    //updateGameList();
+                    //updatePlayers();
                     ArrayList<Game> temp = Client.getInstance().getGameList();
 
 
 
                 }
+               // updateGameList();
+              //  updatePlayers();
             }
         });
 
-        if( createUpdate == true){
-            newGame.setVisibility(View.GONE);
-            gameName.setText(null);
-            gamesAdapter.addGametoView(currentGame);
-            gamesAdapter.notifyDataSetChanged();
-            for (int i=0; i< Client.getInstance().getGameList().size(); i++){
+//        if( createUpdate == true){
+//            newGame.setVisibility(View.GONE);
+//            gameName.setText(null);
+//            gamesAdapter.addGametoView(currentGame);
+//            gamesAdapter.notifyDataSetChanged();
+//            for (int i=0; i< Client.getInstance().getGameList().size(); i++){
+//
+//           curGame.setText( Client.getInstance().getGameList().get(i).getId());
+//            }
+//
+//            for (int i = 0; i < currentGame.getPlayers().size(); i++) {
+//
+//                players.get(i).setText(currentGame.getPlayers().get(i));
+//
+//                if (!players.get(i).getText().equals("")) {
+//                    players.get(i).setVisibility(View.VISIBLE);
+//                    players.get(i).setText(currentGame.getPlayers().get(i));
+//                }
+//                else players.get(i).setVisibility(View.GONE);
+//            }
+//
+//        }
 
-           curGame.setText( Client.getInstance().getGameList().get(i).getId());
-            }
 
-            for (int i = 0; i < currentGame.getPlayers().size(); i++) {
-
-                players.get(i).setText(currentGame.getPlayers().get(i));
-
-                if (!players.get(i).getText().equals("")) {
-                    players.get(i).setVisibility(View.VISIBLE);
-                    players.get(i).setText(currentGame.getPlayers().get(i));
-                }
-                else players.get(i).setVisibility(View.GONE);
-            }
-
-        }
-        if (Client.getInstance().getGameList().size()>0)
+       /* if (Client.getInstance().getGameList().size()>0)
         {
             for(int i=0; i<Client.getInstance().getGameList().size(); i++)
             gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
             gamesAdapter.notifyDataSetChanged();
-        }
+        }*/
 
         return view;
     }
 
     public void updateGameList()
     {
-       /* Game g = new Game();
-        g.setId("test");
-        gamesAdapter.addGametoView(g);
-        */gamesAdapter.clearGames();
-        for(int i=0; i<Client.getInstance().getGameList().size(); i++)
-            gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
-        gamesAdapter.notifyDataSetChanged();
-
+        HashMap<String, Game> games = Client.getInstance().getGameMap();
+        if (Client.getInstance().getGameMap() != null) {
+            gamesAdapter.clearGames();
+            for (String i : Client.getInstance().getGameMap().keySet()){
+                Game game = Client.getInstance().getGameMap().get(i);
+                gamesAdapter.addGametoView(Client.getInstance().getGameMap().get(i));
+            }
+            gamesAdapter.notifyDataSetChanged();
+        }
 
     }
 
     public void updatePlayers()
     {
-        //players.get(i).setText(currentGame.getPlayers().get(i));
-        for(int j= 0; j<Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size(); j++)
-        {players.get(j).setText(Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().get(j));}
-
+        //for(int j= 0; j<Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size(); j++)
+        //{players.get(j).setText(Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().get(j));}
+        if(Client.getInstance().getGameMap().get(currentGame.getId()) != null) {
+        curGame.setText(Client.getInstance().getGameMap().get(currentGame.getId()).getId());
         for (int i = 0; i < players.size(); i++) {
-            if(i<Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size())
-            {players.get(i).setText(Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().get(i));}
-                /*if (!players.get(i).getText().equals("")) {
-                    players.get(i).setVisibility(View.VISIBLE);
-                    players.get(i).setText(Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().get(i));
-                }*/
-                else players.get(i).setText("vacant");//players.get(i).setVisibility(View.GONE);
-            }
+            if (i < Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size()) {
+                players.get(i).setText(Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().get(i));
+            } else players.get(i).setText("vacant");
+        }
+    }
+    else
+        {
+            System.out.println("the current game is null");
+        }
 
     }
 
@@ -295,20 +285,6 @@ public class LobbyFragment extends Fragment {
                         }
 
                     }
-
-                   /* for (int i = 0; i < currentGame.getPlayers().size(); i++) {
-
-                        players.get(i).setText(currentGame.getPlayers().get(i));
-
-                        if (!players.get(i).getText().equals("")) {
-                            players.get(i).setVisibility(View.VISIBLE);
-                            players.get(i).setText(currentGame.getPlayers().get(i));
-                        }
-                        else players.get(i).setVisibility(View.GONE);
-                    }*/
-
-
-
                 }
             });
         }

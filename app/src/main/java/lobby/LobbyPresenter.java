@@ -42,7 +42,7 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
     @Override
     public Game joinGame(Context context, Game currentGame, String name)
     {
-        if (currentGame != null) {
+        if (currentGame != null && currentGame.isJoinable()==true) {
             for (int i = 0; i < currentGame.getPlayers().size(); i++) {
                 if (currentGame.getPlayers().get(i).equals(name)) {
                     Toast.makeText(context, "Cannot join same game twice", Toast.LENGTH_SHORT).show();
@@ -53,9 +53,14 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
         else return null;
 
 //        boolean vacant = false;
-        if(currentGame.getPlayers().size()<5)
+        if(currentGame.getPlayers().size()<4)
         {
             guiFacade.joinGame(currentGame, name);
+            Client.getInstance().setAuthToken(user.getAuthToken());
+        }
+        else
+        {
+            Toast.makeText(context, "The Game is already full", Toast.LENGTH_SHORT).show();
         }
         return currentGame;
     }
@@ -103,8 +108,8 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
         {
             MainActivity lobbyFragment= (MainActivity)((Activity)context);
             result = "";
-            lobbyFragment.updateGamesList();
-            lobbyFragment.updatePlayers();
+           lobbyFragment.updateGamesList();
+          lobbyFragment.updatePlayers();
 
         }
         else if(result.equals("join"))

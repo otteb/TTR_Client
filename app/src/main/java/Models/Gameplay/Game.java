@@ -8,7 +8,7 @@ public class Game {
     private String id;
     //    private Map<String,String> players; // not sure what the key and value are
     private ArrayList<String> players; //list of players' usernames
-    private boolean joinable;
+    private boolean active;
 
     public Game(){
         players = new ArrayList<>();
@@ -62,10 +62,14 @@ public class Game {
     }
 
     public boolean isJoinable() {
-        return joinable;
+        return (players.size()<5 && !active);
     }
 
-    public void setJoinable(boolean joinable) {
-        this.joinable = joinable;
+    public void setActive(boolean active) {
+        this.active = active;
     }
+
+    public boolean isActive()
+    {return active;}
+
 }

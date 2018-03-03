@@ -58,7 +58,6 @@ public class LobbyServices implements ILobby {
 //        tempGameMap.put(request.getGameId(),currentGame);
 //        Client.getInstance().setGameMap(tempGameMap);
         Client.getInstance().addPlayerToGame(request.getGameId(), request.getUsername());
-
         Client.getInstance().setActiveGame(Client.getInstance().getGameMap().get(request.getGameId()));
 //        Client.getInstance().addGameToMap(request.getGameId(), currentGame);
 
@@ -77,9 +76,18 @@ public class LobbyServices implements ILobby {
     public Result startGame(Request request) { //(String authToken, String gameId);
 
         System.out.println("COMMAND EXECUTED - START GAME");
-        Game activeGame = new Game(request.getGameId());
+
+        if (Client.getInstance().getActiveGame().getId().equals(request.getGameId()))
+        {
+            Client.getInstance().getGameMap().get(request.getGameId()).setActive(true);
+            Client.getInstance().startGame();
+        }
+        else {
+            Client.getInstance().getGameMap().get(request.getGameId()).setActive(true);
+        }
+       /* Game activeGame = new Game(request.getGameId());
         Client.getInstance().setActiveGame(activeGame);
-        Client.getInstance().startGame();
+        Client.getInstance().startGame();*/
         return null;
     }
 

@@ -22,15 +22,16 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
-    public final static String openMap= "true";
+    public final static String openMap= "false";
     public LobbyFragment lobbyFragment;
+    public GameFragment gameFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (getIntent().getStringExtra(openMap) != null) {
-            // open game
+        if (openMap.equals("true")) {
+            openGame();
         } else {
             LoginFragment fragment = new LoginFragment();
             FragmentManager headfrag = getSupportFragmentManager();
@@ -58,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
     public void openGame()
     {
         FragmentManager headfrag = getSupportFragmentManager();
-        Fragment fragment = new GameFragment();
-        headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+        gameFragment = new GameFragment();
+        headfrag.beginTransaction().replace(R.id.activity_main, gameFragment).commit();
     }
 
     public void updateCreate(Game currentGame)
@@ -68,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
         lobbyFragment.createGame = currentGame;
         lobbyFragment.gameList = Client.getInstance().getGameList();
-        lobbyFragment.createUpdate= true;
         lobbyFragment.getView();
     }
 
