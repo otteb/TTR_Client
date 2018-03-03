@@ -59,7 +59,7 @@ public class LobbyFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.lobby_fragment, container, false);// setting view
         final ArrayList<String>playernames = new ArrayList<String>();
 
@@ -117,6 +117,7 @@ public class LobbyFragment extends Fragment {
             public void onClick(View v) {
                 if (currentGame != null) {
                     currentGame = lobbyPresenter.joinGame(getActivity(), currentGame, acceptedUser.getString("username"));
+                    currentGame = Client.getInstance().getGameMap().get(currentGame.getId());
                     if (currentGame.isJoinable()) {
                         start.setEnabled(true);
                     }
@@ -125,9 +126,8 @@ public class LobbyFragment extends Fragment {
                 }
 
                 if (currentGame != null) {
-                    for (int i = 0; i < currentGame.getPlayers().size(); i++) {
-                        players.get(i).setText(currentGame.getPlayers().get(i));
-                    }
+                    updateGameList();
+                    updatePlayers();
                 } else Toast.makeText(getActivity(), "no game selected", Toast.LENGTH_SHORT).show();
 
             }
@@ -177,7 +177,7 @@ public class LobbyFragment extends Fragment {
                         gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
                     gamesAdapter.notifyDataSetChanged();
 
-                    for (int i = 0; i < currentGame.getPlayers().size(); i++) {
+                    /*for (int i = 0; i < currentGame.getPlayers().size(); i++) {
 
                         players.get(i).setText(currentGame.getPlayers().get(i));
 
@@ -186,7 +186,8 @@ public class LobbyFragment extends Fragment {
                             players.get(i).setText(currentGame.getPlayers().get(i));
                         }
                         else players.get(i).setVisibility(View.GONE);
-                    }
+                    }*/
+                    updatePlayers();
 
                     ArrayList<Game> temp = Client.getInstance().getGameList();
 
@@ -230,16 +231,35 @@ public class LobbyFragment extends Fragment {
 
     public void updateGameList()
     {
-        /*Game g = new Game();
+       /* Game g = new Game();
         g.setId("test");
-        gamesAdapter.addGametoView(g);*/
-        gamesAdapter.clearGames();
+        gamesAdapter.addGametoView(g);
+        */gamesAdapter.clearGames();
         for(int i=0; i<Client.getInstance().getGameList().size(); i++)
             gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
         gamesAdapter.notifyDataSetChanged();
 
 
     }
+
+    public void updatePlayers()
+    {
+        //players.get(i).setText(currentGame.getPlayers().get(i));
+        for(int j= 0; j<Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size(); j++)
+        {players.get(j).setText(Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().get(j));}
+
+        for (int i = 0; i < players.size(); i++) {
+            if(i<Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size())
+            {players.get(i).setText(Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().get(i));}
+                /*if (!players.get(i).getText().equals("")) {
+                    players.get(i).setVisibility(View.VISIBLE);
+                    players.get(i).setText(Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().get(i));
+                }*/
+                else players.get(i).setText("vacant");//players.get(i).setVisibility(View.GONE);
+            }
+
+    }
+
 
 
     private class GamesHolder extends RecyclerView.ViewHolder {
@@ -269,13 +289,14 @@ public class LobbyFragment extends Fragment {
                         }
                         if (tempGlist.get(i).getId().equals(changeString)) {
                             currentGame = tempGlist.get(i);
+                            updatePlayers();
                             curGame.setText(currentGame.getId());
                             break;
                         }
 
                     }
 
-                    for (int i = 0; i < currentGame.getPlayers().size(); i++) {
+                   /* for (int i = 0; i < currentGame.getPlayers().size(); i++) {
 
                         players.get(i).setText(currentGame.getPlayers().get(i));
 
@@ -284,8 +305,7 @@ public class LobbyFragment extends Fragment {
                             players.get(i).setText(currentGame.getPlayers().get(i));
                         }
                         else players.get(i).setVisibility(View.GONE);
-                    }
-
+                    }*/
 
 
 

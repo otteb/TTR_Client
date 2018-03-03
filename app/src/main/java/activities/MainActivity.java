@@ -82,5 +82,11 @@ public class MainActivity extends AppCompatActivity {
         lobbyFragment.updateGameList();
     }
 
+    public void updatePlayers()
+    {
+        lobbyFragment.updatePlayers();
+    }
+
+
 
 }

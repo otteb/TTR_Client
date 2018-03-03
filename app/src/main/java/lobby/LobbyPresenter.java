@@ -104,13 +104,15 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
             MainActivity lobbyFragment= (MainActivity)((Activity)context);
             result = "";
             lobbyFragment.updateGamesList();
+            lobbyFragment.updatePlayers();
 
         }
         else if(result.equals("join"))
         {
             MainActivity lobbyFragment= (MainActivity)((Activity)context);
             result= "";
-            lobbyFragment.updateJoin(getInstance().getActiveGame());
+            lobbyFragment.updateGamesList();
+            lobbyFragment.updatePlayers();
         }
         else if (result.equals("start"))
         {

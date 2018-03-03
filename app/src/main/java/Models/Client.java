@@ -105,6 +105,7 @@ public class Client extends Observable {
 
     public void setActiveGame(Game activeGame) {
         this.activeGame = activeGame;
+        startGame();
     }
 
     public HashMap<String, Game> getGameMap() {
