@@ -8,13 +8,13 @@ public interface ILobby {
     //the UML said + joinGame(String token, String gameId):boolean, but maybe we call token something else
     //so it makes more sense...
 
-    Result createGame(Request request); //(String authToken, String gameId);
+    void createGame(Request request); //(String authToken, String gameId);
 
-    Result joinGame(Request request); //(String authToken, String gameId);
+    void joinGame(Request request); //(String authToken, String gameId);
 
-    Result leaveGame(Request request); //String authToken, String gameId);
+    void leaveGame(Request request); //String authToken, String gameId);
 
-    Result startGame(Request request); //(String authToken, String gameId);
+    void startGame(Request request); //(String authToken, String gameId);
 
-    Result updateClient(Request request); //(String authToken);
+    void updateClient(Request request); //(String authToken);
 }

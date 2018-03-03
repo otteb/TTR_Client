@@ -157,10 +157,7 @@ public class LobbyFragment extends Fragment {
                     Toast.makeText(getActivity(), "The game needs a name", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    //question for Finn -
-                    play = new ArrayList<String>();
-                    currentGame = lobbyPresenter.createGame(getActivity(), play, gameName.getText().toString());
-
+                    currentGame = lobbyPresenter.createGame(getActivity(), gameName.getText().toString());
                     newGame.setVisibility(View.GONE);
                     gameName.setText(null);
                     curGame.setText(currentGame.getId());
@@ -174,9 +171,6 @@ public class LobbyFragment extends Fragment {
                     //updateGameList();
                     //updatePlayers();
                     ArrayList<Game> temp = Client.getInstance().getGameList();
-
-
-
                 }
                // updateGameList();
               //  updatePlayers();
@@ -235,15 +229,18 @@ public class LobbyFragment extends Fragment {
     {
         //for(int j= 0; j<Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size(); j++)
         //{players.get(j).setText(Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().get(j));}
-        if(Client.getInstance().getGameMap().get(currentGame.getId()) != null) {
-        curGame.setText(Client.getInstance().getGameMap().get(currentGame.getId()).getId());
-        for (int i = 0; i < players.size(); i++) {
-            if (i < Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size()) {
-                players.get(i).setText(Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().get(i));
-            } else players.get(i).setText("vacant");
+        if(Client.getInstance().getGameMap().get(currentGame.getId()) != null)
+        {
+            curGame.setText(Client.getInstance().getGameById(currentGame.getId()).getId());
+            for (int i = 0; i < players.size(); i++)
+            {
+                if (i < Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size())
+                {
+                    players.get(i).setText(Client.getInstance().getGamePlayers(currentGame.getId()).get(i).getName());
+                } else players.get(i).setText("vacant");
+            }
         }
-    }
-    else
+        else
         {
             System.out.println("the current game is null");
         }

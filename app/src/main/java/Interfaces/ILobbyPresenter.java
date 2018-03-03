@@ -18,7 +18,7 @@ public interface ILobbyPresenter {
     boolean startGame(Context context, Game game);
 
 
-    Game createGame(Context context, ArrayList<String> players, String id);
+    Game createGame(Context context, String id);
 
     void updateView();
 

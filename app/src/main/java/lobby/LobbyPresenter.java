@@ -42,7 +42,7 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
     @Override
     public Game joinGame(Context context, Game currentGame, String name)
     {
-        if (currentGame != null && currentGame.isJoinable()==true) {
+        if (currentGame != null && currentGame.isJoinable()) {
             for (int i = 0; i < currentGame.getPlayers().size(); i++) {
                 if (currentGame.getPlayers().get(i).equals(name)) {
                     Toast.makeText(context, "Cannot join same game twice", Toast.LENGTH_SHORT).show();
@@ -78,15 +78,23 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
     }
 
     @Override
-    public Game createGame(Context context, ArrayList<String> players, String id) {
+    public Game createGame(Context context, String id) {
         //TODO: FIGURE OUT WHAT TO RETURN HERE
         //This currently returns a new game and does not check with the server
         //How can we get access to the proper game object here?
-        Game myGame = new Game(players, id);
-        myGame.addPlayer(user.getUsername());
+        Game myGame = new Game(id);
+//        myGame.addPlayer(user.getUsername());
         Client.getInstance().setAuthToken(user.getAuthToken());
         guiFacade.createGame(id);
-        return myGame; //Client.getInstance().getActiveGame();
+        if(Client.getInstance().getGameMap().containsKey(id))
+        {
+            System.out.println("Game was created!");
+        }
+        else
+        {
+            System.out.println("Game not created");
+        }
+        return myGame; //Client.getInstance().getGameById(id); //Client.getInstance().getActiveGame();
     }
 
     @Override

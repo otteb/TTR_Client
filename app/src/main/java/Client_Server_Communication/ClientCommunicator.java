@@ -22,7 +22,7 @@ public class ClientCommunicator {
 
     public static ClientCommunicator getInstance() { return myInstance; }
 
-    private String serverHost = "192.168.2.7"; //"10.24.66.130";
+    private String serverHost = "192.168.2.7"; //"192.168.2.118"; //"10.24.66.130";
     private String serverPort = "8888";
 
     private ClientCommunicator() {}
@@ -51,7 +51,6 @@ public class ClientCommunicator {
             conn.connect();
 
             OutputStream reqBody = conn.getOutputStream();
-
             OutputStreamWriter sw = new OutputStreamWriter(reqBody);
             sw.write(reqData);
             sw.flush();
@@ -69,14 +68,8 @@ public class ClientCommunicator {
                 response.setErrorMsg("ERROR: " + conn.getResponseMessage());
                 System.out.println("Post failed");
             }
-
             Reader read = new InputStreamReader(conn.getInputStream());
-            //Read the json:
-//            response = gson.fromJson(read);
             response = gson.fromJson(read, Result.class);
-//            String prettyJson = gson.toJson(response);
-//            System.out.println(prettyJson);
-
             read.close();
         } catch (Exception e) {
             response.setErrorMsg(e.getMessage());

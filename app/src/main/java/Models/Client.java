@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Observable;
 
 import Models.Gameplay.Game;
+import Models.Gameplay.Player;
 
 /**
  * Created by brianotte on 2/12/18.
@@ -108,6 +109,20 @@ public class Client extends Observable {
        // startGame();
     }
 
+    public Game getGameById(String gameId) {
+        return gameMap.get(gameId);
+    }
+
+    public ArrayList<Player> getGamePlayers(String gameId) {
+        Game test = getGameById(gameId);
+        test.getId();
+        return getGameById(gameId).getPlayers();
+    }
+
+    public int getGameSize(String gameId) {
+        return getGamePlayers(gameId).size();
+    }
+
     public HashMap<String, Game> getGameMap() {
         return gameMap;
     }
@@ -129,10 +144,10 @@ public class Client extends Observable {
         return gameList;
     }
 
-    //can this be in joinGame()?
+
     public void addPlayerToGame(String gameId, String username)
     {
-        gameMap.get(gameId).addPlayer(username);
+        gameMap.get(gameId).addPlayer(new Player(username));
         joinGame();
     }
 
