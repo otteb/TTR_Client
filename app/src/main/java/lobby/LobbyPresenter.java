@@ -10,6 +10,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.ILobbyPresenter;
+import Models.Client;
+import Models.Gameplay.Player;
+import Models.Request;
 import activities.MainActivity;
 import Models.Gameplay.Game;
 import Services.GuiFacade;
@@ -28,6 +31,7 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
     boolean gameStarted;
     String p[] = {"p1", "p2", "p3", "p4", "p5"};
     private Context context;
+    private Request user = new Request();
 
     public LobbyPresenter(Context c)
     {
@@ -69,20 +73,27 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
     }
 
     @Override
-    public Game createGame(Context context, ArrayList<String> players, String id, String username) {
+    public Game createGame(Context context, ArrayList<String> players, String id) {
         //TODO: FIGURE OUT WHAT TO RETURN HERE
         //This currently returns a new game and does not check with the server
         //How can we get access to the proper game object here?
         Game myGame = new Game(players, id);
-        myGame.addPlayer(username);
+        myGame.addPlayer(user.getUsername());
+        Client.getInstance().setAuthToken(user.getAuthToken());
         guiFacade.createGame(id);
-        Toast.makeText(context, "game created", Toast.LENGTH_SHORT).show();
         return myGame; //Client.getInstance().getActiveGame();
     }
 
     @Override
     public void updateView() {
 
+    }
+
+    public void setUser(String username, String password, String authToken)
+    {
+        user.setAuthToken(authToken);
+        user.setPassword(password);
+        user.setUsername(username);
     }
 
 
@@ -92,7 +103,7 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
         {
             MainActivity lobbyFragment= (MainActivity)((Activity)context);
             result = "";
-            lobbyFragment.updateCreate(getInstance().getActiveGame());
+            lobbyFragment.updateGamesList();
 
         }
         else if(result.equals("join"))

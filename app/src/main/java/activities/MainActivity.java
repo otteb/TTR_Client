@@ -77,4 +77,10 @@ public class MainActivity extends AppCompatActivity {
         //join code there wasn't really anything being used
     }
 
+    public void updateGamesList()
+    {
+        lobbyFragment.updateGameList();
+    }
+
+
 }

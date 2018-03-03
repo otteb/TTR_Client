@@ -60,15 +60,16 @@ public class LobbyFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.lobby_fragment, container, false);
+        view = inflater.inflate(R.layout.lobby_fragment, container, false);// setting view
         final ArrayList<String>playernames = new ArrayList<String>();
 
+        //stuff that comes from the last fragment
         final Bundle acceptedUser = getArguments();
         playernames.add(acceptedUser.getString("username"));
         curName = (TextView) view.findViewById(R.id.yourName);
         curName.setText(acceptedUser.getString("username"));
 
-
+        //attributes for the view
         create= (Button)view.findViewById(R.id.create);
         p1 = (TextView) view.findViewById(R.id.p1);
         p2 = (TextView) view.findViewById(R.id.p2);
@@ -82,26 +83,32 @@ public class LobbyFragment extends Fragment {
         players.add(p4);
         players.add(p5);
         curGame = (TextView) view.findViewById(R.id.curGame);
-        final LobbyPresenter lobbyPresenter = new LobbyPresenter(getActivity());
-        final  TextView numPlayers = (TextView) view.findViewById(R.id.numPlayers);
-        numPlayers.setVisibility(View.GONE);
         join= (Button) view.findViewById(R.id.join);
         start= (Button) view.findViewById(R.id.start);
         done= (Button) view.findViewById(R.id.done);
         newGame = (LinearLayout) view.findViewById(R.id.newGame);
         gameName = (EditText) view.findViewById(R.id.gName);
         mGamesRecView = (RecyclerView) view.findViewById(R.id.game_list);
+        final  TextView numPlayers = (TextView) view.findViewById(R.id.numPlayers);
+
+        final LobbyPresenter lobbyPresenter = new LobbyPresenter(getActivity());
+        lobbyPresenter.setUser(acceptedUser.getString("username"), acceptedUser.getString("password"), acceptedUser.getString("authToken"));
+
+        numPlayers.setVisibility(View.GONE);
         mGamesRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
         final ArrayList<Game> games = Client.getInstance().getGameList();
-
         gamesAdapter = new GamesAdapter(games);
         mGamesRecView.setAdapter(gamesAdapter);
         gameList = Client.getInstance().getGameList();
+
+        //sets Games List initially in the view
+        /*gamesAdapter.clearGames();
+        gamesAdapter.notifyDataSetChanged();
         for(int i=0; i<gameList.size(); i++)
             gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
-        gamesAdapter.notifyDataSetChanged();
+        gamesAdapter.notifyDataSetChanged();*/
         //starting to add people
 
 
@@ -158,13 +165,14 @@ public class LobbyFragment extends Fragment {
                 }
                 else {
                     //question for Finn -
-                    currentGame = lobbyPresenter.createGame(getActivity(), play, gameName.getText().toString(),  acceptedUser.getString("username"));
+                    currentGame = lobbyPresenter.createGame(getActivity(), play, gameName.getText().toString());
 
                     newGame.setVisibility(View.GONE);
                     gameName.setText(null);
-                    gamesAdapter.addGametoView(currentGame);
-                    gamesAdapter.notifyDataSetChanged();
                     curGame.setText(currentGame.getId());
+
+                    //updating game list
+                    gamesAdapter.clearGames();
                     for(int i=0; i<Client.getInstance().getGameList().size(); i++)
                         gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
                     gamesAdapter.notifyDataSetChanged();
@@ -219,6 +227,20 @@ public class LobbyFragment extends Fragment {
 
         return view;
     }
+
+    public void updateGameList()
+    {
+        /*Game g = new Game();
+        g.setId("test");
+        gamesAdapter.addGametoView(g);*/
+        gamesAdapter.clearGames();
+        for(int i=0; i<Client.getInstance().getGameList().size(); i++)
+            gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
+        gamesAdapter.notifyDataSetChanged();
+
+
+    }
+
 
     private class GamesHolder extends RecyclerView.ViewHolder {
 
@@ -303,6 +325,11 @@ public class LobbyFragment extends Fragment {
         public void addGametoView(Game game)
         {
             games.add(game);
+        }
+
+        public void clearGames()
+        {
+            games.clear();
         }
 
         @Override

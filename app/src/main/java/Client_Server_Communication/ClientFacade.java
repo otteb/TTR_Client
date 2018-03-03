@@ -90,8 +90,10 @@ public class ClientFacade {
             System.out.println("Login successful!");
             System.out.println(result.getAuthToken());
             runCMD(result);
-            Poller.LobbyPolling lobbyPoller = new Poller.LobbyPolling();
-            lobbyPoller.execute();
+            Poller p = new Poller();
+            p.runLobbyCommands();
+           // Poller.LobbyPolling lobbyPoller = new Poller.LobbyPolling();
+            //lobbyPoller.execute();
         }
         else
         {

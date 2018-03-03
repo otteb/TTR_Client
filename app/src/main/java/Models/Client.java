@@ -113,7 +113,6 @@ public class Client extends Observable {
 
     public void setGameMap(HashMap<String, Game> gameMap) {
             this.gameMap = gameMap;
-//            createGame();
     }
 
     public ArrayList<Game> getGameList(){
