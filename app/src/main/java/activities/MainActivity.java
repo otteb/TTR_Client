@@ -10,6 +10,8 @@ import Models.Request;
 import registerLogin.LoginFragment;
 import lobby.LobbyFragment;
 import game.GameFragment;
+import registerLogin.LoginRegisterPresenter;
+import registerLogin.RegisterFragment;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -25,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     public final static String openMap= "false";
     public LobbyFragment lobbyFragment;
     public GameFragment gameFragment;
+    public LoginFragment loginFragment;
+    public RegisterFragment registerFragment;
+    FragmentManager headfrag = getSupportFragmentManager();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,11 +38,23 @@ public class MainActivity extends AppCompatActivity {
         if (openMap.equals("true")) {
             openGame();
         } else {
-            LoginFragment fragment = new LoginFragment();
-            FragmentManager headfrag = getSupportFragmentManager();
-            headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+           switchToLogin();
+
         }
     }
+
+    public void switchToLogin()
+    {
+        loginFragment = new LoginFragment();
+        headfrag.beginTransaction().replace(R.id.activity_main, loginFragment).commit();
+    }
+
+    public void switchToRegister()
+    {
+        registerFragment = new RegisterFragment();
+        headfrag.beginTransaction().replace(R.id.activity_main, registerFragment).commit();
+    }
+
 
     public void switchToLobby(Request r)
     {
@@ -46,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "ERROR: Invalid Registration", Toast.LENGTH_SHORT).show();
         }
         else{
-            FragmentManager headfrag = getSupportFragmentManager();
             lobbyFragment = new LobbyFragment();
             Bundle bundle = new Bundle();
             bundle.putString("username", r.getUsername());
@@ -58,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void openGame()
     {
-        FragmentManager headfrag = getSupportFragmentManager();
         gameFragment = new GameFragment();
         headfrag.beginTransaction().replace(R.id.activity_main, gameFragment).commit();
     }

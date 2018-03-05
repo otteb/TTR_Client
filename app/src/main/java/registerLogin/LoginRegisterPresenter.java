@@ -22,75 +22,59 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
     public Context context;
     public Request user;
     public GuiFacade guiFacade = new GuiFacade();
+    LoginFragment loginFragment;
+    MainActivity mainActivity;
+
     public LoginRegisterPresenter(Context c) {
         context=c;
         guiFacade.addObserver(this);
-        //make a login frag
+
     }
-    public Result login(Context c, String username, String password)
+
+    public void login(Context c, String username, String password)
     {
+        context=c;
         if(username.equals("") || password.equals("")){
             Toast.makeText(c, "Either Your Password or Username is Null", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            guiFacade.login(username, password);
             user = new Request();
             user.setUsername(username);
             user.setPassword(password);
-//           if(r.getErrorMsg()==null)
-//           {
-//               //Toast.makeText(c, "You successfully logged in", Toast.LENGTH_SHORT).show();
-//               return r;
-//               //switch to Lobby Mode
-//           }
-//           else
-//           {
-//               Toast.makeText(c, r.getErrorMsg(), Toast.LENGTH_SHORT).show();
-//           }
+            guiFacade.login(username, password);
         }
-        return null;
     }
 
     public void switchToRegister(Context c)
     {
-
-        Toast.makeText(c, "Switching to Register", Toast.LENGTH_SHORT).show();
+        context=c;
+        Toast.makeText(c, "Switching to Login", Toast.LENGTH_SHORT).show();
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToRegister();
     }
 
-    public Result register(Context c, String username, String password, String confpswd)
+    public void switchToLogin(Context c){
+        context=c;
+        Toast.makeText(c, "Switching to Login", Toast.LENGTH_SHORT).show();
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToLogin();
+    }
+
+    public void register(Context c, String username, String password, String confpswd)
     {
+        context = c;
         if (password.equals(confpswd) && !username.equals("") & !password.equals(""))
         {
             user = new Request();
             user.setUsername(username);
             user.setPassword(password);
-            Result r =  new Result();
             guiFacade.register(username, password);
-//            if(r.getErrorMsg()==null){
-//                Toast.makeText(c, "You successfully registered", Toast.LENGTH_SHORT).show();
-//                return r;
-//            }
-//            else
-//            {
-//                Toast.makeText(c, r.getErrorMsg(), Toast.LENGTH_SHORT).show();
-//            }
         }
         else
         {
             Toast.makeText(c, "Either your passwords do not match or something is null", Toast.LENGTH_SHORT).show();
         }
-        return null;
-    }
-
-    public void switchToLobby(Context c, String username, String password, String authToken)
-    {
-        user.setAuthToken(authToken);
-        user.setPassword(password);
-        user.setUsername(username);
-        MainActivity mainActivity = (MainActivity) c;
-        mainActivity.switchToLobby(user);
-        user = null;
     }
 
 
@@ -101,13 +85,11 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
             if (user != null) {
                 if (authToken.equals("ERROR: Invalid Registration") || authToken.equals("ERROR: Incorrect username/password combination")) {
                     Toast.makeText(context, (CharSequence) authToken, Toast.LENGTH_SHORT).show();
-                } else {
-                    String a = (String) authToken;
-                    user.setAuthToken(a);
+                }
+                else {
                     user.setAuthToken((String) authToken);
-                    MainActivity mainActivity = (MainActivity) context;
+                    mainActivity = (MainActivity) context;
                     mainActivity.switchToLobby(user);
-                    authToken = a;
                     user = null;
                 }
             }

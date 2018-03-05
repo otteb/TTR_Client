@@ -24,15 +24,11 @@ public class RegisterFragment extends Fragment {
     EditText confpswd;
     Button register;
     TextView backToLogin;
-    LoginRegisterPresenter l;
-
-    public RegisterFragment()
-    {
-    }
+    LoginRegisterPresenter loginRegisterPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        l = new LoginRegisterPresenter(getContext());
+        loginRegisterPresenter = new LoginRegisterPresenter(getContext());
         View view = inflater.inflate(R.layout.register_fragment, container, false);
         username= (EditText)view.findViewById(R.id.editText_username1);
         password= (EditText)view.findViewById(R.id.editText2_password1);
@@ -43,47 +39,18 @@ public class RegisterFragment extends Fragment {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Result r=  l.register(getActivity(), username.getText().toString(), password.getText().toString(), confpswd.getText().toString());
-                if(r!= null)
-                {
-                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                    Fragment fragment = new LobbyFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("username", username.getText().toString());
-                    bundle.putString("password", password.getText().toString());
-                    bundle.putString("authToken", r.getAuthToken());
-                    fragment.setArguments(bundle);
-                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
-                }
-
+                loginRegisterPresenter.register(getActivity(), username.getText().toString(), password.getText().toString(), confpswd.getText().toString());
             }
         });
 
         backToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // l.switchToRegister(getActivity());
-                LoginFragment fragment = new LoginFragment();
-                FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+                loginRegisterPresenter.switchToLogin(getActivity());
             }
         });
 
         return view;
     }
-
-    public void switchToLobby()
-    {
-        FragmentManager headfrag = getActivity().getSupportFragmentManager();
-        Fragment fragment = new LobbyFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("username", username.getText().toString());
-        bundle.putString("password", password.getText().toString());
-        //bundle.putString("authToken", r.getAuthToken());
-        fragment.setArguments(bundle);
-        headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
-    }
-
-
 }
 

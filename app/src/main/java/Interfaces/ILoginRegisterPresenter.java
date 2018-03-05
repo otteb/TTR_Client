@@ -11,11 +11,11 @@ public interface ILoginRegisterPresenter {
 
 
 
-        public Result login(Context c, String username, String password);
+        public void login(Context c, String username, String password);
 
         public void switchToRegister(Context c);
 
-        public Result register(Context c, String username, String password, String confpswd);
+        public void register(Context c, String username, String password, String confpswd);
 
 
 

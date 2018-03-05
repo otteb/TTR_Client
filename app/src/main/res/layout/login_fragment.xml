@@ -13,12 +13,17 @@
      <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background = "@drawable/scroll"
+         >
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp">
+                android:layout_height="45dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="105dp">
                 <TextView
                     android:text="Username"
                     android:layout_width="173dp"
@@ -29,14 +34,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:text=""
+                    android:text="finn"
                     android:ems="10"
                     android:id="@+id/editText_username" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="45dp">
+                android:layout_height="45dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp">
                 <TextView
                     android:text="Password"
                     android:layout_width="176dp"
@@ -50,7 +57,7 @@
                     android:ems="10"
                     android:id="@+id/editText2_password"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text="fj" />
             </LinearLayout>
 
 
