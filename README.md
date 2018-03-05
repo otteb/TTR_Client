@@ -6,3 +6,7 @@
 *git push origin test <br>
 *git checkout master <br>
 *git pull origin test <br>
+
+### How to rebase your branch with the master branch:
+*git fetch origin <br>
+*git rebase origin/master <br>
