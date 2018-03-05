@@ -22,7 +22,10 @@ public class JoinGameAsyncTask extends AsyncTask<Request, Void, Result> {
     //onPostExecute updates the Client model:
     @Override
     protected void onPostExecute(Result result){
-        if(result.isSuccessful()) { System.out.println("joined a game - This is the asyncTask"); }
+        if(result.isSuccessful()) {
+            System.out.println("joined a game - This is the asyncTask");
+            clientFacade.runCMD(result);
+        }
 //        Game game = Client.getInstance().getGameMap().get(result.getGameId());
         else { Client.getInstance().sendMessage(result.getErrorMsg()); }
     }

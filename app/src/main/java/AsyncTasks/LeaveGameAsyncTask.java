@@ -21,7 +21,10 @@ public class LeaveGameAsyncTask extends AsyncTask<Request, Void, Result> {
     //onPostExecute updates the Client model:
     @Override
     protected void onPostExecute(Result result){
-        if(result.isSuccessful()) { System.out.println("Left a game - This is the asyncTask"); }
+        if(result.isSuccessful()) {
+            clientFacade.runCMD(result);
+            System.out.println("Left a game - This is the asyncTask");
+        }
 //        Game game = Client.getInstance().getGameMap().get(result.getGameId());
         else { Client.getInstance().sendMessage(result.getErrorMsg()); }
     }

@@ -18,14 +18,24 @@ public class LoginAsyncTask extends AsyncTask <Request, Void, Result> {
     private ClientFacade clientFacade = new ClientFacade();
     @Override
     protected Result doInBackground(Request... requests) {
-        return clientFacade.login(requests[0]);
-//        return result;
+        Result result = clientFacade.login(requests[0]);
+        if(result.isSuccessful())
+        {
+            Client.getInstance().setUserName(requests[0].getUsername());
+        }
+        return result;
     }
     //onPostExecute updates the Client model:
     @Override
     protected void onPostExecute(Result result){
         if(result.getErrorMsg() == null) {
+//            Client.getInstance().setUserName(result.getUsername());
+            clientFacade.runCMD(result);
             Client.getInstance().setAuthToken(result.getAuthToken());
+            Client.getInstance().setIsLoggedIn(true);
+
+            Poller p = new Poller();
+            p.runLobbyCommands();
         }else {
             Client.getInstance().sendMessage(result.getErrorMsg());
         }

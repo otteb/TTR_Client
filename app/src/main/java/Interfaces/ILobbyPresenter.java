@@ -14,7 +14,7 @@ public interface ILobbyPresenter {
     public ArrayList<String> Players= new ArrayList<String>();
     boolean GameStarted = false;
 
-    Game joinGame(Context context, Game g, String name);
+    void joinGame(Context context, Game g, String name);
     boolean startGame(Context context, Game game);
 
 

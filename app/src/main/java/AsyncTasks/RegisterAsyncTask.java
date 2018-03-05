@@ -22,6 +22,7 @@ public class RegisterAsyncTask extends AsyncTask<Request, Void, Result> {
     protected void onPostExecute(Result result){
         if(result.getErrorMsg() == null) {
             Client.getInstance().setAuthToken(result.getAuthToken());
+            clientFacade.runCMD(result);
         }else {
             Client.getInstance().sendMessage(result.getErrorMsg());
         }

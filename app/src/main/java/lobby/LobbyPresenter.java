@@ -32,6 +32,7 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
     String p[] = {"p1", "p2", "p3", "p4", "p5"};
     private Context context;
     private Request user = new Request();
+    MainActivity lobbyFragment;
 
     public LobbyPresenter(Context c)
     {
@@ -40,29 +41,23 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
     }
 
     @Override
-    public Game joinGame(Context context, Game currentGame, String name)
+    public void joinGame(Context context, Game currentGame, String name)
     {
+        //seeing if the game exists and if number of players is less than 5 and that it has not been started
         if (currentGame != null && currentGame.isJoinable()) {
+            //seeing if you are already in the game
             for (int i = 0; i < currentGame.getPlayers().size(); i++) {
                 if (currentGame.getPlayers().get(i).equals(name)) {
                     Toast.makeText(context, "Cannot join same game twice", Toast.LENGTH_SHORT).show();
-                    return currentGame;
                 }
             }
-        }
-        else return null;
-
-//        boolean vacant = false;
-        if(currentGame.getPlayers().size()<4)
-        {
-            guiFacade.joinGame(currentGame, name);
             Client.getInstance().setAuthToken(user.getAuthToken());
+            guiFacade.joinGame(currentGame, name);
         }
         else
         {
-            Toast.makeText(context, "The Game is already full", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "The Game is already full or active", Toast.LENGTH_SHORT).show();
         }
-        return currentGame;
     }
 
 
@@ -114,24 +109,23 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
     public void update(Observable observable, Object result) {
         if(result.equals("create"))
         {
-            MainActivity lobbyFragment= (MainActivity)((Activity)context);
-            result = "";
-           lobbyFragment.updateGamesList();
-          lobbyFragment.updatePlayers();
+            lobbyFragment = (MainActivity)((Activity)context);
+            lobbyFragment.updateGamesList();
+//            lobbyFragment.updatePlayers();
 
         }
         else if(result.equals("join"))
         {
-            MainActivity lobbyFragment= (MainActivity)((Activity)context);
-            result= "";
-            lobbyFragment.updateGamesList();
+//            MainActivity lobbyFragment= (MainActivity)((Activity)context);
+//            result= "";
+//            lobbyFragment.updateGamesList();
+            lobbyFragment= (MainActivity)((Activity)context);
             lobbyFragment.updatePlayers();
         }
         else if (result.equals("start"))
         {
             //start a game
             MainActivity mainActivity = (MainActivity) context;
-            result = "";
             mainActivity.openGame();
         }
         else
@@ -139,14 +133,6 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
             Toast.makeText(context, (CharSequence) result, Toast.LENGTH_SHORT).show();
         }
         observable.hasChanged();
-//        Result newResult = (Result)result;
-        //      newResult.getErrorMsg();
     }
-
-    public void addPlayer(String player)
-    {
-
-    }
-
 }
 

@@ -26,7 +26,9 @@ public class CreateGameAsyncTask extends AsyncTask<Request, Void, Result> {
 //        if(result.isSuccessful()) { System.out.println("Created a game - This is the asyncTask"); }
         if(result.getErrorMsg() == null)
         {
-            System.out.println("Created a game - This is the asyncTask");
+            System.out.println("Creating a game - This is the asyncTask");
+            clientFacade.runCMD(result);
+            Client.getInstance().createGame();
         }
         else
         {
