@@ -147,6 +147,15 @@ public class Client extends Observable {
 
     public void addPlayerToGame(String gameId, String username)
     {
+        for (String i : getGameMap().keySet())
+        {
+            for (int j=0; j<getGameMap().get(i).getPlayers().size(); j++)
+            {
+                if(!getGameMap().get(i).equals(gameId) && getGameMap().get(i).getPlayers().get(j).getName().equals(username)){
+                    getGameMap().get(i).getPlayers().remove(j);
+                }
+            }
+        }
         gameMap.get(gameId).addPlayer(new Player(username));
         joinGame();
     }

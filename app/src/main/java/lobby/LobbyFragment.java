@@ -30,6 +30,8 @@ import java.util.List;
 
 public class LobbyFragment extends Fragment {
 
+
+    public LobbyPresenter lobbyPresenter;
     public GamesAdapter gamesAdapter;
     private RecyclerView mGamesRecView;
     public Game createGame = new Game();
@@ -56,12 +58,10 @@ public class LobbyFragment extends Fragment {
     ArrayList<TextView> players = new ArrayList<>(5);
     ArrayList<Game> games = new ArrayList<>();
     ArrayList<String> play;
-    public LobbyFragment()
-    {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        lobbyPresenter = new LobbyPresenter(getActivity());
         view = inflater.inflate(R.layout.lobby_fragment, container, false);// setting view
         final ArrayList<String>playernames = new ArrayList<String>();
 
@@ -93,26 +93,22 @@ public class LobbyFragment extends Fragment {
         mGamesRecView = (RecyclerView) view.findViewById(R.id.game_list);
         final  TextView numPlayers = (TextView) view.findViewById(R.id.numPlayers);
 
-        final LobbyPresenter lobbyPresenter = new LobbyPresenter(getActivity());
         lobbyPresenter.setUser(acceptedUser.getString("username"), acceptedUser.getString("password"), acceptedUser.getString("authToken"));
 
-        numPlayers.setVisibility(View.GONE);
+        //numPlayers.setVisibility(View.GONE);
         mGamesRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
         final ArrayList<Game> games = Client.getInstance().getGameList();
         gamesAdapter = new GamesAdapter(games);
         mGamesRecView.setAdapter(gamesAdapter);
-        gameList = Client.getInstance().getGameList();
-
 
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateGameList();
                 if (currentGame != null) {
                     currentGame = Client.getInstance().getGameMap().get(currentGame.getId());
-                    currentGame = lobbyPresenter.joinGame(getActivity(), currentGame, acceptedUser.getString("username"));
+                    lobbyPresenter.joinGame(getActivity(), currentGame, acceptedUser.getString("username"));
                     currentGame = Client.getInstance().getGameMap().get(currentGame.getId());
 
                 } else {
@@ -162,20 +158,11 @@ public class LobbyFragment extends Fragment {
                     gameName.setText(null);
                     curGame.setText(currentGame.getId());
 
-                    //updating game list
-               /*     gamesAdapter.clearGames();
-                    for(int i=0; i<Client.getInstance().getGameList().size(); i++)
-                        gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
-                    gamesAdapter.notifyDataSetChanged();*/
-
-                    //updateGameList();
-                    //updatePlayers();
                     ArrayList<Game> temp = Client.getInstance().getGameList();
                 }
-               // updateGameList();
-              //  updatePlayers();
             }
         });
+        updateGameList();
 
 //        if( createUpdate == true){
 //            newGame.setVisibility(View.GONE);
@@ -199,27 +186,19 @@ public class LobbyFragment extends Fragment {
 //            }
 //
 //        }
-
-
-       /* if (Client.getInstance().getGameList().size()>0)
-        {
-            for(int i=0; i<Client.getInstance().getGameList().size(); i++)
-            gamesAdapter.addGametoView(Client.getInstance().getGameList().get(i));
-            gamesAdapter.notifyDataSetChanged();
-        }*/
-
         return view;
     }
 
     public void updateGameList()
     {
         HashMap<String, Game> games = Client.getInstance().getGameMap();
-        if (Client.getInstance().getGameMap() != null) {
-            gamesAdapter.clearGames();
-            for (String i : Client.getInstance().getGameMap().keySet()){
+        if (games != null) {
+           gamesAdapter.clearGames();
+            for (String i : games.keySet()){
                 Game game = Client.getInstance().getGameMap().get(i);
-                gamesAdapter.addGametoView(Client.getInstance().getGameMap().get(i));
+                gamesAdapter.addGametoView(game);
             }
+
             gamesAdapter.notifyDataSetChanged();
         }
 
@@ -227,16 +206,15 @@ public class LobbyFragment extends Fragment {
 
     public void updatePlayers()
     {
-        //for(int j= 0; j<Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size(); j++)
-        //{players.get(j).setText(Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().get(j));}
-        if(Client.getInstance().getGameMap().get(currentGame.getId()) != null)
+        currentGame =Client.getInstance().getGameMap().get(currentGame.getId());
+        if(currentGame != null)
         {
-            curGame.setText(Client.getInstance().getGameById(currentGame.getId()).getId());
+            curGame.setText(currentGame.getId());
             for (int i = 0; i < players.size(); i++)
             {
                 if (i < Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size())
                 {
-                    players.get(i).setText(Client.getInstance().getGamePlayers(currentGame.getId()).get(i).getName());
+                    players.get(i).setText(currentGame.getPlayers().get(i).getName());
                 } else players.get(i).setText("vacant");
             }
         }
@@ -249,7 +227,17 @@ public class LobbyFragment extends Fragment {
 
 
 
-    private class GamesHolder extends RecyclerView.ViewHolder {
+
+
+
+
+
+
+
+
+
+
+    public class GamesHolder extends RecyclerView.ViewHolder {
 
         private TextView mGameName;
         private Game mGame;
@@ -294,7 +282,7 @@ public class LobbyFragment extends Fragment {
     }
 
 
-   private class GamesAdapter extends RecyclerView.Adapter<GamesHolder> {
+   public class GamesAdapter extends RecyclerView.Adapter<GamesHolder> {
 
         private ArrayList<Game> games;
 
