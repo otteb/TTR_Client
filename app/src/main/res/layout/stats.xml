@@ -3,20 +3,20 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background = "@drawable/scroll">
+    android:background = "@drawable/got">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/scroll">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
             >
             <Button
@@ -34,6 +34,8 @@
             android:layout_weight="1"
             >
             <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="45dp"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
@@ -56,5 +58,4 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

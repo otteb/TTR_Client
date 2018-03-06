@@ -12,18 +12,27 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background = "@drawable/scroll">
+        android:background = "@drawable/got"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/scroll"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp">>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="55dp"
             android:layout_marginTop="105dp">
             <TextView
                 android:text="Username"
-                android:layout_width="173dp"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="20dp"
                 android:layout_height="match_parent"
                 android:id="@+id/textView"
                 tools:text="Username" />
@@ -37,13 +46,14 @@
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp">
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="55dp">
             <TextView
                 android:text="Password"
-                android:layout_width="176dp"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="20dp"
                 android:layout_height="40dp"
                 android:id="@+id/textView3"
                 tools:text="Password" />
@@ -58,13 +68,14 @@
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp">
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="55dp">
             <TextView
                 android:text="Password"
-                android:layout_width="176dp"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="20dp"
                 android:layout_height="40dp"
                 android:id="@+id/textView4"
                 tools:text="Confirm Password" />
@@ -98,7 +109,8 @@
                 android:layout_weight="0.42"
                 android:gravity="center_horizontal"
                 android:layout_centerInParent="true"
-                android:text="Register" />
+                android:text="Register"
+                android:backgroundTint="#A52A2A"/>
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -113,5 +125,6 @@
                 android:layout_weight="2"
                 android:text="Would You Rather Login?" />
         </LinearLayout>
+    </LinearLayout>
     </LinearLayout>
 </FrameLayout>

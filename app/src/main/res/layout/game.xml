@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background = "@drawable/got"
@@ -13,36 +13,63 @@
         android:layout_row="3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Claim Route" />
-    <Button
+        android:text="Claim Route"
+        android:backgroundTint="#A52A2A"/>
+    <ImageButton
         android:id="@+id/returntolobby"
         android:layout_column="0"
         android:layout_row="3"
+        android:src="@drawable/leftarrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="return to lobby" />
-    <Button
+        android:text="return to lobby"
+        android:layout_centerVertical="true"
+        android:backgroundTint="#A52A2A"/>
+
+    <ImageButton
         android:id="@+id/stats"
         android:layout_column="0"
         android:layout_row="3"
+        android:src="@drawable/rightarrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to Stats" />
+        android:text="Go to Stats"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="#A52A2A"/>
 
     <RelativeLayout
+        android:id="@+id/cardMenu"
+        android:background="@drawable/scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_gravity ="bottom"
-        android:clickable="true">
+        android:clickable="true"
+        android:layout_alignParentBottom="true">
 
         <TextView
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="15dp"
             android:text="The Destination Card Menu" />
+        <Button
+            android:id="@+id/doneCards"
+            android:layout_column="0"
+            android:layout_row="3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:text="Done"
+            android:backgroundTint="#A52A2A"/>
     </RelativeLayout>
 
 
 
-</LinearLayout>
+</RelativeLayout>

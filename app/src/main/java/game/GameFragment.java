@@ -11,6 +11,7 @@ import android.widget.Button;
 import Models.Result;
 import activities.R;
 import lobby.LobbyFragment;
+import registerLogin.LoginRegisterPresenter;
 
 /**
  * Created by fjameson on 2/2/18.
@@ -23,7 +24,9 @@ public class GameFragment extends Fragment {
     GamePresenter gamePresenter;
 
     public GameFragment()
-    {}
+    {
+        LoginRegisterPresenter loginRegisterPresenter = new LoginRegisterPresenter(getActivity());
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
