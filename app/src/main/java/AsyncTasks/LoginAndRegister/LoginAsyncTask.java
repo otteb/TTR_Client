@@ -1,4 +1,4 @@
-package AsyncTasks;
+package AsyncTasks.LoginAndRegister;
 
 import android.os.AsyncTask;
 

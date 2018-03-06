@@ -1,10 +1,10 @@
 package Services;
 
-import AsyncTasks.CreateGameAsyncTask;
-import AsyncTasks.JoinGameAsyncTask;
-import AsyncTasks.LoginAsyncTask;
-import AsyncTasks.RegisterAsyncTask;
-import AsyncTasks.StartGameAsyncTask;
+import AsyncTasks.Lobby.CreateGameAsyncTask;
+import AsyncTasks.Lobby.JoinGameAsyncTask;
+import AsyncTasks.LoginAndRegister.LoginAsyncTask;
+import AsyncTasks.LoginAndRegister.RegisterAsyncTask;
+import AsyncTasks.Lobby.StartGameAsyncTask;
 import Client_Server_Communication.ClientFacade;
 import Models.*;
 import Models.Gameplay.Game;

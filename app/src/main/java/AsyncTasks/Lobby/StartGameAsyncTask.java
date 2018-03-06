@@ -1,4 +1,4 @@
-package AsyncTasks;
+package AsyncTasks.Lobby;
 
 import android.os.AsyncTask;
 
