@@ -16,7 +16,6 @@ import java.util.Observer;
  */
 
 public class GuiFacade {
-    ClientFacade clientFacade = new ClientFacade();
 
     public void login (String username, String password)
     {

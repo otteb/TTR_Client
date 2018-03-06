@@ -168,6 +168,9 @@ public class Client extends Observable {
         }
     }
 
+
+    //observables section:
+
     public void removePlayerFromGame(String gameId, String username)
     {
         gameMap.get(gameId).getPlayers().remove(username);
