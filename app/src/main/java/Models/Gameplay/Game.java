@@ -6,6 +6,7 @@ import java.util.List;
 import Models.Cards.DestinationDeck;
 import Models.Cards.TrainCard;
 import Models.Cards.TrainDeck;
+import Models.Client;
 
 public class Game {
 
@@ -15,6 +16,7 @@ public class Game {
     private List<Route> Routes;
     private List<String> Cities;
     private List<TrainCard> faceUpCards;
+
 //    private TrainDeck trainDeck;
 //    private DestinationDeck destinationDeck;
     private boolean active = false;    //Has the game started
@@ -52,8 +54,37 @@ public class Game {
         return players.size() < 5 && !players.contains(p) && players.add(p);
     }
 
+    public boolean isValidPlayer(String username){
+        for(Player p : players)
+        {
+            if(p.getName().equals(username))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ArrayList<Player> getPlayers() {
         return players;
+    }
+
+    public Player getPlayer(String username){
+        for(Player p: players){
+            if(p.getName().equals(username)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public Player getMyPlayer(){
+        for(Player p: players){
+            if(p.getName().equals(Client.getInstance().getUserName())){
+                return p;
+            }
+        }
+        return null;
     }
 
     public void setPlayers(ArrayList<Player> players) {

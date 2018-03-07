@@ -20,13 +20,10 @@ public class DiscardDestinationCardAsyncTask extends AsyncTask<Request, Void, Re
     //onPostExecute updates the Game model:
     @Override
     protected void onPostExecute(Result result) {
-//        if(result.isSuccessful()) { System.out.println("Created a game - This is the asyncTask"); }
         if (result.getErrorMsg() == null) {
-            System.out.println("Adding a Chat - This is the asyncTask");
+            System.out.println("Discarding a destination card - This is the asyncTask");
             //this references the correct facade, and runs the command:
             gamePlayFacade.runCMD(result);
-            //notifies the observer:
-//            Client.getInstance().createGame();
         } else {
             //create an error message for the Active Game Model:
             Client.getInstance().sendMessage(result.getErrorMsg());

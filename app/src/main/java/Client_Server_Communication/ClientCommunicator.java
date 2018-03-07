@@ -72,6 +72,10 @@ public class ClientCommunicator {
             }
             Reader read = new InputStreamReader(conn.getInputStream());
             response = gson.fromJson(read, Result.class);
+            //printout the Json:
+            String prettyJson = gson.toJson(response);
+            System.out.println(prettyJson);
+
             read.close();
         } catch (Exception e) {
             response.setErrorMsg(e.getMessage());

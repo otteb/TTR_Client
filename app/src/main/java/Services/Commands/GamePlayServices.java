@@ -1,9 +1,8 @@
 package Services.Commands;
 
-import Client_Server_Communication.GamePlayFacade;
 import Interfaces.IGamePlay;
+import Models.Client;
 import Models.Request;
-import Models.Result;
 
 public class GamePlayServices implements IGamePlay {
     private static GamePlayServices theOne = new GamePlayServices();
@@ -22,20 +21,25 @@ public class GamePlayServices implements IGamePlay {
     @Override
     public void setupGame(Request request) {
         System.out.println("COMMAND EXECUTING - SetUpGame");
+        Client.getInstance().setActiveGame(request.getGame());
     }
 
     //TODO
     @Override
     public void addGameHistory(Request request) {
         System.out.println("COMMAND EXECUTING - addGameHistory");
+        //update the active game's gameHistory:
+        Client.getInstance().getActiveGame().getHistory().add(request.getAction());
     }
 
     //TODO
     @Override
     public void discardDestCards(Request request) {
         System.out.println("COMMAND EXECUTING - discardDestCards");
+        Client.getInstance().getActiveGame().getPlayer(request.getUsername()).discardDestCards(request.getDiscardDest());
     }
 
+    //Doesn't do anything... just looks pretty:
     @Override
     public void updateClient(Request request) {
         System.out.println("COMMAND EXECUTING - updateClient");

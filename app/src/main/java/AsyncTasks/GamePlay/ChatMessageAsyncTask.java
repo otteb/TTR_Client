@@ -28,8 +28,6 @@ public class ChatMessageAsyncTask extends AsyncTask<Request, Void, Result> {
             System.out.println("Adding a Chat - This is the asyncTask");
             //this references the correct facade, and runs the command:
             gamePlayFacade.runCMD(result);
-            //notifies the observer:
-//            Client.getInstance().createGame();
         }
         else
         {

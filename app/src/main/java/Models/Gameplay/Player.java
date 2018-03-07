@@ -92,4 +92,17 @@ public class Player {
     public void setDestination_cards(List<DestinationCard> destination_cards) {
         this.destination_cards = destination_cards;
     }
+
+    public int getNumTrains() {
+        return numTrains;
+    }
+
+    public void setNumTrains(int numTrains) {
+        this.numTrains = numTrains;
+    }
+
+    public void discardDestCards(ArrayList<DestinationCard> cards)
+    {
+        destination_cards.removeAll(cards);
+    }
 }

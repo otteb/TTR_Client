@@ -1,5 +1,8 @@
 package Client_Server_Communication;
 
+import java.util.ArrayList;
+
+import Models.Cards.DestinationCard;
 import Models.Client;
 import Models.Command;
 import Models.Gameplay.Chat;
@@ -12,7 +15,7 @@ public class ClientFacade {
         //this is for testing purposes:
         GamePlayFacade gamePlayFacade = new GamePlayFacade();
         ClientFacade clientFacade = new ClientFacade();
-
+        Client.getInstance().setUserName("brian");
 
 
         //Login p1:
@@ -50,7 +53,38 @@ public class ClientFacade {
         chatRequest.setChatMessage(newChat.displayChat());
         chatRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
         chatRequest.setGameId("brian-game");
-        gamePlayFacade.addChat(chatRequest);
+
+        gamePlayFacade.runCMD(gamePlayFacade.addChat(chatRequest));
+        //run the updateClient function in the gamePlayFacade:
+        Request updateClientReq = new Request();
+        updateClientReq.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+        updateClientReq.setGameCMDNum(0);
+        updateClientReq.setGameId("brian-game");
+        gamePlayFacade.runCMD(gamePlayFacade.updateClient(updateClientReq));
+
+        //test the discardDestinationCard function:
+        Request discardDestCardRequest = new Request();
+        discardDestCardRequest.setAuthToken(Client.getInstance().getAuthToken());
+        discardDestCardRequest.setUsername(Client.getInstance().getUserName());
+        discardDestCardRequest.setGameId(Client.getInstance().getActiveGame().getId());
+        if(Client.getInstance().getActiveGame().isValidPlayer(Client.getInstance().getUserName()))
+        {
+            ArrayList<DestinationCard> deleteList = new ArrayList<>();
+            deleteList.add(Client.getInstance().getActiveGame().getMyPlayer().getDestination_cards().get(0));
+            discardDestCardRequest.setDiscardDest(deleteList);
+
+        }
+        gamePlayFacade.runCMD(gamePlayFacade.discardDestinationCard(discardDestCardRequest));
+
+
+//        Request request = new Request();
+//        request.setAuthToken(Client.getInstance().getAuthToken());
+//        request.setGameCMDNum(Client.getInstance().getActiveGameCMDNum());
+//        //call the client facade updateClient() - use the current index;
+////            ArrayList<Command> returnList = clientFacade.updateClient(request).getUpdateCommands();
+//        ArrayList<Command> returnList = gamePlayFacade.updateClient(request).getUpdateCommands();
+
+        int temp = 0;
 
 
 

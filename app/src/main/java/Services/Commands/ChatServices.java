@@ -1,6 +1,7 @@
 package Services.Commands;
 
 import Interfaces.IChat;
+import Models.Client;
 import Models.Gameplay.Chat;
 import Models.Request;
 import Models.Result;
@@ -16,11 +17,10 @@ public class ChatServices implements IChat {
         return theOne;
     }
     private ChatServices() {}
-
-
     //TODO
     @Override
     public void addChat(Request request) {
         System.out.println("COMMAND EXECUTING - addChat");
+        Client.getInstance().getActiveGame().addChatMessage(request.getChatMessage());
     }
 }
