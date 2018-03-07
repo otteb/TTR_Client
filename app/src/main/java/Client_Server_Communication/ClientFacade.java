@@ -2,6 +2,8 @@ package Client_Server_Communication;
 
 import Models.Client;
 import Models.Command;
+import Models.Gameplay.Chat;
+import Models.Gameplay.Game;
 import Models.Request;
 import Models.Result;
 
@@ -13,16 +15,45 @@ public class ClientFacade {
 
 
 
-        //TEST LOGIN
+        //Login p1:
         Request loginRequest = new Request();
-//        loginRequest.setUsername("jordan");
-//        loginRequest.setPassword("jf");
         loginRequest.setUsername("brian");
         loginRequest.setPassword("bo");
         clientFacade.login(loginRequest);
-        //END LOGIN TEST
-//
-//
+        //p1 create game:
+        Request createGameRequest = new Request();
+        createGameRequest.setGameId("brian-game");
+        createGameRequest.setAuthToken("01b7cb2c-24c1-4c82-8f6f-c6ee8ab39d2e");
+        clientFacade.createGame(createGameRequest);
+        //Login p2:
+        loginRequest.setUsername("jordan");
+        loginRequest.setPassword("jf");
+        clientFacade.login(loginRequest);
+        //p2 join's p1 game:
+        Game joinableGame = Client.getInstance().getGameMap().get("brian-game");
+        Request joinGameRequest = new Request();
+        joinGameRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+        joinGameRequest.setGameId("brian-game");
+        joinGameRequest.setUsername("jordan");
+        clientFacade.joinGame(joinGameRequest);
+        //start the game:
+        Request startGameRequest = new Request();
+        startGameRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+        startGameRequest.setGameId("brian-game");
+        clientFacade.startGame(startGameRequest);
+        //test addChat:
+        Chat newChat = new Chat();
+        newChat.setMessage("this is a test from the ClientFacade");
+        newChat.setUsername("jordan");
+        Request chatRequest = new Request();
+        chatRequest.setChat(newChat);
+        chatRequest.setChatMessage(newChat.displayChat());
+        chatRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+        chatRequest.setGameId("brian-game");
+        gamePlayFacade.addChat(chatRequest);
+
+
+
     }
 
     //login function:
