@@ -10,9 +10,6 @@ import Models.Client;
 import Models.Command;
 import Models.Request;
 
-/**
- * Created by brianotte on 2/12/18.
- */
 public class Poller {
 //public class Poller extends TimerTask{
 //    @Override

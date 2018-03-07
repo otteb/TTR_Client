@@ -9,17 +9,13 @@ import Models.Request;
 import RegisterLogin.LoginFragment;
 import lobby.LobbyFragment;
 import game.GameFragment;
-import registerLogin.LoginRegisterPresenter;
-import registerLogin.RegisterFragment;
+import RegisterLogin.LoginRegisterPresenter;
+import RegisterLogin.RegisterFragment;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.Toast;
 
-
-/**
- * Created by fjameson on 2/9/18.
- */
 
 public class MainActivity extends AppCompatActivity {
     private Button button;

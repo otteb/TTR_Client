@@ -10,11 +10,11 @@ import Models.Cards.TrainDeck;
 public class Game {
 
     private String id;
-    private ArrayList<Player> players; //list of players' usernames
+    private ArrayList<Player> players; //list of players
     private ArrayList<String> chats;  //List of all chats (format of "username: msg" )
     private List<Route> Routes;
     private List<String> Cities;
-//    private List<TrainCard> trainCards; //This is for the face up train cards
+    private List<TrainCard> faceUpCards;
 //    private TrainDeck trainDeck;
 //    private DestinationDeck destinationDeck;
     private boolean active = false;    //Has the game started
@@ -25,8 +25,6 @@ public class Game {
         players = new ArrayList<>();
         chats = new ArrayList<>();
         history = new GameHistory();
-//        trainDeck = new TrainDeck();
-//        destinationDeck = new DestinationDeck();
     }
 
     //constructor allowing to instantiate new game with given id
@@ -35,8 +33,6 @@ public class Game {
         players = new ArrayList<>();
         chats = new ArrayList<>();
         history = new GameHistory();
-//        trainDeck = new TrainDeck();
-//        destinationDeck = new DestinationDeck();
     }
 
     public String getId() {
@@ -104,19 +100,19 @@ public class Game {
         Cities = cities;
     }
 
-//    public TrainDeck getTrainDeck() {
-//        return trainDeck;
-//    }
-//
-//    public void setTrainDeck(TrainDeck trainDeck) {
-//        this.trainDeck = trainDeck;
-//    }
-//
-//    public DestinationDeck getDestinationDeck() {
-//        return destinationDeck;
-//    }
-//
-//    public void setDestinationDeck(DestinationDeck destinationDeck) {
-//        this.destinationDeck = destinationDeck;
-//    }
+    public List<TrainCard> getFaceUpCards() {
+        return faceUpCards;
+    }
+
+    public void setFaceUpCards(List<TrainCard> faceUpCards) {
+        this.faceUpCards = faceUpCards;
+    }
+
+    public GameHistory getHistory() {
+        return history;
+    }
+
+    public void setHistory(GameHistory history) {
+        this.history = history;
+    }
 }

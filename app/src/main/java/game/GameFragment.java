@@ -11,7 +11,7 @@ import android.widget.Button;
 import Models.Result;
 import activities.R;
 import lobby.LobbyFragment;
-import registerLogin.LoginRegisterPresenter;
+import RegisterLogin.LoginRegisterPresenter;
 
 /**
  * Created by fjameson on 2/2/18.

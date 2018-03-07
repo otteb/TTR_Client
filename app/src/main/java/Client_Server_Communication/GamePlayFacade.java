@@ -5,10 +5,6 @@ import Models.Command;
 import Models.Request;
 import Models.Result;
 
-/**
- * Created by brianotte on 3/6/18.
- */
-
 public class GamePlayFacade {
 
     //TODO STILL NEEDS TO BE ADJUSTED:

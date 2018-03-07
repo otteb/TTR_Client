@@ -6,10 +6,6 @@ import Models.Gameplay.Game;
 
 import java.util.ArrayList;
 
-/**
- * Created by fjameson on 2/12/18.
- */
-
 public interface ILobbyPresenter {
     public ArrayList<String> Players= new ArrayList<String>();
     boolean GameStarted = false;

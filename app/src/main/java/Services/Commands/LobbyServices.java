@@ -6,13 +6,10 @@ import Models.Gameplay.Game;
 import Models.Request;
 
 public class LobbyServices implements ILobby {
-
-    //this is going to be the client facade: THIS IS FOR TESTING
-
-    private static LobbyServices theGS = new LobbyServices();
+    private static LobbyServices theOne = new LobbyServices();
 
     public static LobbyServices getInstance() {
-        return theGS;
+        return theOne;
     }
 
     private LobbyServices() {}
@@ -25,11 +22,6 @@ public class LobbyServices implements ILobby {
         System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS CREATING GAME: " + request.getGameId());
 
         Game newGame = new Game(request.getGameId());
-        //add players to the newGame:
-//        ArrayList<Player> tempList = newGame.getPlayers();
-//        tempList.add(new Player(request.getUsername()));
-//        newGame.setPlayers(tempList);
-        //add the game into the Client Model's HashMap:
         Client.getInstance().addGameToMap(request.getGameId(), newGame);
     }
 
@@ -44,7 +36,6 @@ public class LobbyServices implements ILobby {
     public void leaveGame(Request request) {
         System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS LEAVING GAME " + request.getGameId());
         Client.getInstance().removePlayerFromGame(request.getGameId(), request.getUsername());
-//        Client.getInstance().getGameMap().get(request.getGameId()).getPlayers().remove(request.getUsername());
     }
 
     @Override

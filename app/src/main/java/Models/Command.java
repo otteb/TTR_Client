@@ -3,6 +3,8 @@ package Models;
 import java.lang.reflect.Method;
 
 import Interfaces.ICommand;
+import Services.Commands.ChatServices;
+import Services.Commands.GamePlayServices;
 import Services.Commands.LobbyServices;
 
 public class Command implements ICommand {
@@ -27,13 +29,17 @@ public class Command implements ICommand {
         try {
             Class<?> receiver = Class.forName(_className);
             Method method = receiver.getMethod(_methodName, _paramTypes);
-//            if(_className.equals("Interfaces.IServerUser"))
-//            {
-//                result = (Result) method.invoke(UserServices.getInstance(), _paramValues);
-//            }
             if(_className.equals("Interfaces.ILobby"))
             {
                 result = (Result) method.invoke(LobbyServices.getInstance(), _paramValues);
+            }
+            else if(_className.equals("Interfaces.IGame"))
+            {
+                result = (Result) method.invoke(GamePlayServices.getInstance(), _paramValues);
+            }
+            else if(_className.equals("Interfaces.IChat"))
+            {
+                result = (Result) method.invoke(ChatServices.getInstance(), _paramValues);
             }
 //            else //if(_className.equals("Interfaces.IClient"))
 //            {

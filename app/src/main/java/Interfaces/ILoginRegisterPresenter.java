@@ -3,10 +3,6 @@ package Interfaces;
 import android.content.Context;
 import Models.Result;
 
-/**
- * Created by fjameson on 2/12/18.
- */
-
 public interface ILoginRegisterPresenter {
 
 
