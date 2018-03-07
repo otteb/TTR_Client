@@ -1,49 +1,52 @@
 package Services.GUI;
 
+import java.util.ArrayList;
+
 import AsyncTasks.GamePlay.ChatMessageAsyncTask;
 import AsyncTasks.GamePlay.DiscardDestinationCardAsyncTask;
 import AsyncTasks.LoginAndRegister.LoginAsyncTask;
+import Models.Cards.DestinationCard;
+import Models.Client;
+import Models.Gameplay.Chat;
 import Models.Request;
 
 /**
  * Created by brianotte on 3/6/18.
  */
 
-//The Presenters will call this class when they want information:
+//this class takes information from the presenter, and packages it into a request object
+//that is then sent to the AsyncTasks:
 public class GameGuiFacade {
     //this houses all of the game-specific functions that call the Async tasks:
     //instantiate all AsyncTasks here:
     ChatMessageAsyncTask chatMessageAsyncTask = new ChatMessageAsyncTask();
     DiscardDestinationCardAsyncTask discardDestinationCardAsyncTask = new DiscardDestinationCardAsyncTask();
 
-    //NOT FINISHED:
-    public void addChat (String username, String password)
+    //FINISHED:
+    public void addChat (Chat chat)
     {
-//        Request loginRequest = new Request();
-//        loginRequest.setUsername(username);
-//        loginRequest.setPassword(password);
-//        LoginAsyncTask loginAsyncTask = new LoginAsyncTask();
-//        loginAsyncTask.execute(loginRequest);
         //addChat code:
-        Request addChatRequest = new Request();
         //add properties for the addChat:
+        Request addChatRequest = new Request();
+        addChatRequest.setAuthToken(Client.getInstance().getAuthToken());
+        addChatRequest.setGameId(Client.getInstance().getActiveGame().getId());
+        addChatRequest.setUsername(Client.getInstance().getUserName());
+        addChatRequest.setChat(chat);
+        addChatRequest.setChatMessage(chat.displayChat());
         //execute the AsyncTask
         chatMessageAsyncTask.execute(addChatRequest);
     }
 
-    //NOT FINISHED:
-    public void discardDestinationCard(String username, String password)
+    //FINISHED:
+    public void discardDestinationCard(ArrayList<DestinationCard> destCards)
     {
-        Request loginRequest = new Request();
-        loginRequest.setUsername(username);
-        loginRequest.setPassword(password);
-        LoginAsyncTask loginAsyncTask = new LoginAsyncTask();
-        loginAsyncTask.execute(loginRequest);
-        //addChat code:
         Request dDCRequest = new Request();
-        //add properties for the addChat:
+        //add properties for the dDCRequest:
+        dDCRequest.setAuthToken(Client.getInstance().getAuthToken());
+        dDCRequest.setUsername(Client.getInstance().getUserName());
+        dDCRequest.setGameId(Client.getInstance().getActiveGame().getId());
+        dDCRequest.setDiscardDest(destCards);
         //execute the AsyncTask
         discardDestinationCardAsyncTask.execute(dDCRequest);
     }
-
 }

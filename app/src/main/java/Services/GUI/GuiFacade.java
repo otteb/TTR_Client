@@ -15,6 +15,8 @@ import java.util.Observer;
  * Created by fjameson on 2/9/18.
  */
 
+//this class takes information from the presenter, and packages it into a request object
+    //that is then sent to the AsyncTasks:
 public class GuiFacade {
 
     public void login (String username, String password)

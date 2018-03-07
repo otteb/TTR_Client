@@ -9,9 +9,15 @@ import Models.Result;
  */
 
 public class ChatServices implements IChat {
+    private static ChatServices theOne = new ChatServices();
+    public static ChatServices getInstance() {
+        return theOne;
+    }
+    private ChatServices() {}
+
     //TODO
     @Override
-    public Result addChat(Request request) {
-        return null;
+    public void addChat(Request request) {
+        System.out.println("COMMAND EXECUTING - addChat");
     }
 }

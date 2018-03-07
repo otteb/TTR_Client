@@ -8,16 +8,19 @@ import Models.Result;
 public class ClientFacade {
     public static void main(String[] args) {
         //this is for testing purposes:
+        GamePlayFacade gamePlayFacade = new GamePlayFacade();
+        ClientFacade clientFacade = new ClientFacade();
 
 
-//        //TEST LOGIN
-//        Request loginRequest = new Request();
-////        loginRequest.setUsername("jordan");
-////        loginRequest.setPassword("jf");
-//        loginRequest.setUsername("brian");
-//        loginRequest.setPassword("bo");
-//        login(loginRequest);
-//        //END LOGIN TEST
+
+        //TEST LOGIN
+        Request loginRequest = new Request();
+//        loginRequest.setUsername("jordan");
+//        loginRequest.setPassword("jf");
+        loginRequest.setUsername("brian");
+        loginRequest.setPassword("bo");
+        clientFacade.login(loginRequest);
+        //END LOGIN TEST
 //
 //
     }
