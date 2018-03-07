@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import Models.Result;
 import activities.R;
@@ -18,9 +19,9 @@ import RegisterLogin.LoginRegisterPresenter;
  */
 
 public class GameFragment extends Fragment {
-    Button returnToLobby;
+    ImageButton returnToLobby;
     Button claimRoute;
-    Button goToStats;
+    ImageButton goToStats;
     GamePresenter gamePresenter;
 
     public GameFragment()
@@ -39,7 +40,7 @@ public class GameFragment extends Fragment {
         gamePresenter = new GamePresenter(getContext());
         View view = inflater.inflate(R.layout.game, container, false);
 
-        returnToLobby= (Button)view.findViewById(R.id.returntolobby);
+        returnToLobby = view.findViewById(R.id.returntolobby);
         returnToLobby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +86,7 @@ public class GameFragment extends Fragment {
             }
         });
 
-        goToStats= (Button)view.findViewById(R.id.stats);
+        goToStats= view.findViewById(R.id.stats);
         goToStats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

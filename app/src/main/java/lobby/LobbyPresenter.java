@@ -44,7 +44,7 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
         if (currentGame != null && currentGame.isJoinable()) {
             //seeing if you are already in the game
             for (int i = 0; i < currentGame.getPlayers().size(); i++) {
-                if (currentGame.getPlayers().get(i).equals(name)) {
+                if (currentGame.isValidPlayer(name)) {
                     Toast.makeText(context, "Cannot join same game twice", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -59,14 +59,15 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
 
 
     @Override
-    public boolean startGame(Context context, Game game) {
-        if (game.getPlayers().size() > 1) {
-            Toast.makeText(context, "game started", Toast.LENGTH_SHORT).show();
+    public void startGame(Context context, Game game) {
+        if (game.getPlayers().size() > 1 && game.isValidPlayer(Client.getInstance().getUserName()))
+        {
+            Toast.makeText(context, "Starting game", Toast.LENGTH_SHORT).show();
             guiFacade.startGame(game.getId());
-            return true;
+//            return true;
         }
-        else Toast.makeText(context, "game not started", Toast.LENGTH_SHORT).show();
-        return false;
+        else Toast.makeText(context, "You cannot start that game", Toast.LENGTH_SHORT).show();
+//        return false;
     }
 
     @Override
@@ -89,10 +90,6 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
         return myGame; //Client.getInstance().getGameById(id); //Client.getInstance().getActiveGame();
     }
 
-    @Override
-    public void updateView() {
-
-    }
 
     public void setUser(String username, String password, String authToken)
     {
