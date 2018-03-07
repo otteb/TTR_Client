@@ -38,6 +38,6 @@ public class GamePlayServices implements IGamePlay {
 
     @Override
     public void updateClient(Request request) {
-
+        System.out.println("COMMAND EXECUTING - updateClient");
     }
 }
