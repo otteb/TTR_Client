@@ -1,4 +1,4 @@
-package registerLogin;
+package RegisterLogin;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -11,7 +11,7 @@ import activities.MainActivity;
 import Models.Request;
 import Models.Result;
 
-import Services.GuiFacade;
+import Services.GUI.GuiFacade;
 
 /**
  * Created by fjameson on 2/2/18.

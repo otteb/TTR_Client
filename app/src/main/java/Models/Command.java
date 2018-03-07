@@ -3,7 +3,7 @@ package Models;
 import java.lang.reflect.Method;
 
 import Interfaces.ICommand;
-import Services.LobbyServices;
+import Services.Commands.LobbyServices;
 
 public class Command implements ICommand {
     private String _className;

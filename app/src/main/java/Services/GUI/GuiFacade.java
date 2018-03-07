@@ -1,4 +1,4 @@
-package Services;
+package Services.GUI;
 
 import AsyncTasks.Lobby.CreateGameAsyncTask;
 import AsyncTasks.Lobby.JoinGameAsyncTask;
