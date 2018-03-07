@@ -106,9 +106,9 @@ public class LobbyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (currentGame != null) {
-                    currentGame = Client.getInstance().getGameMap().get(currentGame.getId());
+                    currentGame = Client.getInstance().getGameById(currentGame.getId());
                     lobbyPresenter.joinGame(getActivity(), currentGame, acceptedUser.getString("username"));
-                    currentGame = Client.getInstance().getGameMap().get(currentGame.getId());
+                    currentGame = Client.getInstance().getGameById(currentGame.getId());
 
                 } else {
                     Toast.makeText(getActivity(), "you can't join a game that doesn't exist", Toast.LENGTH_LONG).show();
@@ -124,7 +124,7 @@ public class LobbyFragment extends Fragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentGame = Client.getInstance().getGameMap().get(currentGame.getId());
+                currentGame = Client.getInstance().getGameById(currentGame.getId());
                 if (currentGame != null && currentGame.isJoinable()) {
                     start.setEnabled(true);
                   lobbyPresenter.startGame(getActivity(), currentGame);
@@ -193,10 +193,9 @@ public class LobbyFragment extends Fragment {
         if(games != null) {
             gamesAdapter.clearGames();
             for(String i : games.keySet()) {
-                Game game = Client.getInstance().getGameMap().get(i);
+                Game game = Client.getInstance().getGameById(i);
                 gamesAdapter.addGametoView(game);
             }
-
             gamesAdapter.notifyDataSetChanged();
         }
 
@@ -204,7 +203,6 @@ public class LobbyFragment extends Fragment {
 
     public void updatePlayers()
     {
-
         currentGame = Client.getInstance().getGameById(currentGame.getId());
         if(currentGame != null)
         {

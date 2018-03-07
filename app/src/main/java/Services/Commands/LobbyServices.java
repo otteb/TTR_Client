@@ -28,7 +28,10 @@ public class LobbyServices implements ILobby {
     public void joinGame(Request request) {
         System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS JOINING GAME: " + request.getGameId());
         Client.getInstance().addPlayerToGame(request.getGameId(), request.getUsername());
-        Client.getInstance().setActiveGame(Client.getInstance().getGameMap().get(request.getGameId()));
+        if (request.getUsername().equals(Client.getInstance().getUserName()))
+        {
+            Client.getInstance().setActiveGame(Client.getInstance().getGameById(request.getGameId()));
+        }
     }
 
     @Override
@@ -43,11 +46,11 @@ public class LobbyServices implements ILobby {
         System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS STARTING GAME: " + request.getGameId());
         if(Client.getInstance().getActiveGame().getId().equals(request.getGameId()))
         {
-            Client.getInstance().getGameMap().get(request.getGameId()).setActive(true);
+            Client.getInstance().getGameById(request.getGameId()).setActive(true);
         }
         else
         {
-            Client.getInstance().getGameMap().get(request.getGameId()).setActive(true);
+            Client.getInstance().getGameById(request.getGameId()).setActive(true);
         }
     }
 

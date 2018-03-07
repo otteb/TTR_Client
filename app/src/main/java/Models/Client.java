@@ -14,6 +14,10 @@ import Models.Gameplay.Player;
 public class Client extends Observable {
 
     private static Client single_instance = new Client();
+    public static Client getInstance()
+    {
+        return single_instance;
+    }
 
     private HashMap<String, Game> gameMap;
     private Game activeGame;
@@ -37,14 +41,154 @@ public class Client extends Observable {
         activeGame = null;
     }
 
-    public static Client getInstance()
-    {
-        return single_instance;
+    //Helpful functions
+    public void sendMessage(String m) {
+        setChanged();
+        notifyObservers(m);
     }
 
-    public void setIsLoggedIn(boolean b)
+    public void incCommandNum(int num) {
+        commandNum += num;
+    }
+
+    public void incActiveGameCMDNum(int num){
+        this.activeGameCMDNum += num;
+    }
+
+    public Game getGameById(String gameId) {
+        return gameMap.get(gameId);
+    }
+
+    public ArrayList<Player> getGamePlayers(String gameId) {
+//        Game test = getGameById(gameId);
+//        test.getId();
+        return getGameById(gameId).getPlayers();
+    }
+
+    public int getGameSize(String gameId) {
+        return getGamePlayers(gameId).size();
+    }
+
+    public ArrayList<Game> getGameList(){
+        ArrayList<Game> gameList = new ArrayList<>();
+        for(Game g : gameMap.values())
+        {
+            gameList.add(g);
+        }
+        return gameList;
+    }
+
+    //observables section:
+    public void addPlayerToGame(String gameId, String username) {
+        for (String i : getGameMap().keySet())
+        {
+            for (int j=0; j< getGameSize(gameId); j++)
+            {
+                if(!gameMap.get(i).getId().equals(gameId) && gameMap.get(i).getPlayers().get(j).getName().equals(username))
+                {
+                    gameMap.get(i).getPlayers().remove(j);
+                }
+            }
+        }
+        gameMap.get(gameId).addPlayer(new Player(username));
+        if(this.userName.equals(username))
+        {
+            activeGame = gameMap.get(gameId);
+            if(isLoggedIn)
+            {
+                //only call notify the observer of joinGame if the user is the one joining a game
+                joinGame();
+            }
+        }
+    }
+
+    public void removePlayerFromGame(String gameId, String username)
     {
-        isLoggedIn= b;
+        getGamePlayers(gameId).remove(username);
+        leaveGame();
+    }
+
+    public void addGameToMap(String gameId, Game game) {
+        gameMap.put(gameId, game);
+        createGame();
+    }
+
+    //observables:
+    public void createGame () {
+        setChanged();
+        notifyObservers("create");
+    }
+
+    public void joinGame () {
+        setChanged();
+        notifyObservers("join");
+    }
+
+    public void leaveGame () {
+        setChanged();
+        notifyObservers("leave");
+    }
+
+    public void startGame () {
+        setChanged();
+        notifyObservers("start");
+    }
+
+
+    //GETTERS
+    public Game getActiveGame()
+    {
+        return activeGame;
+    }
+
+    public HashMap<String, Game> getGameMap() {
+        return gameMap;
+    }
+
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public String getAuthToken()
+    {
+        return authToken;
+    }
+
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public int getCommandNum() {
+        return commandNum;
+    }
+
+    public int getActiveGameCMDNum() {
+        return activeGameCMDNum;
+    }
+
+    public boolean getIsLoggedIn()
+    {
+        return isLoggedIn;
+    }
+
+    public Request getRegisterRequest() {
+        return registerRequest;
+    }
+
+    public Request getLoginRequest() {
+        return loginRequest;
+    }
+
+
+    // SETTERS
+    public void setActiveGame(Game activeGame) {
+        this.activeGame = activeGame;
+    }
+
+    public void setGameMap(HashMap<String, Game> gameMap) {
+        this.gameMap = gameMap;
     }
 
     public void setUserName(String u)
@@ -63,29 +207,17 @@ public class Client extends Observable {
         password=p;
     }
 
-    public Game getActiveGame()
-    {
-        return activeGame;
+    public void setCommandNum(int commandNum) {
+        this.commandNum = commandNum;
     }
 
-    public boolean getIsLoggedIn()
-    {
-        return isLoggedIn;
+    public void setActiveGameCMDNum(int activeGameCMDNum) {
+        this.activeGameCMDNum = activeGameCMDNum;
     }
 
-    public String getUserName()
+    public void setIsLoggedIn(boolean b)
     {
-        return userName;
-    }
-
-    public String getAuthToken()
-    {
-        return authToken;
-    }
-
-    public String getPassword()
-    {
-        return password;
+        isLoggedIn= b;
     }
 
     public void setLoginRequest(Request l)
@@ -93,150 +225,12 @@ public class Client extends Observable {
         loginRequest=l;
     }
 
-    public void sendMessage(String m) {
-        setChanged();
-        notifyObservers(m);
-    }
-
-    public Request getRegisterRequest() {
-        return registerRequest;
-    }
-
-    public Request getLoginRequest() {
-        return loginRequest;
-    }
-
-    public void setActiveGame(Game activeGame) {
-        this.activeGame = activeGame;
-       // startGame();
-    }
-
-    public Game getGameById(String gameId) {
-        return gameMap.get(gameId);
-    }
-
-    public ArrayList<Player> getGamePlayers(String gameId) {
-        Game test = getGameById(gameId);
-        test.getId();
-        return getGameById(gameId).getPlayers();
-    }
-
-    public int getGameSize(String gameId) {
-        return getGamePlayers(gameId).size();
-    }
-
-    public HashMap<String, Game> getGameMap() {
-        return gameMap;
-    }
-
-    public void setGameMap(HashMap<String, Game> gameMap) {
-            this.gameMap = gameMap;
-    }
-
-    public ArrayList<Game> getGameList(){
-        ArrayList<Game> gameList = new ArrayList<>();
-        for(Game g : gameMap.values())
-        {
-            gameList.add(g);
-        }
-//        for(String i: this.gameMap.keySet()){
-//
-//            returnList.add(this.gameMap.get(i));
-//        }
-        return gameList;
-    }
-
-
-    public void addPlayerToGame(String gameId, String username)
-    {
-        for (String i : getGameMap().keySet())
-        {
-            for (int j=0; j<getGameMap().get(i).getPlayers().size(); j++)
-            {
-                if(!getGameMap().get(i).getId().equals(gameId) && getGameMap().get(i).getPlayers().get(j).getName().equals(username)){
-                    getGameMap().get(i).getPlayers().remove(j);
-                }
-            }
-        }
-        gameMap.get(gameId).addPlayer(new Player(username));
-        if(this.userName.equals(username))
-        {
-            activeGame = gameMap.get(gameId);
-            if(isLoggedIn)
-            {
-                //only call notify the observer of joinGame if the user is the one joining a game
-                joinGame();
-            }
-        }
-    }
-
-
-    //observables section:
-
-    public void removePlayerFromGame(String gameId, String username)
-    {
-        gameMap.get(gameId).getPlayers().remove(username);
-        leaveGame();
-    }
-
-    public void addGameToMap(String gameId, Game game) {
-        gameMap.put(gameId, game);
-        createGame();
-    }
-
-    //observables:
-    public void createGame ()
-    {
-        setChanged();
-        notifyObservers("create");
-    }
-
-    public void joinGame ()
-    {
-        setChanged();
-        notifyObservers("join");
-    }
-
-    public void leaveGame ()
-    {
-        setChanged();
-        notifyObservers("leave");
-    }
-
-    public void startGame ()
-    {
-        setChanged();
-        notifyObservers("start");
-    }
-
     public void setRegisterRequest(Request r){ registerRequest=r; }
+
 
     //This is for users that are not get officially login to the system
     public void clientLogin(Request lR)
     {
         loginRequest = lR;
-    }
-
-    public int getCommandNum() {
-        return commandNum;
-    }
-
-    public void setCommandNum(int commandNum) {
-        this.commandNum = commandNum;
-    }
-
-    public void incCommandNum(int num) {
-        commandNum += num;
-    }
-
-    public int getActiveGameCMDNum() {
-        return activeGameCMDNum;
-    }
-
-    public void setActiveGameCMDNum(int activeGameCMDNum) {
-        this.activeGameCMDNum = activeGameCMDNum;
-    }
-    public void incActiveGameCMDNum(int num){
-        this.activeGameCMDNum += num;
     }
 }

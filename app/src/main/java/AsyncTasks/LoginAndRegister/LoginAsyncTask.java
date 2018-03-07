@@ -30,8 +30,8 @@ public class LoginAsyncTask extends AsyncTask <Request, Void, Result> {
     protected void onPostExecute(Result result){
         if(result.getErrorMsg() == null) {
 //            Client.getInstance().setUserName(result.getUsername());
-            clientFacade.runCMD(result);
             Client.getInstance().setAuthToken(result.getAuthToken());
+            clientFacade.runCMD(result);
             Client.getInstance().setIsLoggedIn(true);
 
             Poller p = new Poller();
