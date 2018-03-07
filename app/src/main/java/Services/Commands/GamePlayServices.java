@@ -12,14 +12,12 @@ public class GamePlayServices implements IGamePlay {
         return theOne;
     }
 
-<<<<<<< HEAD
-=======
+
     private GamePlayServices() {}
     //reference the services in the server:
     //update the Client and Game models with all of the information returned
     //from the Server - the Presenter will decide what information to display:
 
->>>>>>> brian
     //TODO
     @Override
     public void setupGame(Request request) {
@@ -37,5 +35,9 @@ public class GamePlayServices implements IGamePlay {
     public void discardDestCards(Request request) {
         System.out.println("COMMAND EXECUTING - discardDestCards");
     }
-    //all executed commands FROM
+
+    @Override
+    public void updateClient(Request request) {
+
+    }
 }
