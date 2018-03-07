@@ -9,6 +9,7 @@ import Client_Server_Communication.Poller;
 import Models.Client;
 import Models.Request;
 import Models.Result;
+import ObserverPattern.TTR_Observable;
 
 /**
  * Created by brianotte on 2/13/18.
@@ -36,8 +37,9 @@ public class LoginAsyncTask extends AsyncTask <Request, Void, Result> {
 
             Poller p = new Poller();
             p.runLobbyCommands();
+//            Client.getInstance().getPoller().runLobbyCommands();
         }else {
-            Client.getInstance().sendMessage(result.getErrorMsg());
+            TTR_Observable.getInstance().sendMessage(result.getErrorMsg());
         }
         System.out.println("Logged in - AsyncTask");
     }

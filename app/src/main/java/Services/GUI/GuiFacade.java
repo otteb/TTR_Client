@@ -8,6 +8,7 @@ import AsyncTasks.Lobby.StartGameAsyncTask;
 import Client_Server_Communication.ClientFacade;
 import Models.*;
 import Models.Gameplay.Game;
+import ObserverPattern.TTR_Observable;
 
 import java.util.Observer;
 
@@ -72,7 +73,8 @@ public class GuiFacade {
 
     public void addObserver(Observer o)
     {
-        Client.getInstance().addObserver(o);
+//        Client.getInstance().addObserver(o);
+        TTR_Observable.getInstance().addObserver(o);
     }
 
 }

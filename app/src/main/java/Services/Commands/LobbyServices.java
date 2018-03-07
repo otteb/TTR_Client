@@ -4,6 +4,7 @@ import Interfaces.ILobby;
 import Models.Client;
 import Models.Gameplay.Game;
 import Models.Request;
+import ObserverPattern.TTR_Observable;
 
 public class LobbyServices implements ILobby {
     private static LobbyServices theOne = new LobbyServices();
@@ -47,7 +48,7 @@ public class LobbyServices implements ILobby {
         if(Client.getInstance().getActiveGame().getId().equals(request.getGameId()))
         {
             Client.getInstance().getGameById(request.getGameId()).setActive(true);
-            Client.getInstance().startGame();
+            TTR_Observable.getInstance().startGame();
         }
         else
         {

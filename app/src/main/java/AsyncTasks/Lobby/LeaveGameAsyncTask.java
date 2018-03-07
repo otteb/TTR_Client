@@ -6,6 +6,8 @@ import Client_Server_Communication.ClientFacade;
 import Models.Client;
 import Models.Request;
 import Models.Result;
+import ObserverPattern.TTR_Observable;
+
 /**
  * Created by ferrell3 on 3/1/18.
  */
@@ -26,6 +28,6 @@ public class LeaveGameAsyncTask extends AsyncTask<Request, Void, Result> {
             System.out.println("Left a game - This is the asyncTask");
         }
 //        Game game = Client.getInstance().getGameMap().get(result.getGameId());
-        else { Client.getInstance().sendMessage(result.getErrorMsg()); }
+        else { TTR_Observable.getInstance().sendMessage(result.getErrorMsg()); }
     }
 }

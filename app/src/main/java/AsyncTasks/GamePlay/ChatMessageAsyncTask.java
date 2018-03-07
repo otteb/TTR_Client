@@ -7,6 +7,7 @@ import Client_Server_Communication.GamePlayFacade;
 import Models.Client;
 import Models.Request;
 import Models.Result;
+import ObserverPattern.TTR_Observable;
 
 /**
  * Created by brianotte on 3/6/18.
@@ -32,7 +33,7 @@ public class ChatMessageAsyncTask extends AsyncTask<Request, Void, Result> {
         else
         {
             //create an error message for the Active Game Model:
-            Client.getInstance().sendMessage(result.getErrorMsg());
+            TTR_Observable.getInstance().sendMessage(result.getErrorMsg());
         }
     }
 }

@@ -6,6 +6,7 @@ import Client_Server_Communication.ClientFacade;
 import Models.Client;
 import Models.Request;
 import Models.Result;
+import ObserverPattern.TTR_Observable;
 
 /**
  * Created by brianotte on 2/13/18.
@@ -24,7 +25,7 @@ public class RegisterAsyncTask extends AsyncTask<Request, Void, Result> {
             Client.getInstance().setAuthToken(result.getAuthToken());
             clientFacade.runCMD(result);
         }else {
-            Client.getInstance().sendMessage(result.getErrorMsg());
+            TTR_Observable.getInstance().sendMessage(result.getErrorMsg());
         }
         System.out.println("Registered new user - AsyncTask");
     }

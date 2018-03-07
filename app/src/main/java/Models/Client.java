@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
+import Client_Server_Communication.Poller;
 import Models.Gameplay.Game;
 import Models.Gameplay.Player;
+import ObserverPattern.TTR_Observable;
 
 /**
  * Created by brianotte on 2/12/18.
  */
 
-public class Client extends Observable {
+public class Client {// extends Observable {
 
     private static Client single_instance = new Client();
     public static Client getInstance()
@@ -19,6 +21,7 @@ public class Client extends Observable {
         return single_instance;
     }
 
+    private Poller poller = new Poller();
     private HashMap<String, Game> gameMap;
     private Game activeGame;
     private boolean isLoggedIn;
@@ -31,6 +34,7 @@ public class Client extends Observable {
     private int commandNum;
     //properties specific to each Client in the active game:
     private int activeGameCMDNum = 0;
+//    private TTR_Observable obs = new TTR_Observable();
 
     //constructor
     private Client(){
@@ -42,11 +46,6 @@ public class Client extends Observable {
     }
 
     //Helpful functions
-    public void sendMessage(String m) {
-        setChanged();
-        notifyObservers(m);
-    }
-
     public void incCommandNum(int num) {
         commandNum += num;
     }
@@ -84,7 +83,7 @@ public class Client extends Observable {
         {
             for (int j=0; j< getGameSize(gameId); j++)
             {
-                if(!gameMap.get(i).getId().equals(gameId) && gameMap.get(i).getPlayers().get(j).getName().equals(username))
+                if(gameMap.get(i).getId().equals(gameId) && gameMap.get(i).getPlayers().get(j).getName().equals(username))
                 {
                     gameMap.get(i).getPlayers().remove(j);
                 }
@@ -97,41 +96,20 @@ public class Client extends Observable {
             if(isLoggedIn)
             {
                 //only call notify the observer of joinGame if the user is the one joining a game
-                joinGame();
+                TTR_Observable.getInstance().joinGame();
             }
         }
     }
 
     public void removePlayerFromGame(String gameId, String username)
     {
-        getGamePlayers(gameId).remove(username);
-        leaveGame();
+        getGamePlayers(gameId).remove(getGameById(gameId).getPlayer(username));
+        TTR_Observable.getInstance().leaveGame();
     }
 
     public void addGameToMap(String gameId, Game game) {
         gameMap.put(gameId, game);
-        createGame();
-    }
-
-    //observables:
-    public void createGame () {
-        setChanged();
-        notifyObservers("create");
-    }
-
-    public void joinGame () {
-        setChanged();
-        notifyObservers("join");
-    }
-
-    public void leaveGame () {
-        setChanged();
-        notifyObservers("leave");
-    }
-
-    public void startGame () {
-        setChanged();
-        notifyObservers("start");
+       TTR_Observable.getInstance().createGame();
     }
 
 
@@ -198,8 +176,7 @@ public class Client extends Observable {
 
     public void setAuthToken(String a) {
         authToken=a;
-        setChanged();
-        notifyObservers(a);
+        TTR_Observable.getInstance().setAuthToken(a);
     }
 
     public void setPassword(String p)
@@ -232,5 +209,13 @@ public class Client extends Observable {
     public void clientLogin(Request lR)
     {
         loginRequest = lR;
+    }
+
+    public Poller getPoller() {
+        return poller;
+    }
+
+    public void setPoller(Poller poller) {
+        this.poller = poller;
     }
 }
