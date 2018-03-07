@@ -5,16 +5,13 @@ import Interfaces.IGamePlay;
 import Models.Request;
 import Models.Result;
 
-/**
- * Created by brianotte on 3/6/18.
- */
-
 public class GamePlayServices implements IGamePlay {
     private static GamePlayServices theOne = new GamePlayServices();
 
     public static GamePlayServices getInstance() {
         return theOne;
     }
+
 
     private GamePlayServices() {}
     //reference the services in the server:
@@ -38,5 +35,9 @@ public class GamePlayServices implements IGamePlay {
     public void discardDestCards(Request request) {
         System.out.println("COMMAND EXECUTING - discardDestCards");
     }
-    //all executed commands FROM
+
+    @Override
+    public void updateClient(Request request) {
+
+    }
 }

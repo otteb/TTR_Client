@@ -1,6 +1,7 @@
 package Services.Commands;
 
 import Interfaces.IChat;
+import Models.Gameplay.Chat;
 import Models.Request;
 import Models.Result;
 
@@ -10,10 +11,12 @@ import Models.Result;
 
 public class ChatServices implements IChat {
     private static ChatServices theOne = new ChatServices();
+
     public static ChatServices getInstance() {
         return theOne;
     }
     private ChatServices() {}
+
 
     //TODO
     @Override
