@@ -26,7 +26,7 @@ public class LobbyServices implements ILobby {
     public void createGame(Request request){ //(String authToken, String gameId){
         //this is where the Client (in the models package) needs to be updated with the latest information.
         //return a game, gameId, and message;
-        System.out.println("COMMAND EXECUTED - CREATE GAME");
+        System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS CREATING GAME: " + request.getGameId());
 
         Game newGame = new Game(request.getGameId());
         //add players to the newGame:
@@ -39,14 +39,14 @@ public class LobbyServices implements ILobby {
 
     @Override
     public void joinGame(Request request) { //(String authToken, String gameId);
-        System.out.println("COMMAND EXECUTING - JOIN GAME");
+        System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS JOINING GAME: " + request.getGameId());
         Client.getInstance().addPlayerToGame(request.getGameId(), request.getUsername());
         Client.getInstance().setActiveGame(Client.getInstance().getGameMap().get(request.getGameId()));
     }
 
     @Override
     public void leaveGame(Request request) {
-        System.out.println("COMMAND EXECUTING - LEAVE GAME");
+        System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS LEAVING GAME " + request.getGameId());
         Client.getInstance().removePlayerFromGame(request.getGameId(), request.getUsername());
 //        Client.getInstance().getGameMap().get(request.getGameId()).getPlayers().remove(request.getUsername());
     }
@@ -54,11 +54,11 @@ public class LobbyServices implements ILobby {
     @Override
     public void startGame(Request request) { //(String authToken, String gameId);
 
-        System.out.println("COMMAND EXECUTED - START GAME");
+        System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS STARTING GAME: " + request.getGameId());
         if(Client.getInstance().getActiveGame().getId().equals(request.getGameId()))
         {
             Client.getInstance().getGameMap().get(request.getGameId()).setActive(true);
-            Client.getInstance().startGame();
+//            Client.getInstance().startGame();
             //PHASE2: Stop lobby poller, start game poller
         }
         else

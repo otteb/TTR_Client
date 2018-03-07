@@ -18,7 +18,7 @@ public class Client extends Observable {
     private HashMap<String, Game> gameMap;
     private Game activeGame;
     private boolean isLoggedIn;
-    private boolean isRegistered;
+//    private boolean isRegistered;
     private String userName;
     private String password;
     private String authToken;
@@ -31,7 +31,7 @@ public class Client extends Observable {
         this.commandNum = 0;
         this.gameMap = new HashMap<>();
         isLoggedIn = false;
-        isRegistered = false;
+//        isRegistered = false;
         activeGame = null;
     }
 
@@ -151,13 +151,21 @@ public class Client extends Observable {
         {
             for (int j=0; j<getGameMap().get(i).getPlayers().size(); j++)
             {
-                if(!getGameMap().get(i).equals(gameId) && getGameMap().get(i).getPlayers().get(j).getName().equals(username)){
+                if(!getGameMap().get(i).getId().equals(gameId) && getGameMap().get(i).getPlayers().get(j).getName().equals(username)){
                     getGameMap().get(i).getPlayers().remove(j);
                 }
             }
         }
         gameMap.get(gameId).addPlayer(new Player(username));
-        joinGame();
+        if(this.userName.equals(username))
+        {
+            activeGame = gameMap.get(gameId);
+            if(isLoggedIn)
+            {
+                //only call notify the observer of joinGame if the user is the one joining a game
+                joinGame();
+            }
+        }
     }
 
     public void removePlayerFromGame(String gameId, String username)
@@ -166,13 +174,11 @@ public class Client extends Observable {
         leaveGame();
     }
 
-    //Can we just add this to createGame() instead?
     public void addGameToMap(String gameId, Game game) {
         gameMap.put(gameId, game);
         createGame();
     }
 
-    //TODO: Can we pass parameters into these and add functionality? Or are these only to notify?
     //observables:
     public void createGame ()
     {

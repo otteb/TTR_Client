@@ -89,9 +89,7 @@ public class ClientFacade {
             Client.getInstance().setAuthToken(result.getAuthToken());
             System.out.println("Login successful!");
             System.out.println(result.getAuthToken());
-            runCMD(result);
-            Poller p = new Poller();
-            p.runLobbyCommands();
+//            runCMD(result);
            // Poller.LobbyPolling lobbyPoller = new Poller.LobbyPolling();
             //lobbyPoller.execute();
         }
@@ -114,7 +112,7 @@ public class ClientFacade {
             Client.getInstance().setAuthToken(regResult.getAuthToken());
             System.out.println("Registration successful!");
             System.out.println(regResult.getAuthToken());
-            runCMD(regResult);
+//            runCMD(regResult);
         }
         else
         {
@@ -130,7 +128,7 @@ public class ClientFacade {
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
-        runCMD(gameResult);
+//        runCMD(gameResult);
 //        System.out.println();
         return gameResult;
     }
@@ -139,7 +137,7 @@ public class ClientFacade {
         Command gameCommand = new Command("Interfaces.ILobby", "joinGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
-        runCMD(gameResult);
+//        runCMD(gameResult);
 //        System.out.println();
         return gameResult;
     }
@@ -148,7 +146,7 @@ public class ClientFacade {
         Command gameCommand = new Command("Interfaces.ILobby", "leaveGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
-        runCMD(gameResult);
+//        runCMD(gameResult);
 //        System.out.println();
         return gameResult;
     }
@@ -157,7 +155,7 @@ public class ClientFacade {
         Command gameCommand = new Command("Interfaces.ILobby", "startGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
-        runCMD(gameResult);
+//        runCMD(gameResult);
 //        if (gameResult.isSuccessful())
 //        {
 //            System.out.println(gameResult.getGameId() + " successfully started!");
@@ -196,7 +194,7 @@ public class ClientFacade {
         return gameResult;
     }
 
-    private void runCMD(Result result) {
+    public void runCMD(Result result) {
         if (result.isSuccessful())
         {
             for(int i = 0; i < result.getUpdateCommands().size(); i++){

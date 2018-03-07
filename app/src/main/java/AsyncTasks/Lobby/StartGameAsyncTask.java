@@ -1,8 +1,9 @@
-package AsyncTasks;
+package AsyncTasks.Lobby;
 
 import android.os.AsyncTask;
 
 import Client_Server_Communication.ClientFacade;
+import Models.Client;
 import Models.Request;
 import Models.Result;
 
@@ -20,5 +21,7 @@ public class StartGameAsyncTask extends AsyncTask<Request, Void, Result> {
     @Override
     protected void onPostExecute(Result result){
         System.out.println("Started a game - This is the asyncTask");
+        clientFacade.runCMD(result);
+        Client.getInstance().startGame();
     }
 }

@@ -2,23 +2,30 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import Interfaces.ICommand;
+import Models.Cards.DestinationCard;
+import Models.Cards.TrainCard;
+import Models.Gameplay.Game;
 
 public class Result {
-    //We don't necessarily need these variables, these are just some possible ideas
     private String errorMsg;
     private String authToken; //user authToken
     private String gameId; //game ID
     private boolean success;
     private Command command;
     private ArrayList<Command> updateCommands;
+    private Game game;
+    private List<TrainCard> trainCards;
+    private List<DestinationCard> destinationCards;
+    //chats section:
+    private ArrayList<String> chatMessages;
 
-    public Result(){}
-
-    //probably won't use for a response to a client response like startGame()
-    //I'm thinking more for use with the poller and updating the other clients
-    private List<ICommand> commands; //list of client commands?
+    public Result(){
+        updateCommands = new ArrayList<>();
+        trainCards = new ArrayList<>();
+        chatMessages = new ArrayList<>();
+        destinationCards = new ArrayList<>();
+        game = new Game();
+    }
 
     public String getErrorMsg() {
         return errorMsg;
@@ -52,14 +59,6 @@ public class Result {
         this.success = success;
     }
 
-    public List<ICommand> getCommands() {
-        return commands;
-    }
-
-    public void setCommands(List<ICommand> commands) {
-        this.commands = commands;
-    }
-
     public ArrayList<Command> getUpdateCommands() {
         return updateCommands;
     }
@@ -74,5 +73,37 @@ public class Result {
 
     public void setCommand(Command command) {
         this.command = command;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public List<TrainCard> getTrainCards() {
+        return trainCards;
+    }
+
+    public void setTrainCards(List<TrainCard> trainCards) {
+        this.trainCards = trainCards;
+    }
+
+    public List<DestinationCard> getDestinationCards() {
+        return destinationCards;
+    }
+
+    public void setDestinationCards(List<DestinationCard> destinationCards) {
+        this.destinationCards = destinationCards;
+    }
+
+    public ArrayList<String> getChatMessages() {
+        return chatMessages;
+    }
+
+    public void setChatMessages(ArrayList<String> chatMessages) {
+        this.chatMessages = chatMessages;
     }
 }

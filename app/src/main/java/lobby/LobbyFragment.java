@@ -51,7 +51,7 @@ public class LobbyFragment extends Fragment {
     LinearLayout newGame;
     EditText gameName;
     View view;
-    Game currentGame = null;
+    Game currentGame = Client.getInstance().getActiveGame();
 
 
 
@@ -95,7 +95,6 @@ public class LobbyFragment extends Fragment {
 
         lobbyPresenter.setUser(acceptedUser.getString("username"), acceptedUser.getString("password"), acceptedUser.getString("authToken"));
 
-        //numPlayers.setVisibility(View.GONE);
         mGamesRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
@@ -157,7 +156,6 @@ public class LobbyFragment extends Fragment {
                     newGame.setVisibility(View.GONE);
                     gameName.setText(null);
                     curGame.setText(currentGame.getId());
-
                     ArrayList<Game> temp = Client.getInstance().getGameList();
                 }
             }
@@ -192,9 +190,9 @@ public class LobbyFragment extends Fragment {
     public void updateGameList()
     {
         HashMap<String, Game> games = Client.getInstance().getGameMap();
-        if (games != null) {
-           gamesAdapter.clearGames();
-            for (String i : games.keySet()){
+        if(games != null) {
+            gamesAdapter.clearGames();
+            for(String i : games.keySet()) {
                 Game game = Client.getInstance().getGameMap().get(i);
                 gamesAdapter.addGametoView(game);
             }
@@ -206,13 +204,14 @@ public class LobbyFragment extends Fragment {
 
     public void updatePlayers()
     {
-        currentGame =Client.getInstance().getGameMap().get(currentGame.getId());
+
+        currentGame = Client.getInstance().getGameById(currentGame.getId());
         if(currentGame != null)
         {
             curGame.setText(currentGame.getId());
             for (int i = 0; i < players.size(); i++)
             {
-                if (i < Client.getInstance().getGameMap().get(currentGame.getId()).getPlayers().size())
+                if (i < Client.getInstance().getGameSize(currentGame.getId()))
                 {
                     players.get(i).setText(currentGame.getPlayers().get(i).getName());
                 } else players.get(i).setText("vacant");
@@ -224,16 +223,6 @@ public class LobbyFragment extends Fragment {
         }
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -325,8 +314,4 @@ public class LobbyFragment extends Fragment {
             return games.size();
         }
     }
-
-
-
-
 }

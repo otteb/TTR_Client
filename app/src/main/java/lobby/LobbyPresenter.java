@@ -123,7 +123,6 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
         {
             //start a game
             MainActivity mainActivity = (MainActivity) context;
-            result = "";
             mainActivity.openGame();
         }
         else
@@ -132,7 +131,5 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
         }
         observable.hasChanged();
     }
-
-
 }
 
