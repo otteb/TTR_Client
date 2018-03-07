@@ -21,10 +21,10 @@ public class Request {
     private String action; //Game history entry
     private ArrayList<DestinationCard> discardDest;
     private ArrayList<TrainCard> discardTrains;
+    private int gameCMDNum;
 
     //Chat request Features:
     private Chat chat;
-    private int chatNum;
     private String chatMessage;
 
     public Request(){
@@ -125,5 +125,13 @@ public class Request {
 
     public void setDiscardTrains(ArrayList<TrainCard> discardTrains) {
         this.discardTrains = discardTrains;
+    }
+
+    public int getGameCMDNum() {
+        return gameCMDNum;
+    }
+
+    public void setGameCMDNum(int gameCMDNum) {
+        this.gameCMDNum = gameCMDNum;
     }
 }

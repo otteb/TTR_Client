@@ -6,22 +6,23 @@ import Models.Request;
 import Models.Result;
 
 public class GamePlayFacade {
+    //builds the command to be executed and returns it in a result object:
 
-    //TODO STILL NEEDS TO BE ADJUSTED:
+    // le Fin:
     public Result addChat(Request request){
         //build command:
-        Command gameCommand = new Command("Interfaces.ILobby", "joinGame",
+        Command chatCommand = new Command("Interfaces.IChat", "addChat",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         //send the command to the server via the ClientCommunicator
-        Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
+        Result chatResult = ClientCommunicator.getInstance().sendCommand(chatCommand);
         //return the Result object;
-        return gameResult;
+        return chatResult;
     }
 
-    //TODO STILL NEEDS TO BE ADJUSTED:
+    // le Fin:
     public Result discardDestinationCard(Request request){
         //build command:
-        Command gameCommand = new Command("Interfaces.ILobby", "joinGame",
+        Command gameCommand = new Command("Interfaces.IGamePlay", "discardDestCards",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         //send the command to the server via the ClientCommunicator
         Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
@@ -30,17 +31,28 @@ public class GamePlayFacade {
     }
 
 
+    //TODO still needs to be adjusted:
+    Result updateClient(Request request){
+        Command gameCommand = new Command("Interfaces.IGamePlay", "updateClient",
+                new String[]{ "Models.Request" }, new Request[]{ request });
+        Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
+        if (gameResult.isSuccessful()) { return gameResult; }
+        else
+        {
+            System.out.println("Error:");
+            System.out.println(gameResult.getErrorMsg());
+        }
+        return gameResult;
+    }
 
 
-
-
-    //TODO ADJUST this function to run in the active Game Model:
+    //Finished
     public void runCMD(Result result) {
         if (result.isSuccessful())
         {
             for(int i = 0; i < result.getUpdateCommands().size(); i++){
-                int temp = Client.getInstance().getCommandNum();
-                Client.getInstance().setCommandNum(++temp);
+                int temp = Client.getInstance().getActiveGameCMDNum();
+                Client.getInstance().setActiveGameCMDNum(++temp);
                 try {
                     result.getUpdateCommands().get(i).execute();
                 }catch (Exception e)

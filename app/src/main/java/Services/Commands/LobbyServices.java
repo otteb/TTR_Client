@@ -18,7 +18,6 @@ public class LobbyServices implements ILobby {
     @Override
     public void createGame(Request request){ //(String authToken, String gameId){
         //this is where the Client (in the models package) needs to be updated with the latest information.
-        //return a game, gameId, and message;
         System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS CREATING GAME: " + request.getGameId());
 
         Game newGame = new Game(request.getGameId());
@@ -26,7 +25,7 @@ public class LobbyServices implements ILobby {
     }
 
     @Override
-    public void joinGame(Request request) { //(String authToken, String gameId);
+    public void joinGame(Request request) {
         System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS JOINING GAME: " + request.getGameId());
         Client.getInstance().addPlayerToGame(request.getGameId(), request.getUsername());
         Client.getInstance().setActiveGame(Client.getInstance().getGameMap().get(request.getGameId()));
@@ -45,8 +44,6 @@ public class LobbyServices implements ILobby {
         if(Client.getInstance().getActiveGame().getId().equals(request.getGameId()))
         {
             Client.getInstance().getGameMap().get(request.getGameId()).setActive(true);
-//            Client.getInstance().startGame();
-            //PHASE2: Stop lobby poller, start game poller
         }
         else
         {

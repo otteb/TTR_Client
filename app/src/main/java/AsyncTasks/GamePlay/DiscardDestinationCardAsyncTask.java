@@ -3,6 +3,7 @@ package AsyncTasks.GamePlay;
 import android.os.AsyncTask;
 
 import Client_Server_Communication.GamePlayFacade;
+import Models.Client;
 import Models.Request;
 import Models.Result;
 
@@ -28,7 +29,7 @@ public class DiscardDestinationCardAsyncTask extends AsyncTask<Request, Void, Re
 //            Client.getInstance().createGame();
         } else {
             //create an error message for the Active Game Model:
-//            Client.getInstance().sendMessage(result.getErrorMsg());
+            Client.getInstance().sendMessage(result.getErrorMsg());
         }
     }
 }

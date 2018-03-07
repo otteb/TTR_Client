@@ -13,19 +13,16 @@ import Models.Result;
  */
 
 public class ChatMessageAsyncTask extends AsyncTask<Request, Void, Result> {
-    ClientFacade clientFacade = new ClientFacade();
     GamePlayFacade gamePlayFacade = new GamePlayFacade();
-    //instance of the Facade/Services class:
     @Override
     protected Result doInBackground(Request... requests) {
-        //call the gamePlayFacade's addChat function -> return the Result and pass it to the
-        //onPostExecute();
+        //call the gamePlayFacade's addChat function -> return the Result and pass it to the onPostExecute();
         return gamePlayFacade.addChat(requests[0]);
     }
     //onPostExecute updates the Game model:
+    //TODO - needs to the call the obeserver in the onPOSTEXECUTE function
     @Override
     protected void onPostExecute(Result result){
-//        if(result.isSuccessful()) { System.out.println("Created a game - This is the asyncTask"); }
         if(result.getErrorMsg() == null)
         {
             System.out.println("Adding a Chat - This is the asyncTask");
@@ -37,7 +34,7 @@ public class ChatMessageAsyncTask extends AsyncTask<Request, Void, Result> {
         else
         {
             //create an error message for the Active Game Model:
-//            Client.getInstance().sendMessage(result.getErrorMsg());
+            Client.getInstance().sendMessage(result.getErrorMsg());
         }
     }
 }

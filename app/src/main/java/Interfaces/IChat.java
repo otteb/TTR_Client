@@ -4,5 +4,6 @@ import Models.Request;
 import Models.Result;
 
 public interface IChat {
-    Result addChat(Request request);        //authtoken, gameId, and message
+    //adjusted to void:
+    void addChat(Request request);        //authtoken, gameId, and message
 }
