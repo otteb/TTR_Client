@@ -47,6 +47,7 @@ public class LobbyServices implements ILobby {
         if(Client.getInstance().getActiveGame().getId().equals(request.getGameId()))
         {
             Client.getInstance().getGameById(request.getGameId()).setActive(true);
+            Client.getInstance().startGame();
         }
         else
         {

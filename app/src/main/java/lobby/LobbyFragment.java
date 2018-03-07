@@ -23,11 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
-/**
- * Created by fjameson on 2/2/18.
- */
-
 public class LobbyFragment extends Fragment {
 
 
@@ -52,22 +47,19 @@ public class LobbyFragment extends Fragment {
     EditText gameName;
     View view;
     Game currentGame = Client.getInstance().getActiveGame();
-
-
-
     ArrayList<TextView> players = new ArrayList<>(5);
-    ArrayList<Game> games = new ArrayList<>();
-    ArrayList<String> play;
+//    ArrayList<Game> games = new ArrayList<>();
+//    ArrayList<String> play;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         lobbyPresenter = new LobbyPresenter(getActivity());
         view = inflater.inflate(R.layout.lobby_fragment, container, false);// setting view
-        final ArrayList<String>playernames = new ArrayList<String>();
+//        final ArrayList<String>playernames = new ArrayList<String>();
 
         //stuff that comes from the last fragment
         final Bundle acceptedUser = getArguments();
-        playernames.add(acceptedUser.getString("username"));
+//        playernames.add(acceptedUser.getString("username"));
         curName = (TextView) view.findViewById(R.id.yourName);
         curName.setText(acceptedUser.getString("username"));
 
@@ -91,7 +83,7 @@ public class LobbyFragment extends Fragment {
         newGame = (LinearLayout) view.findViewById(R.id.newGame);
         gameName = (EditText) view.findViewById(R.id.gName);
         mGamesRecView = (RecyclerView) view.findViewById(R.id.game_list);
-        final  TextView numPlayers = (TextView) view.findViewById(R.id.numPlayers);
+//        final  TextView numPlayers = (TextView) view.findViewById(R.id.numPlayers);
 
         lobbyPresenter.setUser(acceptedUser.getString("username"), acceptedUser.getString("password"), acceptedUser.getString("authToken"));
 
@@ -109,29 +101,28 @@ public class LobbyFragment extends Fragment {
                     currentGame = Client.getInstance().getGameById(currentGame.getId());
                     lobbyPresenter.joinGame(getActivity(), currentGame, acceptedUser.getString("username"));
                     currentGame = Client.getInstance().getGameById(currentGame.getId());
-
-                } else {
-                    Toast.makeText(getActivity(), "you can't join a game that doesn't exist", Toast.LENGTH_LONG).show();
                 }
-
-                if (currentGame != null) {
-                } else Toast.makeText(getActivity(), "no game selected", Toast.LENGTH_SHORT).show();
-
+                else
+                {
+                    Toast.makeText(getActivity(), "No game selected", Toast.LENGTH_LONG).show();
+                }
             }
-
         });
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentGame = Client.getInstance().getGameById(currentGame.getId());
-                if (currentGame != null && currentGame.isJoinable()) {
-                    start.setEnabled(true);
-                  lobbyPresenter.startGame(getActivity(), currentGame);
-                }
-                else
+                if(currentGame != null)
                 {
-                    Toast.makeText(getActivity(), "you can't start this game", Toast.LENGTH_LONG).show();
+                    currentGame = Client.getInstance().getGameById(currentGame.getId());
+                    if (currentGame.isJoinable()) {
+                        start.setEnabled(true);
+                        lobbyPresenter.startGame(getActivity(), currentGame);
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity(), "You cannot start that game", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -156,34 +147,11 @@ public class LobbyFragment extends Fragment {
                     newGame.setVisibility(View.GONE);
                     gameName.setText(null);
                     curGame.setText(currentGame.getId());
-                    ArrayList<Game> temp = Client.getInstance().getGameList();
+//                    ArrayList<Game> temp = Client.getInstance().getGameList();
                 }
             }
         });
         updateGameList();
-
-//        if( createUpdate == true){
-//            newGame.setVisibility(View.GONE);
-//            gameName.setText(null);
-//            gamesAdapter.addGametoView(currentGame);
-//            gamesAdapter.notifyDataSetChanged();
-//            for (int i=0; i< Client.getInstance().getGameList().size(); i++){
-//
-//           curGame.setText( Client.getInstance().getGameList().get(i).getId());
-//            }
-//
-//            for (int i = 0; i < currentGame.getPlayers().size(); i++) {
-//
-//                players.get(i).setText(currentGame.getPlayers().get(i));
-//
-//                if (!players.get(i).getText().equals("")) {
-//                    players.get(i).setVisibility(View.VISIBLE);
-//                    players.get(i).setText(currentGame.getPlayers().get(i));
-//                }
-//                else players.get(i).setVisibility(View.GONE);
-//            }
-//
-//        }
         return view;
     }
 
@@ -217,11 +185,9 @@ public class LobbyFragment extends Fragment {
         }
         else
         {
-            System.out.println("the current game is null");
+            System.out.println("The current game is null");
         }
-
     }
-
 
 
     public class GamesHolder extends RecyclerView.ViewHolder {
@@ -232,11 +198,9 @@ public class LobbyFragment extends Fragment {
         public GamesHolder(View itemView) {
             super(itemView);
 
-            mGameName = (TextView) itemView.findViewById(R.id.game_name);
+            mGameName = itemView.findViewById(R.id.game_name);
 
             mGameName.setOnClickListener(new View.OnClickListener() {
-
-
                 @Override
                 public void onClick(View v) {
                     //This needs to be adjusted in the client model;
@@ -244,9 +208,10 @@ public class LobbyFragment extends Fragment {
                     int gListSize = tempGlist.size();
                     String changeString = mGameName.getText().toString();
 
-                    for (int i = 0; i <gListSize; i++) {
-
-                        if (tempGlist.get(i).getId() == null) {
+                    for (int i = 0; i <gListSize; i++)
+                    {
+                        if (tempGlist.get(i).getId() == null)
+                        {
                             continue;
                         }
                         if (tempGlist.get(i).getId().equals(changeString)) {
@@ -255,7 +220,6 @@ public class LobbyFragment extends Fragment {
                             curGame.setText(currentGame.getId());
                             break;
                         }
-
                     }
                 }
             });
@@ -264,13 +228,10 @@ public class LobbyFragment extends Fragment {
         public void bindGame(Game game) {
             mGame = game;
             mGameName.setText(mGame.getId());
-
         }
     }
 
-
    public class GamesAdapter extends RecyclerView.Adapter<GamesHolder> {
-
         private ArrayList<Game> games;
 
         public GamesAdapter(ArrayList<Game> g) {
@@ -281,7 +242,8 @@ public class LobbyFragment extends Fragment {
                 games.add(game);
             }
             else
-            {games = g; }}
+            {games = g; }
+        }
 
         @Override
         public GamesHolder onCreateViewHolder(ViewGroup parent, int viewType) {

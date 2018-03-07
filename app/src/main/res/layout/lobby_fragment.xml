@@ -14,131 +14,147 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:columnCount="2"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
         android:paddingTop="10dp"
-        tools:targetApi="ice_cream_sandwich">
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="10dp"
-            android:layout_column="0"
-            android:layout_row="0"
-            android:text="Your Name: " />
-
-        <TextView
-            android:id="@+id/yourName"
-            android:layout_marginLeft="45dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="0"
-            android:text="Daniel" />
-
-
-        <TextView
-            android:id="@+id/tvPlayers"
-            android:layout_marginLeft="45dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="1"
-            android:text="Players: "
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/gameLabel"
-            android:layout_marginLeft="45dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="1"
-            android:text="Current Game: " />
-
-        <TextView
-            android:id="@+id/curGame"
-            android:layout_marginLeft="45dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="1" />
-
-
-
-        <TextView
-            android:id="@+id/numPlayers"
-            android:layout_marginLeft="45dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="1"
-            android:text="0"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/list_label"
-            android:layout_marginLeft="45dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Player List:"
-            android:textStyle="bold" />
+        tools:targetApi="ice_cream_sandwich"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_marginLeft="45dp"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:baselineAligned="false">
 
             <TextView
-                android:id="@+id/p1"
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="vacant" />
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="10dp"
+                android:text="Username: "
+                android:textStyle="normal|bold"/>
 
             <TextView
-                android:id="@+id/p2"
-                android:layout_width="wrap_content"
+                android:id="@+id/yourName"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:text="username"
+                android:textAlignment="textStart"
                 android:layout_height="wrap_content"
-                android:text="vacant" />
+                />
 
-            <TextView
-                android:id="@+id/p3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="vacant" />
-
-            <TextView
-                android:id="@+id/p4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="vacant" />
-
-            <TextView
-                android:id="@+id/p5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="vacant" />
         </LinearLayout>
 
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/gameLabel"
+                android:layout_marginStart="45dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Current Game: "
+                android:textStyle="normal|bold"/>
 
+            <TextView
+                android:id="@+id/curGame"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop ="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lists_layout">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="115dp"
+                android:orientation="vertical"
+                tools:ignore="GridLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:text="Games List:"
+                    android:id="@+id/gList"
+                    android:textStyle="bold"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/game_list"
+                    android:layout_marginStart="45dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginStart="45dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/player_list">
+
+                <TextView
+                    android:id="@+id/list_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Player List:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/p1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="vacant" />
+
+                <TextView
+                    android:id="@+id/p2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="vacant" />
+
+                <TextView
+                    android:id="@+id/p3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="vacant" />
+
+                <TextView
+                    android:id="@+id/p4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="vacant" />
+
+                <TextView
+                    android:id="@+id/p5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="vacant" />
+            </LinearLayout>
+
+        </LinearLayout>
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:columnCount="2"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:layout_column="1"
-            android:layout_row="3"/>
-
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </LinearLayout>
 
         <Button
             android:layout_marginLeft="45dp"
@@ -159,8 +175,6 @@
             android:layout_height="wrap_content"
             android:text="Start Game"
             android:backgroundTint="#A52A2A"/>
-
-        />
 
         <Button
             android:layout_marginLeft="45dp"
@@ -198,29 +212,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:orientation="vertical"
-        tools:ignore="GridLayout">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Games List:"
-            android:id="@+id/gList"
-            android:textStyle="bold"
-            />
-
-        <android.support.v7.widget.RecyclerView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/game_list"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            />
 
     </LinearLayout>
 

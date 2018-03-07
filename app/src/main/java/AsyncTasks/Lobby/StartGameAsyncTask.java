@@ -24,6 +24,6 @@ public class StartGameAsyncTask extends AsyncTask<Request, Void, Result> {
         //executes the command:
         clientFacade.runCMD(result);
         //notifies the observer:
-        Client.getInstance().startGame();
+//        Client.getInstance().startGame();
     }
 }
