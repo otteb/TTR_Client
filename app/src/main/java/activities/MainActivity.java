@@ -1,13 +1,12 @@
 package activities;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import Models.Client;
 import Models.Gameplay.Game;
 import Models.Request;
-import registerLogin.LoginFragment;
+import RegisterLogin.LoginFragment;
 import lobby.LobbyFragment;
 import game.GameFragment;
 import registerLogin.LoginRegisterPresenter;

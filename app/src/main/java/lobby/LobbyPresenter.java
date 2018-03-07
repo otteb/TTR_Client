@@ -11,13 +11,10 @@ import java.util.Observer;
 
 import Interfaces.ILobbyPresenter;
 import Models.Client;
-import Models.Gameplay.Player;
 import Models.Request;
 import activities.MainActivity;
 import Models.Gameplay.Game;
-import Services.GuiFacade;
-
-import static Models.Client.getInstance;
+import Services.GUI.GuiFacade;
 
 
 /**

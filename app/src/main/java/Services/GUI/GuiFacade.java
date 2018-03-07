@@ -1,4 +1,4 @@
-package Services;
+package Services.GUI;
 
 import AsyncTasks.Lobby.CreateGameAsyncTask;
 import AsyncTasks.Lobby.JoinGameAsyncTask;
@@ -16,7 +16,6 @@ import java.util.Observer;
  */
 
 public class GuiFacade {
-    ClientFacade clientFacade = new ClientFacade();
 
     public void login (String username, String password)
     {

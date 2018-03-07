@@ -1,13 +1,9 @@
-package Services;
-
-import java.util.ArrayList;
+package Services.Commands;
 
 import Interfaces.ILobby;
 import Models.Client;
 import Models.Gameplay.Game;
-import Models.Gameplay.Player;
 import Models.Request;
-import Models.Result;
 
 public class LobbyServices implements ILobby {
 

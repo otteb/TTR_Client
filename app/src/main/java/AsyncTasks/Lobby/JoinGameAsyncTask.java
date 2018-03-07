@@ -16,6 +16,7 @@ public class JoinGameAsyncTask extends AsyncTask<Request, Void, Result> {
 
     @Override
     protected Result doInBackground(Request... requests) {
+        //returns the correct Result object from the server via the Client facade through the ClientCommunicator
         return clientFacade.joinGame(requests[0]);
 //        return result;
     }
@@ -24,6 +25,7 @@ public class JoinGameAsyncTask extends AsyncTask<Request, Void, Result> {
     protected void onPostExecute(Result result){
         if(result.isSuccessful()) {
             System.out.println("joined a game - This is the asyncTask");
+            //executes the command in the clientFacade:
             clientFacade.runCMD(result);
         }
 //        Game game = Client.getInstance().getGameMap().get(result.getGameId());

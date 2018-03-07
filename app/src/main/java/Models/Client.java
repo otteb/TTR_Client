@@ -25,6 +25,8 @@ public class Client extends Observable {
     private Request loginRequest;
     private Request registerRequest;
     private int commandNum;
+    //properties specific to each Client in the active game:
+    private int activeGameCMDNum = 0;
 
     //constructor
     private Client(){
@@ -168,6 +170,9 @@ public class Client extends Observable {
         }
     }
 
+
+    //observables section:
+
     public void removePlayerFromGame(String gameId, String username)
     {
         gameMap.get(gameId).getPlayers().remove(username);
@@ -222,5 +227,16 @@ public class Client extends Observable {
 
     public void incCommandNum(int num) {
         commandNum += num;
+    }
+
+    public int getActiveGameCMDNum() {
+        return activeGameCMDNum;
+    }
+
+    public void setActiveGameCMDNum(int activeGameCMDNum) {
+        this.activeGameCMDNum = activeGameCMDNum;
+    }
+    public void incActiveGameCMDNum(int num){
+        this.activeGameCMDNum += num;
     }
 }
