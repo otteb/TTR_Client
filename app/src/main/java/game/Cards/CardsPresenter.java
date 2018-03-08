@@ -1,6 +1,7 @@
 package game.Cards;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -29,7 +30,8 @@ public class CardsPresenter implements ICardsPresenter, Observer {
     //functionality
 
     //TODO - Sends back an array of destination cards:
-    public void sendBackDestinationCard(){
+    public void sendBackDestinationCard(Context context, int card){
+        this.context=context;
 
     }
 
@@ -47,6 +49,7 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         mainActivity.openGame();
 
     }
+
 
     //TODO - switch back to the game fragment:
 

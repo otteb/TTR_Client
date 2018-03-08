@@ -36,9 +36,63 @@
                     android:layout_marginRight="20dp"
                     android:layout_height="match_parent"
                     android:id="@+id/cardViewName" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="40dp">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/rainbow"
+                    android:id="@+id/cardViewCard1"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/rainbow"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/cardViewCard2"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/rainbow"
+                    android:id="@+id/cardViewCard3"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_height="80dp"
+                    android:background="@drawable/rainbow"
+                    android:id="@+id/cardViewCard4"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="60dp">
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/rainbow"
+                    android:id="@+id/cardViewCard5"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+                </LinearLayout>
             </LinearLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
             <RelativeLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -46,36 +100,58 @@
                 android:layout_gravity="center_horizontal">
 
                 <Button
-                    android:id="@+id/cardViewToGame"
+                    android:id="@+id/cardViewFromDeck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
+                    android:text="From Deck"
+                    android:backgroundTint="#A52A2A"/>
+                <Button
+                    android:id="@+id/cardViewToGame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginLeft="120dp"
                     android:text="Return to Game"
                     android:backgroundTint="#A52A2A"/>
+
+
                 <Button
                     android:id="@+id/cardViewFromTable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_marginLeft="160dp"
+                    android:layout_marginLeft="270dp"
                     android:text="From Table"
                     android:backgroundTint="#A52A2A"/>
 
-                <Button
-                    android:id="@+id/cardViewFromDeck"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_marginLeft="270dp"
-                    android:text="From Deck"
-                    android:backgroundTint="#A52A2A"/>
-
             </RelativeLayout>
-
-
         </LinearLayout>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="67dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/cardViewDCardToDeck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_marginLeft="10dp"
+                        android:text="Send Destination Card to Deck"
+                        android:backgroundTint="#A52A2A"/>
+
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+</LinearLayout>
 
 </FrameLayout>
 
