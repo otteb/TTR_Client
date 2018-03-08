@@ -33,10 +33,10 @@ public class Poller {
         }, 1, 1000);
     }
 
-    public void stopLobbyCommands() {
-        LobbyListTimer.cancel();
-        LobbyListTimer.purge();
-    }
+//    public void stopLobbyCommands() {
+//        LobbyListTimer.cancel();
+//        LobbyListTimer.purge();
+//    }
 
     //For the Game:
     public void runGamePlayCommands(){

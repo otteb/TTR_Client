@@ -11,84 +11,84 @@ import Models.Request;
 import Models.Result;
 
 public class ClientFacade {
-    public static void main(String[] args) {
-        //this is for testing purposes:
-        GamePlayFacade gamePlayFacade = new GamePlayFacade();
-        ClientFacade clientFacade = new ClientFacade();
-        Client.getInstance().setUserName("brian");
-
-
-        //Login p1:
-        Request loginRequest = new Request();
-        loginRequest.setUsername("brian");
-        loginRequest.setPassword("bo");
-        clientFacade.login(loginRequest);
-        //p1 create game:
-        Request createGameRequest = new Request();
-        createGameRequest.setGameId("brian-game");
-        createGameRequest.setAuthToken("01b7cb2c-24c1-4c82-8f6f-c6ee8ab39d2e");
-        clientFacade.createGame(createGameRequest);
-        //Login p2:
-        loginRequest.setUsername("jordan");
-        loginRequest.setPassword("jf");
-        clientFacade.login(loginRequest);
-        //p2 join's p1 game:
-        Game joinableGame = Client.getInstance().getGameMap().get("brian-game");
-        Request joinGameRequest = new Request();
-        joinGameRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
-        joinGameRequest.setGameId("brian-game");
-        joinGameRequest.setUsername("jordan");
-        clientFacade.joinGame(joinGameRequest);
-        //start the game:
-        Request startGameRequest = new Request();
-        startGameRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
-        startGameRequest.setGameId("brian-game");
-        clientFacade.startGame(startGameRequest);
-        //test addChat:
-        Chat newChat = new Chat();
-        newChat.setMessage("this is a test from the ClientFacade");
-        newChat.setUsername("jordan");
-        Request chatRequest = new Request();
-        chatRequest.setChat(newChat);
-        chatRequest.setChatMessage(newChat.displayChat());
-        chatRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
-        chatRequest.setGameId("brian-game");
-
-        gamePlayFacade.runCMD(gamePlayFacade.addChat(chatRequest));
-        //run the updateClient function in the gamePlayFacade:
-        Request updateClientReq = new Request();
-        updateClientReq.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
-        updateClientReq.setGameCMDNum(0);
-        updateClientReq.setGameId("brian-game");
-        gamePlayFacade.runCMD(gamePlayFacade.updateClient(updateClientReq));
-
-        //test the discardDestinationCard function:
-        Request discardDestCardRequest = new Request();
-        discardDestCardRequest.setAuthToken(Client.getInstance().getAuthToken());
-        discardDestCardRequest.setUsername(Client.getInstance().getUserName());
-        discardDestCardRequest.setGameId(Client.getInstance().getActiveGame().getId());
-        if(Client.getInstance().getActiveGame().isValidPlayer(Client.getInstance().getUserName()))
-        {
-            ArrayList<DestinationCard> deleteList = new ArrayList<>();
-            deleteList.add(Client.getInstance().getActiveGame().getMyPlayer().getDestination_cards().get(0));
-            discardDestCardRequest.setDiscardDest(deleteList);
-
-        }
-        gamePlayFacade.runCMD(gamePlayFacade.discardDestinationCard(discardDestCardRequest));
-
-
-//        Request request = new Request();
-//        request.setAuthToken(Client.getInstance().getAuthToken());
-//        request.setGameCMDNum(Client.getInstance().getActiveGameCMDNum());
-//        //call the client facade updateClient() - use the current index;
-////            ArrayList<Command> returnList = clientFacade.updateClient(request).getUpdateCommands();
-//        ArrayList<Command> returnList = gamePlayFacade.updateClient(request).getUpdateCommands();
-
-        int temp = 0;
-
-
-
-    }
+//    public static void main(String[] args) {
+//        //this is for testing purposes:
+//        GamePlayFacade gamePlayFacade = new GamePlayFacade();
+//        ClientFacade clientFacade = new ClientFacade();
+//        Client.getInstance().setUserName("brian");
+//
+//
+//        //Login p1:
+//        Request loginRequest = new Request();
+//        loginRequest.setUsername("brian");
+//        loginRequest.setPassword("bo");
+//        clientFacade.login(loginRequest);
+//        //p1 create game:
+//        Request createGameRequest = new Request();
+//        createGameRequest.setGameId("brian-game");
+//        createGameRequest.setAuthToken("01b7cb2c-24c1-4c82-8f6f-c6ee8ab39d2e");
+//        clientFacade.createGame(createGameRequest);
+//        //Login p2:
+//        loginRequest.setUsername("jordan");
+//        loginRequest.setPassword("jf");
+//        clientFacade.login(loginRequest);
+//        //p2 join's p1 game:
+//        Game joinableGame = Client.getInstance().getGameMap().get("brian-game");
+//        Request joinGameRequest = new Request();
+//        joinGameRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+//        joinGameRequest.setGameId("brian-game");
+//        joinGameRequest.setUsername("jordan");
+//        clientFacade.joinGame(joinGameRequest);
+//        //start the game:
+//        Request startGameRequest = new Request();
+//        startGameRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+//        startGameRequest.setGameId("brian-game");
+//        clientFacade.startGame(startGameRequest);
+//        //test addChat:
+//        Chat newChat = new Chat();
+//        newChat.setMessage("this is a test from the ClientFacade");
+//        newChat.setUsername("jordan");
+//        Request chatRequest = new Request();
+//        chatRequest.setChat(newChat);
+//        chatRequest.setChatMessage(newChat.displayChat());
+//        chatRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+//        chatRequest.setGameId("brian-game");
+//
+//        gamePlayFacade.runCMD(gamePlayFacade.addChat(chatRequest));
+//        //run the updateClient function in the gamePlayFacade:
+//        Request updateClientReq = new Request();
+//        updateClientReq.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+//        updateClientReq.setGameCMDNum(0);
+//        updateClientReq.setGameId("brian-game");
+//        gamePlayFacade.runCMD(gamePlayFacade.updateClient(updateClientReq));
+//
+//        //test the discardDestinationCard function:
+//        Request discardDestCardRequest = new Request();
+//        discardDestCardRequest.setAuthToken(Client.getInstance().getAuthToken());
+//        discardDestCardRequest.setUsername(Client.getInstance().getUserName());
+//        discardDestCardRequest.setGameId(Client.getInstance().getActiveGame().getId());
+//        if(Client.getInstance().getActiveGame().isValidPlayer(Client.getInstance().getUserName()))
+//        {
+//            ArrayList<DestinationCard> deleteList = new ArrayList<>();
+//            deleteList.add(Client.getInstance().getActiveGame().getMyPlayer().getDestination_cards().get(0));
+//            discardDestCardRequest.setDiscardDest(deleteList);
+//
+//        }
+//        gamePlayFacade.runCMD(gamePlayFacade.discardDestinationCard(discardDestCardRequest));
+//
+//
+////        Request request = new Request();
+////        request.setAuthToken(Client.getInstance().getAuthToken());
+////        request.setGameCMDNum(Client.getInstance().getActiveGameCMDNum());
+////        //call the client facade updateClient() - use the current index;
+//////            ArrayList<Command> returnList = clientFacade.updateClient(request).getUpdateCommands();
+////        ArrayList<Command> returnList = gamePlayFacade.updateClient(request).getUpdateCommands();
+//
+//        int temp = 0;
+//
+//
+//
+//    }
 
     //login function:
     public Result login(Request request){

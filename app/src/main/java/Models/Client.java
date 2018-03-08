@@ -21,7 +21,7 @@ public class Client {// extends Observable {
         return single_instance;
     }
 
-    private Poller poller = new Poller();
+//    private Poller poller = new Poller();
     private HashMap<String, Game> gameMap;
     private Game activeGame;
     private boolean isLoggedIn;
@@ -211,11 +211,11 @@ public class Client {// extends Observable {
         loginRequest = lR;
     }
 
-    public Poller getPoller() {
-        return poller;
-    }
-
-    public void setPoller(Poller poller) {
-        this.poller = poller;
-    }
+//    public Poller getPoller() {
+//        return poller;
+//    }
+//
+//    public void setPoller(Poller poller) {
+//        this.poller = poller;
+//    }
 }
