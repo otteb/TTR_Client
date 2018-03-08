@@ -49,17 +49,11 @@ public class Client {// extends Observable {
         commandNum += num;
     }
 
-//    public void incActiveGameCMDNum(int num){
-//        this.activeGameCMDNum += num;
-//    }
-
     public Game getGameById(String gameId) {
         return gameMap.get(gameId);
     }
 
     public ArrayList<Player> getGamePlayers(String gameId) {
-//        Game test = getGameById(gameId);
-//        test.getId();
         return getGameById(gameId).getPlayers();
     }
 

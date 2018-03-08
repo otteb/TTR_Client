@@ -11,7 +11,10 @@ public class TTR_Observable extends Observable {
 
     private TTR_Observable(){}
 
-
+    public void updateChat () {
+        setChanged();
+        notifyObservers("chat");
+    }
 
     public void updateHistory () {
         setChanged();

@@ -7,10 +7,6 @@ import Models.Gameplay.Chat;
 import Models.Request;
 import Models.Result;
 
-/**
- * Created by brianotte on 3/6/18.
- */
-
 public class ChatServices implements IChat {
     private static ChatServices theOne = new ChatServices();
 

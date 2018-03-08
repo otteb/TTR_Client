@@ -4,6 +4,7 @@ import Interfaces.IGamePlay;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Request;
+import ObserverPattern.TTR_Observable;
 
 public class GamePlayServices implements IGamePlay {
     private static GamePlayServices theOne = new GamePlayServices();
@@ -18,7 +19,6 @@ public class GamePlayServices implements IGamePlay {
     //update the Client and Game models with all of the information returned
     //from the Server - the Presenter will decide what information to display:
 
-    //TODO - change this to update the ActiveGameSingleton instead of the Client.Model.ActiveGame:
     @Override
     public void setupGame(Request request) {
         System.out.println("COMMAND EXECUTING - SetUpGame");
@@ -36,6 +36,7 @@ public class GamePlayServices implements IGamePlay {
         System.out.println("COMMAND EXECUTING - addGameHistory");
         //update the active game's gameHistory:
         ActiveGame.getInstance().getHistory().add(request.getAction());
+        TTR_Observable.getInstance().updateHistory();
     }
 
     //Testing Phase:

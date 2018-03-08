@@ -25,11 +25,6 @@ public class ChatPresenter implements IChatPresenter, Observer {
         gameGuiFacade.addObserver(this);
     }
 
-    //TODO - this needs to display the chats:
-    public void displayChat(){
-
-    }
-
     //this grabs the text from the edit view the user presses enter in the view and sends a request to the server
     public void addChat(Context c, String message){
         Chat chat = new Chat();

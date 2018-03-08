@@ -35,7 +35,7 @@ public class GameGuiFacade {
         addChatRequest.setGameId(ActiveGame.getInstance().getId());
         addChatRequest.setUsername(Client.getInstance().getUserName());
         addChatRequest.setChat(chat);
-        addChatRequest.setChatMessage(chat.displayChat());
+        addChatRequest.setChatMessage(chat.getMessage());
         addChatRequest.setGameCMDNum(ActiveGame.getInstance().getActiveGameCMDNum());
         //execute the AsyncTask
         chatMessageAsyncTask.execute(addChatRequest);

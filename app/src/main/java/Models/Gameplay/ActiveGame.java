@@ -6,6 +6,7 @@ import java.util.List;
 import Client_Server_Communication.Poller;
 import Models.Cards.TrainCard;
 import Models.Client;
+import ObserverPattern.TTR_Observable;
 
 public class ActiveGame {
 
@@ -91,6 +92,7 @@ public class ActiveGame {
 
     public void addChatMessage(Chat chat){
         chats.add(chat);
+        TTR_Observable.getInstance().updateChat();
     }
 
     public ArrayList<Chat> getChats() {
