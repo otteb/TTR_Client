@@ -3,6 +3,7 @@ package AsyncTasks.Lobby;
 import android.os.AsyncTask;
 
 import Client_Server_Communication.ClientFacade;
+import Client_Server_Communication.Poller;
 import Models.Client;
 import Models.Request;
 import Models.Result;
@@ -23,6 +24,8 @@ public class StartGameAsyncTask extends AsyncTask<Request, Void, Result> {
         System.out.println("Started a game - This is the asyncTask");
         //executes the command:
         clientFacade.runCMD(result);
+        Client.getInstance().getPoller().stopLobbyCommands();
+        Client.getInstance().getPoller().runGamePlayCommands();
         //notifies the observer:
 //        Client.getInstance().startGame();
     }

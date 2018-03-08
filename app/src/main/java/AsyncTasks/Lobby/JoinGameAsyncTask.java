@@ -6,6 +6,7 @@ import Client_Server_Communication.ClientFacade;
 import Models.Client;
 import Models.Request;
 import Models.Result;
+import ObserverPattern.TTR_Observable;
 
 /**
  * Created by brianotte on 2/13/18.
@@ -29,6 +30,6 @@ public class JoinGameAsyncTask extends AsyncTask<Request, Void, Result> {
             clientFacade.runCMD(result);
         }
 //        Game game = Client.getInstance().getGameMap().get(result.getGameId());
-        else { Client.getInstance().sendMessage(result.getErrorMsg()); }
+        else { TTR_Observable.getInstance().sendMessage(result.getErrorMsg()); }
     }
 }

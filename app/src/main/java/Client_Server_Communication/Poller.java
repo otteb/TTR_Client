@@ -12,6 +12,13 @@ import Models.Request;
 
 public class Poller {
 
+//    private static Poller theOneAndOnly = new Poller();
+//    public static Poller getInstance()
+//    {
+//        return theOneAndOnly;
+//    }
+    public Poller() {}
+
     Timer LobbyListTimer = new Timer();
     Timer GamePlayTimer = new Timer();
 
@@ -24,6 +31,11 @@ public class Poller {
                 lp.execute();
             }
         }, 1, 1000);
+    }
+
+    public void stopLobbyCommands() {
+        LobbyListTimer.cancel();
+        LobbyListTimer.purge();
     }
 
     //For the Game:
