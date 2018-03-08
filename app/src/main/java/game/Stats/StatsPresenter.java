@@ -2,13 +2,14 @@ package game.Stats;
 
 import android.content.Context;
 
+import Interfaces.IStatesPresenter;
 import Models.Result;
 
 /**
  * Created by fjameson on 2/28/18.
  */
 
-public class StatsPresenter {
+public class StatsPresenter implements IStatesPresenter{
 
     public Context context;
     public StatsPresenter(Context c)
