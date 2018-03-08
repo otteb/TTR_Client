@@ -25,6 +25,18 @@ public class StatsPresenter implements IStatesPresenter, Observer{
         gameGuiFacade.addObserver(this);
     }
 
+    //Functionality:
+    //TODO - add route points to a player:
+    public void addPointsToPlayer(){}
+
+    //TODO - subtract trains:
+    public void subtractPlayerTrains(){}
+
+    //TODO - display player information
+    public void displayInformation(){}
+
+    //Navigation:
+
     public Result returnToGame(Context c)
     {
         return null;
