@@ -10,12 +10,14 @@ import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.Set;
 
@@ -29,6 +31,8 @@ import RegisterLogin.LoginRegisterPresenter;
  */
 
 public class GameFragment extends Fragment {
+    ImageButton city_one;
+    ImageButton city_two;
     ImageButton returnToLobby;
     Button claimRoute;
     ImageButton goToStats;
@@ -143,7 +147,6 @@ public class GameFragment extends Fragment {
             }
         });
 
-
         goToStats= (ImageButton)view.findViewById(R.id.stats);
         goToStats.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,11 +172,34 @@ public class GameFragment extends Fragment {
         return view;
     }
 
-    public void claimingRoute(ImageButton city1, ImageButton city2){
-        city1.setOnClickListener(new View.OnClickListener() {
+    public void claimingRoute(final ImageButton city){
+        city.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    //add highlight
+                    if (city == null)
+                        city_one =city;
+                    else if (city_two == null)
+                    {
+                        city_two=city;
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "You need to deselect one of your cities", Toast.LENGTH_SHORT).show();
+                    }
             }
+            else if(event.getAction() == MotionEvent.ACTION_UP){
+                    //remove highlight
+                    if(city_one.equals(city))
+                    {
+                        city_one=null;
+                    }
+                    else {
+                        city_two=null;
+                    }
+                }
+                return true;
+        };
         });
 
     }

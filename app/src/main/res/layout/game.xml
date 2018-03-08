@@ -43,7 +43,7 @@
         android:id="@+id/sunSpeare"
         android:src="@drawable/citydot"
         android:layout_width="15dp"
-        android:background="#00000000"
+        android:background="#FFFF00"
         android:scaleType="fitCenter"
         android:layout_height="15dp"
         android:layout_marginLeft="335dp"
