@@ -6,13 +6,12 @@ import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.IChatPresenter;
+import Models.Client;
+import Models.Gameplay.Chat;
 import Models.Request;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
-/**
- * Created by brianotte on 3/7/18.
- */
 
 public class ChatPresenter implements IChatPresenter, Observer {
     //attributes:
@@ -31,13 +30,14 @@ public class ChatPresenter implements IChatPresenter, Observer {
 
     }
 
-    //TODO - this needs to grab the text from the edit view
-    //and display it once the user presses enter in the view:
+    //this grabs the text from the edit view the user presses enter in the view and sends a request to the server
     public void addChat(Context c, String message){
-
+        Chat chat = new Chat();
+        chat.setUsername(Client.getInstance().getUserName());
+        chat.setMessage(message);
+        gameGuiFacade.addChat(chat);
     }
 
-    //TODO - switch view back to the stats fragment
     public void switchToStats(Context c){
         context=c;
         mainActivity = (MainActivity) context;
@@ -50,9 +50,13 @@ public class ChatPresenter implements IChatPresenter, Observer {
         mainActivity.switchToGameHistory();
     }
 
-    //TODO - I honestly have no idea
     @Override
     public void update(Observable observable, Object o) {
-        //consider pulling in code from the login/register fragment:
+        if(o.equals("chat"))
+        {
+            mainActivity = (MainActivity) context;
+            mainActivity.updateChat();
+        }
+        observable.hasChanged();
     }
 }

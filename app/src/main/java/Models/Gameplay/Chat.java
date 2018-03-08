@@ -1,8 +1,8 @@
 package Models.Gameplay;
 
 public class Chat {
-    private String username;
-    private String message;
+    private String username = "";
+    private String message = "";
 
 
     public String getUsername() {

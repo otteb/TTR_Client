@@ -19,7 +19,7 @@ public class ActiveGame {
     private String id;
     private GameHistory history;
     private ArrayList<Player> players; //list of players
-    private ArrayList<String> chats;  //List of all chats (format of "username: msg" )
+    private ArrayList<Chat> chats;  //List of all chats (format of "username: msg" )
     private List<TrainCard> faceUpCards;
     private List<Route> Routes;
     private List<String> Cities;
@@ -89,15 +89,15 @@ public class ActiveGame {
         this.players = players;
     }
 
-    public void addChatMessage(String message){
-        chats.add(message);
+    public void addChatMessage(Chat chat){
+        chats.add(chat);
     }
 
-    public ArrayList<String> getChats() {
+    public ArrayList<Chat> getChats() {
         return chats;
     }
 
-    public void setChats(ArrayList<String> chat) {
+    public void setChats(ArrayList<Chat> chat) {
         this.chats = chat;
     }
 

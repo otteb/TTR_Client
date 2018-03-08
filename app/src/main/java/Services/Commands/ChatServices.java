@@ -22,6 +22,6 @@ public class ChatServices implements IChat {
     @Override
     public void addChat(Request request) {
         System.out.println("COMMAND EXECUTING - addChat");
-        ActiveGame.getInstance().addChatMessage(request.getChatMessage());
+        ActiveGame.getInstance().addChatMessage(request.getChat());
     }
 }
