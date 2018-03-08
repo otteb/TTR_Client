@@ -58,15 +58,8 @@ public class GameFragment extends Fragment {
         View view = inflater.inflate(R.layout.game, container, false);
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
 
-
-
         sunSpeare = (ImageButton)view.findViewById(R.id.sunSpeare);
         saltShore = (ImageButton) view.findViewById(R.id.saltShore);
-
-
-
-
-
 
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeWidth(10);
@@ -79,23 +72,6 @@ public class GameFragment extends Fragment {
         paint2.setStrokeWidth(10);
         paint2.setColor(Color.BLACK);
         relativeLayout.addView(new Line(getActivity(), lp.leftMargin+10,lp.topMargin+10, lp2.leftMargin+10, lp2.topMargin+10, paint2));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
