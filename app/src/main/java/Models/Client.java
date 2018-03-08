@@ -140,10 +140,6 @@ public class Client {// extends Observable {
         return commandNum;
     }
 
-//    public int getActiveGameCMDNum() {
-//        return activeGameCMDNum;
-//    }
-
     public boolean getIsLoggedIn()
     {
         return isLoggedIn;
@@ -172,23 +168,18 @@ public class Client {// extends Observable {
         userName = u;
     }
 
-    public void setAuthToken(String a) {
-        authToken=a;
-        TTR_Observable.getInstance().setAuthToken(a);
+    public void setAuthToken(String auth) {
+        authToken = auth;
     }
 
     public void setPassword(String p)
     {
-        password=p;
+        password = p;
     }
 
     public void setCommandNum(int commandNum) {
         this.commandNum = commandNum;
     }
-
-//    public void setActiveGameCMDNum(int activeGameCMDNum) {
-//        this.activeGameCMDNum = activeGameCMDNum;
-//    }
 
     public void setIsLoggedIn(boolean b)
     {
@@ -212,12 +203,4 @@ public class Client {// extends Observable {
     public Poller getPoller() {
         return poller;
     }
-
-//    public Poller getPoller() {
-//        return poller;
-//    }
-//
-//    public void setPoller(Poller poller) {
-//        this.poller = poller;
-//    }
 }

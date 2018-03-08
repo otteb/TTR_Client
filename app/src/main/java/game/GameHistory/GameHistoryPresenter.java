@@ -20,7 +20,7 @@ import game.Chat.ChatFragment;
 public class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
     public Context context;
     public GameGuiFacade gameGuiFacade = new GameGuiFacade();
-    GameHistoryPresenter gameHistoryPresenter = new GameHistoryPresenter(context);
+//    GameHistoryPresenter gameHistoryPresenter = new GameHistoryPresenter(context);
     //create instance of the GameHistory Fragment:
     MainActivity mainActivity;
     //Constructor:
@@ -30,11 +30,11 @@ public class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
     }
 
     //TODO
-    public void switchToGame(Context c){
+    public void switchToStats(Context c){
         context=c;
-        Toast.makeText(c, "Switching to Game", Toast.LENGTH_SHORT).show();
+        Toast.makeText(c, "Switching to Stats", Toast.LENGTH_SHORT).show();
         mainActivity = (MainActivity) context;
-        mainActivity.switchToRegister();
+        mainActivity.switchToStats();
     }
 
     //TODO
@@ -42,7 +42,7 @@ public class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
         context=c;
         Toast.makeText(c, "Switching to Chat", Toast.LENGTH_SHORT).show();
         mainActivity = (MainActivity) context;
-        mainActivity.switchToRegister();
+        mainActivity.switchToChat();
     }
 
 
@@ -53,8 +53,8 @@ public class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
         if(result.equals("updateHistory"))
         {
             mainActivity = (MainActivity)((Activity)context);
-           // mainActivity.update();
-//            lobbyFragment.updatePlayers();
+
+            mainActivity.updateGameHistory();
         }
         else
         {

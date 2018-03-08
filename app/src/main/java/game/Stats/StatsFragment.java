@@ -42,21 +42,22 @@ public class StatsFragment extends Fragment {
         returnToGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Result r = statsPresenter.returnToGame(getActivity());
-                if(r != null)
-                {
-
-                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                    Fragment fragment = new GameFragment();
-
-                    //need something along these lines for the game and users in it?
-                    /*bundle.putString("username", username.getText().toString());
-                    bundle.putString("password", password.getText().toString());
-                    bundle.putString("authToken", r.getAuthToken());
-                    fragment.setArguments(bundle);*/
-
-                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
-                }
+                statsPresenter.returnToGame(getActivity());
+//                Result r = statsPresenter.returnToGame(getActivity());
+//                if(r != null)
+//                {
+//
+//                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
+//                    Fragment fragment = new GameFragment();
+//
+//                    //need something along these lines for the game and users in it?
+//                    /*bundle.putString("username", username.getText().toString());
+//                    bundle.putString("password", password.getText().toString());
+//                    bundle.putString("authToken", r.getAuthToken());
+//                    fragment.setArguments(bundle);*/
+//
+//                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+//                }
 
             }
         });

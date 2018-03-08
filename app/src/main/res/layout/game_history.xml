@@ -20,7 +20,7 @@
             android:backgroundTint="#A52A2A"/>
 
         <ImageButton
-            android:id="@+id/historyToGame"
+            android:id="@+id/historyToStats"
             android:src="@drawable/rightarrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,22 +38,22 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="50dp"
-            android:layout_toStartOf="@+id/historyToGame"
+            android:layout_toStartOf="@+id/historyToStats"
             android:layout_toEndOf="@+id/historyToChat"
             android:weightSum="1">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/history_title"
                 android:text="Game History"
-                android:id="@+id/gList"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textSize="24sp"/>
 
             <android.support.v7.widget.RecyclerView
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/game_list"
+                android:id="@+id/history_list"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginTop="10dp"

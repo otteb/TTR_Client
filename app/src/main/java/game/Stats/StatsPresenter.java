@@ -39,9 +39,12 @@ public class StatsPresenter implements IStatesPresenter, Observer{
 
     //Navigation:
 
-    public Result returnToGame(Context c)
+//    public Result returnToGame(Context c)
+    public void returnToGame(Context c)
     {
-        return null;
+        context=c;
+        mainActivity = (MainActivity) context;
+        mainActivity.openGame();
     }
 
     public void viewChat(Context c)

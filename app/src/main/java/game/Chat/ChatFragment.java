@@ -37,6 +37,13 @@ public class ChatFragment extends Fragment {
                 chatPresenter.switchToStats(getActivity());
             }
         });
+        goToGameHistory = (ImageButton) view.findViewById(R.id.chatToGameHistory);
+        goToGameHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chatPresenter.switchToGameHistory(getActivity());
+            }
+        });
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

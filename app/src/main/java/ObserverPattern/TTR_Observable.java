@@ -11,6 +11,13 @@ public class TTR_Observable extends Observable {
 
     private TTR_Observable(){}
 
+
+
+    public void updateHistory () {
+        setChanged();
+        notifyObservers("updateHistory");
+    }
+
     public void createGame () {
         setChanged();
         notifyObservers("create");
@@ -36,9 +43,9 @@ public class TTR_Observable extends Observable {
         notifyObservers(m);
     }
 
-    public void setAuthToken(String a) {
+    public void login() {
         setChanged();
-        notifyObservers(a);
+        notifyObservers("login");
     }
 
 }

@@ -11,6 +11,7 @@ import RegisterLogin.LoginFragment;
 
 import game.Cards.CardsFragment;
 import game.Chat.ChatFragment;
+import game.GameHistory.GameHistoryFragment;
 import game.Stats.StatsFragment;
 import lobby.LobbyFragment;
 import game.GameFragment;
@@ -24,14 +25,14 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
-    public final static String openMap= "true";
+    public final static String openMap= "false";
     public LobbyFragment lobbyFragment;
     public GameFragment gameFragment;
     public LoginFragment loginFragment;
     public StatsFragment statsFragment;
     public ChatFragment chatFragment;
     public CardsFragment cardsFragment;
-    //public GameHistoryFragment gameHistoryFragment;
+    public GameHistoryFragment gameHistoryFragment;
     public RegisterFragment registerFragment;
     FragmentManager headfrag = getSupportFragmentManager();
 
@@ -116,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void switchToGameHistory()
     {
-      //  gameHistoryFragment = new GameHistoryFragment();
-        //headfrag.beginTransaction().replace(R.id.activity_main, registerFragment).commit();
+        gameHistoryFragment = new GameHistoryFragment();
+        headfrag.beginTransaction().replace(R.id.activity_main, gameHistoryFragment).commit();
     }
 
     public void updateGamesList()
@@ -128,6 +129,11 @@ public class MainActivity extends AppCompatActivity {
     public void updatePlayers()
     {
         lobbyFragment.updatePlayers();
+    }
+
+    public void updateGameHistory()
+    {
+        gameHistoryFragment.update();
     }
 
 

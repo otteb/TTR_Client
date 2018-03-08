@@ -7,6 +7,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.ILoginRegisterPresenter;
+import Models.Client;
+import ObserverPattern.TTR_Observable;
 import activities.MainActivity;
 import Models.Request;
 import Models.Result;
@@ -28,7 +30,7 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
     public LoginRegisterPresenter(Context c) {
         context=c;
         guiFacade.addObserver(this);
-
+        user = new Request();
     }
 
     public void login(Context c, String username, String password)
@@ -39,7 +41,7 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
         }
         else
         {
-            user = new Request();
+//            user = new Request();
             user.setUsername(username);
             user.setPassword(password);
             guiFacade.login(username, password);
@@ -79,20 +81,31 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
 
 
     @Override
-    public void update(Observable o, Object authToken) {
-
-        if (!authToken.equals("create") && !authToken.equals("join") && !authToken.equals("start")) {
-            if (user != null) {
-                if (authToken.equals("ERROR: Invalid Registration") || authToken.equals("ERROR: Incorrect username/password combination")) {
-                    Toast.makeText(context, (CharSequence) authToken, Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    user.setAuthToken((String) authToken);
-                    mainActivity = (MainActivity) context;
-                    mainActivity.switchToLobby(user);
-                    user = null;
-                }
+    public void update(Observable o, Object result) {
+        if(result.equals("login"))
+        {
+            mainActivity = (MainActivity) context;
+            if(user == null)
+            {
+                user = new Request();
             }
+            user.setAuthToken(Client.getInstance().getAuthToken());
+            mainActivity.switchToLobby(user);
         }
+        o.hasChanged();
+
+//        if (!authToken.equals("create") && !authToken.equals("join") && !authToken.equals("start")) {
+//            if (user != null) {
+//                if (authToken.equals("ERROR: Invalid Registration") || authToken.equals("ERROR: Incorrect username/password combination")) {
+//                    Toast.makeText(context, (CharSequence) authToken, Toast.LENGTH_SHORT).show();
+//                }
+//                else {
+//                    user.setAuthToken((String) authToken);
+//                    mainActivity = (MainActivity) context;
+//                    mainActivity.switchToLobby(user);
+//                    user = null;
+//                }
+//            }
+//        }
     }
 }
