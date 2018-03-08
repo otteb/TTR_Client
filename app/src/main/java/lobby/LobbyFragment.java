@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import Models.Gameplay.Player;
+import ObserverPattern.TTR_Observable;
 import activities.R;
 import Models.Gameplay.Game;
 import Models.Client;
@@ -115,9 +116,23 @@ public class LobbyFragment extends Fragment {
                 if(currentGame != null)
                 {
                     currentGame = Client.getInstance().getGameById(currentGame.getId());
-                    if (currentGame.isJoinable()) {
+                    if (!currentGame.isActive()) {
                         start.setEnabled(true);
                         lobbyPresenter.startGame(getActivity(), currentGame);
+                    }
+                    else if(Client.getInstance().getActiveGame() == currentGame)
+                    {
+                        TTR_Observable.getInstance().startGame();
+                        start.setEnabled(true);
+//                        lobbyPresenter.startGame(getActivity(), currentGame);
+                        System.out.println("GetActiveGame == game");
+                    }
+                    else if(Client.getInstance().getActiveGame().getId().equals(currentGame.getId()))
+                    {
+                        TTR_Observable.getInstance().startGame();
+                        start.setEnabled(true);
+//                        lobbyPresenter.startGame(getActivity(), currentGame);
+                        System.out.println("GetActiveGameId.equals(game.getId())");
                     }
                     else
                     {

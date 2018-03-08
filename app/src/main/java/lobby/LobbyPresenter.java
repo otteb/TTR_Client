@@ -12,6 +12,7 @@ import java.util.Observer;
 import Interfaces.ILobbyPresenter;
 import Models.Client;
 import Models.Request;
+import ObserverPattern.TTR_Observable;
 import activities.MainActivity;
 import Models.Gameplay.Game;
 import Services.GUI.GuiFacade;

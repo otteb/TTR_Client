@@ -32,7 +32,7 @@ public class GameGuiFacade {
         //add properties for the addChat:
         Request addChatRequest = new Request();
         addChatRequest.setAuthToken(Client.getInstance().getAuthToken());
-        addChatRequest.setGameId(Client.getInstance().getActiveGame().getId());
+        addChatRequest.setGameId(ActiveGame.getInstance().getId());
         addChatRequest.setUsername(Client.getInstance().getUserName());
         addChatRequest.setChat(chat);
         addChatRequest.setChatMessage(chat.displayChat());
@@ -48,7 +48,7 @@ public class GameGuiFacade {
         //add properties for the dDCRequest:
         dDCRequest.setAuthToken(Client.getInstance().getAuthToken());
         dDCRequest.setUsername(Client.getInstance().getUserName());
-        dDCRequest.setGameId(Client.getInstance().getActiveGame().getId());
+        dDCRequest.setGameId(ActiveGame.getInstance().getId());
         dDCRequest.setDiscardDest(destCards);
         dDCRequest.setGameCMDNum(ActiveGame.getInstance().getActiveGameCMDNum());
         //execute the AsyncTask

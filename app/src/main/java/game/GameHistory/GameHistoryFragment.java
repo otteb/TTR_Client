@@ -17,7 +17,7 @@ import activities.R;
 public class GameHistoryFragment extends Fragment {
     public GameHistoryPresenter historyPresenter;
     public GameHistoryAdapter historyAdapter;
-    private RecyclerView historyRecView;
+    RecyclerView historyRecView;
     ImageButton leftToChat;
     ImageButton rightToStats;
     View view;
@@ -28,10 +28,10 @@ public class GameHistoryFragment extends Fragment {
         view = inflater.inflate(R.layout.game_history, container, false);// setting view
         leftToChat = (ImageButton) view.findViewById(R.id.historyToChat);
         rightToStats = (ImageButton) view.findViewById(R.id.historyToStats);
-        historyRecView = (RecyclerView) view.findViewById(R.id.history_list);
-        historyRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         final GameHistory history = ActiveGame.getInstance().getHistory();
+        historyRecView = (RecyclerView) view.findViewById(R.id.history_list);
+        historyRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
         historyAdapter = new GameHistoryAdapter(history);
         historyRecView.setAdapter(historyAdapter);
 
@@ -58,7 +58,7 @@ public class GameHistoryFragment extends Fragment {
             historyAdapter.clearGameHistory();
             for(int i = 0; i < updateHistory.size(); i++)
             {
-                historyAdapter.addActiontoView(updateHistory.get(i));
+                historyAdapter.addActionToView(updateHistory.get(i));
             }
             historyAdapter.notifyDataSetChanged();
         }
@@ -71,11 +71,10 @@ public class GameHistoryFragment extends Fragment {
 
         public GameHistoryHolder(View itemView) {
             super(itemView);
-
             mHistoryItem = itemView.findViewById(R.id.history_item);
         }
 
-        public void bindGame(String action) {
+        public void bindAction(String action) {
             mAction = action;
             mHistoryItem.setText(mAction);
         }
@@ -102,7 +101,7 @@ public class GameHistoryFragment extends Fragment {
             return new GameHistoryFragment.GameHistoryHolder(view);
         }
 
-        public void addActiontoView(String action)
+        public void addActionToView(String action)
         {
             history.add(action);
         }
@@ -116,7 +115,7 @@ public class GameHistoryFragment extends Fragment {
         public void onBindViewHolder(GameHistoryFragment.GameHistoryHolder holder, int position) {
 
             String action = history.get(position);
-            holder.bindGame(action);
+            holder.bindAction(action);
         }
 
         @Override

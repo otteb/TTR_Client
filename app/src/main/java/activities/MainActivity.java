@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         gameHistoryFragment.update();
     }
 
+    public void updateChat() { chatFragment.update(); }
 
 
 }
