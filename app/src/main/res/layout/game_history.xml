@@ -20,7 +20,7 @@
             android:backgroundTint="#A52A2A"/>
 
         <ImageButton
-            android:id="@+id/historyToGame"
+            android:id="@+id/historyToStats"
             android:src="@drawable/rightarrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="50dp"
-            android:layout_toStartOf="@+id/historyToGame"
+            android:layout_toStartOf="@+id/historyToStats"
             android:layout_toEndOf="@+id/historyToChat"
             android:weightSum="1">
 

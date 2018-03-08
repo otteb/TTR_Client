@@ -44,6 +44,12 @@ public class ChatPresenter implements IChatPresenter, Observer {
         mainActivity.switchToStats();
     }
 
+    public void switchToGameHistory(Context c){
+        context = c;
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToGameHistory();
+    }
+
     //TODO - I honestly have no idea
     @Override
     public void update(Observable observable, Object o) {

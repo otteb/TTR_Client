@@ -46,7 +46,8 @@ public class LobbyServices implements ILobby {
     public void startGame(Request request) { //(String authToken, String gameId);
         System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS STARTING GAME: " + request.getGameId());
         //Check if the game starting is this user's game
-        if(Client.getInstance().getActiveGame().getId().equals(request.getGameId()))
+        Game temp = Client.getInstance().getActiveGame();
+        if(temp != null && temp.getId().equals(request.getGameId()))
         {
             Client.getInstance().getGameById(request.getGameId()).setActive(true);
             ActiveGame.getInstance().setId(Client.getInstance().getActiveGame().getId());

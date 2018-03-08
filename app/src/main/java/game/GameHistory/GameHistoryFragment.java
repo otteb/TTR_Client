@@ -19,17 +19,15 @@ public class GameHistoryFragment extends Fragment {
     public GameHistoryAdapter historyAdapter;
     private RecyclerView historyRecView;
     ImageButton leftToChat;
-    ImageButton rightToGame;
+    ImageButton rightToStats;
     View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         historyPresenter = new GameHistoryPresenter(getActivity());
         view = inflater.inflate(R.layout.game_history, container, false);// setting view
-//        final Bundle bundle = getArguments();
-        //do we need a bundle for this fragment?
         leftToChat = (ImageButton) view.findViewById(R.id.historyToChat);
-        rightToGame = (ImageButton) view.findViewById(R.id.historyToGame);
+        rightToStats = (ImageButton) view.findViewById(R.id.historyToStats);
         historyRecView = (RecyclerView) view.findViewById(R.id.history_list);
         historyRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -44,10 +42,10 @@ public class GameHistoryFragment extends Fragment {
             }
         });
 
-        rightToGame.setOnClickListener(new View.OnClickListener() {
+        rightToStats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                historyPresenter.switchToGame(getActivity());
+                historyPresenter.switchToStats(getActivity());
             }
         });
         update();
@@ -75,30 +73,6 @@ public class GameHistoryFragment extends Fragment {
             super(itemView);
 
             mHistoryItem = itemView.findViewById(R.id.history_item);
-
-            mHistoryItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    //This needs to be adjusted in the client model;
-////                    ArrayList<Game> tempGlist = Client.getInstance().getGameList();
-//                    GameHistory history = ActiveGame.getInstance().getHistory();
-//                    String changeString = mHistoryItem.getText().toString();
-//
-//                    for (int i = 0; i < history.size(); i++)
-//                    {
-////                        if (history.get(i) == null)
-////                        {
-////                            continue;
-////                        }
-//                        if (history.get(i).equals(changeString)) {
-////                            currentGame = tempGlist.get(i);
-//                            updatePlayers();
-////                            curGame.setText(currentGame.getId());
-//                            break;
-//                        }
-//                    }
-                }
-            });
         }
 
         public void bindGame(String action) {
@@ -114,9 +88,6 @@ public class GameHistoryFragment extends Fragment {
             //what is this doing?
             if (history == null)
             {
-//                Game game = new Game();
-//                games = new ArrayList<Game>();
-//                games.add(game);
                 history = new GameHistory();
                 history.add("");
             }

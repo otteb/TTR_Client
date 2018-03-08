@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import Interfaces.ILoginRegisterPresenter;
 import Models.Client;
+import ObserverPattern.TTR_Observable;
 import activities.MainActivity;
 import Models.Request;
 import Models.Result;
@@ -91,6 +92,7 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
             user.setAuthToken(Client.getInstance().getAuthToken());
             mainActivity.switchToLobby(user);
         }
+        o.hasChanged();
 
 //        if (!authToken.equals("create") && !authToken.equals("join") && !authToken.equals("start")) {
 //            if (user != null) {
