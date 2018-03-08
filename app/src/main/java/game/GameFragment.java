@@ -33,8 +33,9 @@ import RegisterLogin.LoginRegisterPresenter;
 public class GameFragment extends Fragment {
     ImageButton city_one;
     ImageButton city_two;
-    ImageButton returnToLobby;
     Button claimRoute;
+    Button viewDestCards;
+    Button viewTrainCards;
     ImageButton goToStats;
     GamePresenter gamePresenter;
     Set<ImageButton> cities;
@@ -77,28 +78,9 @@ public class GameFragment extends Fragment {
 
 
 
-        returnToLobby= (ImageButton)view.findViewById(R.id.returntolobby);
-        returnToLobby.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Result r = gamePresenter.switchToLobby(getActivity());
-                if(r != null)
-                {
 
-                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                    Fragment fragment = new LobbyFragment();
 
-                    //need something along these lines for the game and users in it?
-                    /*bundle.putString("username", username.getText().toString());
-                    bundle.putString("password", password.getText().toString());
-                    bundle.putString("authToken", r.getAuthToken());
-                    fragment.setArguments(bundle);*/
 
-                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
-                }
-
-            }
-        });
 
         claimRoute= (Button)view.findViewById(R.id.claim);
         claimRoute.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +105,14 @@ public class GameFragment extends Fragment {
             }
         });
 
+        viewDestCards= (Button)view.findViewById(R.id.gameToDestCards);
+        viewDestCards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gamePresenter.switchToCards(getActivity());
+
+            }
+        });
         goToStats= (ImageButton)view.findViewById(R.id.stats);
         goToStats.setOnClickListener(new View.OnClickListener() {
             @Override

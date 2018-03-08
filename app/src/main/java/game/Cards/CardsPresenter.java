@@ -7,6 +7,7 @@ import java.util.Observer;
 
 import Interfaces.ICardsPresenter;
 import Services.GUI.GameGuiFacade;
+import activities.MainActivity;
 import game.Chat.ChatFragment;
 
 /**
@@ -16,6 +17,7 @@ import game.Chat.ChatFragment;
 public class CardsPresenter implements ICardsPresenter, Observer {
     //attributes:
     public Context context;
+    MainActivity mainActivity;
     public GameGuiFacade gameGuiFacade = new GameGuiFacade();
     ChatFragment chatFragment = new ChatFragment();
     //Constructor:
@@ -39,7 +41,10 @@ public class CardsPresenter implements ICardsPresenter, Observer {
     //Navigating Views:
 
     //TODO - switch view back to the stats fragment:
-    public void switchToStats(Context c){
+    public void switchToGame(Context c){
+        context=c;
+        mainActivity = (MainActivity) context;
+        mainActivity.openGame();
 
     }
 

@@ -31,6 +31,14 @@ public class GamePresenter {
         mainActivity.switchToStats();
     }
 
+    public void switchToCards(Context c)
+    {
+        context=c;
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToCards();
+    }
+
+
     public Result claimRoute(Context c)
     {
         return null;
