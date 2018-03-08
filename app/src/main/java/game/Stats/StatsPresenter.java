@@ -8,6 +8,7 @@ import java.util.Observer;
 import Interfaces.IStatesPresenter;
 import Models.Result;
 import Services.GUI.GameGuiFacade;
+import activities.MainActivity;
 import game.Chat.ChatFragment;
 
 /**
@@ -17,6 +18,7 @@ import game.Chat.ChatFragment;
 public class StatsPresenter implements IStatesPresenter, Observer{
 
     public Context context;
+    public MainActivity mainActivity;
     public GameGuiFacade gameGuiFacade = new GameGuiFacade();
     ChatFragment chatFragment = new ChatFragment();
     //Constructor:
@@ -35,8 +37,11 @@ public class StatsPresenter implements IStatesPresenter, Observer{
         return null;
     }
 
-    public Result viewGameHistory(Context c){
-        return null;
+    public void viewGameHistory(Context c){
+
+        context=c;
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToGameHistory();
     }
 
     @Override

@@ -14,6 +14,7 @@ import activities.MainActivity;
 
 public class GamePresenter {
     Context context;
+    MainActivity mainActivity;
     public GamePresenter(Context c) {
         context=c;
         //guiFacade.addObserver(this);
@@ -23,9 +24,11 @@ public class GamePresenter {
         return null;
     }
 
-    public Result switchToStats(Context c)
+    public void switchToStats(Context c)
     {
-        return null;
+        context=c;
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToStats();
     }
 
     public Result claimRoute(Context c)

@@ -7,6 +7,8 @@ import Models.Client;
 import Models.Gameplay.Game;
 import Models.Request;
 import RegisterLogin.LoginFragment;
+import game.GameHistory.GameHistoryFragment;
+import game.Stats.StatsFragment;
 import lobby.LobbyFragment;
 import game.GameFragment;
 import RegisterLogin.LoginRegisterPresenter;
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     public LobbyFragment lobbyFragment;
     public GameFragment gameFragment;
     public LoginFragment loginFragment;
+    public StatsFragment statsFragment;
+    public GameHistoryFragment gameHistoryFragment;
     public RegisterFragment registerFragment;
     FragmentManager headfrag = getSupportFragmentManager();
 
@@ -82,9 +86,19 @@ public class MainActivity extends AppCompatActivity {
         lobbyFragment.getView();
     }
 
-    public void updateJoin (Game currentGame)
+
+    public void switchToStats()
     {
-        //join code there wasn't really anything being used
+        //game
+        statsFragment= new StatsFragment();
+        headfrag.beginTransaction().replace(R.id.activity_main, statsFragment).commit();
+
+    }
+
+    public void switchToGameHistory()
+    {
+        gameHistoryFragment = new GameHistoryFragment();
+        headfrag.beginTransaction().replace(R.id.activity_main, registerFragment).commit();
     }
 
     public void updateGamesList()

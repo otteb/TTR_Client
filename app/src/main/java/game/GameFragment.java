@@ -151,21 +151,7 @@ public class GameFragment extends Fragment {
         goToStats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Result r = gamePresenter.switchToStats(getActivity());
-                if(r != null)
-                {
-
-                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                    Fragment fragment = new LobbyFragment();
-
-                    //need something along these lines for the game and users in it?
-                    /*bundle.putString("username", username.getText().toString());
-                    bundle.putString("password", password.getText().toString());
-                    bundle.putString("authToken", r.getAuthToken());
-                    fragment.setArguments(bundle);*/
-
-                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
-                }
+                gamePresenter.switchToStats(getActivity());
 
             }
         });
