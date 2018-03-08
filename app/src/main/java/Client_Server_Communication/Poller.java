@@ -33,10 +33,10 @@ public class Poller {
         }, 1, 1000);
     }
 
-//    public void stopLobbyCommands() {
-//        LobbyListTimer.cancel();
-//        LobbyListTimer.purge();
-//    }
+    public void stopLobbyCommands() {
+        LobbyListTimer.cancel();
+        LobbyListTimer.purge();
+    }
 
     //For the Game:
     public void runGamePlayCommands(){
@@ -88,6 +88,7 @@ public class Poller {
         protected ArrayList<Command> doInBackground(Void... params) {
 
             Request request = new Request();
+            request.setGameId(Client.getInstance().getActiveGame().getId());
             request.setAuthToken(Client.getInstance().getAuthToken());
             request.setGameCMDNum(Client.getInstance().getActiveGameCMDNum());
             //call the client facade updateClient() - use the current index;

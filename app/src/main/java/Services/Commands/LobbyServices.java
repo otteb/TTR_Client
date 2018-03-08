@@ -43,7 +43,6 @@ public class LobbyServices implements ILobby {
 
     @Override
     public void startGame(Request request) { //(String authToken, String gameId);
-
         System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS STARTING GAME: " + request.getGameId());
         if(Client.getInstance().getActiveGame().getId().equals(request.getGameId()))
         {

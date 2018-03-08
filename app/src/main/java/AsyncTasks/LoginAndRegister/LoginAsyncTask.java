@@ -35,9 +35,9 @@ public class LoginAsyncTask extends AsyncTask <Request, Void, Result> {
             clientFacade.runCMD(result);
             Client.getInstance().setIsLoggedIn(true);
 
-            Poller p = new Poller();
-            p.runLobbyCommands();
-//            Client.getInstance().getPoller().runLobbyCommands();
+//            Poller p = new Poller();
+//            p.runLobbyCommands();
+            Client.getInstance().getPoller().runLobbyCommands();
         }else {
             TTR_Observable.getInstance().sendMessage(result.getErrorMsg());
         }

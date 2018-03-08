@@ -33,6 +33,7 @@ public class GameGuiFacade {
         addChatRequest.setUsername(Client.getInstance().getUserName());
         addChatRequest.setChat(chat);
         addChatRequest.setChatMessage(chat.displayChat());
+        addChatRequest.setGameCMDNum(Client.getInstance().getActiveGameCMDNum());
         //execute the AsyncTask
         chatMessageAsyncTask.execute(addChatRequest);
     }
@@ -46,6 +47,7 @@ public class GameGuiFacade {
         dDCRequest.setUsername(Client.getInstance().getUserName());
         dDCRequest.setGameId(Client.getInstance().getActiveGame().getId());
         dDCRequest.setDiscardDest(destCards);
+        dDCRequest.setGameCMDNum(Client.getInstance().getActiveGameCMDNum());
         //execute the AsyncTask
         discardDestinationCardAsyncTask.execute(dDCRequest);
     }
