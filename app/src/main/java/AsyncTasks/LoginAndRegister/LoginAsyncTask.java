@@ -11,10 +11,6 @@ import Models.Request;
 import Models.Result;
 import ObserverPattern.TTR_Observable;
 
-/**
- * Created by brianotte on 2/13/18.
- */
-
 public class LoginAsyncTask extends AsyncTask <Request, Void, Result> {
     private ClientFacade clientFacade = new ClientFacade();
     @Override
@@ -29,14 +25,12 @@ public class LoginAsyncTask extends AsyncTask <Request, Void, Result> {
     //onPostExecute updates the Client model:
     @Override
     protected void onPostExecute(Result result){
-        if(result.getErrorMsg() == null) {
-//            Client.getInstance().setUserName(result.getUsername());
+        if(result.getErrorMsg() == null)
+        {
             Client.getInstance().setAuthToken(result.getAuthToken());
             clientFacade.runCMD(result);
             Client.getInstance().setIsLoggedIn(true);
-
-//            Poller p = new Poller();
-//            p.runLobbyCommands();
+            TTR_Observable.getInstance().login();
             Client.getInstance().getPoller().runLobbyCommands();
         }else {
             TTR_Observable.getInstance().sendMessage(result.getErrorMsg());
