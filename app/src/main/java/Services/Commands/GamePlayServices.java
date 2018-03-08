@@ -17,14 +17,14 @@ public class GamePlayServices implements IGamePlay {
     //update the Client and Game models with all of the information returned
     //from the Server - the Presenter will decide what information to display:
 
-    //TODO
+    //TODO - change this to update the ActiveGameSingleton instead of the Client.Model.ActiveGame:
     @Override
     public void setupGame(Request request) {
         System.out.println("COMMAND EXECUTING - SetUpGame");
         Client.getInstance().setActiveGame(request.getGame());
     }
 
-    //TODO
+    //Testing Phase:
     @Override
     public void addGameHistory(Request request) {
         System.out.println("COMMAND EXECUTING - addGameHistory");
@@ -32,12 +32,20 @@ public class GamePlayServices implements IGamePlay {
         Client.getInstance().getActiveGame().getHistory().add(request.getAction());
     }
 
-    //TODO
+    //Testing Phase:
     @Override
     public void discardDestCards(Request request) {
         System.out.println("COMMAND EXECUTING - discardDestCards");
         Client.getInstance().getActiveGame().getPlayer(request.getUsername()).discardDestCards(request.getDiscardDest());
     }
+
+
+    //this doesn't need to be done until phase III
+    @Override
+    public void drawTrainCards(Request request) {
+        System.out.println("COMMAND EXECUTING - drawTrainCards");
+    }
+
 
     //Doesn't do anything... just looks pretty:
     @Override
