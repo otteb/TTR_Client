@@ -31,17 +31,16 @@ public class Client {// extends Observable {
     private String authToken;
     private Request loginRequest;
     private Request registerRequest;
-    private int commandNum;
+    private int commandNum = 0;
     //properties specific to each Client in the active game:
-    private int activeGameCMDNum = 0;
+//    private int activeGameCMDNum = 0;
 //    private TTR_Observable obs = new TTR_Observable();
 
     //constructor
     private Client(){
-        this.commandNum = 0;
+//        this.commandNum = 0;
         this.gameMap = new HashMap<>();
         isLoggedIn = false;
-//        isRegistered = false;
         activeGame = null;
     }
 
@@ -50,9 +49,9 @@ public class Client {// extends Observable {
         commandNum += num;
     }
 
-    public void incActiveGameCMDNum(int num){
-        this.activeGameCMDNum += num;
-    }
+//    public void incActiveGameCMDNum(int num){
+//        this.activeGameCMDNum += num;
+//    }
 
     public Game getGameById(String gameId) {
         return gameMap.get(gameId);
@@ -101,8 +100,7 @@ public class Client {// extends Observable {
         }
     }
 
-    public void removePlayerFromGame(String gameId, String username)
-    {
+    public void removePlayerFromGame(String gameId, String username) {
         getGamePlayers(gameId).remove(getGameById(gameId).getPlayer(username));
         TTR_Observable.getInstance().leaveGame();
     }
@@ -142,9 +140,9 @@ public class Client {// extends Observable {
         return commandNum;
     }
 
-    public int getActiveGameCMDNum() {
-        return activeGameCMDNum;
-    }
+//    public int getActiveGameCMDNum() {
+//        return activeGameCMDNum;
+//    }
 
     public boolean getIsLoggedIn()
     {
@@ -188,9 +186,9 @@ public class Client {// extends Observable {
         this.commandNum = commandNum;
     }
 
-    public void setActiveGameCMDNum(int activeGameCMDNum) {
-        this.activeGameCMDNum = activeGameCMDNum;
-    }
+//    public void setActiveGameCMDNum(int activeGameCMDNum) {
+//        this.activeGameCMDNum = activeGameCMDNum;
+//    }
 
     public void setIsLoggedIn(boolean b)
     {

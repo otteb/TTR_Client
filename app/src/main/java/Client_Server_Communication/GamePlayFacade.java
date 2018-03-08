@@ -2,6 +2,7 @@ package Client_Server_Communication;
 
 import Models.Client;
 import Models.Command;
+import Models.Gameplay.ActiveGame;
 import Models.Request;
 import Models.Result;
 
@@ -51,8 +52,8 @@ public class GamePlayFacade {
         if (result.isSuccessful())
         {
             for(int i = 0; i < result.getUpdateCommands().size(); i++){
-                int temp = Client.getInstance().getActiveGameCMDNum();
-                Client.getInstance().setActiveGameCMDNum(++temp);
+                int temp = ActiveGame.getInstance().getActiveGameCMDNum();
+                ActiveGame.getInstance().setActiveGameCMDNum(++temp);
                 try {
                     result.getUpdateCommands().get(i).execute();
                 }catch (Exception e)

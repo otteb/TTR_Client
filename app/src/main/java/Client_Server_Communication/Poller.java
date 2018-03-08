@@ -8,6 +8,7 @@ import java.util.TimerTask;
 
 import Models.Client;
 import Models.Command;
+import Models.Gameplay.ActiveGame;
 import Models.Request;
 
 public class Poller {
@@ -88,9 +89,9 @@ public class Poller {
         protected ArrayList<Command> doInBackground(Void... params) {
 
             Request request = new Request();
-            request.setGameId(Client.getInstance().getActiveGame().getId());
+            request.setGameId(ActiveGame.getInstance().getId());
             request.setAuthToken(Client.getInstance().getAuthToken());
-            request.setGameCMDNum(Client.getInstance().getActiveGameCMDNum());
+            request.setGameCMDNum(ActiveGame.getInstance().getActiveGameCMDNum());
             //call the client facade updateClient() - use the current index;
 //            ArrayList<Command> returnList = clientFacade.updateClient(request).getUpdateCommands();
             ArrayList<Command> returnList = gamePlayFacade.updateClient(request).getUpdateCommands();
@@ -102,7 +103,7 @@ public class Poller {
             //create for loop and execute all of the commands;
             if(commands != null){
                 //updates the ActiveGame's CMD number:
-                Client.getInstance().incActiveGameCMDNum(commands.size());
+                ActiveGame.getInstance().incActiveGameCMDNum(commands.size());
                 //iterates through the commands and executes them.
                 for(int i = 0; i < commands.size(); i++){
                     try {

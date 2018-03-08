@@ -3,27 +3,36 @@ package Models.Gameplay;
 import java.util.ArrayList;
 import java.util.List;
 
+import Client_Server_Communication.Poller;
 import Models.Cards.TrainCard;
 import Models.Client;
 
-public class Game {
+public class ActiveGame {
 
+    private static ActiveGame theGame = new ActiveGame();
+    public static ActiveGame getInstance()
+    {
+        return theGame;
+    }
+
+    private Poller poller = new Poller();
     private String id;
-    private ArrayList<Player> players; //list of players
-    private List<TrainCard> faceUpCards;
     private GameHistory history;
-    private boolean active = false;    //Has the game started
+    private ArrayList<Player> players; //list of players
+    private ArrayList<String> chats;  //List of all chats (format of "username: msg" )
+    private List<TrainCard> faceUpCards;
+    private List<Route> Routes;
+    private List<String> Cities;
+    private int activeGameCMDNum = 0;
 
-    public Game(){
+    private ActiveGame(){
         players = new ArrayList<>();
+        chats = new ArrayList<>();
         history = new GameHistory();
     }
 
-    //constructor allowing to instantiate new game with given id
-    public Game(String id){
-        this.id = id;
-        players = new ArrayList<>();
-        history = new GameHistory();
+    public void incActiveGameCMDNum(int num){
+        this.activeGameCMDNum += num;
     }
 
     public String getId() {
@@ -80,45 +89,33 @@ public class Game {
         this.players = players;
     }
 
-    public boolean isJoinable() {
-        return (players.size() < 5 && !active);
+    public void addChatMessage(String message){
+        chats.add(message);
     }
 
-    public boolean isActive() {
-        return active;
+    public ArrayList<String> getChats() {
+        return chats;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setChats(ArrayList<String> chat) {
+        this.chats = chat;
     }
 
-//    public void addChatMessage(String message){
-//        chats.add(message);
-//    }
-//
-//    public ArrayList<String> getChats() {
-//        return chats;
-//    }
-//
-//    public void setChats(ArrayList<String> chat) {
-//        this.chats = chat;
-//    }
-//
-//    public List<Route> getRoutes() {
-//        return Routes;
-//    }
-//
-//    public void setRoutes(List<Route> routes) {
-//        Routes = routes;
-//    }
-//
-//    public List<String> getCities() {
-//        return Cities;
-//    }
-//
-//    public void setCities(List<String> cities) {
-//        Cities = cities;
-//    }
+    public List<Route> getRoutes() {
+        return Routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        Routes = routes;
+    }
+
+    public List<String> getCities() {
+        return Cities;
+    }
+
+    public void setCities(List<String> cities) {
+        Cities = cities;
+    }
 
     public List<TrainCard> getFaceUpCards() {
         return faceUpCards;
@@ -134,5 +131,17 @@ public class Game {
 
     public void setHistory(GameHistory history) {
         this.history = history;
+    }
+
+    public Poller getPoller() {
+        return poller;
+    }
+
+    public int getActiveGameCMDNum() {
+        return activeGameCMDNum;
+    }
+
+    public void setActiveGameCMDNum(int activeGameCMDNum) {
+        this.activeGameCMDNum = activeGameCMDNum;
     }
 }
