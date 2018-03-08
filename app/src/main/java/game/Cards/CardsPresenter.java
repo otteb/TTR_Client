@@ -24,15 +24,28 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         gameGuiFacade.addObserver(this);
     }
 
-    //TODO - this needs to display the Game History actions as they trickle in:
-    public void displayGameHistory(){
+    //functionality
+
+    //TODO - Sends back an array of destination cards:
+    public void sendBackDestinationCard(){
 
     }
 
-    //TODO - switch view back to the stats fragment
+    //TODO - Draw a train card:
+    public void drawTrainCard(){
+
+    }
+
+    //Navigating Views:
+
+    //TODO - switch view back to the stats fragment:
     public void switchToStats(Context c){
 
     }
+
+    //TODO - switch back to the game fragment:
+
+    //Observer:
 
     //TODO - I honestly have no idea:
     @Override
