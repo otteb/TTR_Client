@@ -54,6 +54,7 @@ public class GuiFacade {
         request.setAuthToken(Client.getInstance().getAuthToken());
         request.setGameId(game.getId());
         request.setUsername(player);
+        request.setCommandNum(Client.getInstance().getCommandNum());
         JoinGameAsyncTask joinGameAsyncTask = new JoinGameAsyncTask();
         joinGameAsyncTask.execute(request);
     }
@@ -64,6 +65,7 @@ public class GuiFacade {
         Request request = new Request();
         request.setGameId(gameId);
         request.setAuthToken(Client.getInstance().getAuthToken());
+        request.setUsername(Client.getInstance().getUserName());
         int temp = Client.getInstance().getCommandNum();
         request.setCommandNum(temp);
         StartGameAsyncTask startGameAsyncTask = new StartGameAsyncTask();

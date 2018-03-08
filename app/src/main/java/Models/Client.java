@@ -215,7 +215,11 @@ public class Client {// extends Observable {
         return poller;
     }
 
-    public void setPoller(Poller poller) {
-        this.poller = poller;
-    }
+//    public Poller getPoller() {
+//        return poller;
+//    }
+//
+//    public void setPoller(Poller poller) {
+//        this.poller = poller;
+//    }
 }
