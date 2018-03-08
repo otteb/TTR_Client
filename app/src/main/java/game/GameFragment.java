@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+
+import java.util.Set;
 
 import Models.Result;
 import activities.R;
@@ -30,6 +33,9 @@ public class GameFragment extends Fragment {
     Button claimRoute;
     ImageButton goToStats;
     GamePresenter gamePresenter;
+    Set<ImageButton> cities;
+    ImageButton sunSpeare;
+    ImageButton saltShore;
 
     public GameFragment()
     {
@@ -50,8 +56,8 @@ public class GameFragment extends Fragment {
 
 
 
-        ImageButton sunSpeare = (ImageButton)view.findViewById(R.id.sunSpeare);
-        ImageButton saltShore = (ImageButton) view.findViewById(R.id.saltShore);
+        sunSpeare = (ImageButton)view.findViewById(R.id.sunSpeare);
+        saltShore = (ImageButton) view.findViewById(R.id.saltShore);
 
 
 
@@ -161,9 +167,16 @@ public class GameFragment extends Fragment {
             }
         });
         return view;
-
     }
 
+    public void claimingRoute(ImageButton city1, ImageButton city2){
+        city1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
+    }
     private class Line extends View{
 
         Paint paint;
