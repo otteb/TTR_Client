@@ -2,6 +2,7 @@ package Services.Commands;
 
 import Interfaces.IGamePlay;
 import Models.Client;
+import Models.Gameplay.ActiveGame;
 import Models.Request;
 
 public class GamePlayServices implements IGamePlay {
@@ -21,7 +22,12 @@ public class GamePlayServices implements IGamePlay {
     @Override
     public void setupGame(Request request) {
         System.out.println("COMMAND EXECUTING - SetUpGame");
-        Client.getInstance().setActiveGame(request.getGame());
+        //set the Players:
+        ActiveGame.getInstance().setPlayers(request.getGame().getPlayers());
+        //Game History
+        ActiveGame.getInstance().setHistory(request.getGame().getHistory());
+        //faceupCards:
+        ActiveGame.getInstance().setFaceUpCards(request.getGame().getFaceUpCards());
     }
 
     //Testing Phase:
@@ -29,14 +35,14 @@ public class GamePlayServices implements IGamePlay {
     public void addGameHistory(Request request) {
         System.out.println("COMMAND EXECUTING - addGameHistory");
         //update the active game's gameHistory:
-        Client.getInstance().getActiveGame().getHistory().add(request.getAction());
+        ActiveGame.getInstance().getHistory().add(request.getAction());
     }
 
     //Testing Phase:
     @Override
     public void discardDestCards(Request request) {
         System.out.println("COMMAND EXECUTING - discardDestCards");
-        Client.getInstance().getActiveGame().getPlayer(request.getUsername()).discardDestCards(request.getDiscardDest());
+        ActiveGame.getInstance().getPlayer(request.getUsername()).discardDestCards(request.getDiscardDest());
     }
 
 
