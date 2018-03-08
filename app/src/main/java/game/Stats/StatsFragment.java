@@ -20,7 +20,7 @@ import static java.security.AccessController.getContext;
 
 public class StatsFragment extends Fragment {
     Button returnToGame;
-    Button chatMenu;
+    Button goToChat;
     Button gameHistory;
     StatsPresenter statsPresenter;
 
@@ -38,7 +38,7 @@ public class StatsFragment extends Fragment {
         statsPresenter = new StatsPresenter(getContext());
         View view = inflater.inflate(R.layout.stats, container, false);
 
-        returnToGame= (Button)view.findViewById(R.id.gameView);
+        returnToGame= (Button)view.findViewById(R.id.statsToGame);
         returnToGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,37 +61,14 @@ public class StatsFragment extends Fragment {
             }
         });
 
-        chatMenu= (Button)view.findViewById(R.id.addChat);
-        chatMenu.setOnClickListener(new View.OnClickListener() {
+        goToChat= (Button)view.findViewById(R.id.statsToChat);
+        goToChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Result r = statsPresenter.viewChat(getActivity());
-                if(r != null)
-                {
-
-                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                    // Fragment fragment = new LobbyFragment();
-
-                    //need something along these lines for the game and users in it?
-                    /*bundle.putString("username", username.getText().toString());
-                    bundle.putString("password", password.getText().toString());
-                    bundle.putString("authToken", r.getAuthToken());
-                    fragment.setArguments(bundle);*/
-
-                    // headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
-                }
-
+                statsPresenter.viewChat(getActivity());
             }
         });
 
-        gameHistory= (Button)view.findViewById(R.id.statsToGameHistory);
-        gameHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                statsPresenter.viewGameHistory(getActivity());
-
-            }
-        });
         return view;
 
     }

@@ -5,10 +5,10 @@
               android:layout_height="match_parent"
               android:background="@drawable/got"
               android:orientation="vertical">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="4"
         android:background="@drawable/scroll">
 
 
@@ -63,9 +63,13 @@
             android:layout_weight="0.84"/>
 
         </LinearLayout>
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_weight=".6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,9 +78,9 @@
             android:ems="10"
             android:background="#FFFAFA"
             android:layout_marginBottom="30dp"
-            android:id="@+id/editText"
+            android:id="@+id/chatMessage"
             android:layout_marginStart="50dp"
-            android:layout_marginEnd="45dp"
+            android:layout_marginEnd="40dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             />
@@ -89,9 +93,11 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="30dp"
-            android:layout_marginRight="50dp"/>
+            android:layout_marginRight="40dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>
-    </RelativeLayout>
 
-</LinearLayout>
+
+

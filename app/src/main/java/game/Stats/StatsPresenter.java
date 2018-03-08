@@ -44,9 +44,11 @@ public class StatsPresenter implements IStatesPresenter, Observer{
         return null;
     }
 
-    public Result viewChat(Context c)
+    public void viewChat(Context c)
     {
-        return null;
+        context=c;
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToChat();
     }
 
     public void viewGameHistory(Context c){

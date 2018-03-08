@@ -7,7 +7,8 @@ import Models.Client;
 import Models.Gameplay.Game;
 import Models.Request;
 import RegisterLogin.LoginFragment;
-import game.GameHistory.GameHistoryFragment;
+//import game.GameHistory.GameHistoryFragment;
+import game.Chat.ChatFragment;
 import game.Stats.StatsFragment;
 import lobby.LobbyFragment;
 import game.GameFragment;
@@ -26,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
     public GameFragment gameFragment;
     public LoginFragment loginFragment;
     public StatsFragment statsFragment;
-    public GameHistoryFragment gameHistoryFragment;
+    public ChatFragment chatFragment;
+    //public GameHistoryFragment gameHistoryFragment;
     public RegisterFragment registerFragment;
     FragmentManager headfrag = getSupportFragmentManager();
 
@@ -95,10 +97,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void switchToChat()
+    {
+        chatFragment= new ChatFragment();
+        headfrag.beginTransaction().replace(R.id.activity_main, chatFragment).commit();
+    }
+
+
     public void switchToGameHistory()
     {
-        gameHistoryFragment = new GameHistoryFragment();
-        headfrag.beginTransaction().replace(R.id.activity_main, registerFragment).commit();
+      //  gameHistoryFragment = new GameHistoryFragment();
+        //headfrag.beginTransaction().replace(R.id.activity_main, registerFragment).commit();
     }
 
     public void updateGamesList()

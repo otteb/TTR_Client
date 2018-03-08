@@ -8,6 +8,7 @@ import java.util.Observer;
 import Interfaces.IChatPresenter;
 import Models.Request;
 import Services.GUI.GameGuiFacade;
+import activities.MainActivity;
 
 /**
  * Created by brianotte on 3/7/18.
@@ -16,6 +17,7 @@ import Services.GUI.GameGuiFacade;
 public class ChatPresenter implements IChatPresenter, Observer {
     //attributes:
     public Context context;
+    public MainActivity mainActivity;
     public GameGuiFacade gameGuiFacade = new GameGuiFacade();
     ChatFragment chatFragment = new ChatFragment();
     //Constructor:
@@ -31,13 +33,15 @@ public class ChatPresenter implements IChatPresenter, Observer {
 
     //TODO - this needs to grab the text from the edit view
     //and display it once the user presses enter in the view:
-    public void addChat(){
+    public void addChat(Context c, String message){
 
     }
 
     //TODO - switch view back to the stats fragment
     public void switchToStats(Context c){
-
+        context=c;
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToStats();
     }
 
     //TODO - I honestly have no idea
