@@ -381,25 +381,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_marginLeft="40dp"
-                    android:text="Game"
+                    android:layout_marginLeft="70dp"
+                    android:text="Return to Game"
                     android:backgroundTint="#A52A2A"/>
 
-                <Button
-                    android:id="@+id/statsFromDeck"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_marginLeft="130dp"
-                    android:text="Pull from Deck"
-                    android:backgroundTint="#A52A2A"/>
 
                 <Button
                     android:id="@+id/statsToGameHistory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_marginLeft="270dp"
+                    android:layout_marginLeft="240dp"
                     android:text="Game Chat"
                     android:backgroundTint="#A52A2A"/>
 
