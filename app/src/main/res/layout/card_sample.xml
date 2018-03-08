@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/baratheon_stag_transparent"/>
+                android:src="@drawable/baratheonstagtransparent"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -42,7 +42,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/card_boarder">
+            android:background="@drawable/cardboarder">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

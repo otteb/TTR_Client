@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
-    public final static String openMap= "false";
+    public final static String openMap= "true";
     public LobbyFragment lobbyFragment;
     public GameFragment gameFragment;
     public LoginFragment loginFragment;
