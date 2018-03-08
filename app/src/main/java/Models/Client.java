@@ -172,14 +172,14 @@ public class Client {// extends Observable {
         userName = u;
     }
 
-    public void setAuthToken(String a) {
-        authToken=a;
-        TTR_Observable.getInstance().setAuthToken(a);
+    public void setAuthToken(String auth) {
+        authToken = auth;
+//        TTR_Observable.getInstance().setAuthToken(a);
     }
 
     public void setPassword(String p)
     {
-        password=p;
+        password = p;
     }
 
     public void setCommandNum(int commandNum) {

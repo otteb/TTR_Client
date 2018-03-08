@@ -24,9 +24,6 @@ import Services.GUI.GuiFacade;
 public class LobbyPresenter implements ILobbyPresenter, Observer {
 
     private GuiFacade guiFacade = new GuiFacade();
-    ArrayList<String> players = new ArrayList<String>();
-    boolean gameStarted;
-    String p[] = {"p1", "p2", "p3", "p4", "p5"};
     private Context context;
     private Request user = new Request();
     MainActivity lobbyFragment;
@@ -53,7 +50,7 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
         }
         else
         {
-            Toast.makeText(context, "The Game is already full or active", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "That Game is already full or active", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -64,19 +61,13 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
         {
             Toast.makeText(context, "Starting game", Toast.LENGTH_SHORT).show();
             guiFacade.startGame(game.getId());
-//            return true;
         }
         else Toast.makeText(context, "You cannot start that game", Toast.LENGTH_SHORT).show();
-//        return false;
     }
 
     @Override
     public Game createGame(Context context, String id) {
-        //TODO: FIGURE OUT WHAT TO RETURN HERE
-        //This currently returns a new game and does not check with the server
-        //How can we get access to the proper game object here?
         Game myGame = new Game(id);
-//        myGame.addPlayer(user.getUsername());
         Client.getInstance().setAuthToken(user.getAuthToken());
         guiFacade.createGame(id);
         if(Client.getInstance().getGameMap().containsKey(id))
@@ -105,7 +96,7 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
         {
             lobbyFragment= (MainActivity)((Activity)context);
             lobbyFragment.updateGamesList();
-//            lobbyFragment.updatePlayers();
+            //lobbyFragment.updatePlayers();
         }
         else if(result.equals("join"))
         {
