@@ -1,6 +1,7 @@
 package Services.GUI;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 import AsyncTasks.GamePlay.ChatMessageAsyncTask;
 import AsyncTasks.GamePlay.DiscardDestinationCardAsyncTask;
@@ -9,6 +10,7 @@ import Models.Cards.DestinationCard;
 import Models.Client;
 import Models.Gameplay.Chat;
 import Models.Request;
+import ObserverPattern.TTR_Observable;
 
 /**
  * Created by brianotte on 3/6/18.
@@ -50,5 +52,11 @@ public class GameGuiFacade {
         dDCRequest.setGameCMDNum(Client.getInstance().getActiveGameCMDNum());
         //execute the AsyncTask
         discardDestinationCardAsyncTask.execute(dDCRequest);
+    }
+
+    public void addObserver(Observer o)
+    {
+//        Client.getInstance().addObserver(o);
+        TTR_Observable.getInstance().addObserver(o);
     }
 }
