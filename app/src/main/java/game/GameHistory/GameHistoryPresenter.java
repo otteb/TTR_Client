@@ -53,7 +53,7 @@ public class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
         if(result.equals("updateHistory"))
         {
             mainActivity = (MainActivity)((Activity)context);
-            mainActivity.update();
+           // mainActivity.update();
 //            lobbyFragment.updatePlayers();
         }
         else

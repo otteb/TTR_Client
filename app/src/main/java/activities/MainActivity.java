@@ -8,6 +8,7 @@ import Models.Gameplay.Game;
 import Models.Request;
 import RegisterLogin.LoginFragment;
 //import game.GameHistory.GameHistoryFragment;
+
 import game.Cards.CardsFragment;
 import game.Chat.ChatFragment;
 import game.Stats.StatsFragment;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (openMap.equals("true")) {
-            openGame();
+            switchToCards();
         } else {
            switchToLogin();
 
