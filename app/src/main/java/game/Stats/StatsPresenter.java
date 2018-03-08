@@ -2,19 +2,27 @@ package game.Stats;
 
 import android.content.Context;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import Interfaces.IStatesPresenter;
 import Models.Result;
+import Services.GUI.GameGuiFacade;
+import game.Chat.ChatFragment;
 
 /**
  * Created by fjameson on 2/28/18.
  */
 
-public class StatsPresenter implements IStatesPresenter{
+public class StatsPresenter implements IStatesPresenter, Observer{
 
     public Context context;
-    public StatsPresenter(Context c)
-    {
-        context=c;
+    public GameGuiFacade gameGuiFacade = new GameGuiFacade();
+    ChatFragment chatFragment = new ChatFragment();
+    //Constructor:
+    public StatsPresenter(Context c){
+        this.context = c;
+        gameGuiFacade.addObserver(this);
     }
 
     public Result returnToGame(Context c)
@@ -31,6 +39,8 @@ public class StatsPresenter implements IStatesPresenter{
         return null;
     }
 
+    @Override
+    public void update(Observable observable, Object o) {
 
-
+    }
 }
