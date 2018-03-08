@@ -84,7 +84,7 @@ public class StatsFragment extends Fragment {
             }
         });
 
-        gameHistory= (Button)view.findViewById(R.id.gamehistory);
+        gameHistory= (Button)view.findViewById(R.id.statsToGameHistory);
         gameHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
