@@ -28,8 +28,6 @@ public class Player {
         claimedRoutes = new ArrayList<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
-        //TODO: how many trains does a player get?
-        //board game rules say 45
         numTrains = 45;
     }
 
