@@ -9,6 +9,7 @@ import java.util.Observer;
 
 import Interfaces.ICardsPresenter;
 import Models.Cards.DestinationCard;
+import Models.Cards.TrainCard;
 import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
@@ -41,9 +42,10 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         }
         else
         {
+            //draw from deck and append to player hand
             ArrayList<DestinationCard> discard= new ArrayList<>();
             discard.add(ActiveGame.getInstance().getMyPlayer().getDestination_cards().get(card-1));
-            ActiveGame.getInstance().getMyPlayer().getDestination_cards().remove(discard.get(0));
+//            ActiveGame.getInstance().getMyPlayer().getDestination_cards().remove(discard.get(0));
             gameGuiFacade.discardDestinationCard(discard);
             switchToGame(context);
         }
@@ -56,21 +58,25 @@ public class CardsPresenter implements ICardsPresenter, Observer {
 
     }
 
-    public void drawTrainCardFromTable(int cardChoice1, int cardChoice2){
-        if(cardChoice1 == 0 || cardChoice2 == 0)
+    public void drawTrainCardFromTable(int cardIndex) {
+        if(cardIndex == 0)
         {
             Toast.makeText(context, "You haven't selected enough cards", Toast.LENGTH_SHORT).show();
         }
         else {
             //add cards to player hand
             //replace the cards on the table
+            ActiveGame.getInstance().getMyPlayer().getHand().add(ActiveGame.getInstance().getFaceUpCards().get(cardIndex-1));
+            ActiveGame.getInstance().getFaceUpCards().remove(cardIndex-1);
+
+            TrainCard newCard = new TrainCard("blue");
+            ActiveGame.getInstance().getFaceUpCards().add(cardIndex-1, newCard);
         }
 
     }
 
     //Navigating Views:
 
-    //TODO - switch view back to the stats_linear fragment:
     public void switchToGame(Context c){
         context=c;
         mainActivity = (MainActivity) context;
@@ -79,11 +85,9 @@ public class CardsPresenter implements ICardsPresenter, Observer {
     }
 
 
-    //TODO - switch back to the game fragment:
 
     //Observer:
 
-    //TODO - I honestly have no idea:
     @Override
     public void update(Observable observable, Object o) {
 

@@ -108,7 +108,19 @@ public class Player {
     }
 
     public void discardDestCards(ArrayList<DestinationCard> cards) {
-        destination_cards.removeAll(cards);
+        for(DestinationCard discard : cards)
+        {
+            for(DestinationCard card : destination_cards)
+            {
+                if(discard.isEqual(card))
+                {
+                    destination_cards.remove(card);
+                    break;
+                }
+            }
+        }
+
+//        destination_cards.removeAll(cards);
     }
 
     public int getNumColorCards(String color) {

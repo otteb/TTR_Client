@@ -1,6 +1,8 @@
 package game.Cards;
 
+import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -75,6 +77,9 @@ public class CardsFragment extends Fragment {
         card5=(LinearLayout)view.findViewById(R.id.cardViewCard5);
         cards.add(card5);
         title= (TextView)view.findViewById(R.id.cardViewName);
+        AssetManager am = getContext().getApplicationContext().getAssets();
+        Typeface custom_font = Typeface.createFromAsset(am, "game_of_thrones.ttf");
+        title.setTypeface(custom_font);
         returnToGame= (Button)view.findViewById(R.id.cardViewToGame);
         fromDeck= (Button)view.findViewById(R.id.cardViewFromDeck);
         fromTable= (Button)view.findViewById(R.id.cardViewFromTable);
@@ -110,6 +115,39 @@ public class CardsFragment extends Fragment {
         }
         else{
             title.setText("Face Up Train Cards");
+            for(int i = 0; i < cards.size(); i++)
+            {
+                switch (ActiveGame.getInstance().getFaceUpCards().get(i).getColor()){
+                    case "purple":
+                        cards.get(i).setBackgroundColor(Color.parseColor("#DDA0DD"));
+                        break;
+                    case "white":
+                        cards.get(i).setBackgroundColor(Color.parseColor("#FFFAFA"));
+                        break;
+                    case "blue":
+                        cards.get(i).setBackgroundColor(Color.parseColor("#4169E1"));
+                        break;
+                    case "yellow":
+                        cards.get(i).setBackgroundColor(Color.parseColor("#FFD700"));
+                        break;
+                    case "orange":
+                        cards.get(i).setBackgroundColor(Color.parseColor("#FF8C00"));
+                        break;
+                    case "black":
+                        cards.get(i).setBackgroundColor(Color.parseColor("#000000"));
+                        break;
+                    case "red":
+                        cards.get(i).setBackgroundColor(Color.parseColor("#A52A2A"));
+                        break;
+                    case "green":
+                        cards.get(i).setBackgroundColor(Color.parseColor("#3CB371"));
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+//            card1.setBackgroundColor(Color);
             sendDCardBack.setVisibility(View.GONE);
         }
         returnToGame.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +167,8 @@ public class CardsFragment extends Fragment {
         fromTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardsPresenter.drawTrainCardFromTable(card1Chosen, card2Chosen);
+                cardsPresenter.drawTrainCardFromTable(card1Chosen); //, card2Chosen);
+                cards.get(card1Chosen-1).setBackgroundColor(Color.parseColor("#4169E1"));
 
             }
         });

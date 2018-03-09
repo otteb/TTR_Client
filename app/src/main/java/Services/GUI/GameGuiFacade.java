@@ -41,7 +41,7 @@ public class GameGuiFacade {
     }
 
     //FINISHED:
-    public void discardDestinationCard(ArrayList<DestinationCard> destCards)
+    public void discardDestinationCards(ArrayList<DestinationCard> destCards)
     {
         Request dDCRequest = new Request();
         //add properties for the dDCRequest:
