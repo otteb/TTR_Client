@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import java.util.Observable;
 
+import Models.Gameplay.Player;
 import Models.Result;
 import activities.MainActivity;
 
@@ -15,6 +16,7 @@ import activities.MainActivity;
 public class GamePresenter {
     Context context;
     MainActivity mainActivity;
+    Player player;
     public GamePresenter(Context c) {
         context=c;
         //guiFacade.addObserver(this);
@@ -31,11 +33,13 @@ public class GamePresenter {
         mainActivity.switchToStats();
     }
 
-    public void switchToCards(Context c)
+    public void switchToCards(Context c, Boolean destinationCardSetup)
     {
+        player = new Player();
+        player.setName("kip");
         context=c;
         mainActivity = (MainActivity) context;
-        mainActivity.switchToCards();
+        mainActivity.switchToCards(player.getName(), destinationCardSetup);
     }
 
 

@@ -32,11 +32,32 @@ public class CardsPresenter implements ICardsPresenter, Observer {
     //TODO - Sends back an array of destination cards:
     public void sendBackDestinationCard(Context context, int card){
         this.context=context;
+        if (card == 0)
+        {
+            Toast.makeText(context, "You haven't selected a card", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            //draw from deck and append to player hand
+        }
 
     }
 
     //TODO - Draw a train card:
-    public void drawTrainCard(){
+    public void drawTrainCardFromDeck(){
+
+
+    }
+
+    public void drawTrainCardFromTable(int cardChoice1, int cardChoice2){
+        if(cardChoice1 == 0 || cardChoice2 == 0)
+        {
+            Toast.makeText(context, "You haven't selected enough cards", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            //add cards to player hand
+            //replace the cards on the table
+        }
 
     }
 
