@@ -105,14 +105,27 @@ public class GameFragment extends Fragment {
             }
         });
 
+
+        //switch to the cards fragment with the bundle passed-in:
         viewDestCards= (Button)view.findViewById(R.id.gameToDestCards);
         viewDestCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gamePresenter.switchToCards(getActivity());
-
             }
         });
+
+        //switch to the cards fragment with the bundle passed-in:
+        viewTrainCards = (Button)view.findViewById(R.id.gameToTrainCards);
+        viewTrainCards.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                gamePresenter.switchToCards(getActivity());
+            }
+        });
+
+
         goToStats= (ImageButton)view.findViewById(R.id.stats);
         goToStats.setOnClickListener(new View.OnClickListener() {
             @Override
