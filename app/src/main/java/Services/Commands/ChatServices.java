@@ -14,7 +14,7 @@ public class ChatServices implements IChat {
         return theOne;
     }
     private ChatServices() {}
-    //TODO
+
     @Override
     public void addChat(Request request) {
         System.out.println("COMMAND EXECUTING - addChat");

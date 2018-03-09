@@ -22,8 +22,6 @@ import ObserverPattern.TTR_Observable;
 public class GameGuiFacade {
     //this houses all of the game-specific functions that call the Async tasks:
     //instantiate all AsyncTasks here:
-    ChatMessageAsyncTask chatMessageAsyncTask = new ChatMessageAsyncTask();
-    DiscardDestinationCardAsyncTask discardDestinationCardAsyncTask = new DiscardDestinationCardAsyncTask();
 
     //FINISHED:
     public void addChat (Chat chat)
@@ -38,6 +36,7 @@ public class GameGuiFacade {
         addChatRequest.setChatMessage(chat.getMessage());
         addChatRequest.setGameCMDNum(ActiveGame.getInstance().getActiveGameCMDNum());
         //execute the AsyncTask
+        ChatMessageAsyncTask chatMessageAsyncTask = new ChatMessageAsyncTask();
         chatMessageAsyncTask.execute(addChatRequest);
     }
 
@@ -52,6 +51,7 @@ public class GameGuiFacade {
         dDCRequest.setDiscardDest(destCards);
         dDCRequest.setGameCMDNum(ActiveGame.getInstance().getActiveGameCMDNum());
         //execute the AsyncTask
+        DiscardDestinationCardAsyncTask discardDestinationCardAsyncTask = new DiscardDestinationCardAsyncTask();
         discardDestinationCardAsyncTask.execute(dDCRequest);
     }
 

@@ -24,9 +24,7 @@ public class StartGameAsyncTask extends AsyncTask<Request, Void, Result> {
     protected void onPostExecute(Result result){
         System.out.println("Started a game - This is the asyncTask");
         //executes the command:
-        Client.getInstance().getPoller().stopLobbyCommands();
         clientFacade.runCMD(result);
-        ActiveGame.getInstance().getPoller().runGamePlayCommands();
 //        Client.getInstance().getPoller().runGamePlayCommands();
         //notifies the observer:
 //        Client.getInstance().startGame();

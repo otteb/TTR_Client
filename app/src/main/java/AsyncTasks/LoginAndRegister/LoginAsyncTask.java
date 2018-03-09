@@ -28,9 +28,9 @@ public class LoginAsyncTask extends AsyncTask <Request, Void, Result> {
         if(result.getErrorMsg() == null)
         {
             Client.getInstance().setAuthToken(result.getAuthToken());
-            Client.getInstance().setIsLoggedIn(true);
             TTR_Observable.getInstance().login();
             clientFacade.runCMD(result);
+            Client.getInstance().setIsLoggedIn(true);
             Client.getInstance().getPoller().runLobbyCommands();
         }else {
             TTR_Observable.getInstance().sendMessage(result.getErrorMsg());
