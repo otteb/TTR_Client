@@ -117,30 +117,23 @@ public class MainActivity extends AppCompatActivity {
         headfrag.beginTransaction().replace(R.id.activity_main, cardsFragment).commit();
     }
 
-
-
     public void switchToGameHistory()
     {
         gameHistoryFragment = new GameHistoryFragment();
         headfrag.beginTransaction().replace(R.id.activity_main, gameHistoryFragment).commit();
     }
 
-    public void updateGamesList()
-    {
-        lobbyFragment.updateGameList();
-    }
+    public void updateGamesList() { lobbyFragment.updateGameList(); }
 
-    public void updatePlayers()
-    {
-        lobbyFragment.updatePlayers();
-    }
+    public void updatePlayers() { lobbyFragment.updatePlayers(); }
 
-    public void updateGameHistory()
-    {
-        gameHistoryFragment.update();
-    }
+    public void updateGameHistory() { gameHistoryFragment.update(); }
 
     public void updateChat() { chatFragment.update(); }
+
+    public void updateStats() { statsFragment.update(); }
+
+    public void updateHand() { statsFragment.updateHand(); }
 
 
 }

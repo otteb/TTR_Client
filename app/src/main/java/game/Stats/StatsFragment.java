@@ -21,6 +21,15 @@ import activities.R;
 //TODO: check/implement observable
 
 public class StatsFragment extends Fragment {
+    TextView redCards;
+    TextView orangeCards;
+    TextView yellowCards;
+    TextView greenCards;
+    TextView blueCards;
+    TextView purpleCards;
+    TextView blackCards;
+    TextView whiteCards;
+    TextView wildCards;
     Button returnToGame;
     Button goToChat;
     RecyclerView statsRecView;
@@ -40,10 +49,12 @@ public class StatsFragment extends Fragment {
         //TODO: set the color number cards
         statsPresenter = new StatsPresenter(getContext());
         View view = inflater.inflate(R.layout.stats_rv, container, false);
+
         TextView title = (TextView) view.findViewById(R.id.statsName);
         AssetManager am = getContext().getApplicationContext().getAssets();
         Typeface custom_font = Typeface.createFromAsset(am, "game_of_thrones.ttf");
         title.setTypeface(custom_font);
+
         returnToGame= (Button)view.findViewById(R.id.statsToGame);
         returnToGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +78,16 @@ public class StatsFragment extends Fragment {
         statsAdapter = new StatsAdapter(players);
         statsRecView.setAdapter(statsAdapter);
 
+        redCards = (TextView) view.findViewById(R.id.numRedCards);
+        orangeCards = (TextView) view.findViewById(R.id.numOrangeCards);
+        yellowCards = (TextView) view.findViewById(R.id.numYellowCards);
+        greenCards = (TextView) view.findViewById(R.id.numGreenCards);
+        blueCards = (TextView) view.findViewById(R.id.numBlueCards);
+        purpleCards = (TextView) view.findViewById(R.id.numPurpleCards);
+        blackCards = (TextView) view.findViewById(R.id.numBlackCards);
+        whiteCards = (TextView) view.findViewById(R.id.numWhiteCards);
+        wildCards = (TextView) view.findViewById(R.id.numWildCards);
+
         update();
         return view;
     }
@@ -83,6 +104,20 @@ public class StatsFragment extends Fragment {
             }
             statsAdapter.notifyDataSetChanged();
         }
+        updateHand();
+    }
+
+    public void updateHand() {
+        Player player = ActiveGame.getInstance().getMyPlayer();
+        redCards.setText(String.valueOf(player.getNumColorCards("red")));
+        orangeCards.setText(String.valueOf(player.getNumColorCards("orange")));
+        yellowCards.setText(String.valueOf(player.getNumColorCards("yellow")));
+        greenCards.setText(String.valueOf(player.getNumColorCards("green")));
+        blueCards.setText(String.valueOf(player.getNumColorCards("blue")));
+        purpleCards.setText(String.valueOf(player.getNumColorCards("purple")));
+        blackCards.setText(String.valueOf(player.getNumColorCards("black")));
+        whiteCards.setText(String.valueOf(player.getNumColorCards("white")));
+        wildCards.setText(String.valueOf(player.getNumColorCards("wild")));
     }
 
     public class StatsHolder extends RecyclerView.ViewHolder {

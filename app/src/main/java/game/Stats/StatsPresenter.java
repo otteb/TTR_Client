@@ -11,58 +11,46 @@ import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 import game.Chat.ChatFragment;
 
-/**
- * Created by fjameson on 2/28/18.
- */
 
 public class StatsPresenter implements IStatesPresenter, Observer{
 
     public Context context;
-    public MainActivity mainActivity;
-    public GameGuiFacade gameGuiFacade = new GameGuiFacade();
-    ChatFragment chatFragment = new ChatFragment();
+    MainActivity mainActivity;
+    GameGuiFacade gameGuiFacade = new GameGuiFacade();
     //Constructor:
-    public StatsPresenter(Context c){
+    StatsPresenter(Context c){
         this.context = c;
         gameGuiFacade.addObserver(this);
     }
 
-    //Functionality:
-    //TODO - add route points to a player:
-    public void addPointsToPlayer(){}
-
-    //TODO - subtract trains:
-    public void subtractPlayerTrains(){}
-
-    //TODO - display player information
-    public void displayInformation(){}
-
     //Navigation:
 
-//    public Result returnToGame(Context c)
-    public void returnToGame(Context c)
+    void returnToGame(Context c)
     {
         context=c;
         mainActivity = (MainActivity) context;
         mainActivity.openGame();
     }
 
-    public void viewChat(Context c)
+    void viewChat(Context c)
     {
         context=c;
         mainActivity = (MainActivity) context;
         mainActivity.switchToChat();
     }
 
-    public void viewGameHistory(Context c){
-
-        context=c;
-        mainActivity = (MainActivity) context;
-        mainActivity.switchToGameHistory();
-    }
-
     @Override
     public void update(Observable observable, Object o) {
-
+        if(o.equals("stats"))
+        {
+            mainActivity = (MainActivity) context;
+            mainActivity.updateStats();
+        }
+        else if(o.equals("hand"))
+        {
+            mainActivity = (MainActivity) context;
+            mainActivity.updateHand();
+        }
+        observable.hasChanged();
     }
 }

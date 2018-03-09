@@ -12,10 +12,9 @@ public class TTR_Observable extends Observable {
     private TTR_Observable(){}
 
     /*
-    msg can be "cards", "destCards", or "claimRoute"
-    "cards" will update the number of each color train card and total destination and train cards
-    "destCards" will update only the number of both types of cards
-    "claimRoute" will update all stats
+    msg can be "hand" or "stats"
+    "hand" will update the number of each color train card and total destination and train cards
+    "stats" will update all stats
     */
     public void updateStats(String msg) {
         setChanged();

@@ -11,6 +11,7 @@ import Models.Gameplay.Player;
 import Models.Gameplay.Route;
 import Models.Request;
 import Models.Result;
+import ObserverPattern.TTR_Observable;
 import Services.Commands.GamePlayServices;
 import activities.MainActivity;
 
@@ -75,6 +76,7 @@ public class GamePresenter {
         ActiveGame.getInstance().incTurn();
         String username = ActiveGame.getInstance().getActivePlayer().getName();
         Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
+        TTR_Observable.getInstance().updateStats("stats");
         return null;
     }
 
@@ -108,6 +110,7 @@ public class GamePresenter {
         ActiveGame.getInstance().incTurn();
         username = ActiveGame.getInstance().getActivePlayer().getName();
         Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
+        TTR_Observable.getInstance().updateStats("stats");
         return null;
     }
 

@@ -28,6 +28,7 @@ public class GamePlayServices implements IGamePlay {
         ActiveGame.getInstance().setHistory(request.getGame().getHistory());
         //faceupCards:
         ActiveGame.getInstance().setFaceUpCards(request.getGame().getFaceUpCards());
+        TTR_Observable.getInstance().updateStats("stats");
     }
 
     //Testing Phase:
@@ -44,6 +45,7 @@ public class GamePlayServices implements IGamePlay {
     public void discardDestCards(Request request) {
         System.out.println("COMMAND EXECUTING - discardDestCards");
         ActiveGame.getInstance().getPlayer(request.getUsername()).discardDestCards(request.getDiscardDest());
+        TTR_Observable.getInstance().updateStats("stats");
     }
 
 
@@ -51,6 +53,7 @@ public class GamePlayServices implements IGamePlay {
     @Override
     public void drawTrainCards(Request request) {
         System.out.println("COMMAND EXECUTING - drawTrainCards");
+        TTR_Observable.getInstance().updateStats("hand");
     }
 
 

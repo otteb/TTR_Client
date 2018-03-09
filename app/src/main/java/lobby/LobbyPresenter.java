@@ -110,10 +110,6 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
             MainActivity mainActivity = (MainActivity) context;
             mainActivity.openGame();
         }
-        else
-        {
-            Toast.makeText(context, (CharSequence) result, Toast.LENGTH_SHORT).show();
-        }
         observable.hasChanged();
     }
 }

@@ -107,8 +107,19 @@ public class Player {
         numTrains -= num;
     }
 
-    public void discardDestCards(ArrayList<DestinationCard> cards)
-    {
+    public void discardDestCards(ArrayList<DestinationCard> cards) {
         destination_cards.removeAll(cards);
+    }
+
+    public int getNumColorCards(String color) {
+        int count = 0;
+        for(TrainCard card : hand)
+        {
+            if(card.getColor().equals(color))
+            {
+                count++;
+            }
+        }
+        return count;
     }
 }
