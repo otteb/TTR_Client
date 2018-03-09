@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
-    public final static String openMap= "false";
+    public final static String openMap= "true";
     public LobbyFragment lobbyFragment;
     public GameFragment gameFragment;
     public LoginFragment loginFragment;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (openMap.equals("true")) {
-            switchToCards();
+            switchToCards("kip", false);
         } else {
            switchToLogin();
 
@@ -107,9 +107,13 @@ public class MainActivity extends AppCompatActivity {
         headfrag.beginTransaction().replace(R.id.activity_main, chatFragment).commit();
     }
 
-    public void switchToCards()
+    public void switchToCards(String player, boolean destinationCardSetup )
     {
         cardsFragment = new CardsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", player);
+        bundle.putBoolean("destinationCardSetup", destinationCardSetup);
+        cardsFragment.setArguments(bundle);
         headfrag.beginTransaction().replace(R.id.activity_main, cardsFragment).commit();
     }
 
