@@ -11,32 +11,43 @@ public class TTR_Observable extends Observable {
 
     private TTR_Observable(){}
 
-    public void updateChat () {
+    /*
+    msg can be "cards", "destCards", or "claimRoute"
+    "cards" will update the number of each color train card and total destination and train cards
+    "destCards" will update only the number of both types of cards
+    "claimRoute" will update all stats
+    */
+    public void updateStats(String msg) {
+        setChanged();
+        notifyObservers(msg);
+    }
+
+    public void updateChat() {
         setChanged();
         notifyObservers("chat");
     }
 
-    public void updateHistory () {
+    public void updateHistory() {
         setChanged();
         notifyObservers("updateHistory");
     }
 
-    public void createGame () {
+    public void createGame() {
         setChanged();
         notifyObservers("create");
     }
 
-    public void joinGame () {
+    public void joinGame() {
         setChanged();
         notifyObservers("join");
     }
 
-    public void leaveGame () {
+    public void leaveGame() {
         setChanged();
         notifyObservers("leave");
     }
 
-    public void startGame () {
+    public void startGame() {
         setChanged();
         notifyObservers("start");
     }

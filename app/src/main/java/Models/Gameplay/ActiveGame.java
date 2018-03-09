@@ -86,6 +86,38 @@ public class ActiveGame {
         return null;
     }
 
+    //get the player whose turn it is
+    public Player getActivePlayer() {
+        for(Player p : players)
+        {
+            if(p.isTurn())
+            {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void incTurn() {
+        for(int i = 1; i < players.size(); i++)
+        {
+            if (players.get(i-1).isTurn())
+            {
+                players.get(i-1).setTurn(false);
+                players.get(i).setTurn(true);
+                break;
+            }
+            else if(i == (players.size()-1))
+            {
+                if(players.get(i).isTurn())
+                {
+                    players.get(i).setTurn(false);
+                    players.get(0).setTurn(true);
+                }
+            }
+        }
+    }
+
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }

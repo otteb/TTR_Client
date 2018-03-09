@@ -1,5 +1,7 @@
 package game.Stats;
 
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,6 +40,10 @@ public class StatsFragment extends Fragment {
         //TODO: set the color number cards
         statsPresenter = new StatsPresenter(getContext());
         View view = inflater.inflate(R.layout.stats_rv, container, false);
+        TextView title = (TextView) view.findViewById(R.id.statsName);
+        AssetManager am = getContext().getApplicationContext().getAssets();
+        Typeface custom_font = Typeface.createFromAsset(am, "game_of_thrones.ttf");
+        title.setTypeface(custom_font);
         returnToGame= (Button)view.findViewById(R.id.statsToGame);
         returnToGame.setOnClickListener(new View.OnClickListener() {
             @Override

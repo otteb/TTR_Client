@@ -10,7 +10,7 @@ public class Player {
     private String color;
     private String name;
     private int points;
-    private int turn;
+    private boolean turn;
     private int numTrains; //will be decremented when a route is claimed
     private List<Route> claimedRoutes;
     private List<TrainCard> hand;
@@ -55,15 +55,19 @@ public class Player {
         return points;
     }
 
+    public void addPoints(int pts) {
+        points += pts;
+    }
+
     public void setPoints(int points) {
         this.points = points;
     }
 
-    public int getTurn() {
+    public boolean isTurn() {
         return turn;
     }
 
-    public void setTurn(int turn) {
+    public void setTurn(boolean turn) {
         this.turn = turn;
     }
 
@@ -97,6 +101,10 @@ public class Player {
 
     public void setNumTrains(int numTrains) {
         this.numTrains = numTrains;
+    }
+
+    public void decNumTrains(int num) {
+        numTrains -= num;
     }
 
     public void discardDestCards(ArrayList<DestinationCard> cards)

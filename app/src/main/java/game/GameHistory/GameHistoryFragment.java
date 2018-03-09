@@ -1,5 +1,7 @@
 package game.GameHistory;
 
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +30,10 @@ public class GameHistoryFragment extends Fragment {
         view = inflater.inflate(R.layout.game_history, container, false);// setting view
         leftToChat = (ImageButton) view.findViewById(R.id.historyToChat);
         rightToStats = (ImageButton) view.findViewById(R.id.historyToStats);
+        TextView title = (TextView) view.findViewById(R.id.history_title);
+        AssetManager am = getContext().getApplicationContext().getAssets();
+        Typeface custom_font = Typeface.createFromAsset(am, "game_of_thrones.ttf");
+        title.setTypeface(custom_font);
 
         final GameHistory history = ActiveGame.getInstance().getHistory();
         historyRecView = (RecyclerView) view.findViewById(R.id.history_list);
