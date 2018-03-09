@@ -32,5 +32,9 @@ public class DestinationCard {
         this.points = points;
     }
 
+    public boolean isEqual(DestinationCard that) {
+        return start.equals(that.start) && end.equals(that.end) && (points == that.points);
+    }
+
 //    public boolean compareRoutes(List<Route> playerRoutes){} // What is this for?
 }

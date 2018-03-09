@@ -3,9 +3,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.fjameson.got_ttr.registerLogin.LoginFragment">
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        tools:context="RegisterLogin.LoginFragment">
+
+     <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="" />
@@ -65,7 +65,7 @@
                     android:ems="10"
                     android:id="@+id/editText2_password"
                     android:layout_weight="1"
-                    android:text="fj" />
+                    android:text="aa" />
             </LinearLayout>
 
 
@@ -111,4 +111,14 @@
 </LinearLayout>
      </LinearLayout>
 
-</FrameLayout>
+     <TextView
+         android:text="Game of Thrones\nTicket to Ride"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/login_title"
+         android:textSize="24sp"
+         android:layout_gravity="center_horizontal"
+         android:layout_marginTop="80dp"
+         android:textAlignment="center"/>
+
+ </FrameLayout>

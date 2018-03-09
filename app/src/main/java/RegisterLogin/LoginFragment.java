@@ -1,5 +1,7 @@
 package RegisterLogin;
 
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +31,12 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         loginRegisterPresenter = new LoginRegisterPresenter(getActivity());
         View view = inflater.inflate(R.layout.login_fragment, container, false);
+
+        TextView title = (TextView) view.findViewById(R.id.login_title);
+        AssetManager am = getContext().getApplicationContext().getAssets();
+        Typeface custom_font = Typeface.createFromAsset(am, "game_of_thrones.ttf");
+        title.setTypeface(custom_font);
+
         username= (EditText)view.findViewById(R.id.editText_username);
         password= (EditText)view.findViewById(R.id.editText2_password);
 
