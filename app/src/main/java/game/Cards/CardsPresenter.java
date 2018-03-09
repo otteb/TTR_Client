@@ -46,7 +46,7 @@ public class CardsPresenter implements ICardsPresenter, Observer {
             ArrayList<DestinationCard> discard= new ArrayList<>();
             discard.add(ActiveGame.getInstance().getMyPlayer().getDestination_cards().get(card-1));
 //            ActiveGame.getInstance().getMyPlayer().getDestination_cards().remove(discard.get(0));
-            gameGuiFacade.discardDestinationCard(discard);
+            gameGuiFacade.discardDestinationCards(discard);
             switchToGame(context);
         }
 
