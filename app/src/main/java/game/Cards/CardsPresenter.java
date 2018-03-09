@@ -63,7 +63,7 @@ public class CardsPresenter implements ICardsPresenter, Observer {
 
     //Navigating Views:
 
-    //TODO - switch view back to the stats fragment:
+    //TODO - switch view back to the stats_linear fragment:
     public void switchToGame(Context c){
         context=c;
         mainActivity = (MainActivity) context;

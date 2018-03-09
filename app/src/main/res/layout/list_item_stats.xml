@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:layout_marginEnd="40dp"
+              android:id="@+id/pStats">
+
+    <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:id="@+id/pName"
+            android:layout_marginStart="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/pPoints"
+            android:layout_marginEnd="45dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pTrains"
+            android:text="0"
+            android:layout_marginEnd="50dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/pCards"
+            android:layout_marginEnd="60dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/pRoutes"
+            android:layout_marginEnd="10dp"/>
+
+</LinearLayout>
