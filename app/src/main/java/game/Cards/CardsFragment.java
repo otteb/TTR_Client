@@ -27,8 +27,14 @@ public class CardsFragment extends Fragment {
     CardsPresenter cardsPresenter;
     LinearLayout card1;
     LinearLayout card2;
+    TextView card2Start;
+    TextView card2End;
     LinearLayout card3;
+    TextView card3Start;
+    TextView card3End;
     LinearLayout card4;
+    TextView card4Start;
+    TextView card4End;
     LinearLayout card5;
     LinearLayout temp;
     ArrayList<LinearLayout> cards;
@@ -49,10 +55,16 @@ public class CardsFragment extends Fragment {
         card1=(LinearLayout)view.findViewById(R.id.cardViewCard1);
         cards.add(card1);
         card2=(LinearLayout)view.findViewById(R.id.cardViewCard2);
+        card2Start = (TextView)view.findViewById(R.id.cardViewCard2StartCity);
+        card2End= (TextView)view.findViewById(R.id.cardViewCard2EndCity);
         cards.add(card2);
         card3=(LinearLayout)view.findViewById(R.id.cardViewCard3);
+        card3Start = (TextView)view.findViewById(R.id.cardViewCard3StartCity);
+        card3End= (TextView)view.findViewById(R.id.cardViewCard3EndCity);
         cards.add(card3);
         card4=(LinearLayout)view.findViewById(R.id.cardViewCard4);
+        card4Start = (TextView)view.findViewById(R.id.cardViewCard4StartCity);
+        card4End= (TextView)view.findViewById(R.id.cardViewCard4EndCity);
         cards.add(card4);
         card5=(LinearLayout)view.findViewById(R.id.cardViewCard5);
         cards.add(card5);
@@ -73,8 +85,14 @@ public class CardsFragment extends Fragment {
             fromTable.setVisibility(View.GONE);
             fromDeck.setVisibility(View.GONE);
             card2.setBackgroundColor(Color.parseColor("#F5F5DC"));
+            card2Start.setText("startcity");
+            card2End.setText("endcity");
             card3.setBackgroundColor(Color.parseColor("#F5F5DC"));
+            card3Start.setText("startcity");
+            card3End.setText("endcity");
             card4.setBackgroundColor(Color.parseColor("#F5F5DC"));
+            card4Start.setText("startcity");
+            card4End.setText("endcity");
 
         }
         else{

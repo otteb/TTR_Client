@@ -50,6 +50,22 @@
                     android:id="@+id/cardViewCard1"
                     android:layout_marginRight="10dp"
                     android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/cardViewCard1StartCity"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/cardViewCard1EndCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
@@ -59,6 +75,22 @@
                     android:layout_marginRight="10dp"
                     android:id="@+id/cardViewCard2"
                     android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/cardViewCard2StartCity"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/cardViewCard2EndCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
@@ -68,6 +100,22 @@
                     android:id="@+id/cardViewCard3"
                     android:layout_marginRight="10dp"
                     android:orientation="vertical">
+                    <TextView
+                    android:layout_width="wrap_content"
+                        android:id="@+id/cardViewCard3StartCity"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=""
+                        android:textStyle="bold"
+                    android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/cardViewCard3EndCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
@@ -77,6 +125,22 @@
                     android:layout_marginRight="10dp"
                     android:orientation="vertical"
                     android:layout_width="60dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/cardViewCard4StartCity"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/cardViewCard4EndCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
@@ -86,6 +150,22 @@
                     android:id="@+id/cardViewCard5"
                     android:layout_marginRight="10dp"
                     android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/cardViewCard5StartCity"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/cardViewCard5EndCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
                 </LinearLayout>
             </LinearLayout>
 
