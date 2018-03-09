@@ -62,6 +62,8 @@ public class GamePresenter {
         //update trains left
         ActiveGame.getInstance().getMyPlayer().decNumTrains(4);
 
+        ActiveGame.getInstance().getMyPlayer().getHand().clear();
+
         //add game history
         Request fakeReq = new Request();
 //        fakeReq.setGameId(ActiveGame.getInstance().getId());
@@ -72,6 +74,39 @@ public class GamePresenter {
         //increment turn
         ActiveGame.getInstance().incTurn();
         String username = ActiveGame.getInstance().getActivePlayer().getName();
+        Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
+        return null;
+    }
+
+    public Result claimOtherRoute(Context c)
+    {
+        //draw line -- new color for that player
+
+        //increment routes
+        Route rt = new Route();
+        ActiveGame.getInstance().getActivePlayer().getClaimedRoutes().add(rt);
+
+        //update player points
+        ActiveGame.getInstance().getActivePlayer().addPoints(4);
+
+        //update trains left
+        ActiveGame.getInstance().getActivePlayer().decNumTrains(3);
+
+        ActiveGame.getInstance().getActivePlayer().getHand().remove(0);
+        ActiveGame.getInstance().getActivePlayer().getHand().remove(0);
+        ActiveGame.getInstance().getActivePlayer().getHand().remove(0);
+//        ActiveGame.getInstance().getActivePlayer().getHand().remove(2);
+
+        //add game history
+        Request fakeReq = new Request();
+        String username = ActiveGame.getInstance().getActivePlayer().getName();
+        String action = username + " claimed a route.";
+        fakeReq.setAction(action);
+        GamePlayServices.getInstance().addGameHistory(fakeReq);
+
+        //increment turn
+        ActiveGame.getInstance().incTurn();
+        username = ActiveGame.getInstance().getActivePlayer().getName();
         Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         return null;
     }

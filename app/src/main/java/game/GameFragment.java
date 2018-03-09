@@ -23,6 +23,7 @@ import java.util.Set;
 
 import Models.Client;
 import Models.Gameplay.ActiveGame;
+import Models.Gameplay.Location;
 import Models.Result;
 import activities.R;
 import lobby.LobbyFragment;
@@ -38,6 +39,7 @@ public class GameFragment extends Fragment {
     Button claimRoute;
     Button viewDestCards;
     Button viewTrainCards;
+    Button simulateTurn;
     ImageButton goToStats;
     GamePresenter gamePresenter;
     Set<ImageButton> cities;
@@ -61,20 +63,90 @@ public class GameFragment extends Fragment {
         View view = inflater.inflate(R.layout.game, container, false);
         final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
 
-        sunSpeare = (ImageButton)view.findViewById(R.id.sunSpeare);
-        saltShore = (ImageButton) view.findViewById(R.id.saltShore);
+//        sunSpeare = (ImageButton)view.findViewById(R.id.sunSpeare);
+//        saltShore = (ImageButton) view.findViewById(R.id.saltShore);
+
+        final Location start1 = new Location(250, 1330);
+        final Location end1 = new Location(480, 1265);
+
+        final Location start2 = new Location(470, 1500);
+        final Location end2 = new Location(847, 1665);
 
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeWidth(10);
         paint.setColor(Color.WHITE);
-        final RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)sunSpeare.getLayoutParams();
-        final RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams)saltShore.getLayoutParams();
-        relativeLayout.addView(new Line(getActivity(), lp.leftMargin, lp.topMargin, lp2.leftMargin, lp2.topMargin, paint));
+        relativeLayout.addView(new Line(getActivity(), start1.getX(), start1.getY(), end1.getX(), end1.getY(), paint));
 
-        Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint2.setStrokeWidth(10);
-        paint2.setColor(Color.BLACK);
-        relativeLayout.addView(new Line(getActivity(), lp.leftMargin+10,lp.topMargin+10, lp2.leftMargin+10, lp2.topMargin+10, paint2));
+//        Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
+//        paint2.setStrokeWidth(10);
+//        paint2.setColor(Color.WHITE);
+        relativeLayout.addView(new Line(getActivity(), start2.getX(), start2.getY(), end2.getX(), end2.getY(), paint));
+
+        if(ActiveGame.getInstance().getMyPlayer().getClaimedRoutes().size() == 1) //current user
+        {
+            Paint paint3 = new Paint(Paint.ANTI_ALIAS_FLAG);
+            paint3.setStrokeWidth(10);
+            if(ActiveGame.getInstance().getMyPlayer().getColor().equals("red"))
+            {
+                paint3.setColor(Color.RED);
+            }
+            else
+            {
+                paint3.setColor(Color.GREEN);
+            }
+            relativeLayout.addView(new Line(getActivity(), start1.getX(), start1.getY(), end1.getX(), end1.getY(), paint3));
+        }
+        if(ActiveGame.getInstance().getOtherPlayer().getClaimedRoutes().size() == 1) //other player
+        {
+            Paint paint4 = new Paint(Paint.ANTI_ALIAS_FLAG);
+            paint4.setStrokeWidth(10);
+            if(ActiveGame.getInstance().getOtherPlayer().getColor().equals("red"))
+            {
+                paint4.setColor(Color.RED);
+            }
+            else
+            {
+                paint4.setColor(Color.GREEN);
+            }
+            relativeLayout.addView(new Line(getActivity(), start2.getX(), start2.getY(), end2.getX(), end2.getY(), paint4));
+        }
+
+
+//        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+//        final RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)sunSpeare.getLayoutParams();
+//        final RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams)saltShore.getLayoutParams();
+//        relativeLayout.addView(new Line(getActivity(), lp.leftMargin, lp.topMargin, lp2.leftMargin, lp2.topMargin, paint));
+//
+//        Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
+//        paint2.setStrokeWidth(10);
+//        paint2.setColor(Color.BLACK);
+//        relativeLayout.addView(new Line(getActivity(), lp.leftMargin+10,lp.topMargin+10, lp2.leftMargin+10, lp2.topMargin+10, paint2));
+
+        simulateTurn = (Button) view.findViewById(R.id.test_button);
+        simulateTurn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = ActiveGame.getInstance().getActivePlayer().getName();
+                if(Client.getInstance().getUserName().equals(username))
+                {
+                    Toast.makeText(getActivity(), "It's not their turn!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    gamePresenter.claimOtherRoute(getActivity());
+                    Paint paint4 = new Paint(Paint.ANTI_ALIAS_FLAG);
+                    paint4.setStrokeWidth(10);
+                    if(ActiveGame.getInstance().getOtherPlayer().getColor().equals("red"))
+                    {
+                        paint4.setColor(Color.RED);
+                    }
+                    else
+                    {
+                        paint4.setColor(Color.GREEN);
+                    }
+                    relativeLayout.addView(new Line(getActivity(), start2.getX(), start2.getY(), end2.getX(), end2.getY(), paint4));
+                }
+            }
+        });
 
         claimRoute= (Button)view.findViewById(R.id.claim);
         claimRoute.setOnClickListener(new View.OnClickListener() {
@@ -88,10 +160,21 @@ public class GameFragment extends Fragment {
                 }
                 else {
                     Result r = gamePresenter.claimRoute(getActivity());
-                    Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
-                    paint2.setStrokeWidth(10);
-                    paint2.setColor(Color.RED);
-                    relativeLayout.addView(new Line(getActivity(), lp.leftMargin + 10, lp.topMargin + 10, lp2.leftMargin + 10, lp2.topMargin + 10, paint2));
+                    Paint paint3 = new Paint(Paint.ANTI_ALIAS_FLAG);
+                    paint3.setStrokeWidth(10);
+                    if(ActiveGame.getInstance().getMyPlayer().getColor().equals("red"))
+                    {
+                        paint3.setColor(Color.RED);
+                    }
+                    else
+                    {
+                        paint3.setColor(Color.GREEN);
+                    }
+                    relativeLayout.addView(new Line(getActivity(), start1.getX(), start1.getY(), end1.getX(), end1.getY(), paint3));
+//                    Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
+//                    paint2.setStrokeWidth(10);
+//                    paint2.setColor(Color.RED);
+//                    relativeLayout.addView(new Line(getActivity(), lp.leftMargin + 10, lp.topMargin + 10, lp2.leftMargin + 10, lp2.topMargin + 10, paint2));
                     if (r != null) {
 
                         FragmentManager headfrag = getActivity().getSupportFragmentManager();

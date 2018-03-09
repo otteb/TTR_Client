@@ -86,6 +86,15 @@ public class ActiveGame {
         return null;
     }
 
+    public Player getOtherPlayer() {
+        for(Player p : players) {
+            if(!p.getName().equals(Client.getInstance().getUserName())){
+                return p;
+            }
+        }
+        return null;
+    }
+
     //get the player whose turn it is
     public Player getActivePlayer() {
         for(Player p : players)
