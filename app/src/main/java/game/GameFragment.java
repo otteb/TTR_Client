@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import java.util.Set;
 
+import Models.Client;
+import Models.Gameplay.ActiveGame;
 import Models.Result;
 import activities.R;
 import lobby.LobbyFragment;
@@ -57,7 +59,7 @@ public class GameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         gamePresenter = new GamePresenter(getContext());
         View view = inflater.inflate(R.layout.game, container, false);
-        RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
+        final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
 
         sunSpeare = (ImageButton)view.findViewById(R.id.sunSpeare);
         saltShore = (ImageButton) view.findViewById(R.id.saltShore);
@@ -65,8 +67,8 @@ public class GameFragment extends Fragment {
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeWidth(10);
         paint.setColor(Color.WHITE);
-        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)sunSpeare.getLayoutParams();
-        RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams)saltShore.getLayoutParams();
+        final RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)sunSpeare.getLayoutParams();
+        final RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams)saltShore.getLayoutParams();
         relativeLayout.addView(new Line(getActivity(), lp.leftMargin, lp.topMargin, lp2.leftMargin, lp2.topMargin, paint));
 
         Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -74,32 +76,35 @@ public class GameFragment extends Fragment {
         paint2.setColor(Color.BLACK);
         relativeLayout.addView(new Line(getActivity(), lp.leftMargin+10,lp.topMargin+10, lp2.leftMargin+10, lp2.topMargin+10, paint2));
 
-
-
-
-
-
-
-
-
         claimRoute= (Button)view.findViewById(R.id.claim);
         claimRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Result r = gamePresenter.claimRoute(getActivity());
-                if(r != null)
+
+                String username = ActiveGame.getInstance().getActivePlayer().getName();
+                if(!Client.getInstance().getUserName().equals(username))
                 {
+                    Toast.makeText(getActivity(), "It's not your turn!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Result r = gamePresenter.claimRoute(getActivity());
+                    Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
+                    paint2.setStrokeWidth(10);
+                    paint2.setColor(Color.RED);
+                    relativeLayout.addView(new Line(getActivity(), lp.leftMargin + 10, lp.topMargin + 10, lp2.leftMargin + 10, lp2.topMargin + 10, paint2));
+                    if (r != null) {
 
-                    FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                    Fragment fragment = new LobbyFragment();
+                        FragmentManager headfrag = getActivity().getSupportFragmentManager();
+                        Fragment fragment = new LobbyFragment();
 
-                    //need something along these lines for the game and users in it?
+                        //need something along these lines for the game and users in it?
                     /*bundle.putString("username", username.getText().toString());
                     bundle.putString("password", password.getText().toString());
                     bundle.putString("authToken", r.getAuthToken());
                     fragment.setArguments(bundle);*/
 
-                    headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+                        headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+                    }
                 }
 
             }
@@ -134,6 +139,16 @@ public class GameFragment extends Fragment {
 
             }
         });
+
+        String username = ActiveGame.getInstance().getActivePlayer().getName();
+        if(Client.getInstance().getUserName().equals(username))
+        {
+            Toast.makeText(getActivity(), "It's your turn!", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(getActivity(), "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
+        }
         return view;
     }
 

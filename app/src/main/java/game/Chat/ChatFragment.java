@@ -1,5 +1,7 @@
 package game.Chat;
 
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +35,10 @@ public class ChatFragment extends Fragment {
         View view = inflater.inflate(R.layout.chat, container, false);
         chat = (Button) view.findViewById(R.id.addChat);
         message = (EditText)view.findViewById(R.id.chatMessage);
+        TextView title = (TextView) view.findViewById(R.id.chat_title);
+        AssetManager am = getContext().getApplicationContext().getAssets();
+        Typeface custom_font = Typeface.createFromAsset(am, "game_of_thrones.ttf");
+        title.setTypeface(custom_font);
 
         chatRecView = (RecyclerView) view.findViewById(R.id.chat_list);
         chatRecView.setLayoutManager(new LinearLayoutManager(getActivity()));

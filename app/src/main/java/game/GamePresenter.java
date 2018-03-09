@@ -5,8 +5,13 @@ import android.widget.Toast;
 
 import java.util.Observable;
 
+import Models.Client;
+import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Player;
+import Models.Gameplay.Route;
+import Models.Request;
 import Models.Result;
+import Services.Commands.GamePlayServices;
 import activities.MainActivity;
 
 /**
@@ -45,6 +50,29 @@ public class GamePresenter {
 
     public Result claimRoute(Context c)
     {
+        //draw line -- new color for that player
+
+        //increment routes
+        Route rt = new Route();
+        ActiveGame.getInstance().getMyPlayer().getClaimedRoutes().add(rt);
+
+        //update player points
+        ActiveGame.getInstance().getMyPlayer().addPoints(7);
+
+        //update trains left
+        ActiveGame.getInstance().getMyPlayer().decNumTrains(4);
+
+        //add game history
+        Request fakeReq = new Request();
+//        fakeReq.setGameId(ActiveGame.getInstance().getId());
+        String action = Client.getInstance().getUserName() + " claimed a route.";
+        fakeReq.setAction(action);
+        GamePlayServices.getInstance().addGameHistory(fakeReq);
+
+        //increment turn
+        ActiveGame.getInstance().incTurn();
+        String username = ActiveGame.getInstance().getActivePlayer().getName();
+        Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         return null;
     }
 
