@@ -13,9 +13,13 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+import Models.Client;
+import Models.Gameplay.ActiveGame;
+import Models.Gameplay.Player;
 import RegisterLogin.LoginRegisterPresenter;
 import activities.R;
 
@@ -46,10 +50,12 @@ public class CardsFragment extends Fragment {
     Button sendDCardBack;
     TextView title;
     boolean destinationCardSetup = true;
-    final Bundle currentPlayer = getArguments();
+    final Bundle playerInfoFromGame = getArguments();
+    Player player;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        player= ActiveGame.getInstance().getMyPlayer();
         final View view = inflater.inflate(R.layout.card_view, container, false);
         cards = new ArrayList<LinearLayout>();
         card1=(LinearLayout)view.findViewById(R.id.cardViewCard1);
@@ -85,14 +91,21 @@ public class CardsFragment extends Fragment {
             fromTable.setVisibility(View.GONE);
             fromDeck.setVisibility(View.GONE);
             card2.setBackgroundColor(Color.parseColor("#F5F5DC"));
-            card2Start.setText("startcity");
-            card2End.setText("endcity");
+            card2Start.setText(player.getDestination_cards().get(0).getCity1());
+            card2End.setText(player.getDestination_cards().get(0).getCity2());
             card3.setBackgroundColor(Color.parseColor("#F5F5DC"));
-            card3Start.setText("startcity");
-            card3End.setText("endcity");
-            card4.setBackgroundColor(Color.parseColor("#F5F5DC"));
-            card4Start.setText("startcity");
-            card4End.setText("endcity");
+            card3Start.setText(player.getDestination_cards().get(1).getCity1());
+            card3End.setText(player.getDestination_cards().get(1).getCity2());
+            if(ActiveGame.getInstance().getMyPlayer().getDestination_cards().size()<3)
+            {
+                sendDCardBack.setVisibility(View.GONE);
+                card4.setVisibility(View.GONE);
+            }
+            else {
+                    card4.setBackgroundColor(Color.parseColor("#F5F5DC"));
+                    card4Start.setText(player.getDestination_cards().get(2).getCity1());
+                    card4End.setText(player.getDestination_cards().get(2).getCity2());
+            }
 
         }
         else{

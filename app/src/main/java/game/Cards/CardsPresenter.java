@@ -3,10 +3,13 @@ package game.Cards;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.ICardsPresenter;
+import Models.Cards.DestinationCard;
+import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 import game.Chat.ChatFragment;
@@ -38,7 +41,11 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         }
         else
         {
-            //draw from deck and append to player hand
+            ArrayList<DestinationCard> discard= new ArrayList<>();
+            discard.add(ActiveGame.getInstance().getMyPlayer().getDestination_cards().get(card-1));
+            ActiveGame.getInstance().getMyPlayer().getDestination_cards().remove(discard.get(0));
+            gameGuiFacade.discardDestinationCard(discard);
+            switchToGame(context);
         }
 
     }
