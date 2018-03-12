@@ -25,20 +25,15 @@ public class Client {// extends Observable {
     private HashMap<String, Game> gameMap;
     private Game activeGame;
     private boolean isLoggedIn;
-//    private boolean isRegistered;
     private String userName;
     private String password;
     private String authToken;
     private Request loginRequest;
     private Request registerRequest;
     private int commandNum = 0;
-    //properties specific to each Client in the active game:
-//    private int activeGameCMDNum = 0;
-//    private TTR_Observable obs = new TTR_Observable();
 
     //constructor
     private Client(){
-//        this.commandNum = 0;
         this.gameMap = new HashMap<>();
         isLoggedIn = false;
         activeGame = null;
@@ -86,12 +81,8 @@ public class Client {// extends Observable {
         if(this.userName.equals(username))
         {
             activeGame = gameMap.get(gameId);
-            if(isLoggedIn)
-            {
-                //only call notify the observer of joinGame if the user is the one joining a game
-                TTR_Observable.getInstance().joinGame();
-            }
         }
+        TTR_Observable.getInstance().joinGame();
     }
 
     public void removePlayerFromGame(String gameId, String username) {
