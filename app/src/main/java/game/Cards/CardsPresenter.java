@@ -12,19 +12,18 @@ import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
 import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
+import StatePattern.State;
 import activities.MainActivity;
 import game.Chat.ChatFragment;
 
-/**
- * Created by brianotte on 3/7/18.
- */
 
 public class CardsPresenter implements ICardsPresenter, Observer {
     //attributes:
     public Context context;
-    MainActivity mainActivity;
-    public GameGuiFacade gameGuiFacade = new GameGuiFacade();
-    ChatFragment chatFragment = new ChatFragment();
+    private MainActivity mainActivity;
+    private GameGuiFacade gameGuiFacade = new GameGuiFacade();
+    private State curState;
+//    ChatFragment chatFragment = new ChatFragment();
     //Constructor:
     public CardsPresenter(Context c){
         this.context = c;
@@ -54,11 +53,13 @@ public class CardsPresenter implements ICardsPresenter, Observer {
 
     //TODO - Draw a train card:
     public void drawTrainCardFromDeck(){
-
-
+        curState.drawTrainCard(this);
+        //change to the next state
+        //to drew1Card or to notmyturn
     }
 
     public void drawTrainCardFromTable(int cardIndex) {
+        curState.takeFaceUpCard(this);
         if(cardIndex == 0)
         {
             Toast.makeText(context, "You haven't selected enough cards", Toast.LENGTH_SHORT).show();
@@ -81,7 +82,7 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         context=c;
         mainActivity = (MainActivity) context;
         mainActivity.openGame();
-
+//        mainActivity.openGame(curState);
     }
 
 

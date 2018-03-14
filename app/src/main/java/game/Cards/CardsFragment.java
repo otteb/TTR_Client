@@ -89,7 +89,7 @@ public class CardsFragment extends Fragment {
         final Bundle currentPlayer = getArguments();
         destinationCardSetup= currentPlayer.getBoolean("destinationCardSetup");
         cardsPresenter = new CardsPresenter(getActivity());
-        if (destinationCardSetup==true)
+        if (destinationCardSetup)
         {
             title.setText("Destination Cards");
             card1.setVisibility(View.GONE);

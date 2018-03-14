@@ -11,4 +11,5 @@ public interface IGamePlay {
     void drawTrainCards(Request request);
     //include the updateClient:
     void updateClient(Request request); //(String authToken);
+    void incTurn(Request request);
 }

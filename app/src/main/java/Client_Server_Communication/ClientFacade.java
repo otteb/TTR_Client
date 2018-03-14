@@ -79,7 +79,7 @@ public class ClientFacade {
 
 //        Request request = new Request();
 //        request.setAuthToken(Client.getInstance().getAuthToken());
-//        request.setGameCMDNum(Client.getInstance().getActiveGameCMDNum());
+//        request.setGameCMDNum(Client.getInstance().getGameCMDNum());
 //        //call the client facade updateClient() - use the current index;
 ////            ArrayList<Command> returnList = clientFacade.updateClient(request).getUpdateCommands();
 //        ArrayList<Command> returnList = gamePlayFacade.updateClient(request).getUpdateCommands();

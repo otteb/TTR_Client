@@ -31,10 +31,6 @@ public class Player {
         numTrains = 45;
     }
 
-    public void chooseDestCard(){
-        //TODO: decide how to implement this method
-    }
-
     public String getColor() {
         return color;
     }
@@ -65,6 +61,7 @@ public class Player {
 
     public boolean isTurn() {
         return turn;
+//        return ActiveGame.getInstance().getActivePlayer().equals(name);
     }
 
     public void setTurn(boolean turn) {

@@ -5,7 +5,6 @@ import java.util.Observer;
 
 import AsyncTasks.GamePlay.ChatMessageAsyncTask;
 import AsyncTasks.GamePlay.DiscardDestinationCardAsyncTask;
-import AsyncTasks.LoginAndRegister.LoginAsyncTask;
 import Models.Cards.DestinationCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
@@ -34,7 +33,7 @@ public class GameGuiFacade {
         addChatRequest.setUsername(Client.getInstance().getUserName());
         addChatRequest.setChat(chat);
         addChatRequest.setChatMessage(chat.getMessage());
-        addChatRequest.setGameCMDNum(ActiveGame.getInstance().getActiveGameCMDNum());
+        addChatRequest.setGameCMDNum(ActiveGame.getInstance().getGameCMDNum());
         //execute the AsyncTask
         ChatMessageAsyncTask chatMessageAsyncTask = new ChatMessageAsyncTask();
         chatMessageAsyncTask.execute(addChatRequest);
@@ -49,7 +48,7 @@ public class GameGuiFacade {
         dDCRequest.setUsername(Client.getInstance().getUserName());
         dDCRequest.setGameId(ActiveGame.getInstance().getId());
         dDCRequest.setDiscardDest(destCards);
-        dDCRequest.setGameCMDNum(ActiveGame.getInstance().getActiveGameCMDNum());
+        dDCRequest.setGameCMDNum(ActiveGame.getInstance().getGameCMDNum());
         //execute the AsyncTask
         DiscardDestinationCardAsyncTask discardDestinationCardAsyncTask = new DiscardDestinationCardAsyncTask();
         discardDestinationCardAsyncTask.execute(dDCRequest);

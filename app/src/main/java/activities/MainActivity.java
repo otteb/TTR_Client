@@ -9,6 +9,7 @@ import Models.Request;
 import RegisterLogin.LoginFragment;
 //import game.GameHistory.GameHistoryFragment;
 
+import StatePattern.State;
 import game.Cards.CardsFragment;
 import game.Chat.ChatFragment;
 import game.GameHistory.GameHistoryFragment;
@@ -78,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openGame()
+    {
+        gameFragment = new GameFragment();
+        headfrag.beginTransaction().replace(R.id.activity_main, gameFragment).commit();
+    }
+
+    public void openGame(State state)
     {
         gameFragment = new GameFragment();
         headfrag.beginTransaction().replace(R.id.activity_main, gameFragment).commit();

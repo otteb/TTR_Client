@@ -23,7 +23,7 @@ public class ClientCommunicator {
     public static ClientCommunicator getInstance() { return myInstance; }
 
 
-    private String serverHost = "192.168.2.169"; //"10.14.176.243"; //"10.24.66.130"; "10.14.176.243"; //
+    private String serverHost = "192.168.2.35"; //"10.14.176.243"; //"10.24.66.130"; "10.14.176.243"; //
 
     private String serverPort = "8888";
 

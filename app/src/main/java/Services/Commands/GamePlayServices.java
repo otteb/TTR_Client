@@ -62,4 +62,16 @@ public class GamePlayServices implements IGamePlay {
     public void updateClient(Request request) {
         System.out.println("COMMAND EXECUTING - updateClient");
     }
+
+    @Override
+    public void incTurn(Request request) {
+        System.out.println("COMMAND EXECUTING - incTurn");
+        ActiveGame.getInstance().setActivePlayer(request.getUsername());
+        //what else do we need to do here?
+        if(request.getUsername().equals(Client.getInstance().getUserName()))
+        {
+            //State nextState
+            TTR_Observable.getInstance().changeState("MyTurn");
+        }
+    }
 }

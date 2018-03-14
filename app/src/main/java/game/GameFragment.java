@@ -1,12 +1,10 @@
 package game;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -25,6 +23,7 @@ import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Location;
 import Models.Result;
+import StatePattern.GameSetup;
 import activities.R;
 import lobby.LobbyFragment;
 import RegisterLogin.LoginRegisterPresenter;
@@ -48,7 +47,10 @@ public class GameFragment extends Fragment {
 
     public GameFragment()
     {
-        LoginRegisterPresenter loginRegisterPresenter = new LoginRegisterPresenter(getActivity());
+//        LoginRegisterPresenter loginRegisterPresenter = new LoginRegisterPresenter(getActivity());
+        gamePresenter = new GamePresenter(getContext());
+//        gamePresenter = new GamePresenter(getContext(), new GameSetup());
+
     }
 
     @Override
@@ -59,7 +61,7 @@ public class GameFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        gamePresenter = new GamePresenter(getContext());
+//        gamePresenter = new GamePresenter(getContext());
         View view = inflater.inflate(R.layout.game, container, false);
         final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
 
@@ -126,7 +128,7 @@ public class GameFragment extends Fragment {
         simulateTurn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = ActiveGame.getInstance().getActivePlayer().getName();
+                String username = ActiveGame.getInstance().getActivePlayerObj().getName();
                 if(Client.getInstance().getUserName().equals(username))
                 {
                     Toast.makeText(getActivity(), "It's not their turn!", Toast.LENGTH_SHORT).show();
@@ -153,7 +155,7 @@ public class GameFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String username = ActiveGame.getInstance().getActivePlayer().getName();
+                String username = ActiveGame.getInstance().getActivePlayerObj().getName();
                 if(!Client.getInstance().getUserName().equals(username))
                 {
                     Toast.makeText(getActivity(), "It's not your turn!", Toast.LENGTH_SHORT).show();
@@ -223,7 +225,7 @@ public class GameFragment extends Fragment {
             }
         });
 
-        String username = ActiveGame.getInstance().getActivePlayer().getName();
+        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
         if(Client.getInstance().getUserName().equals(username))
         {
             Toast.makeText(getActivity(), "It's your turn!", Toast.LENGTH_SHORT).show();

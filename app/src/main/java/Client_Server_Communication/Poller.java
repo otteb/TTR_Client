@@ -91,7 +91,7 @@ public class Poller {
             Request request = new Request();
             request.setGameId(ActiveGame.getInstance().getId());
             request.setAuthToken(Client.getInstance().getAuthToken());
-            request.setGameCMDNum(ActiveGame.getInstance().getActiveGameCMDNum());
+            request.setGameCMDNum(ActiveGame.getInstance().getGameCMDNum());
             //call the client facade updateClient() - use the current index;
 //            ArrayList<Command> returnList = clientFacade.updateClient(request).getUpdateCommands();
             ArrayList<Command> returnList = gamePlayFacade.updateClient(request).getUpdateCommands();
@@ -103,7 +103,7 @@ public class Poller {
             //create for loop and execute all of the commands;
             if(commands != null){
                 //updates the ActiveGame's CMD number:
-                ActiveGame.getInstance().incActiveGameCMDNum(commands.size());
+                ActiveGame.getInstance().incGameCMDNum(commands.size());
                 //iterates through the commands and executes them.
                 for(int i = 0; i < commands.size(); i++){
                     try {
