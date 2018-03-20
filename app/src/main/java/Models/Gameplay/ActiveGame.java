@@ -7,6 +7,7 @@ import Client_Server_Communication.Poller;
 import Models.Cards.TrainCard;
 import Models.Client;
 import ObserverPattern.TTR_Observable;
+import StatePattern.MyTurn;
 
 public class ActiveGame {
 
@@ -25,7 +26,7 @@ public class ActiveGame {
     private List<Route> Routes;
     private List<String> Cities;
     private int gameCMDNum = 0;
-    private String activePlayer;
+//    private String activePlayer;
 
     private ActiveGame(){
         players = new ArrayList<>();
@@ -109,12 +110,13 @@ public class ActiveGame {
     }
 
     public String getActivePlayer() {
-        return activePlayer;
+        return getActivePlayerObj().getName();
+//        return activePlayer;
     }
 
-    public void setActivePlayer(String activePlayer) {
-        this.activePlayer = activePlayer;
-    }
+//    public void setActivePlayer(String activePlayer) {
+//        this.activePlayer = activePlayer;
+//    }
 
     public void incTurn() {
         for(int i = 1; i < players.size(); i++)
@@ -133,6 +135,9 @@ public class ActiveGame {
                     players.get(0).setTurn(true);
                 }
             }
+        }
+        if(getActivePlayer().equals(Client.getInstance().getUserName())){
+            Client.getInstance().setCurState(new MyTurn());
         }
     }
 

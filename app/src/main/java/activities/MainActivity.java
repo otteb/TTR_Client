@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     {
         cardsFragment = new CardsFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("username", player);
+//        bundle.putString("username", player);
         bundle.putBoolean("destinationCardSetup", destinationCardSetup);
         cardsFragment.setArguments(bundle);
         headfrag.beginTransaction().replace(R.id.activity_main, cardsFragment).commit();

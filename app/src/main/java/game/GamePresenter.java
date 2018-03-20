@@ -15,10 +15,7 @@ import Models.Request;
 import Models.Result;
 import ObserverPattern.TTR_Observable;
 import Services.Commands.GamePlayServices;
-import StatePattern.DrewDestCards;
 import StatePattern.GameSetup;
-import StatePattern.MyTurn;
-import StatePattern.NotMyTurn;
 import StatePattern.State;
 import activities.MainActivity;
 
@@ -26,19 +23,20 @@ import activities.MainActivity;
 public class GamePresenter implements IGamePresenter, Observer {
     private Context context;
     private MainActivity mainActivity;
-    private Player player = ActiveGame.getInstance().getMyPlayer();
-    private State curState;
-    private State nextState = null;
+    private Player player;
+//    private State curState;
+//    private State nextState = null;
 
     public GamePresenter(Context c) {
         context = c;
-        curState = new GameSetup();
+        player = ActiveGame.getInstance().getMyPlayer();
+//        curState = new GameSetup();
         //guiFacade.addObserver(this);
     }
 
     public GamePresenter(Context c, State state) {
         context = c;
-        curState = state; //new GameSetup();
+//        curState = state; //new GameSetup();
         //guiFacade.addObserver(this);
     }
 
@@ -56,7 +54,7 @@ public class GamePresenter implements IGamePresenter, Observer {
 
         context = c;
         mainActivity = (MainActivity) context;
-        mainActivity.switchToCards(player.getName(), destinationCardSetup);
+        mainActivity.switchToCards(ActiveGame.getInstance().getMyPlayer().getName(), destinationCardSetup);
         //replace the boolean with the state?
 //        mainActivity.switchToCards(player.getName(), curState);
     }
@@ -64,7 +62,7 @@ public class GamePresenter implements IGamePresenter, Observer {
 
     public Result claimRoute(Context c)
     {
-        curState.claimRoute(this);
+        Client.getInstance().getCurState().claimRoute(this);
         //to implement the state pattern, do this in MyTurn?
 
         //draw line -- new color for that player
@@ -156,24 +154,24 @@ public class GamePresenter implements IGamePresenter, Observer {
 //        observable.hasChanged(); //what is this doing?
     }
 
-    public State getCurState() {
-        return curState;
-    }
-
-    public void setCurState(State curState) {
-        this.curState = curState;
-    }
-
-    public void changeState(State next)
-    {
-        if(nextState == null)
-        {
-            curState = next;
-        }
-        else
-        {
-            curState = nextState;
-        }
-    }
+//    public State getCurState() {
+//        return curState;
+//    }
+//
+//    public void setCurState(State curState) {
+//        this.curState = curState;
+//    }
+//
+//    public void changeState(State next)
+//    {
+//        if(nextState == null)
+//        {
+//            curState = next;
+//        }
+//        else
+//        {
+//            curState = nextState;
+//        }
+//    }
 
 }

@@ -8,7 +8,8 @@ public interface IGamePlay {
     //adjusted to void - they don't need to return anything to the Client - they update the models directly:
     void addGameHistory(Request request);
     void discardDestCards(Request request);
-    void drawTrainCards(Request request);
+    void drawTrainCard(Request request);
+    void takeFaceUpCard(Request request);
     //include the updateClient:
     void updateClient(Request request); //(String authToken);
     void incTurn(Request request);

@@ -6,11 +6,13 @@ import java.util.Observer;
 import AsyncTasks.GamePlay.ChatMessageAsyncTask;
 import AsyncTasks.GamePlay.DiscardDestinationCardAsyncTask;
 import Models.Cards.DestinationCard;
+import Models.Cards.TrainCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Chat;
 import Models.Request;
 import ObserverPattern.TTR_Observable;
+import Services.Commands.GamePlayServices;
 
 /**
  * Created by brianotte on 3/6/18.
@@ -22,7 +24,6 @@ public class GameGuiFacade {
     //this houses all of the game-specific functions that call the Async tasks:
     //instantiate all AsyncTasks here:
 
-    //FINISHED:
     public void addChat (Chat chat)
     {
         //addChat code:
@@ -39,7 +40,6 @@ public class GameGuiFacade {
         chatMessageAsyncTask.execute(addChatRequest);
     }
 
-    //FINISHED:
     public void discardDestinationCards(ArrayList<DestinationCard> destCards)
     {
         Request dDCRequest = new Request();
@@ -52,6 +52,27 @@ public class GameGuiFacade {
         //execute the AsyncTask
         DiscardDestinationCardAsyncTask discardDestinationCardAsyncTask = new DiscardDestinationCardAsyncTask();
         discardDestinationCardAsyncTask.execute(dDCRequest);
+    }
+
+    public void claimRoute(){
+
+    }
+
+    public void takeFaceUpCard(TrainCard card) {
+        Request request = new Request();
+        request.setAuthToken(Client.getInstance().getAuthToken());
+        request.setGameId(ActiveGame.getInstance().getId());
+        request.setUsername(Client.getInstance().getUserName());
+        ArrayList<TrainCard> cards = new ArrayList<>();
+        cards.add(card);
+        request.setTrainCards(cards);
+        request.setGameCMDNum(ActiveGame.getInstance().getGameCMDNum());
+        //execute the AsyncTask
+        //TODO: Create the asyncTask and then execute it here
+        //until we have server connection for this method, call the gamePlayServices
+        //delete the following lines once the server is connected
+//        ActiveGame.getInstance().getFaceUpCards().add
+//        GamePlayServices.getInstance().takeFaceUpCard(request);
     }
 
     public void addObserver(Observer o)

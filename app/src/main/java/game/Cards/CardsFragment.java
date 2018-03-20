@@ -53,7 +53,7 @@ public class CardsFragment extends Fragment {
     Button sendDCardBack;
     TextView title;
     boolean destinationCardSetup = true;
-    final Bundle playerInfoFromGame = getArguments();
+//    final Bundle playerInfoFromGame = getArguments();
     Player player;
 
     @Override
@@ -168,12 +168,12 @@ public class CardsFragment extends Fragment {
         fromTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cardCount < 2)
+                if(cardCount < 2 && card1Chosen != 0)
                 {
                     cardsPresenter.drawTrainCardFromTable(card1Chosen); //, card2Chosen);
                     cards.get(card1Chosen-1).setBackgroundColor(Color.parseColor("#4169E1"));
                     cardCount++;
-                    cardsPresenter.drawTrainCardFromTable(card1Chosen); //, card2Chosen);
+//                    cardsPresenter.drawTrainCardFromTable(card1Chosen); //, card2Chosen);
 //                    Random random = new Random();
 //                    int colorIndex=random.nextInt()%8;
 //                    switch (colorIndex) {

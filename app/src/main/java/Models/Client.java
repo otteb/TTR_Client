@@ -2,16 +2,12 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observable;
 
 import Client_Server_Communication.Poller;
 import Models.Gameplay.Game;
 import Models.Gameplay.Player;
 import ObserverPattern.TTR_Observable;
-
-/**
- * Created by brianotte on 2/12/18.
- */
+import StatePattern.State;
 
 public class Client {// extends Observable {
 
@@ -31,6 +27,7 @@ public class Client {// extends Observable {
     private Request loginRequest;
     private Request registerRequest;
     private int commandNum = 0;
+    private State curState;
 
     //constructor
     private Client(){
@@ -138,6 +135,10 @@ public class Client {// extends Observable {
         return loginRequest;
     }
 
+    public State getCurState() {
+        return curState;
+    }
+
 
     // SETTERS
     public void setActiveGame(Game activeGame) {
@@ -187,5 +188,9 @@ public class Client {// extends Observable {
 
     public Poller getPoller() {
         return poller;
+    }
+
+    public void setCurState(State curState) {
+        this.curState = curState;
     }
 }

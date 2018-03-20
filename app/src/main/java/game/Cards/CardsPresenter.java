@@ -10,6 +10,7 @@ import java.util.Observer;
 import Interfaces.ICardsPresenter;
 import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
+import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
 import StatePattern.State;
@@ -22,7 +23,7 @@ public class CardsPresenter implements ICardsPresenter, Observer {
     public Context context;
     private MainActivity mainActivity;
     private GameGuiFacade gameGuiFacade = new GameGuiFacade();
-    private State curState;
+//    private State curState;
 //    ChatFragment chatFragment = new ChatFragment();
     //Constructor:
     public CardsPresenter(Context c){
@@ -32,7 +33,6 @@ public class CardsPresenter implements ICardsPresenter, Observer {
 
     //functionality
 
-    //TODO - Sends back an array of destination cards:
     public void sendBackDestinationCard(Context context, int card){
         this.context=context;
         if (card == 0)
@@ -42,36 +42,32 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         else
         {
             //draw from deck and append to player hand
-            ArrayList<DestinationCard> discard= new ArrayList<>();
-            discard.add(ActiveGame.getInstance().getMyPlayer().getDestination_cards().get(card-1));
-//            ActiveGame.getInstance().getMyPlayer().getDestination_cards().remove(discard.get(0));
-            gameGuiFacade.discardDestinationCards(discard);
+            Client.getInstance().getCurState().returnDestCard(this, card-1);
             switchToGame(context);
         }
-
     }
 
     //TODO - Draw a train card:
     public void drawTrainCardFromDeck(){
-        curState.drawTrainCard(this);
+        Client.getInstance().getCurState().drawTrainCard(this);
         //change to the next state
         //to drew1Card or to notmyturn
     }
 
     public void drawTrainCardFromTable(int cardIndex) {
-        curState.takeFaceUpCard(this);
         if(cardIndex == 0)
         {
             Toast.makeText(context, "You haven't selected enough cards", Toast.LENGTH_SHORT).show();
         }
         else {
-            //add cards to player hand
-            //replace the cards on the table
-            ActiveGame.getInstance().getMyPlayer().getHand().add(ActiveGame.getInstance().getFaceUpCards().get(cardIndex-1));
-            ActiveGame.getInstance().getFaceUpCards().remove(cardIndex-1);
-
-            TrainCard newCard = new TrainCard("blue");
-            ActiveGame.getInstance().getFaceUpCards().add(cardIndex-1, newCard);
+            Client.getInstance().getCurState().takeFaceUpCard(this, cardIndex-1);
+//            //add cards to player hand
+//            //replace the cards on the table
+//            ActiveGame.getInstance().getMyPlayer().getHand().add(ActiveGame.getInstance().getFaceUpCards().get(cardIndex-1));
+//            ActiveGame.getInstance().getFaceUpCards().remove(cardIndex-1);
+//
+//            TrainCard newCard = new TrainCard("blue");
+//            ActiveGame.getInstance().getFaceUpCards().add(cardIndex-1, newCard);
         }
 
     }

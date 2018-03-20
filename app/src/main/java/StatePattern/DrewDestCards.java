@@ -13,6 +13,6 @@ public class DrewDestCards extends State {
 //    public void returnDestCard(GamePresenter wrapper) {}
 
     @Override
-    public void returnDestCard(CardsPresenter wrapper) {}
+    public void returnDestCard(CardsPresenter wrapper, int cardIndex) {}
 
 }

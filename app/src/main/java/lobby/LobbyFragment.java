@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import Models.Gameplay.Player;
+import Models.Request;
 import ObserverPattern.TTR_Observable;
+import Services.Commands.LobbyServices;
 import activities.R;
 import Models.Gameplay.Game;
 import Models.Client;
@@ -119,6 +121,10 @@ public class LobbyFragment extends Fragment {
                         TTR_Observable.getInstance().startGame();
                         start.setEnabled(true);
                         System.out.println("GetActiveGame == game");
+                        Request temp = new Request(); // Jordan-Approved
+                        temp.setUsername(Client.getInstance().getUserName());
+                        temp.setGameId(currentGame.getId());
+                        LobbyServices.getInstance().startGame(temp);
                     }
                     else if(Client.getInstance().getActiveGame().getId().equals(currentGame.getId()))
                     {

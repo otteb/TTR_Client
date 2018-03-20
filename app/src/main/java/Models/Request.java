@@ -20,7 +20,7 @@ public class Request {
     private Game game;      //Pass back Game object
     private String action; //Game history entry
     private ArrayList<DestinationCard> discardDest;
-    private ArrayList<TrainCard> discardTrains;
+    private ArrayList<TrainCard> trainCards;
     private int gameCMDNum;
 
     //Chat request Features:
@@ -119,12 +119,12 @@ public class Request {
         this.discardDest = discardDest;
     }
 
-    public ArrayList<TrainCard> getDiscardTrains() {
-        return discardTrains;
+    public ArrayList<TrainCard> getTrainCards() {
+        return trainCards;
     }
 
-    public void setDiscardTrains(ArrayList<TrainCard> discardTrains) {
-        this.discardTrains = discardTrains;
+    public void setTrainCards(ArrayList<TrainCard> trainCards) {
+        this.trainCards = trainCards;
     }
 
     public int getGameCMDNum() {
