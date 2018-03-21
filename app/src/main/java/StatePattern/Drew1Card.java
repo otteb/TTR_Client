@@ -1,6 +1,5 @@
 package StatePattern;
 
-import Models.Cards.TrainCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
@@ -21,27 +20,19 @@ public class Drew1Card extends State {
         {
             System.out.println("You can't take that card");
         }
-        else {
-
-
-            TrainCard card = ActiveGame.getInstance().getFaceUpCards().remove(cardIndex);
-
-//        ActiveGame.getInstance().getMyPlayer().getHand().add(ActiveGame.getInstance().getFaceUpCards().get(cardIndex));
-            //check if card is a wild
+        else
+        {
             Client.getInstance().setCurState(new NotMyTurn());
-//        ActiveGame.getInstance().getFaceUpCards().remove(cardIndex);
-
-            gui.takeFaceUpCard(card);
-            TrainCard newCard = new TrainCard("red");
-            ActiveGame.getInstance().getFaceUpCards().add(cardIndex, newCard);
-            ActiveGame.getInstance().incTurn();
+            gui.takeFaceUpCard(cardIndex);
+            gui.incTurn();
         }
     }
 
     @Override
     public void drawTrainCard(CardsPresenter wrapper) {
         //add all functionality
+        //TODO: Finish drawTrainCard (from deck) full-stack
         Client.getInstance().setCurState(new NotMyTurn());
-        ActiveGame.getInstance().incTurn();
+//        ActiveGame.getInstance().incTurn();
     }
 }

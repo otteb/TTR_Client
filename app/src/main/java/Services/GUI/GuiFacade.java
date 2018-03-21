@@ -12,10 +12,6 @@ import ObserverPattern.TTR_Observable;
 
 import java.util.Observer;
 
-/**
- * Created by fjameson on 2/9/18.
- */
-
 //this class takes information from the presenter, and packages it into a request object
     //that is then sent to the AsyncTasks:
 public class GuiFacade {
@@ -25,8 +21,7 @@ public class GuiFacade {
         Request loginRequest = new Request();
         loginRequest.setUsername(username);
         loginRequest.setPassword(password);
-        LoginAsyncTask loginAsyncTask = new LoginAsyncTask();
-        loginAsyncTask.execute(loginRequest);
+        new LoginAsyncTask().execute(loginRequest);
     }
 
     public void register (String username, String password)
@@ -34,18 +29,15 @@ public class GuiFacade {
         Request registerRequest = new Request();
         registerRequest.setUsername(username);
         registerRequest.setPassword(password);
-        RegisterAsyncTask registerAsyncTask = new RegisterAsyncTask();
-        registerAsyncTask.execute(registerRequest);
+        new RegisterAsyncTask().execute(registerRequest);
     }
     public void createGame (String gameId)
     {
         Request request = new Request();
         request.setAuthToken(Client.getInstance().getAuthToken());
         request.setGameId(gameId);
-        int temp = Client.getInstance().getCommandNum();
-        request.setCommandNum(temp);
-        CreateGameAsyncTask createGameAsyncTask = new CreateGameAsyncTask();
-        createGameAsyncTask.execute(request);
+        request.setCommandNum(Client.getInstance().getCommandNum());
+        new CreateGameAsyncTask().execute(request);
     }
 
     public void joinGame (Game game, String player)
@@ -55,8 +47,7 @@ public class GuiFacade {
         request.setGameId(game.getId());
         request.setUsername(player);
         request.setCommandNum(Client.getInstance().getCommandNum());
-        JoinGameAsyncTask joinGameAsyncTask = new JoinGameAsyncTask();
-        joinGameAsyncTask.execute(request);
+        new JoinGameAsyncTask().execute(request);
     }
 
 
@@ -66,16 +57,12 @@ public class GuiFacade {
         request.setGameId(gameId);
         request.setAuthToken(Client.getInstance().getAuthToken());
         request.setUsername(Client.getInstance().getUserName());
-        int temp = Client.getInstance().getCommandNum();
-        request.setCommandNum(temp);
-        StartGameAsyncTask startGameAsyncTask = new StartGameAsyncTask();
-        //executes the startGameAsyncTask:
-        startGameAsyncTask.execute(request);
+        request.setCommandNum(Client.getInstance().getCommandNum());
+        new StartGameAsyncTask().execute(request);
     }
 
     public void addObserver(Observer o)
     {
-//        Client.getInstance().addObserver(o);
         TTR_Observable.getInstance().addObserver(o);
     }
 

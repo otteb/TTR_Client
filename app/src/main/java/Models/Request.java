@@ -22,6 +22,7 @@ public class Request {
     private ArrayList<DestinationCard> discardDest;
     private ArrayList<TrainCard> trainCards;
     private int gameCMDNum;
+    private int cardIndex;
 
     //Chat request Features:
     private Chat chat;
@@ -133,5 +134,13 @@ public class Request {
 
     public void setGameCMDNum(int gameCMDNum) {
         this.gameCMDNum = gameCMDNum;
+    }
+
+    public int getCardIndex() {
+        return cardIndex;
+    }
+
+    public void setCardIndex(int cardIndex) {
+        this.cardIndex = cardIndex;
     }
 }

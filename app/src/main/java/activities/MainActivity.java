@@ -142,5 +142,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateHand() { statsFragment.updateHand(); }
 
-
+    public void updateFaceUp() { cardsFragment.updateFaceUp(); }
 }

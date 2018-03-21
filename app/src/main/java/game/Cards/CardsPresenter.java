@@ -23,8 +23,6 @@ public class CardsPresenter implements ICardsPresenter, Observer {
     public Context context;
     private MainActivity mainActivity;
     private GameGuiFacade gameGuiFacade = new GameGuiFacade();
-//    private State curState;
-//    ChatFragment chatFragment = new ChatFragment();
     //Constructor:
     public CardsPresenter(Context c){
         this.context = c;
@@ -42,7 +40,7 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         else
         {
             //draw from deck and append to player hand
-            Client.getInstance().getCurState().returnDestCard(this, card-1);
+            Client.getInstance().getCurState().returnDestCard(this, card-2);
             switchToGame(context);
         }
     }
@@ -59,15 +57,9 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         {
             Toast.makeText(context, "You haven't selected enough cards", Toast.LENGTH_SHORT).show();
         }
-        else {
+        else
+        {
             Client.getInstance().getCurState().takeFaceUpCard(this, cardIndex-1);
-//            //add cards to player hand
-//            //replace the cards on the table
-//            ActiveGame.getInstance().getMyPlayer().getHand().add(ActiveGame.getInstance().getFaceUpCards().get(cardIndex-1));
-//            ActiveGame.getInstance().getFaceUpCards().remove(cardIndex-1);
-//
-//            TrainCard newCard = new TrainCard("blue");
-//            ActiveGame.getInstance().getFaceUpCards().add(cardIndex-1, newCard);
         }
 
     }
@@ -78,7 +70,6 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         context=c;
         mainActivity = (MainActivity) context;
         mainActivity.openGame();
-//        mainActivity.openGame(curState);
     }
 
 
@@ -87,6 +78,11 @@ public class CardsPresenter implements ICardsPresenter, Observer {
 
     @Override
     public void update(Observable observable, Object o) {
-
+        if(o.equals("faceUp"))
+        {
+            mainActivity = (MainActivity) context;
+            mainActivity.updateFaceUp();
+        }
+        observable.hasChanged();
     }
 }

@@ -15,6 +15,7 @@ import Models.Request;
 import Models.Result;
 import ObserverPattern.TTR_Observable;
 import Services.Commands.GamePlayServices;
+import Services.GUI.GameGuiFacade;
 import StatePattern.GameSetup;
 import StatePattern.State;
 import activities.MainActivity;
@@ -87,7 +88,8 @@ public class GamePresenter implements IGamePresenter, Observer {
         GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
-        ActiveGame.getInstance().incTurn();
+//        ActiveGame.getInstance().incTurn();
+        new GameGuiFacade().incTurn();
         String username = ActiveGame.getInstance().getActivePlayerObj().getName();
         Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
@@ -121,7 +123,8 @@ public class GamePresenter implements IGamePresenter, Observer {
         GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
-        ActiveGame.getInstance().incTurn();
+//        ActiveGame.getInstance().incTurn();
+        new GameGuiFacade().incTurn();
         username = ActiveGame.getInstance().getActivePlayerObj().getName();
         Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
@@ -134,44 +137,6 @@ public class GamePresenter implements IGamePresenter, Observer {
     //this
     @Override
     public void update(Observable observable, Object o) {
-//        if(o.equals("MyTurn"))
-//        {
-//            if(curState instanceof NotMyTurn)
-//            {
-//                State next = new MyTurn();
-//                setCurState(next);
-//            }
-//            else if(curState instanceof DrewDestCards)
-//            {
-//                nextState = new MyTurn();
-//            }
-//        }
-//        if(o.equals(""))
-//        {
-//            mainActivity = (MainActivity) context;
-//            mainActivity.changeState();
-//        }
-//        observable.hasChanged(); //what is this doing?
+
     }
-
-//    public State getCurState() {
-//        return curState;
-//    }
-//
-//    public void setCurState(State curState) {
-//        this.curState = curState;
-//    }
-//
-//    public void changeState(State next)
-//    {
-//        if(nextState == null)
-//        {
-//            curState = next;
-//        }
-//        else
-//        {
-//            curState = nextState;
-//        }
-//    }
-
 }

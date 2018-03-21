@@ -57,16 +57,6 @@ public class GamePlayServices implements IGamePlay {
         {
             Client.getInstance().setCurState(new NotMyTurn());
         }
-//        Client.getInstance().setCurState(new NotMyTurn());
-//        TTR_Observable.getInstance().changeState("NotMyTurn");
-//        if(ActiveGame.getInstance().getMyPlayer().isTurn())
-//        {
-//            Client.getInstance().setCurState(new MyTurn());
-//        }
-//        else
-//        {
-//            Client.getInstance().setCurState(new NotMyTurn());
-//        }
     }
 
 
@@ -80,13 +70,14 @@ public class GamePlayServices implements IGamePlay {
     @Override
     public void takeFaceUpCard(Request request) {
         System.out.println("COMMAND EXECUTING - takeFaceUpCard");
-        //add functionality
+        ActiveGame.getInstance().getMyPlayer().getHand().add(request.getTrainCards().get(0));
+        ActiveGame.getInstance().replaceFaceUp(request.getCardIndex(), request.getTrainCards().get(1).getColor());
+        TTR_Observable.getInstance().updateStats("faceUp");
         TTR_Observable.getInstance().updateStats("hand");
     }
 
-
     //Doesn't do anything... just looks pretty:
-    //it doesn't even look pretty...
+    //Well it doesn't even look pretty...
     @Override
     public void updateClient(Request request) {
         System.out.println("COMMAND EXECUTING - updateClient");
@@ -95,8 +86,8 @@ public class GamePlayServices implements IGamePlay {
     @Override
     public void incTurn(Request request) {
         System.out.println("COMMAND EXECUTING - incTurn");
-//        ActiveGame.getInstance().setActivePlayer(request.getUsername());
-        //what else do we need to do here?
+        ActiveGame.getInstance().incTurn();
+        //username here is the name of the active player whose turn it is
         if(request.getUsername().equals(Client.getInstance().getUserName()))
         {
             if(Client.getInstance().getCurState() instanceof GameSetup)
@@ -108,10 +99,13 @@ public class GamePlayServices implements IGamePlay {
             {
                 System.out.println("It's your turn!");
                 Client.getInstance().setCurState(new MyTurn());
-                //do I want the observable?
-//                TTR_Observable.getInstance().changeState("MyTurn");
             }
-            //State nextState
         }
+    }
+
+    @Override
+    public void claimRoute(Request request){
+        System.out.println("COMMAND EXECUTING - claimRoute");
+        //TODO: implement this method
     }
 }

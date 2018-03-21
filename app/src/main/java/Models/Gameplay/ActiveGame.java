@@ -114,9 +114,10 @@ public class ActiveGame {
 //        return activePlayer;
     }
 
-//    public void setActivePlayer(String activePlayer) {
-//        this.activePlayer = activePlayer;
-//    }
+    public void replaceFaceUp(int index, String color)
+    {
+        faceUpCards.get(index).setColor(color);
+    }
 
     public void incTurn() {
         for(int i = 1; i < players.size(); i++)
