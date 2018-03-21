@@ -3,61 +3,87 @@ package Services.GUI;
 import java.util.ArrayList;
 import java.util.Observer;
 
-import AsyncTasks.GamePlay.ChatMessageAsyncTask;
-import AsyncTasks.GamePlay.DiscardDestinationCardAsyncTask;
-import AsyncTasks.LoginAndRegister.LoginAsyncTask;
+import AsyncTasks.GamePlay.ChatTask;
+import AsyncTasks.GamePlay.ClaimRouteTask;
+import AsyncTasks.GamePlay.DiscardDestinationsTask;
+import AsyncTasks.GamePlay.DrawDestinationsTask;
+import AsyncTasks.GamePlay.DrawTrainTask;
+import AsyncTasks.GamePlay.FaceUpTask;
+import AsyncTasks.GamePlay.EndTurnTask;
+import Interfaces.IGamePlay;
 import Models.Cards.DestinationCard;
+import Models.Cards.TrainCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Chat;
 import Models.Request;
 import ObserverPattern.TTR_Observable;
 
-/**
- * Created by brianotte on 3/6/18.
- */
-
 //this class takes information from the presenter, and packages it into a request object
 //that is then sent to the AsyncTasks:
 public class GameGuiFacade {
     //this houses all of the game-specific functions that call the Async tasks:
-    //instantiate all AsyncTasks here:
 
-    //FINISHED:
     public void addChat (Chat chat)
     {
-        //addChat code:
         //add properties for the addChat:
-        Request addChatRequest = new Request();
-        addChatRequest.setAuthToken(Client.getInstance().getAuthToken());
-        addChatRequest.setGameId(ActiveGame.getInstance().getId());
-        addChatRequest.setUsername(Client.getInstance().getUserName());
-        addChatRequest.setChat(chat);
-        addChatRequest.setChatMessage(chat.getMessage());
-        addChatRequest.setGameCMDNum(ActiveGame.getInstance().getActiveGameCMDNum());
+        Request chatRequest = setUpRequest();
+        chatRequest.setChat(chat);
+        chatRequest.setChatMessage(chat.getMessage());
         //execute the AsyncTask
-        ChatMessageAsyncTask chatMessageAsyncTask = new ChatMessageAsyncTask();
-        chatMessageAsyncTask.execute(addChatRequest);
+        new ChatTask().execute(chatRequest);
     }
 
-    //FINISHED:
     public void discardDestinationCards(ArrayList<DestinationCard> destCards)
     {
-        Request dDCRequest = new Request();
-        //add properties for the dDCRequest:
-        dDCRequest.setAuthToken(Client.getInstance().getAuthToken());
-        dDCRequest.setUsername(Client.getInstance().getUserName());
-        dDCRequest.setGameId(ActiveGame.getInstance().getId());
+        Request dDCRequest = setUpRequest();
+        //add other properties for the dDCRequest:
         dDCRequest.setDiscardDest(destCards);
-        dDCRequest.setGameCMDNum(ActiveGame.getInstance().getActiveGameCMDNum());
         //execute the AsyncTask
-        DiscardDestinationCardAsyncTask discardDestinationCardAsyncTask = new DiscardDestinationCardAsyncTask();
-        discardDestinationCardAsyncTask.execute(dDCRequest);
+        new DiscardDestinationsTask().execute(dDCRequest);
+    }
+
+    public void drawDestinationCards(ArrayList<DestinationCard> destCards) //do we pass anything in?
+    {
+//        Request dDCRequest = setUpRequest();
+        //execute the AsyncTask
+        new DrawDestinationsTask().execute(setUpRequest());
+    }
+
+    public void takeFaceUpCard(int cardIndex) {
+        Request request = setUpRequest();
+        request.setCardIndex(cardIndex);
+        //execute the AsyncTask
+        new FaceUpTask().execute(request);
+    }
+
+    public void drawTrainCard(TrainCard card) { //do we pass anything in?
+//        Request request = setUpRequest();
+        new DrawTrainTask().execute(setUpRequest());
+    }
+
+    public void incTurn(){
+//        Request request = setUpRequest();
+        new EndTurnTask().execute(setUpRequest());
+    }
+
+    public void claimRoute(){
+        Request request = setUpRequest();
+        //TODO: pass in some way to identify the route to be claimed
+
+        new ClaimRouteTask().execute(request);
     }
 
     public void addObserver(Observer o)
     {
-//        Client.getInstance().addObserver(o);
         TTR_Observable.getInstance().addObserver(o);
+    }
+
+    private Request setUpRequest() {
+        Request request = new Request();
+        request.setAuthToken(Client.getInstance().getAuthToken());
+        request.setGameId(ActiveGame.getInstance().getId());
+        request.setGameCMDNum(ActiveGame.getInstance().getGameCMDNum());
+        return request;
     }
 }

@@ -1,6 +1,5 @@
 package Client_Server_Communication;
 
-import Models.Client;
 import Models.Command;
 import Models.Gameplay.ActiveGame;
 import Models.Request;
@@ -15,9 +14,8 @@ public class GamePlayFacade {
         Command chatCommand = new Command("Interfaces.IChat", "addChat",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         //send the command to the server via the ClientCommunicator
-        Result chatResult = ClientCommunicator.getInstance().sendCommand(chatCommand);
+        return ClientCommunicator.getInstance().sendCommand(chatCommand);
         //return the Result object;
-        return chatResult;
     }
 
     // le Fin:
@@ -26,13 +24,58 @@ public class GamePlayFacade {
         Command gameCommand = new Command("Interfaces.IGamePlay", "discardDestCards",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         //send the command to the server via the ClientCommunicator
-        Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
+        return ClientCommunicator.getInstance().sendCommand(gameCommand);
         //return the Result object;
-        return gameResult;
+    }
+
+    public Result drawDestCards(Request request){
+        //build command:
+        Command gameCommand = new Command("Interfaces.IGamePlay", "drawDestCards",
+                new String[]{ "Models.Request" }, new Request[]{ request });
+        //send the command to the server via the ClientCommunicator
+        return ClientCommunicator.getInstance().sendCommand(gameCommand);
+        //return the Result object;
+    }
+
+    public Result takeFaceUpCard(Request request)
+    {
+        //build command:
+        Command gameCommand = new Command("Interfaces.IGamePlay", "takeFaceUpCard",
+                new String[]{ "Models.Request" }, new Request[]{ request });
+        //send the command to the server via the ClientCommunicator
+        return ClientCommunicator.getInstance().sendCommand(gameCommand);
+    }
+
+    public Result drawTrainCard(Request request)
+    {
+        //build command:
+        Command gameCommand = new Command("Interfaces.IGamePlay", "drawTrainCard",
+                new String[]{ "Models.Request" }, new Request[]{ request });
+        //send the command to the server via the ClientCommunicator
+        return ClientCommunicator.getInstance().sendCommand(gameCommand);
+    }
+
+    public Result claimRoute(Request request)
+    {
+        //build command:
+        Command gameCommand = new Command("Interfaces.IGamePlay", "claimRoute",
+                new String[]{ "Models.Request" }, new Request[]{ request });
+        //send the command to the server via the ClientCommunicator
+        return ClientCommunicator.getInstance().sendCommand(gameCommand);
+    }
+
+    public Result incTurn(Request request)
+    {
+        //build command:
+        Command gameCommand = new Command("Interfaces.IGamePlay", "incTurn",
+                new String[]{ "Models.Request" }, new Request[]{ request });
+        //send the command to the server via the ClientCommunicator
+        return ClientCommunicator.getInstance().sendCommand(gameCommand);
     }
 
 
     //TODO still needs to be adjusted:
+    //Does it still need to be adjusted?
     Result updateClient(Request request){
         Command gameCommand = new Command("Interfaces.IGamePlay", "updateClient",
                 new String[]{ "Models.Request" }, new Request[]{ request });
@@ -52,8 +95,8 @@ public class GamePlayFacade {
         if (result.isSuccessful())
         {
             for(int i = 0; i < result.getUpdateCommands().size(); i++){
-                int temp = ActiveGame.getInstance().getActiveGameCMDNum();
-                ActiveGame.getInstance().setActiveGameCMDNum(++temp);
+                int temp = ActiveGame.getInstance().getGameCMDNum();
+                ActiveGame.getInstance().setGameCMDNum(++temp);
                 try {
                     result.getUpdateCommands().get(i).execute();
                 }catch (Exception e)

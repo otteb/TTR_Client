@@ -46,14 +46,14 @@ public class CardsFragment extends Fragment {
     LinearLayout temp;
     ArrayList<LinearLayout> cards;
     int card1Chosen=0;
-    int card2Chosen=0;
+    int cardCount=0;
     Button returnToGame;
     Button fromTable;
     Button fromDeck;
     Button sendDCardBack;
     TextView title;
     boolean destinationCardSetup = true;
-    final Bundle playerInfoFromGame = getArguments();
+//    final Bundle playerInfoFromGame = getArguments();
     Player player;
 
     @Override
@@ -89,7 +89,7 @@ public class CardsFragment extends Fragment {
         final Bundle currentPlayer = getArguments();
         destinationCardSetup= currentPlayer.getBoolean("destinationCardSetup");
         cardsPresenter = new CardsPresenter(getActivity());
-        if (destinationCardSetup==true)
+        if (destinationCardSetup)
         {
             title.setText("Destination Cards");
             card1.setVisibility(View.GONE);
@@ -102,7 +102,7 @@ public class CardsFragment extends Fragment {
             card3.setBackgroundColor(Color.parseColor("#F5F5DC"));
             card3Start.setText(player.getDestination_cards().get(1).getCity1());
             card3End.setText(player.getDestination_cards().get(1).getCity2());
-            if(ActiveGame.getInstance().getMyPlayer().getDestination_cards().size()<3)
+            if(ActiveGame.getInstance().getMyPlayer().getDestination_cards().size() < 3)
             {
                 sendDCardBack.setVisibility(View.GONE);
                 card4.setVisibility(View.GONE);
@@ -115,39 +115,8 @@ public class CardsFragment extends Fragment {
 
         }
         else{
-            title.setText("Face Up Train Cards");
-            for(int i = 0; i < cards.size(); i++)
-            {
-                switch (ActiveGame.getInstance().getFaceUpCards().get(i).getColor()){
-                    case "purple":
-                        cards.get(i).setBackgroundColor(Color.parseColor("#DDA0DD"));
-                        break;
-                    case "white":
-                        cards.get(i).setBackgroundColor(Color.parseColor("#FFFAFA"));
-                        break;
-                    case "blue":
-                        cards.get(i).setBackgroundColor(Color.parseColor("#4169E1"));
-                        break;
-                    case "yellow":
-                        cards.get(i).setBackgroundColor(Color.parseColor("#FFD700"));
-                        break;
-                    case "orange":
-                        cards.get(i).setBackgroundColor(Color.parseColor("#FF8C00"));
-                        break;
-                    case "black":
-                        cards.get(i).setBackgroundColor(Color.parseColor("#000000"));
-                        break;
-                    case "red":
-                        cards.get(i).setBackgroundColor(Color.parseColor("#A52A2A"));
-                        break;
-                    case "green":
-                        cards.get(i).setBackgroundColor(Color.parseColor("#3CB371"));
-                        break;
-
-                    default:
-                        break;
-                }
-            }
+            title.setText("Train Cards");
+            updateFaceUp();
 //            card1.setBackgroundColor(Color);
             sendDCardBack.setVisibility(View.GONE);
         }
@@ -168,37 +137,11 @@ public class CardsFragment extends Fragment {
         fromTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardsPresenter.drawTrainCardFromTable(card1Chosen); //, card2Chosen);
-                Random random = new Random();
-                int colorIndex=random.nextInt()%8;
-                switch (colorIndex) {
-                    case 0:
-                        cards.get(card1Chosen - 1).setBackgroundColor(Color.parseColor("#DDA0DD"));
-                        break;
-                    case 1:
-                        cards.get(card1Chosen - 1).setBackgroundColor(Color.parseColor("#FFFAFA"));
-                        break;
-                    case 2:
-                        cards.get(card1Chosen - 1).setBackgroundColor(Color.parseColor("#4169E1"));
-                        break;
-                    case 3:
-                        cards.get(card1Chosen - 1).setBackgroundColor(Color.parseColor("#FFD700"));
-                        break;
-                    case 4:
-                        cards.get(card1Chosen - 1).setBackgroundColor(Color.parseColor("#FF8C00"));
-                        break;
-                    case 5:
-                        cards.get(card1Chosen - 1).setBackgroundColor(Color.parseColor("#000000"));
-                        break;
-                    case 6:
-                        cards.get(card1Chosen - 1).setBackgroundColor(Color.parseColor("#A52A2A"));
-                        break;
-                    case 7:
-                        cards.get(card1Chosen - 1).setBackgroundColor(Color.parseColor("#3CB371"));
-                        break;
-
-                    default:
-                        break;
+                if(cardCount < 2 && card1Chosen != 0)
+                {
+                    cardsPresenter.drawTrainCardFromTable(card1Chosen);
+//                    cards.get(card1Chosen-1).setBackgroundColor(Color.parseColor("#4169E1"));
+                    cardCount++;
                 }
             }
         });
@@ -213,72 +156,72 @@ public class CardsFragment extends Fragment {
         card1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (card1Chosen== 0)
-                {
-                    card1Chosen=1;
-                    card1.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                }
-                else if (card2Chosen ==0 && destinationCardSetup == false) {
-                    card2Chosen=1;
-                    card1.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                }
+                card1Chosen=1;
+                card1.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+//                if (card1Chosen== 0)
+//                {
+//                }
+//                else if (card2Chosen ==0 && destinationCardSetup == false) {
+//                    card2Chosen=1;
+//                    card1.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+//                }
             }
         });
 
         card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (card1Chosen== 0)
-                {
-                    card1Chosen=2;
-                    card2.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                }
-                else if (card2Chosen ==0 && destinationCardSetup == false) {
-                    card2Chosen=2;
-                    card2.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                }
+                card1Chosen=2;
+                card2.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+//                if (card1Chosen== 0)
+//                {
+//                }
+//                else if (card2Chosen ==0 && destinationCardSetup == false) {
+//                    card2Chosen=2;
+//                    card2.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+//                }
             }
         });
         card3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (card1Chosen== 0)
-                {
-                    card1Chosen=3;
-                    card3.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                }
-                else if (card2Chosen ==0 && destinationCardSetup == false) {
-                    card2Chosen=3;
-                    card3.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                }
+                card1Chosen=3;
+                card3.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+//                if (card1Chosen== 0)
+//                {
+//                }
+//                else if (card2Chosen ==0 && destinationCardSetup == false) {
+//                    card2Chosen=3;
+//                    card3.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+//                }
             }
         });
         card4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (card1Chosen== 0)
-                {
-                    card1Chosen=4;
-                    card4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                }
-                else if (card2Chosen ==0 && destinationCardSetup == false) {
-                    card2Chosen=4;
-                    card4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                }
+                card1Chosen=4;
+                card4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+//                if (card1Chosen== 0)
+//                {
+//                }
+//                else if (card2Chosen ==0 && destinationCardSetup == false) {
+//                    card2Chosen=4;
+//                    card4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+//                }
             }
         });
         card5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (card1Chosen== 0)
-                {
-                    card1Chosen=5;
-                    card5.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                }
-                else if (card2Chosen ==0 && destinationCardSetup == false) {
-                    card2Chosen=5;
-                    card5.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                }
+                card1Chosen=5;
+                card5.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+//                if (card1Chosen== 0)
+//                {
+//                }
+//                else if (card2Chosen ==0 && destinationCardSetup == false) {
+//                    card2Chosen=5;
+//                    card5.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+//                }
             }
         });
         return view;
@@ -286,7 +229,7 @@ public class CardsFragment extends Fragment {
 
     public void cardAlgorithm(LinearLayout card, int cardNum)
     {
-        if (destinationCardSetup == true)
+        if (destinationCardSetup)
         {
             if(card1Chosen != 0)
             {
@@ -298,6 +241,41 @@ public class CardsFragment extends Fragment {
         else
         {
             //if(card1Chosen != 0 == card2Chosen !=0)
+        }
+    }
+
+    public void updateFaceUp() {
+        for(int i = 0; i < cards.size(); i++)
+        {
+            switch (ActiveGame.getInstance().getFaceUpCards().get(i).getColor()){
+                case "purple":
+                    cards.get(i).setBackgroundColor(Color.parseColor("#DDA0DD"));
+                    break;
+                case "white":
+                    cards.get(i).setBackgroundColor(Color.parseColor("#FFFAFA"));
+                    break;
+                case "blue":
+                    cards.get(i).setBackgroundColor(Color.parseColor("#4169E1"));
+                    break;
+                case "yellow":
+                    cards.get(i).setBackgroundColor(Color.parseColor("#FFD700"));
+                    break;
+                case "orange":
+                    cards.get(i).setBackgroundColor(Color.parseColor("#FF8C00"));
+                    break;
+                case "black":
+                    cards.get(i).setBackgroundColor(Color.parseColor("#000000"));
+                    break;
+                case "red":
+                    cards.get(i).setBackgroundColor(Color.parseColor("#A52A2A"));
+                    break;
+                case "green":
+                    cards.get(i).setBackgroundColor(Color.parseColor("#3CB371"));
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 

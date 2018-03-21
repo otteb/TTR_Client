@@ -2,16 +2,12 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observable;
 
 import Client_Server_Communication.Poller;
 import Models.Gameplay.Game;
 import Models.Gameplay.Player;
 import ObserverPattern.TTR_Observable;
-
-/**
- * Created by brianotte on 2/12/18.
- */
+import StatePattern.State;
 
 public class Client {// extends Observable {
 
@@ -25,20 +21,16 @@ public class Client {// extends Observable {
     private HashMap<String, Game> gameMap;
     private Game activeGame;
     private boolean isLoggedIn;
-//    private boolean isRegistered;
     private String userName;
     private String password;
     private String authToken;
     private Request loginRequest;
     private Request registerRequest;
     private int commandNum = 0;
-    //properties specific to each Client in the active game:
-//    private int activeGameCMDNum = 0;
-//    private TTR_Observable obs = new TTR_Observable();
+    private State curState;
 
     //constructor
     private Client(){
-//        this.commandNum = 0;
         this.gameMap = new HashMap<>();
         isLoggedIn = false;
         activeGame = null;
@@ -86,12 +78,8 @@ public class Client {// extends Observable {
         if(this.userName.equals(username))
         {
             activeGame = gameMap.get(gameId);
-            if(isLoggedIn)
-            {
-                //only call notify the observer of joinGame if the user is the one joining a game
-                TTR_Observable.getInstance().joinGame();
-            }
         }
+        TTR_Observable.getInstance().joinGame();
     }
 
     public void removePlayerFromGame(String gameId, String username) {
@@ -147,6 +135,10 @@ public class Client {// extends Observable {
         return loginRequest;
     }
 
+    public State getCurState() {
+        return curState;
+    }
+
 
     // SETTERS
     public void setActiveGame(Game activeGame) {
@@ -196,5 +188,9 @@ public class Client {// extends Observable {
 
     public Poller getPoller() {
         return poller;
+    }
+
+    public void setCurState(State curState) {
+        this.curState = curState;
     }
 }

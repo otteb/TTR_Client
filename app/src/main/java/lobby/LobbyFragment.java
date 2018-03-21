@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import Models.Gameplay.Player;
+import Models.Request;
 import ObserverPattern.TTR_Observable;
+import Services.Commands.LobbyServices;
 import activities.R;
 import Models.Gameplay.Game;
 import Models.Client;
@@ -51,18 +53,14 @@ public class LobbyFragment extends Fragment {
     View view;
     Game currentGame = Client.getInstance().getActiveGame();
     ArrayList<TextView> players = new ArrayList<>(5);
-//    ArrayList<Game> games = new ArrayList<>();
-//    ArrayList<String> play;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         lobbyPresenter = new LobbyPresenter(getActivity());
         view = inflater.inflate(R.layout.lobby_fragment, container, false);// setting view
-//        final ArrayList<String>playernames = new ArrayList<String>();
 
         //stuff that comes from the last fragment
         final Bundle acceptedUser = getArguments();
-//        playernames.add(acceptedUser.getString("username"));
         curName = (TextView) view.findViewById(R.id.yourName);
         curName.setText(acceptedUser.getString("username"));
 
@@ -86,12 +84,8 @@ public class LobbyFragment extends Fragment {
         newGame = (LinearLayout) view.findViewById(R.id.newGame);
         gameName = (EditText) view.findViewById(R.id.gName);
         mGamesRecView = (RecyclerView) view.findViewById(R.id.game_list);
-//        final  TextView numPlayers = (TextView) view.findViewById(R.id.numPlayers);
-
         lobbyPresenter.setUser(acceptedUser.getString("username"), acceptedUser.getString("password"), acceptedUser.getString("authToken"));
-
         mGamesRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         final ArrayList<Game> games = Client.getInstance().getGameList();
         gamesAdapter = new GamesAdapter(games);
@@ -126,14 +120,16 @@ public class LobbyFragment extends Fragment {
                     {
                         TTR_Observable.getInstance().startGame();
                         start.setEnabled(true);
-//                        lobbyPresenter.startGame(getActivity(), currentGame);
                         System.out.println("GetActiveGame == game");
+                        Request temp = new Request(); // Jordan-Approved
+                        temp.setUsername(Client.getInstance().getUserName());
+                        temp.setGameId(currentGame.getId());
+                        LobbyServices.getInstance().startGame(temp);
                     }
                     else if(Client.getInstance().getActiveGame().getId().equals(currentGame.getId()))
                     {
                         TTR_Observable.getInstance().startGame();
                         start.setEnabled(true);
-//                        lobbyPresenter.startGame(getActivity(), currentGame);
                         System.out.println("GetActiveGameId.equals(game.getId())");
                     }
                     else
@@ -164,11 +160,15 @@ public class LobbyFragment extends Fragment {
                     newGame.setVisibility(View.GONE);
                     gameName.setText(null);
                     curGame.setText(currentGame.getId());
-//                    ArrayList<Game> temp = Client.getInstance().getGameList();
                 }
             }
         });
         updateGameList();
+        if(Client.getInstance().getActiveGame() != null)
+        {
+            currentGame = Client.getInstance().getActiveGame();
+            updatePlayers();
+        }
         return view;
     }
 

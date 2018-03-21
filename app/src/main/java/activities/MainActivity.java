@@ -9,6 +9,7 @@ import Models.Request;
 import RegisterLogin.LoginFragment;
 //import game.GameHistory.GameHistoryFragment;
 
+import StatePattern.State;
 import game.Cards.CardsFragment;
 import game.Chat.ChatFragment;
 import game.GameHistory.GameHistoryFragment;
@@ -83,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
         headfrag.beginTransaction().replace(R.id.activity_main, gameFragment).commit();
     }
 
+    public void openGame(State state)
+    {
+        gameFragment = new GameFragment();
+        headfrag.beginTransaction().replace(R.id.activity_main, gameFragment).commit();
+    }
+
     public void updateCreate(Game currentGame)
     {
         //currentGame = lobbyP.createGame(getActivity(), play, gameName.getText().toString());
@@ -111,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     {
         cardsFragment = new CardsFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("username", player);
+//        bundle.putString("username", player);
         bundle.putBoolean("destinationCardSetup", destinationCardSetup);
         cardsFragment.setArguments(bundle);
         headfrag.beginTransaction().replace(R.id.activity_main, cardsFragment).commit();
@@ -135,5 +142,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateHand() { statsFragment.updateHand(); }
 
-
+    public void updateFaceUp() { cardsFragment.updateFaceUp(); }
 }

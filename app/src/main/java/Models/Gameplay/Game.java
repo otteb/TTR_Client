@@ -92,7 +92,7 @@ public class Game {
         this.active = active;
     }
 
-//    public void addChatMessage(String message){
+//    public void addChat(String message){
 //        chats.add(message);
 //    }
 //

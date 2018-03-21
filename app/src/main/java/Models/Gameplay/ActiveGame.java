@@ -7,6 +7,7 @@ import Client_Server_Communication.Poller;
 import Models.Cards.TrainCard;
 import Models.Client;
 import ObserverPattern.TTR_Observable;
+import StatePattern.MyTurn;
 
 public class ActiveGame {
 
@@ -24,7 +25,8 @@ public class ActiveGame {
     private List<TrainCard> faceUpCards;
     private List<Route> Routes;
     private List<String> Cities;
-    private int activeGameCMDNum = 0;
+    private int gameCMDNum = 0;
+//    private String activePlayer;
 
     private ActiveGame(){
         players = new ArrayList<>();
@@ -32,8 +34,8 @@ public class ActiveGame {
         history = new GameHistory();
     }
 
-    public void incActiveGameCMDNum(int num){
-        this.activeGameCMDNum += num;
+    public void incGameCMDNum(int num){
+        this.gameCMDNum += num;
     }
 
     public String getId() {
@@ -96,7 +98,7 @@ public class ActiveGame {
     }
 
     //get the player whose turn it is
-    public Player getActivePlayer() {
+    public Player getActivePlayerObj() {
         for(Player p : players)
         {
             if(p.isTurn())
@@ -105,6 +107,16 @@ public class ActiveGame {
             }
         }
         return null;
+    }
+
+    public String getActivePlayer() {
+        return getActivePlayerObj().getName();
+//        return activePlayer;
+    }
+
+    public void replaceFaceUp(int index, String color)
+    {
+        faceUpCards.get(index).setColor(color);
     }
 
     public void incTurn() {
@@ -125,13 +137,16 @@ public class ActiveGame {
                 }
             }
         }
+        if(getActivePlayer().equals(Client.getInstance().getUserName())){
+            Client.getInstance().setCurState(new MyTurn());
+        }
     }
 
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
 
-    public void addChatMessage(Chat chat){
+    public void addChat(Chat chat){
         chats.add(chat);
         TTR_Observable.getInstance().updateChat();
     }
@@ -180,11 +195,11 @@ public class ActiveGame {
         return poller;
     }
 
-    public int getActiveGameCMDNum() {
-        return activeGameCMDNum;
+    public int getGameCMDNum() {
+        return gameCMDNum;
     }
 
-    public void setActiveGameCMDNum(int activeGameCMDNum) {
-        this.activeGameCMDNum = activeGameCMDNum;
+    public void setGameCMDNum(int gameCMDNum) {
+        this.gameCMDNum = gameCMDNum;
     }
 }

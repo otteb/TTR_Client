@@ -11,6 +11,17 @@ public class TTR_Observable extends Observable {
 
     private TTR_Observable(){}
 
+    //do we want to pass in the new state as a state object or as a string?
+//    public void changeState(String newState) {
+//        setChanged();
+//        notifyObservers(newState);
+//    }
+
+    public void updateCards(String msg) {
+        setChanged();
+        notifyObservers(msg);
+    }
+
     /*
     msg can be "hand" or "stats"
     "hand" will update the number of each color train card and total destination and train cards

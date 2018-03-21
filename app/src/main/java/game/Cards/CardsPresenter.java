@@ -10,37 +10,25 @@ import java.util.Observer;
 import Interfaces.ICardsPresenter;
 import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
+import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
+import StatePattern.State;
 import activities.MainActivity;
 import game.Chat.ChatFragment;
 
-/**
- * @inv any context arg != null
- * @inv this.context= current context of the activity
- */
 
 public class CardsPresenter implements ICardsPresenter, Observer {
 
     public Context context;
-    MainActivity mainActivity;
-    public GameGuiFacade gameGuiFacade = new GameGuiFacade();
-    ChatFragment chatFragment = new ChatFragment();
-
-    /*
-    *@pre gameGuiFacade != null
-    *@post The CardsPresenter is an Observer of the gameGuiFacade class
-    * */
+    private MainActivity mainActivity;
+    private GameGuiFacade gameGuiFacade = new GameGuiFacade();
+    //Constructor:
     public CardsPresenter(Context c){
         this.context = c;
         gameGuiFacade.addObserver(this);
     }
 
-    /*
-    *@pre card < 6 && card >= 0
-    *@post card=0 will ret an error Toast
-    * card if != 0 will be passed on to the guiFacade, which shall remove it
-    * */
     public void sendBackDestinationCard(Context context, int card){
         this.context=context;
         if (card == 0)
@@ -50,13 +38,9 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         else
         {
             //draw from deck and append to player hand
-            ArrayList<DestinationCard> discard= new ArrayList<>();
-            discard.add(ActiveGame.getInstance().getMyPlayer().getDestination_cards().get(card-1));
-//            ActiveGame.getInstance().getMyPlayer().getDestination_cards().remove(discard.get(0));
-            gameGuiFacade.discardDestinationCards(discard);
+            Client.getInstance().getCurState().returnDestCard(this, card-2);
             switchToGame(context);
         }
-
     }
 
     /*
@@ -65,8 +49,9 @@ public class CardsPresenter implements ICardsPresenter, Observer {
    * card if != 0 will be passed on to the guiFacade, which shall remove it
    * */
     public void drawTrainCardFromDeck(){
-
-
+        Client.getInstance().getCurState().drawTrainCard(this);
+        //change to the next state
+        //to drew1Card or to notmyturn
     }
 
     public void drawTrainCardFromTable(int cardIndex) {
@@ -74,14 +59,9 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         {
             Toast.makeText(context, "You haven't selected enough cards", Toast.LENGTH_SHORT).show();
         }
-        else {
-            //add cards to player hand
-            //replace the cards on the table
-            ActiveGame.getInstance().getMyPlayer().getHand().add(ActiveGame.getInstance().getFaceUpCards().get(cardIndex-1));
-            ActiveGame.getInstance().getFaceUpCards().remove(cardIndex-1);
-
-            TrainCard newCard = new TrainCard("blue");
-            ActiveGame.getInstance().getFaceUpCards().add(cardIndex-1, newCard);
+        else
+        {
+            Client.getInstance().getCurState().takeFaceUpCard(this, cardIndex-1);
         }
 
     }
@@ -92,7 +72,6 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         context=c;
         mainActivity = (MainActivity) context;
         mainActivity.openGame();
-
     }
 
 
@@ -101,6 +80,11 @@ public class CardsPresenter implements ICardsPresenter, Observer {
 
     @Override
     public void update(Observable observable, Object o) {
-
+        if(o.equals("faceUp"))
+        {
+            mainActivity = (MainActivity) context;
+            mainActivity.updateFaceUp();
+        }
+        observable.hasChanged();
     }
 }
