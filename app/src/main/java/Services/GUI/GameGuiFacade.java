@@ -69,7 +69,7 @@ public class GameGuiFacade {
 
     public void claimRoute(){
         Request request = setUpRequest();
-        //TODO: pass in some way to identify the route to be claimed
+        //TODO: (claimRoute) pass in some way to identify the route to be claimed
 
         new ClaimRouteTask().execute(request);
     }

@@ -24,22 +24,15 @@ import activities.MainActivity;
 public class GamePresenter implements IGamePresenter, Observer {
     private Context context;
     private MainActivity mainActivity;
-    private Player player;
-//    private State curState;
-//    private State nextState = null;
+    private GameGuiFacade gui = new GameGuiFacade();
+//    private Player player;
 
     public GamePresenter(Context c) {
         context = c;
-        player = ActiveGame.getInstance().getMyPlayer();
-//        curState = new GameSetup();
-        //guiFacade.addObserver(this);
+//        player = ActiveGame.getInstance().getMyPlayer();
+        gui.addObserver(this);
     }
 
-    public GamePresenter(Context c, State state) {
-        context = c;
-//        curState = state; //new GameSetup();
-        //guiFacade.addObserver(this);
-    }
 
     public void switchToStats(Context c)
     {
@@ -55,9 +48,9 @@ public class GamePresenter implements IGamePresenter, Observer {
 
         context = c;
         mainActivity = (MainActivity) context;
-        mainActivity.switchToCards(ActiveGame.getInstance().getMyPlayer().getName(), destinationCardSetup);
-        //replace the boolean with the state?
-//        mainActivity.switchToCards(player.getName(), curState);
+//        mainActivity.switchToCards(ActiveGame.getInstance().getMyPlayer().getName(), destinationCardSetup);
+        mainActivity.switchToCards(destinationCardSetup);
+
     }
 
 
@@ -82,14 +75,12 @@ public class GamePresenter implements IGamePresenter, Observer {
 
         //add game history
         Request fakeReq = new Request();
-//        fakeReq.setGameId(ActiveGame.getInstance().getId());
         String action = Client.getInstance().getUserName() + " claimed a route.";
         fakeReq.setAction(action);
         GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
-//        ActiveGame.getInstance().incTurn();
-        new GameGuiFacade().incTurn();
+        gui.incTurn();
         String username = ActiveGame.getInstance().getActivePlayerObj().getName();
         Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
@@ -113,7 +104,6 @@ public class GamePresenter implements IGamePresenter, Observer {
         ActiveGame.getInstance().getActivePlayerObj().getHand().remove(0);
         ActiveGame.getInstance().getActivePlayerObj().getHand().remove(0);
         ActiveGame.getInstance().getActivePlayerObj().getHand().remove(0);
-//        ActiveGame.getInstance().getActivePlayerObj().getHand().remove(2);
 
         //add game history
         Request fakeReq = new Request();
@@ -123,18 +113,14 @@ public class GamePresenter implements IGamePresenter, Observer {
         GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
-//        ActiveGame.getInstance().incTurn();
-        new GameGuiFacade().incTurn();
+        gui.incTurn();
         username = ActiveGame.getInstance().getActivePlayerObj().getName();
         Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
         return null;
     }
 
-
-
-    //TODO change the update for the GamePresenter
-    //this
+    // We need this for updating the claimed routes
     @Override
     public void update(Observable observable, Object o) {
 

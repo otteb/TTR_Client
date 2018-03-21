@@ -11,15 +11,11 @@ public class TTR_Observable extends Observable {
 
     private TTR_Observable(){}
 
-    //do we want to pass in the new state as a state object or as a string?
-//    public void changeState(String newState) {
-//        setChanged();
-//        notifyObservers(newState);
-//    }
-
-    public void updateCards(String msg) {
+    //msg is really just "faceUp"
+    public void updateCards() {
         setChanged();
-        notifyObservers(msg);
+        notifyObservers("faceUp");
+        updateStats("stats");
     }
 
     /*

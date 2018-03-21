@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
-    public final static String openMap= "false";
+//    public final static String openMap= "false";
     public LobbyFragment lobbyFragment;
     public GameFragment gameFragment;
     public LoginFragment loginFragment;
@@ -41,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (openMap.equals("true")) {
-            switchToCards("kip", false);
-        } else {
+//        if (openMap.equals("true")) {
+//            switchToCards("kip", false);
+//        } else {
            switchToLogin();
-
-        }
+//
+//        }
     }
 
     public void switchToLogin()
@@ -84,11 +84,6 @@ public class MainActivity extends AppCompatActivity {
         headfrag.beginTransaction().replace(R.id.activity_main, gameFragment).commit();
     }
 
-    public void openGame(State state)
-    {
-        gameFragment = new GameFragment();
-        headfrag.beginTransaction().replace(R.id.activity_main, gameFragment).commit();
-    }
 
     public void updateCreate(Game currentGame)
     {
@@ -119,6 +114,15 @@ public class MainActivity extends AppCompatActivity {
         cardsFragment = new CardsFragment();
         Bundle bundle = new Bundle();
 //        bundle.putString("username", player);
+        bundle.putBoolean("destinationCardSetup", destinationCardSetup);
+        cardsFragment.setArguments(bundle);
+        headfrag.beginTransaction().replace(R.id.activity_main, cardsFragment).commit();
+    }
+
+    public void switchToCards(boolean destinationCardSetup )
+    {
+        cardsFragment = new CardsFragment();
+        Bundle bundle = new Bundle();
         bundle.putBoolean("destinationCardSetup", destinationCardSetup);
         cardsFragment.setArguments(bundle);
         headfrag.beginTransaction().replace(R.id.activity_main, cardsFragment).commit();

@@ -8,6 +8,7 @@ public interface IGamePlay {
     //adjusted to void - they don't need to return anything to the Client - they update the models directly:
     void addGameHistory(Request request);
     void discardDestCards(Request request);
+    void drawDestCards(Request request);
     void takeFaceUpCard(Request request);
     void drawTrainCard(Request request);
     void claimRoute(Request request);
