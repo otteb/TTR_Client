@@ -16,24 +16,31 @@ import activities.MainActivity;
 import game.Chat.ChatFragment;
 
 /**
- * Created by brianotte on 3/7/18.
+ * @inv any context arg != null
+ * @inv this.context= current context of the activity
  */
 
 public class CardsPresenter implements ICardsPresenter, Observer {
-    //attributes:
+
     public Context context;
     MainActivity mainActivity;
     public GameGuiFacade gameGuiFacade = new GameGuiFacade();
     ChatFragment chatFragment = new ChatFragment();
-    //Constructor:
+
+    /*
+    *@pre gameGuiFacade != null
+    *@post The CardsPresenter is an Observer of the gameGuiFacade class
+    * */
     public CardsPresenter(Context c){
         this.context = c;
         gameGuiFacade.addObserver(this);
     }
 
-    //functionality
-
-    //TODO - Sends back an array of destination cards:
+    /*
+    *@pre card < 6 && card >= 0
+    *@post card=0 will ret an error Toast
+    * card if != 0 will be passed on to the guiFacade, which shall remove it
+    * */
     public void sendBackDestinationCard(Context context, int card){
         this.context=context;
         if (card == 0)
@@ -52,7 +59,11 @@ public class CardsPresenter implements ICardsPresenter, Observer {
 
     }
 
-    //TODO - Draw a train card:
+    /*
+   *
+   *@post card=0 will ret an error Toast
+   * card if != 0 will be passed on to the guiFacade, which shall remove it
+   * */
     public void drawTrainCardFromDeck(){
 
 

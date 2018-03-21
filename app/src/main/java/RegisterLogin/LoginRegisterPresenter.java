@@ -16,7 +16,8 @@ import Models.Result;
 import Services.GUI.GuiFacade;
 
 /**
- * Created by fjameson on 2/2/18.
+ * @inv any context arg != null
+ * @inv this.context= current context of the activity
  */
 
 public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer {
@@ -27,12 +28,24 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
     LoginFragment loginFragment;
     MainActivity mainActivity;
 
+    /**
+     * @pre gameGuiFacade != null
+     * @post The CardsPresenter is an Observer of the gameGuiFacade class
+     * @post user != null
+     */
     public LoginRegisterPresenter(Context c) {
         context=c;
         guiFacade.addObserver(this);
         user = new Request();
     }
 
+    /**
+     * @pre username != null
+     * @pre password != null
+     * @post user.username = username
+     * @post user.password = password
+     * @post username && passed onto the guiFacade
+     */
     public void login(Context c, String username, String password)
     {
         context=c;
@@ -48,6 +61,9 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
         }
     }
 
+    /**
+     * @post The Activity is switched to the Register Fragment
+     */
     public void switchToRegister(Context c)
     {
         context=c;
@@ -56,6 +72,9 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
         mainActivity.switchToRegister();
     }
 
+    /**
+     * @post The Activity is switched to the Login Fragment
+     */
     public void switchToLogin(Context c){
         context=c;
         Toast.makeText(c, "Switching to Login", Toast.LENGTH_SHORT).show();
@@ -63,6 +82,15 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
         mainActivity.switchToLogin();
     }
 
+    /**
+     * @pre username != null
+     * @pre password != null
+     * @pre confpswd = password
+     * @post user != null
+     * @post user.username = username
+     * @post user.password = password
+     * @post username && passed onto the guiFacade
+     */
     public void register(Context c, String username, String password, String confpswd)
     {
         context = c;
@@ -80,6 +108,13 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
     }
 
 
+    /**
+     * @pre o != null
+     * @pre result != null
+     * @pre result= "login"
+     * @post user.authToken = Client.authToken (singleton class)
+     * @post the activity is switched to the Lobby Fragment
+     */
     @Override
     public void update(Observable o, Object result) {
         if(result.equals("login"))
@@ -93,19 +128,5 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
             mainActivity.switchToLobby(user);
         }
         o.hasChanged();
-
-//        if (!authToken.equals("create") && !authToken.equals("join") && !authToken.equals("start")) {
-//            if (user != null) {
-//                if (authToken.equals("ERROR: Invalid Registration") || authToken.equals("ERROR: Incorrect username/password combination")) {
-//                    Toast.makeText(context, (CharSequence) authToken, Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    user.setAuthToken((String) authToken);
-//                    mainActivity = (MainActivity) context;
-//                    mainActivity.switchToLobby(user);
-//                    user = null;
-//                }
-//            }
-//        }
     }
 }
