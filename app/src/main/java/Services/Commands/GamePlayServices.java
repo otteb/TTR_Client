@@ -59,11 +59,17 @@ public class GamePlayServices implements IGamePlay {
         }
     }
 
+    @Override
+    public void drawDestCards(Request request) {
+        System.out.println("COMMAND EXECUTING - drawTrainCard");
+        //TODO: add functionality to drawDestCards()
+        TTR_Observable.getInstance().updateStats("hand");
+    }
 
     @Override
     public void drawTrainCard(Request request) {
         System.out.println("COMMAND EXECUTING - drawTrainCard");
-        //add functionality
+        //TODO: add functionality to drawTrainCard()
         TTR_Observable.getInstance().updateStats("hand");
     }
 
@@ -72,8 +78,8 @@ public class GamePlayServices implements IGamePlay {
         System.out.println("COMMAND EXECUTING - takeFaceUpCard");
         ActiveGame.getInstance().getMyPlayer().getHand().add(request.getTrainCards().get(0));
         ActiveGame.getInstance().replaceFaceUp(request.getCardIndex(), request.getTrainCards().get(1).getColor());
-        TTR_Observable.getInstance().updateStats("faceUp");
-        TTR_Observable.getInstance().updateStats("hand");
+        TTR_Observable.getInstance().updateCards();
+//        TTR_Observable.getInstance().updateStats("hand");
     }
 
     //Doesn't do anything... just looks pretty:
@@ -106,6 +112,6 @@ public class GamePlayServices implements IGamePlay {
     @Override
     public void claimRoute(Request request){
         System.out.println("COMMAND EXECUTING - claimRoute");
-        //TODO: implement this method
+        //TODO: implement claimRoute()
     }
 }

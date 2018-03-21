@@ -11,14 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Player;
 import activities.R;
 
-//TODO: check/implement observable
 
 public class StatsFragment extends Fragment {
     TextView redCards;
@@ -46,7 +43,6 @@ public class StatsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //TODO: set the color number cards
         statsPresenter = new StatsPresenter(getContext());
         View view = inflater.inflate(R.layout.stats_rv, container, false);
 

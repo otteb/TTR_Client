@@ -12,7 +12,7 @@ public class MyTurn extends State {
 
     @Override
     public void claimRoute(GamePresenter wrapper) {
-        //TODO: finish this
+        //TODO: implement claimRoute()
         gui.claimRoute();
     }
 
