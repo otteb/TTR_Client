@@ -65,9 +65,9 @@ public class State {
         }
     }
 
-    public void drawDestCards(GamePresenter wrapper) {
+    public void drawDestCards(CardsPresenter wrapper) {
         //toast it's not your turn
-        System.out.println("It's not your turn!");
+        System.out.println("You cannot draw any more cards this turn.");
 
         if(Client.getInstance().getCurState() instanceof MyTurn) {
             System.out.println("Current state: MyTurn");

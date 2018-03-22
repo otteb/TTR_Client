@@ -49,35 +49,34 @@ public class GamePlayServices implements IGamePlay {
     public void discardDestCards(Request request) {
         System.out.println("COMMAND EXECUTING - discardDestCards");
         ActiveGame.getInstance().getPlayer(request.getUsername()).discardDestCards(request.getDiscardDest());
+        TTR_Observable.getInstance().updateStats("destinations");
         TTR_Observable.getInstance().updateStats("stats");
-        if(ActiveGame.getInstance().getActivePlayer().equals(Client.getInstance().getUserName())){
-            Client.getInstance().setCurState(new MyTurn());
-        }
-        else
-        {
-            Client.getInstance().setCurState(new NotMyTurn());
-        }
+//        if(ActiveGame.getInstance().getActivePlayer().equals(Client.getInstance().getUserName())){
+//            Client.getInstance().setCurState(new MyTurn());
+//        }
+//        else
+//        {
+//            Client.getInstance().setCurState(new NotMyTurn());
+//        }
     }
 
     @Override
     public void drawDestCards(Request request) {
-        System.out.println("COMMAND EXECUTING - drawTrainCard");
-        //TODO: add functionality to drawDestCards()
-
-        TTR_Observable.getInstance().updateStats("hand");
+        System.out.println("COMMAND EXECUTING - drawDestCards");
+        ActiveGame.getInstance().getPlayer(request.getUsername()).addDrawnDestCards(request.getDestCards());
+        if(request.getUsername().equals(Client.getInstance().getUserName()))
+        {
+            TTR_Observable.getInstance().updateCards("destinations");
+        }
     }
 
     @Override
     public void drawTrainCard(Request request) {
         System.out.println("COMMAND EXECUTING - drawTrainCard");
+        ActiveGame.getInstance().getPlayer(request.getUsername()).getHand().add(request.getTrainCards().get(0));
         if(request.getUsername().equals(Client.getInstance().getUserName()))
         {
-            ActiveGame.getInstance().getMyHand().add(request.getTrainCards().get(0));
             TTR_Observable.getInstance().updateCards("deck");
-        }
-        else
-        {
-            ActiveGame.getInstance().getPlayer(request.getUsername()).getHand().add(request.getTrainCards().get(0));
         }
         TTR_Observable.getInstance().updateStats("hand");
     }

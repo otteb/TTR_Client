@@ -11,7 +11,7 @@ public class TTR_Observable extends Observable {
 
     private TTR_Observable(){}
 
-    //msg can be "faceUp" or "deck"
+    //msg can be "faceUp" or "deck" or "destinations"
     public void updateCards(String msg) {
         setChanged();
         notifyObservers(msg);

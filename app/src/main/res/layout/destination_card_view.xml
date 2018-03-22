@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,12 +32,12 @@
                 android:layout_marginTop="60dp">
 
                 <TextView
+                    android:text="DESTINATION CARDS"
                     android:layout_width="wrap_content"
                     android:textSize="20sp"
                     android:layout_marginStart="20dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/cardViewName"
-                    android:text="@string/train_cards"/>
+                    android:id="@+id/cardViewName" />
 
             </LinearLayout>
 
@@ -45,15 +45,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginStart="15dp">
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="60dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/rainbow"
-                    android:id="@+id/cardViewCard1"
-                    android:layout_marginEnd="10dp"
-                    android:orientation="vertical">
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_weight="1"
@@ -63,8 +54,23 @@
                     android:layout_marginEnd="10dp"
                     android:id="@+id/cardViewCard2"
                     android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/cardViewCard2StartCity"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/cardViewCard2EndCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_weight="1"
                     android:layout_width="60dp"
@@ -73,8 +79,23 @@
                     android:id="@+id/cardViewCard3"
                     android:layout_marginEnd="10dp"
                     android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/cardViewCard3StartCity"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/cardViewCard3EndCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_weight="1"
                     android:layout_height="80dp"
@@ -83,54 +104,31 @@
                     android:layout_marginEnd="10dp"
                     android:orientation="vertical"
                     android:layout_width="60dp">
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="60dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/rainbow"
-                    android:id="@+id/cardViewCard5"
-                    android:layout_marginEnd="10dp"
-                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/cardViewCard4StartCity"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/cardViewCard4EndCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
                 </LinearLayout>
             </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom">
-            <RelativeLayout
-                android:orientation="horizontal"
-                android:layout_width="410dp"
-                android:layout_height="67dp"
-                android:layout_gravity="center_horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
 
-                <Button
-                    android:id="@+id/cardViewFromTable"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Take From Table"
-                    android:backgroundTint="#A52A2A"
-                    android:layout_alignBaseline="@+id/cardViewFromDeck"
-                    android:layout_alignBottom="@+id/cardViewFromDeck"
-                    android:layout_toEndOf="@+id/cardViewFromDeck"
-                    android:layout_marginStart="7dp"/>
-
-                <Button
-                    android:id="@+id/cardViewFromDeck"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_marginStart="58dp"
-                    android:text="Draw From Deck"
-                    android:backgroundTint="#A52A2A"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"/>
-
-            </RelativeLayout>
-        </LinearLayout>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -144,14 +142,14 @@
                     android:layout_gravity="center_horizontal">
 
                     <Button
-                        android:id="@+id/cardViewToGame"
+                        android:id="@+id/cardViewDCardToDeck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="Return to Game"
+                        android:text="@string/discard_dest"
                         android:backgroundTint="#A52A2A"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true"/>
+                        android:layout_centerHorizontal="true"/>
 
                 </RelativeLayout>
 
@@ -162,19 +160,38 @@
                     android:layout_gravity="center_horizontal">
 
                     <Button
-                        android:id="@+id/cardViewSkipTurn"
+                        android:id="@+id/cardViewDrawDests"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="Skip Turn"
+                        android:text="@string/draw_dest"
                         android:backgroundTint="#A52A2A"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="26dp"/>
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"/>
                 </RelativeLayout>
+
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="398dp"
+                    android:layout_height="67dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/cardViewToGame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="Return to Game"
+                        android:backgroundTint="#A52A2A"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"/>
+
+
+                </RelativeLayout>
+
             </LinearLayout>
         </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>
 

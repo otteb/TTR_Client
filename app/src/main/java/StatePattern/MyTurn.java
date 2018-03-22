@@ -40,8 +40,9 @@ public class MyTurn extends State {
     }
 
     @Override
-    public void drawDestCards(GamePresenter wrapper) {
-        //TODO: implement drawDestCards
+    public void drawDestCards(CardsPresenter wrapper) {
+        gui.drawDestinationCards();
+        Client.getInstance().setCurState(new DrewDestCards());
     }
 
 }

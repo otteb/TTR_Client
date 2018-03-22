@@ -15,7 +15,6 @@ public class GamePlayFacade {
                 new String[]{ "Models.Request" }, new Request[]{ request });
         //send the command to the server via the ClientCommunicator
         return ClientCommunicator.getInstance().sendCommand(chatCommand);
-        //return the Result object;
     }
 
     // le Fin:
@@ -25,7 +24,6 @@ public class GamePlayFacade {
                 new String[]{ "Models.Request" }, new Request[]{ request });
         //send the command to the server via the ClientCommunicator
         return ClientCommunicator.getInstance().sendCommand(gameCommand);
-        //return the Result object;
     }
 
     public Result drawDestCards(Request request){
@@ -34,7 +32,6 @@ public class GamePlayFacade {
                 new String[]{ "Models.Request" }, new Request[]{ request });
         //send the command to the server via the ClientCommunicator
         return ClientCommunicator.getInstance().sendCommand(gameCommand);
-        //return the Result object;
     }
 
     public Result takeFaceUpCard(Request request)
@@ -90,18 +87,14 @@ public class GamePlayFacade {
     }
 
 
-    //Finished
     public void runCMD(Result result) {
         if (result.isSuccessful())
         {
             ActiveGame.getInstance().incGameCMDNum(result.getUpdateCommands().size());
-            for(int i = 0; i < result.getUpdateCommands().size(); i++){
-//                int temp = ActiveGame.getInstance().getGameCMDNum();
-//                ActiveGame.getInstance().setGameCMDNum(++temp);
-                try {
-                    result.getUpdateCommands().get(i).execute();
-                }catch (Exception e)
-                {
+            for(int i = 0; i < result.getUpdateCommands().size(); i++)
+            {
+                try { result.getUpdateCommands().get(i).execute(); }
+                catch (Exception e) {
                     System.out.println("ERROR");
                     e.printStackTrace();
                 }

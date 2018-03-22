@@ -3,45 +3,48 @@ package game.Cards;
 import android.content.Context;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.ICardsPresenter;
-import Models.Cards.DestinationCard;
-import Models.Cards.TrainCard;
 import Models.Client;
-import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
-import StatePattern.State;
 import activities.MainActivity;
-import game.Chat.ChatFragment;
-
 
 public class CardsPresenter implements ICardsPresenter, Observer {
     //attributes:
     public Context context;
     private MainActivity mainActivity;
     private GameGuiFacade gameGuiFacade = new GameGuiFacade();
+    private boolean keepAll;
     //Constructor:
     public CardsPresenter(Context c){
         this.context = c;
         gameGuiFacade.addObserver(this);
     }
 
-    //functionality
 
     public void sendBackDestinationCard(Context context, int card){
         this.context=context;
         if (card == 0)
         {
-            Toast.makeText(context, "You haven't selected a card", Toast.LENGTH_SHORT).show();
+            if(!keepAll)
+            {
+                Toast.makeText(context, "You haven't selected a card, press again to keep all three cards.", Toast.LENGTH_SHORT).show();
+                keepAll = true;
+            }
+            else //keepAll is true, they pressed it a second time
+            {
+                Client.getInstance().getCurState().returnDestCard(this, -1);
+                keepAll = false;
+            }
         }
         else
         {
+            keepAll = false;
             //draw from deck and append to player hand
             Client.getInstance().getCurState().returnDestCard(this, card-2);
-            switchToGame(context);
+//            switchToGame(context);
         }
     }
 
@@ -59,7 +62,10 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         {
             Client.getInstance().getCurState().takeFaceUpCard(this, cardIndex-1);
         }
+    }
 
+    void drawDestinationCards() {
+        Client.getInstance().getCurState().drawDestCards(this);
     }
 
     //Navigating Views:
@@ -87,6 +93,11 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         {
             mainActivity = (MainActivity) context;
             mainActivity.displayDrawnCard();
+        }
+        else if(o.equals("destinations"))
+        {
+            mainActivity = (MainActivity) context;
+            mainActivity.updateDestinations();
         }
         observable.hasChanged();
     }

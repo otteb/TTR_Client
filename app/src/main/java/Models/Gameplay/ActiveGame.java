@@ -1,7 +1,6 @@
 package Models.Gameplay;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import Client_Server_Communication.Poller;
 import Models.Cards.DestinationCard;
@@ -23,18 +22,16 @@ public class ActiveGame {
     private GameHistory history;
     private ArrayList<Player> players; //list of players
     private ArrayList<Chat> chats;  //List of all chats (format of "username: msg" )
-    private List<TrainCard> faceUpCards;
-    private List<Route> Routes;
-    private List<String> Cities;
+    private ArrayList<TrainCard> faceUpCards;
+    private ArrayList<Route> routes;
+    private ArrayList<String> Cities;
     private int gameCMDNum = 0;
-    private ArrayList<DestinationCard> drawnDestCards;
-    //TODO: do I want the drawnDestCards here or in the player? I think here...
-//    private String activePlayer;
 
     private ActiveGame(){
         players = new ArrayList<>();
         chats = new ArrayList<>();
         history = new GameHistory();
+        routes = new ArrayList<>();
     }
 
     public void incGameCMDNum(int num){
@@ -122,7 +119,6 @@ public class ActiveGame {
 
     public String getActivePlayer() {
         return getActivePlayerObj().getName();
-//        return activePlayer;
     }
 
     public void replaceFaceUp(int index, String color)
@@ -170,27 +166,27 @@ public class ActiveGame {
         this.chats = chat;
     }
 
-    public List<Route> getRoutes() {
-        return Routes;
+    public ArrayList<Route> getRoutes() {
+        return routes;
     }
 
-    public void setRoutes(List<Route> routes) {
-        Routes = routes;
+    public void setRoutes(ArrayList<Route> routes) {
+        this.routes = routes;
     }
 
-    public List<String> getCities() {
+    public ArrayList<String> getCities() {
         return Cities;
     }
 
-    public void setCities(List<String> cities) {
+    public void setCities(ArrayList<String> cities) {
         Cities = cities;
     }
 
-    public List<TrainCard> getFaceUpCards() {
+    public ArrayList<TrainCard> getFaceUpCards() {
         return faceUpCards;
     }
 
-    public void setFaceUpCards(List<TrainCard> faceUpCards) {
+    public void setFaceUpCards(ArrayList<TrainCard> faceUpCards) {
         this.faceUpCards = faceUpCards;
     }
 
@@ -212,5 +208,9 @@ public class ActiveGame {
 
     public void setGameCMDNum(int gameCMDNum) {
         this.gameCMDNum = gameCMDNum;
+    }
+
+    public ArrayList<DestinationCard> getDrawnDestinations() {
+        return getMyPlayer().getDrawnDestCards();
     }
 }

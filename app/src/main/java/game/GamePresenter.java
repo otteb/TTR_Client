@@ -7,17 +7,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.IGamePresenter;
-import Models.Client;
 import Models.Gameplay.ActiveGame;
-import Models.Gameplay.Player;
-import Models.Gameplay.Route;
-import Models.Request;
 import Models.Result;
 import ObserverPattern.TTR_Observable;
-import Services.Commands.GamePlayServices;
 import Services.GUI.GameGuiFacade;
-import StatePattern.GameSetup;
-import StatePattern.State;
 import activities.MainActivity;
 
 
@@ -41,16 +34,21 @@ public class GamePresenter implements IGamePresenter, Observer {
         mainActivity.switchToStats();
     }
 
-    public void switchToCards(Context c, Boolean destinationCardSetup)
+    public void switchToCards(Context c)
     {
 //        player = new Player();
 //        player.setName("kip");
 
         context = c;
         mainActivity = (MainActivity) context;
-//        mainActivity.switchToCards(ActiveGame.getInstance().getMyPlayer().getName(), destinationCardSetup);
-        mainActivity.switchToCards(destinationCardSetup);
+        mainActivity.switchToTrainCards();
+    }
 
+    public void switchToDestCards(Context c)
+    {
+        context = c;
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToDestCards();
     }
 
 

@@ -21,6 +21,7 @@ public class Request {
     private String action; //Game history entry
     private ArrayList<DestinationCard> discardDest;
     private ArrayList<TrainCard> trainCards;
+    private ArrayList<DestinationCard> destCards;
     private int gameCMDNum;
     private int cardIndex;
 
@@ -142,5 +143,13 @@ public class Request {
 
     public void setCardIndex(int cardIndex) {
         this.cardIndex = cardIndex;
+    }
+
+    public ArrayList<DestinationCard> getDestCards() {
+        return destCards;
+    }
+
+    public void setDestCards(ArrayList<DestinationCard> destCards) {
+        this.destCards = destCards;
     }
 }
