@@ -56,28 +56,29 @@ public class GamePresenter implements IGamePresenter, Observer {
 
     public Result claimRoute(Context c)
     {
-        Client.getInstance().getCurState().claimRoute(this);
-        //to implement the state pattern, do this in MyTurn?
 
-        //draw line -- new color for that player
-
-        //increment routes
-        Route rt = new Route();
-        ActiveGame.getInstance().getMyPlayer().getClaimedRoutes().add(rt);
-
-        //update player points
-        ActiveGame.getInstance().getMyPlayer().addPoints(7);
-
-        //update trains left
-        ActiveGame.getInstance().getMyPlayer().decNumTrains(4);
-
-        ActiveGame.getInstance().getMyPlayer().getHand().clear();
-
-        //add game history
-        Request fakeReq = new Request();
-        String action = Client.getInstance().getUserName() + " claimed a route.";
-        fakeReq.setAction(action);
-        GamePlayServices.getInstance().addGameHistory(fakeReq);
+//        Client.getInstance().getCurState().claimRoute(this);
+//        //to implement the state pattern, do this in MyTurn?
+//
+//        //draw line -- new color for that player
+//
+//        //increment routes
+//        Route rt = new Route();
+//        ActiveGame.getInstance().getMyPlayer().getClaimedRoutes().add(rt);
+//
+//        //update player points
+//        ActiveGame.getInstance().getMyPlayer().addPoints(7);
+//
+//        //update trains left
+//        ActiveGame.getInstance().getMyPlayer().decNumTrains(4);
+//
+//        ActiveGame.getInstance().getMyPlayer().getHand().clear();
+//
+//        //add game history
+//        Request fakeReq = new Request();
+//        String action = Client.getInstance().getUserName() + " claimed a route.";
+//        fakeReq.setAction(action);
+//        GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
         gui.incTurn();
@@ -92,29 +93,29 @@ public class GamePresenter implements IGamePresenter, Observer {
         //draw line -- new color for that player
 
         //increment routes
-        Route rt = new Route();
-        ActiveGame.getInstance().getActivePlayerObj().getClaimedRoutes().add(rt);
-
-        //update player points
-        ActiveGame.getInstance().getActivePlayerObj().addPoints(4);
-
-        //update trains left
-        ActiveGame.getInstance().getActivePlayerObj().decNumTrains(3);
-
-        ActiveGame.getInstance().getActivePlayerObj().getHand().remove(0);
-        ActiveGame.getInstance().getActivePlayerObj().getHand().remove(0);
-        ActiveGame.getInstance().getActivePlayerObj().getHand().remove(0);
-
-        //add game history
-        Request fakeReq = new Request();
-        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
-        String action = username + " claimed a route.";
-        fakeReq.setAction(action);
-        GamePlayServices.getInstance().addGameHistory(fakeReq);
+//        Route rt = new Route();
+//        ActiveGame.getInstance().getActivePlayerObj().getClaimedRoutes().add(rt);
+//
+//        //update player points
+//        ActiveGame.getInstance().getActivePlayerObj().addPoints(4);
+//
+//        //update trains left
+//        ActiveGame.getInstance().getActivePlayerObj().decNumTrains(3);
+//
+//        ActiveGame.getInstance().getActivePlayerObj().getHand().remove(0);
+//        ActiveGame.getInstance().getActivePlayerObj().getHand().remove(0);
+//        ActiveGame.getInstance().getActivePlayerObj().getHand().remove(0);
+//
+//        //add game history
+//        Request fakeReq = new Request();
+//        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
+//        String action = username + " claimed a route.";
+//        fakeReq.setAction(action);
+//        GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
         gui.incTurn();
-        username = ActiveGame.getInstance().getActivePlayerObj().getName();
+        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
         Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
         return null;

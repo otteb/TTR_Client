@@ -13,7 +13,7 @@ public class Player {
     private boolean turn;
     private int numTrains; //will be decremented when a route is claimed
     private List<Route> claimedRoutes;
-    private List<TrainCard> hand;
+    private ArrayList<TrainCard> hand;
     private List<DestinationCard> destination_cards;
 
     public Player() {
@@ -76,11 +76,11 @@ public class Player {
         this.claimedRoutes = claimedRoutes;
     }
 
-    public List<TrainCard> getHand() {
+    public ArrayList<TrainCard> getHand() {
         return hand;
     }
 
-    public void setHand(List<TrainCard> hand) {
+    public void setHand(ArrayList<TrainCard> hand) {
         this.hand = hand;
     }
 

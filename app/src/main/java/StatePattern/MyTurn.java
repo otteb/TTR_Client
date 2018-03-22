@@ -1,6 +1,5 @@
 package StatePattern;
 
-import Models.Cards.TrainCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
@@ -23,8 +22,8 @@ public class MyTurn extends State {
         //check if card is a wild
         if(ActiveGame.getInstance().getFaceUpCards().get(cardIndex).getColor().equals("wild"))
         {
-            Client.getInstance().setCurState(new NotMyTurn());
             gui.takeFaceUpCard(cardIndex);
+            Client.getInstance().setCurState(new NotMyTurn());
             gui.incTurn();
         }
         else
@@ -36,11 +35,13 @@ public class MyTurn extends State {
 
     @Override
     public void drawTrainCard(CardsPresenter wrapper) {
-        //add all functionality
+        gui.drawTrainCard();
         Client.getInstance().setCurState(new Drew1Card());
     }
 
     @Override
-    public void drawDestCards(GamePresenter wrapper) {}
+    public void drawDestCards(GamePresenter wrapper) {
+        //TODO: implement drawDestCards
+    }
 
 }

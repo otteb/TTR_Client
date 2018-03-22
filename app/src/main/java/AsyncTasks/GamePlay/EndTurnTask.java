@@ -21,13 +21,13 @@ public class EndTurnTask extends AsyncTask<Request, Void, Result> {
     //onPostExecute updates the Game model:
     @Override
     protected void onPostExecute(Result result) {
-        if (result.getErrorMsg() == null) {
-            System.out.println("Incrementing turn - This is the asyncTask");
-            //this references the correct facade, and runs the command:
-            gamePlayFacade.runCMD(result);
-        } else {
-            //create an error message for the Active Game Model:
-            TTR_Observable.getInstance().sendMessage(result.getErrorMsg());
-        }
+//        if (result.getErrorMsg() == null) {
+//            System.out.println("Incrementing turn - This is the asyncTask");
+//            //this references the correct facade, and runs the command:
+////            gamePlayFacade.runCMD(result);
+//        } else {
+//            //create an error message for the Active Game Model:
+//            TTR_Observable.getInstance().sendMessage(result.getErrorMsg());
+//        }
     }
 }

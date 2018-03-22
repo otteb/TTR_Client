@@ -57,8 +57,7 @@ public class GameGuiFacade {
         new FaceUpTask().execute(request);
     }
 
-    public void drawTrainCard(TrainCard card) { //do we pass anything in?
-//        Request request = setUpRequest();
+    public void drawTrainCard() {
         new DrawTrainTask().execute(setUpRequest());
     }
 

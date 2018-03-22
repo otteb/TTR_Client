@@ -13,8 +13,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background = "@drawable/got"
-        >
+        android:background = "@drawable/got">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,6 +22,7 @@
             android:background="@drawable/scroll"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="50dp">
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
@@ -29,26 +30,28 @@
                 android:layout_marginLeft="55dp"
                 android:layout_marginRight="55dp"
                 android:layout_marginTop="60dp">
+
                 <TextView
-                    android:text="Card View Menu"
+                    android:text="CARDS"
                     android:layout_width="wrap_content"
-                    android:textSize="20dp"
-                    android:layout_marginRight="20dp"
+                    android:textSize="20sp"
+                    android:layout_marginStart="20dp"
                     android:layout_height="match_parent"
                     android:id="@+id/cardViewName" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_marginLeft="40dp">
+                android:layout_marginStart="15dp">
                 <LinearLayout
                     android:layout_weight="1"
                     android:layout_width="60dp"
                     android:layout_height="80dp"
                     android:background="@drawable/rainbow"
                     android:id="@+id/cardViewCard1"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
@@ -184,15 +187,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:text="From Deck"
+                    android:layout_marginStart="25dp"
+                    android:text="Draw Card"
                     android:backgroundTint="#A52A2A"/>
                 <Button
                     android:id="@+id/cardViewToGame"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_marginLeft="120dp"
+                    android:layout_marginStart="138dp"
                     android:text="Return to Game"
                     android:backgroundTint="#A52A2A"/>
 
@@ -202,7 +205,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_marginLeft="270dp"
+                    android:layout_marginStart="285dp"
                     android:text="From Table"
                     android:backgroundTint="#A52A2A"/>
 
@@ -211,7 +214,9 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_gravity="center_horizontal">
+
                 <RelativeLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -223,11 +228,43 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:layout_marginLeft="10dp"
-                        android:text="Send Destination Card to Deck"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/discard_dest"
                         android:backgroundTint="#A52A2A"/>
 
+                    </RelativeLayout>
 
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="67dp"
+                    android:layout_gravity="center_horizontal">
+                    <Button
+                        android:id="@+id/cardViewKeepDCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/keep_dest"
+                        android:backgroundTint="#A52A2A"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="67dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/cardViewSkipTurn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="Skip Turn"
+                        android:backgroundTint="#A52A2A"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="26dp"/>
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

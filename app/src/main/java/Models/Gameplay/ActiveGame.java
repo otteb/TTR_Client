@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Client_Server_Communication.Poller;
+import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
 import Models.Client;
 import ObserverPattern.TTR_Observable;
@@ -26,6 +27,8 @@ public class ActiveGame {
     private List<Route> Routes;
     private List<String> Cities;
     private int gameCMDNum = 0;
+    private ArrayList<DestinationCard> drawnDestCards;
+    //TODO: do I want the drawnDestCards here or in the player? I think here...
 //    private String activePlayer;
 
     private ActiveGame(){
@@ -86,6 +89,14 @@ public class ActiveGame {
             }
         }
         return null;
+    }
+
+    public ArrayList<TrainCard> getMyHand() {
+        return getMyPlayer().getHand();
+    }
+
+    public TrainCard getLastCard() {
+        return getMyHand().get(getMyHand().size()-1);
     }
 
     public Player getOtherPlayer() {

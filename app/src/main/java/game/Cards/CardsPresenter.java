@@ -45,11 +45,9 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         }
     }
 
-    //TODO - Draw a train card:
+
     public void drawTrainCardFromDeck(){
         Client.getInstance().getCurState().drawTrainCard(this);
-        //change to the next state
-        //to drew1Card or to notmyturn
     }
 
     public void drawTrainCardFromTable(int cardIndex) {
@@ -72,7 +70,9 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         mainActivity.openGame();
     }
 
-
+    void skipTurn(){
+        gameGuiFacade.incTurn();
+    }
 
     //Observer:
 
@@ -82,6 +82,11 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         {
             mainActivity = (MainActivity) context;
             mainActivity.updateFaceUp();
+        }
+        else if(o.equals("deck"))
+        {
+            mainActivity = (MainActivity) context;
+            mainActivity.displayDrawnCard();
         }
         observable.hasChanged();
     }

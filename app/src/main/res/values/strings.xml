@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TTR_Client</string>
+    <string name="discard_dest">Discard Destination Card</string>
+    <string name="keep_dest">Keep All Destination Cards</string>
+    <string name="train_cards">Train Cards</string>
+    <string name="dest_cards">Destination Cards</string>
+    <string name="chat_title">Chat</string>
+    <string name="history_title">Game History</string>
 </resources>

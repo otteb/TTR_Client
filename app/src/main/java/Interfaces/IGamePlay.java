@@ -13,6 +13,7 @@ public interface IGamePlay {
     void drawTrainCard(Request request);
     void claimRoute(Request request);
     void incTurn(Request request);
+    void shuffleFaceUp(Request request);
     //include the updateClient:
     void updateClient(Request request); //(String authToken);
 }

@@ -94,9 +94,10 @@ public class GamePlayFacade {
     public void runCMD(Result result) {
         if (result.isSuccessful())
         {
+            ActiveGame.getInstance().incGameCMDNum(result.getUpdateCommands().size());
             for(int i = 0; i < result.getUpdateCommands().size(); i++){
-                int temp = ActiveGame.getInstance().getGameCMDNum();
-                ActiveGame.getInstance().setGameCMDNum(++temp);
+//                int temp = ActiveGame.getInstance().getGameCMDNum();
+//                ActiveGame.getInstance().setGameCMDNum(++temp);
                 try {
                     result.getUpdateCommands().get(i).execute();
                 }catch (Exception e)
