@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import Interfaces.ICardsPresenter;
 import Models.Client;
+import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
@@ -77,7 +78,7 @@ public class CardsPresenter implements ICardsPresenter, Observer {
     }
 
     void skipTurn(){
-        gameGuiFacade.incTurn();
+        gameGuiFacade.endTurn();
     }
 
     //Observer:
@@ -99,6 +100,13 @@ public class CardsPresenter implements ICardsPresenter, Observer {
             mainActivity = (MainActivity) context;
             mainActivity.updateDestinations();
         }
+//        else if(o.equals("turn"))
+//        {
+//            mainActivity = (MainActivity) context;
+//            mainActivity.displayTurn();
+////            String username = ActiveGame.getInstance().getActivePlayer();
+////            Toast.makeText(getActivity(), "It's " + ActiveGame.getInstance().getActivePlayer() + "'s turn", Toast.LENGTH_SHORT).show();
+//        }
         observable.hasChanged();
     }
 }

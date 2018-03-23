@@ -59,7 +59,7 @@ public class GameGuiFacade {
         new DrawTrainTask().execute(setUpRequest());
     }
 
-    public void incTurn(){
+    public void endTurn(){
         new EndTurnTask().execute(setUpRequest());
     }
 

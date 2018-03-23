@@ -2,9 +2,12 @@ package game.GameHistory;
 
 import android.app.Activity;
 import android.content.Context;
+import android.widget.Toast;
+
 import java.util.Observable;
 import java.util.Observer;
 import Interfaces.IGameHistoryPresenter;
+import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
@@ -35,7 +38,7 @@ public class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
 
     @Override
     public void update(Observable observable, Object result) {
-        if(result.equals("updateHistory"))
+        if(result.equals("history"))
         {
             mainActivity = (MainActivity)((Activity)context);
 

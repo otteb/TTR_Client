@@ -31,6 +31,7 @@ public class ActiveGame {
     private ArrayList<String> Cities;
 
     private int gameCMDNum = 0;
+    private String activePlayer = "";
 
     private ActiveGame(){
         players = new ArrayList<>();
@@ -112,6 +113,7 @@ public class ActiveGame {
 
     //get the player whose turn it is
     public Player getActivePlayerObj() {
+        Player active = new Player();
         for(Player p : players)
         {
             if(p.isTurn())
@@ -123,7 +125,15 @@ public class ActiveGame {
     }
 
     public String getActivePlayer() {
-        return getActivePlayerObj().getName();
+        return activePlayer;
+//        return getActivePlayerObj().getName();
+    }
+
+    public void setActivePlayer(String username) {
+        activePlayer = username;
+        if(activePlayer.equals(Client.getInstance().getUserName())){
+            Client.getInstance().setCurState(new MyTurn());
+        }
     }
 
     public void replaceFaceUp(int index, String color)

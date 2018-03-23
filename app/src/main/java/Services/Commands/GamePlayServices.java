@@ -25,14 +25,17 @@ public class GamePlayServices implements IGamePlay {
     @Override
     public void setupGame(Request request) {
         System.out.println("COMMAND EXECUTING - SetUpGame");
-        //set the Players:
-        ActiveGame.getInstance().setPlayers(request.getGame().getPlayers());
-        //Game History
-        ActiveGame.getInstance().setHistory(request.getGame().getHistory());
-        //faceupCards:
-        ActiveGame.getInstance().setFaceUpCards(request.getGame().getFaceUpCards());
-        Client.getInstance().setCurState(new GameSetup());
-        TTR_Observable.getInstance().updateStats("stats");
+        if(request.getGameId().equals(Client.getInstance().getActiveGame().getId()))
+        {
+            //set the Players:
+            ActiveGame.getInstance().setPlayers(request.getGame().getPlayers());
+            //Game History
+            ActiveGame.getInstance().setHistory(request.getGame().getHistory());
+            //faceupCards:
+            ActiveGame.getInstance().setFaceUpCards(request.getGame().getFaceUpCards());
+            Client.getInstance().setCurState(new GameSetup());
+            TTR_Observable.getInstance().updateStats("stats");
+        }
     }
 
     //Testing Phase:
@@ -97,9 +100,12 @@ public class GamePlayServices implements IGamePlay {
     }
 
     @Override
-    public void incTurn(Request request) {
-        System.out.println("COMMAND EXECUTING - incTurn");
-        ActiveGame.getInstance().incTurn();
+    public void endTurn(Request request) {
+        System.out.println("COMMAND EXECUTING - endTurn");
+        ActiveGame.getInstance().setActivePlayer(request.getUsername());
+//        ActiveGame.getInstance().incTurn();
+        TTR_Observable.getInstance().updateTurn();
+        TTR_Observable.getInstance().updateStats("stats");
         //username here is the name of the active player whose turn it is
         if(request.getUsername().equals(Client.getInstance().getUserName()))
         {
@@ -113,6 +119,10 @@ public class GamePlayServices implements IGamePlay {
                 System.out.println("It's your turn!");
                 Client.getInstance().setCurState(new MyTurn());
             }
+        }
+        else
+        {
+            Client.getInstance().setCurState(new NotMyTurn());
         }
     }
 

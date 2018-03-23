@@ -150,4 +150,12 @@ public class MainActivity extends AppCompatActivity {
     public void updateDestinations() { destCardsFragment.updateView(); }
 
     public void displayDrawnCard() { trainCardsFragment.displayCard(); }
+
+//    public void displayTurn() {
+//        gameFragment.displayTurn();
+//        chatFragment.displayTurn();
+//        statsFragment.displayTurn();
+//        destCardsFragment.displayTurn();
+//        trainCardsFragment.displayTurn();
+//    }
 }

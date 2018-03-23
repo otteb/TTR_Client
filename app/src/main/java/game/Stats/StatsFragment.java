@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Player;
@@ -103,6 +105,10 @@ public class StatsFragment extends Fragment {
         updateHand();
     }
 
+//    public void displayTurn() {
+//        Toast.makeText(getActivity(), "It's " + ActiveGame.getInstance().getActivePlayer() + "'s turn", Toast.LENGTH_SHORT).show();
+//    }
+
     public void updateHand() {
         Player player = ActiveGame.getInstance().getMyPlayer();
         redCards.setText(String.valueOf(player.getNumColorCards("red")));
@@ -144,6 +150,14 @@ public class StatsFragment extends Fragment {
             int destSize = player.getDestination_cards().size();
             int numRoutes = player.getClaimedRoutes().size();
             mName.setText(mPlayer.getName());
+            if(ActiveGame.getInstance().getActivePlayer().equals(mPlayer.getName()))
+            {
+                mName.setTypeface(null, Typeface.BOLD);
+            }
+            else
+            {
+                mName.setTypeface(null, Typeface.NORMAL);
+            }
             mPoints.setText(String.valueOf(mPlayer.getPoints()));
             mTrains.setText(String.valueOf(mPlayer.getNumTrains()));
             mCards.setText(String.valueOf(handSize) + "/" + String.valueOf(destSize));

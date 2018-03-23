@@ -220,4 +220,8 @@ public class DestinationCardsFragment extends Fragment {
     private void resetCard(int index) {
         cards.get(index).setBackgroundColor(Color.parseColor("#F5F5DC"));
     }
+
+//    public void displayTurn() {
+//        Toast.makeText(getActivity(), "It's " + ActiveGame.getInstance().getActivePlayer() + "'s turn", Toast.LENGTH_SHORT).show();
+//    }
 }
