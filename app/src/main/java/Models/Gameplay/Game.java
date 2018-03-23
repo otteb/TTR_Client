@@ -1,7 +1,6 @@
 package Models.Gameplay;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import Models.Cards.TrainCard;
 import Models.Client;

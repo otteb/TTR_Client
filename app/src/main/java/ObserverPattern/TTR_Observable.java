@@ -11,6 +11,11 @@ public class TTR_Observable extends Observable {
 
     private TTR_Observable(){}
 
+    public void updateTurn(){
+        setChanged();
+        notifyObservers("turn");
+    }
+
     //msg can be "faceUp" or "deck" or "destinations"
     public void updateCards(String msg) {
         setChanged();
@@ -20,8 +25,8 @@ public class TTR_Observable extends Observable {
 
     /*
     msg can be "hand" or "stats"
-    "hand" will update the number of each color train card and total destination and train cards
-    "stats" will update all stats
+    "hand" will updateStats the number of each color train card and total destination and train cards
+    "stats" will updateStats all stats
     */
     public void updateStats(String msg) {
         setChanged();
@@ -35,7 +40,7 @@ public class TTR_Observable extends Observable {
 
     public void updateHistory() {
         setChanged();
-        notifyObservers("updateHistory");
+        notifyObservers("history");
     }
 
     public void createGame() {

@@ -1,11 +1,11 @@
 package game;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,14 +26,9 @@ import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Location;
 import Models.Result;
-import StatePattern.GameSetup;
 import activities.R;
 import lobby.LobbyFragment;
-import RegisterLogin.LoginRegisterPresenter;
 
-/**
- * Created by fjameson on 2/2/18.
- */
 
 public class GameFragment extends Fragment implements View.OnClickListener, View.OnTouchListener {
 
@@ -43,8 +38,9 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
     Button claimRoute;
     Button viewDestCards;
     Button viewTrainCards;
-    Button simulateTurn;
+//    Button simulateTurn;
     ImageButton goToStats;
+    ImageButton goToHistory;
     GamePresenter gamePresenter;
     Set<ImageButton> cities;
     ImageButton sunSpeare;
@@ -66,8 +62,9 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
     @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        gamePresenter = new GamePresenter(getContext());
         View view = inflater.inflate(R.layout.game, container, false);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.hide();
 
         final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
         map = (ImageView) view.findViewById(R.id.gameMap);
@@ -130,31 +127,31 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
 //        paint2.setColor(Color.BLACK);
 //        relativeLayout.addView(new Line(getActivity(), lp.leftMargin+10,lp.topMargin+10, lp2.leftMargin+10, lp2.topMargin+10, paint2));
 
-        simulateTurn = (Button) view.findViewById(R.id.test_button);
-        simulateTurn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = ActiveGame.getInstance().getActivePlayerObj().getName();
-                if(Client.getInstance().getUserName().equals(username))
-                {
-                    Toast.makeText(getActivity(), "It's not their turn!", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    gamePresenter.claimOtherRoute(getActivity());
-                    Paint paint4 = new Paint(Paint.ANTI_ALIAS_FLAG);
-                    paint4.setStrokeWidth(10);
-                    if(ActiveGame.getInstance().getOtherPlayer().getColor().equals("red"))
-                    {
-                        paint4.setColor(Color.RED);
-                    }
-                    else
-                    {
-                        paint4.setColor(Color.GREEN);
-                    }
-                    relativeLayout.addView(new Line(getActivity(), start2.getX(), start2.getY(), end2.getX(), end2.getY(), paint4));
-                }
-            }
-        });
+//        simulateTurn = (Button) view.findViewById(R.id.test_button);
+//        simulateTurn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String username = ActiveGame.getInstance().getActivePlayerObj().getName();
+//                if(Client.getInstance().getUserName().equals(username))
+//                {
+//                    Toast.makeText(getActivity(), "It's not their turn!", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    gamePresenter.claimOtherRoute(getActivity());
+//                    Paint paint4 = new Paint(Paint.ANTI_ALIAS_FLAG);
+//                    paint4.setStrokeWidth(10);
+//                    if(ActiveGame.getInstance().getOtherPlayer().getColor().equals("red"))
+//                    {
+//                        paint4.setColor(Color.RED);
+//                    }
+//                    else
+//                    {
+//                        paint4.setColor(Color.GREEN);
+//                    }
+//                    relativeLayout.addView(new Line(getActivity(), start2.getX(), start2.getY(), end2.getX(), end2.getY(), paint4));
+//                }
+//            }
+//        });
 
         claimRoute= (Button)view.findViewById(R.id.claim);
         claimRoute.setOnClickListener(new View.OnClickListener() {
@@ -222,7 +219,7 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
         });
 
 
-        goToStats= (ImageButton)view.findViewById(R.id.stats);
+        goToStats= (ImageButton)view.findViewById(R.id.gameToStats);
         goToStats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -230,6 +227,15 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
 
             }
         });
+        goToHistory= (ImageButton)view.findViewById(R.id.gameToGameHistory);
+        goToHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gamePresenter.switchToGameHistory(getActivity());
+
+            }
+        });
+
         map.setOnTouchListener(this);
 
         String username = ActiveGame.getInstance().getActivePlayerObj().getName();
@@ -271,7 +277,7 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
                     }
                 }
                 return true;
-        };
+        }
         });
 
     }

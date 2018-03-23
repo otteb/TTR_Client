@@ -2,6 +2,7 @@ package game.GameHistory;
 
 import android.app.Activity;
 import android.content.Context;
+
 import java.util.Observable;
 import java.util.Observer;
 import Interfaces.IGameHistoryPresenter;
@@ -9,24 +10,24 @@ import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
 
-public class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
+class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
     public Context context;
     private GameGuiFacade gameGuiFacade = new GameGuiFacade();
     private MainActivity mainActivity;
 
     //Constructor:
-    public GameHistoryPresenter(Context c){
+    GameHistoryPresenter(Context c){
         this.context = c;
         gameGuiFacade.addObserver(this);
     }
 
-    public void switchToStats(Context c){
+    void switchToGame(Context c){
         context=c;
         mainActivity = (MainActivity) context;
-        mainActivity.switchToStats();
+        mainActivity.openGame();
     }
 
-    public void switchToChat(Context c){
+    void switchToChat(Context c){
         context=c;
         mainActivity = (MainActivity) context;
         mainActivity.switchToChat();
@@ -35,7 +36,7 @@ public class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
 
     @Override
     public void update(Observable observable, Object result) {
-        if(result.equals("updateHistory"))
+        if(result.equals("history"))
         {
             mainActivity = (MainActivity)((Activity)context);
 

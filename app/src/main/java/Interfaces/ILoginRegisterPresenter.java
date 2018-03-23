@@ -1,19 +1,11 @@
 package Interfaces;
 
 import android.content.Context;
-import Models.Result;
 
 public interface ILoginRegisterPresenter {
+        void login(Context c, String username, String password);
 
+        void switchToRegister(Context c);
 
-
-        public void login(Context c, String username, String password);
-
-        public void switchToRegister(Context c);
-
-        public void register(Context c, String username, String password, String confpswd);
-
-
-
-
+        void register(Context c, String username, String password, String confpswd);
 }

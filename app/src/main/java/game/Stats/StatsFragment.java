@@ -9,9 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
 import java.util.ArrayList;
+
+import Models.Cards.DestinationCard;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Player;
 import activities.R;
@@ -27,13 +30,17 @@ public class StatsFragment extends Fragment {
     TextView blackCards;
     TextView whiteCards;
     TextView wildCards;
-    Button returnToGame;
-    Button goToChat;
+    ImageButton goToChat;
+    ImageButton goToGame;
     RecyclerView statsRecView;
-    public StatsPresenter statsPresenter;
-    public StatsAdapter statsAdapter;
+    RecyclerView destCardsRecView;
+    private StatsPresenter statsPresenter;
+    private StatsAdapter statsAdapter;
+    private DestCardsAdapter destCardsAdapter;
 
-    public StatsFragment() {}
+    public StatsFragment() {
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,19 +58,19 @@ public class StatsFragment extends Fragment {
         Typeface custom_font = Typeface.createFromAsset(am, "game_of_thrones.ttf");
         title.setTypeface(custom_font);
 
-        returnToGame= (Button)view.findViewById(R.id.statsToGame);
-        returnToGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                statsPresenter.returnToGame(getActivity());
-            }
-        });
-
-        goToChat= (Button)view.findViewById(R.id.statsToChat);
+        goToChat= (ImageButton)view.findViewById(R.id.statsToChat);
         goToChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 statsPresenter.viewChat(getActivity());
+            }
+        });
+
+        goToGame= (ImageButton)view.findViewById(R.id.statsToGame);
+        goToGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                statsPresenter.returnToGame(getActivity());
             }
         });
 
@@ -73,6 +80,13 @@ public class StatsFragment extends Fragment {
         statsRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
         statsAdapter = new StatsAdapter(players);
         statsRecView.setAdapter(statsAdapter);
+
+        ArrayList<DestinationCard> cards = new ArrayList<>();
+        cards.addAll(ActiveGame.getInstance().getMyPlayer().getDestination_cards());
+        destCardsRecView = (RecyclerView) view.findViewById(R.id.dest_card_list);
+        destCardsRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        destCardsAdapter = new DestCardsAdapter(cards);
+        destCardsRecView.setAdapter(destCardsAdapter);
 
         redCards = (TextView) view.findViewById(R.id.numRedCards);
         orangeCards = (TextView) view.findViewById(R.id.numOrangeCards);
@@ -84,11 +98,11 @@ public class StatsFragment extends Fragment {
         whiteCards = (TextView) view.findViewById(R.id.numWhiteCards);
         wildCards = (TextView) view.findViewById(R.id.numWildCards);
 
-        update();
+        updateStats();
         return view;
     }
 
-    public void update() {
+    public void updateStats() {
         ArrayList<Player> updatePlayers = new ArrayList<>();
         updatePlayers.addAll(ActiveGame.getInstance().getPlayers());
         if(updatePlayers.size() > 0)
@@ -101,6 +115,21 @@ public class StatsFragment extends Fragment {
             statsAdapter.notifyDataSetChanged();
         }
         updateHand();
+        updateDestCards();
+    }
+
+    public void updateDestCards() {
+        ArrayList<DestinationCard> updateCards = new ArrayList<>();
+        updateCards.addAll(ActiveGame.getInstance().getMyPlayer().getDestination_cards());
+        if(updateCards.size() > 0)
+        {
+            destCardsAdapter.clearCardList();
+            for(DestinationCard dc : updateCards)
+            {
+                destCardsAdapter.addCardToView(dc);
+            }
+            destCardsAdapter.notifyDataSetChanged();
+        }
     }
 
     public void updateHand() {
@@ -125,10 +154,6 @@ public class StatsFragment extends Fragment {
         private TextView mRoutes;
         private Player mPlayer;
 
-//        private StatsHolder(LayoutInflater inflater, ViewGroup parent) {
-//            super(inflater.inflate(R.layout.list_item_stats, parent, false));
-//        }
-
         private StatsHolder(View itemView) {
             super(itemView);
             mName = itemView.findViewById(R.id.pName);
@@ -144,7 +169,15 @@ public class StatsFragment extends Fragment {
             int destSize = player.getDestination_cards().size();
             int numRoutes = player.getClaimedRoutes().size();
             mName.setText(mPlayer.getName());
-            mPoints.setText(String.valueOf(mPlayer.getPoints()));
+            if(ActiveGame.getInstance().getActivePlayer().equals(mPlayer.getName()))
+            {
+                mName.setTypeface(null, Typeface.BOLD_ITALIC);
+            }
+            else
+            {
+                mName.setTypeface(null, Typeface.NORMAL);
+            }
+            mPoints.setText(String.valueOf(mPlayer.getRoutePoints()));
             mTrains.setText(String.valueOf(mPlayer.getNumTrains()));
             mCards.setText(String.valueOf(handSize) + "/" + String.valueOf(destSize));
             mRoutes.setText(String.valueOf(numRoutes));
@@ -154,7 +187,7 @@ public class StatsFragment extends Fragment {
     public class StatsAdapter extends RecyclerView.Adapter<StatsFragment.StatsHolder> {
         private ArrayList<Player> players;
 
-        public StatsAdapter(ArrayList<Player> player_list) {
+        private StatsAdapter(ArrayList<Player> player_list) {
             if (players == null)
             {
                 players = new ArrayList<>();
@@ -172,12 +205,12 @@ public class StatsFragment extends Fragment {
             return new StatsFragment.StatsHolder(view);
         }
 
-        public void addPlayerToView(Player plyr)
+        private void addPlayerToView(Player plyr)
         {
             players.add(plyr);
         }
 
-        public void clearPlayerList()
+        private void clearPlayerList()
         {
             players.clear();
         }
@@ -192,6 +225,74 @@ public class StatsFragment extends Fragment {
         @Override
         public int getItemCount() {
             return players.size();
+        }
+    }
+
+    //------------DESTINATION CARD RECYCLER VIEW ---------------
+    public class DestCardsHolder extends RecyclerView.ViewHolder {
+
+        private TextView mStart;
+        private TextView mEnd;
+        private TextView mPoints;
+        private DestinationCard mCard;
+
+        private DestCardsHolder(View itemView) {
+            super(itemView);
+            mStart = itemView.findViewById(R.id.dcStart);
+            mEnd = itemView.findViewById(R.id.dcEnd);
+            mPoints = itemView.findViewById(R.id.dcPoints);
+        }
+
+        private void bindDestCard(DestinationCard card) {
+            mCard = card;
+            mStart.setText(mCard.getCity1());
+            mEnd.setText(mCard.getCity2());
+            mPoints.setText(String.valueOf(mCard.getPoints()));
+        }
+    }
+
+    public class DestCardsAdapter extends RecyclerView.Adapter<StatsFragment.DestCardsHolder> {
+        ArrayList<DestinationCard> cards;
+
+        DestCardsAdapter(ArrayList<DestinationCard> card_list) {
+            if (cards == null)
+            {
+                cards = new ArrayList<>();
+//                DestinationCard dc = new DestinationCard();
+//                cards.add(dc);
+            }
+            else
+            { cards.addAll(card_list); }
+        }
+
+        @Override
+        public StatsFragment.DestCardsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = getLayoutInflater();
+            View view = layoutInflater.inflate(R.layout.list_item_dest_card, parent, false);
+            return new StatsFragment.DestCardsHolder(view);
+        }
+
+        private void addCardToView(DestinationCard destCard)
+        {
+            cards.add(destCard);
+        }
+
+        private void clearCardList()
+        {
+            cards.clear();
+
+        }
+
+        @Override
+        public void onBindViewHolder(StatsFragment.DestCardsHolder holder, int position) {
+
+            DestinationCard destCard = cards.get(position);
+            holder.bindDestCard(destCard);
+        }
+
+        @Override
+        public int getItemCount() {
+            return cards.size();
         }
     }
 }

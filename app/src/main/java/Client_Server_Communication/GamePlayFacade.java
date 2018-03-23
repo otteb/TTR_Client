@@ -61,18 +61,16 @@ public class GamePlayFacade {
         return ClientCommunicator.getInstance().sendCommand(gameCommand);
     }
 
-    public Result incTurn(Request request)
+    public Result endTurn(Request request)
     {
         //build command:
-        Command gameCommand = new Command("Interfaces.IGamePlay", "incTurn",
+        Command gameCommand = new Command("Interfaces.IGamePlay", "endTurn",
                 new String[]{ "Models.Request" }, new Request[]{ request });
         //send the command to the server via the ClientCommunicator
         return ClientCommunicator.getInstance().sendCommand(gameCommand);
     }
 
 
-    //TODO still needs to be adjusted:
-    //Does it still need to be adjusted?
     Result updateClient(Request request){
         Command gameCommand = new Command("Interfaces.IGamePlay", "updateClient",
                 new String[]{ "Models.Request" }, new Request[]{ request });

@@ -3,14 +3,10 @@ package AsyncTasks.Lobby;
 import android.os.AsyncTask;
 
 import Client_Server_Communication.ClientFacade;
-import Models.Client;
 import Models.Request;
 import Models.Result;
 import ObserverPattern.TTR_Observable;
 
-/**
- * Created by brianotte on 2/13/18.
- */
 
 public class CreateGameAsyncTask extends AsyncTask<Request, Void, Result> {
     private ClientFacade clientFacade = new ClientFacade();

@@ -23,7 +23,7 @@ public class Drew1Card extends State {
         else
         {
             gui.takeFaceUpCard(cardIndex);
-            gui.incTurn();
+            gui.endTurn();
             Client.getInstance().setCurState(new NotMyTurn());
         }
     }
@@ -31,7 +31,7 @@ public class Drew1Card extends State {
     @Override
     public void drawTrainCard(CardsPresenter wrapper) {
         gui.drawTrainCard();
-        gui.incTurn();
+        gui.endTurn();
         Client.getInstance().setCurState(new NotMyTurn());
     }
 }

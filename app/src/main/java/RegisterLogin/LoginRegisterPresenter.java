@@ -8,10 +8,8 @@ import java.util.Observer;
 
 import Interfaces.ILoginRegisterPresenter;
 import Models.Client;
-import ObserverPattern.TTR_Observable;
 import activities.MainActivity;
 import Models.Request;
-import Models.Result;
 
 import Services.GUI.GuiFacade;
 

@@ -19,27 +19,30 @@ public class GamePlayServices implements IGamePlay {
 
     private GamePlayServices() {}
     //reference the services in the server:
-    //update the Client and Game models with all of the information returned
+    //updateStats the Client and Game models with all of the information returned
     //from the Server - the Presenter will decide what information to display:
 
     @Override
     public void setupGame(Request request) {
         System.out.println("COMMAND EXECUTING - SetUpGame");
-        //set the Players:
-        ActiveGame.getInstance().setPlayers(request.getGame().getPlayers());
-        //Game History
-        ActiveGame.getInstance().setHistory(request.getGame().getHistory());
-        //faceupCards:
-        ActiveGame.getInstance().setFaceUpCards(request.getGame().getFaceUpCards());
-        Client.getInstance().setCurState(new GameSetup());
-        TTR_Observable.getInstance().updateStats("stats");
+        if(request.getGameId().equals(Client.getInstance().getActiveGame().getId()))
+        {
+            //set the Players:
+            ActiveGame.getInstance().setPlayers(request.getGame().getPlayers());
+            //Game History
+            ActiveGame.getInstance().setHistory(request.getGame().getHistory());
+            //faceupCards:
+            ActiveGame.getInstance().setFaceUpCards(request.getGame().getFaceUpCards());
+            Client.getInstance().setCurState(new GameSetup());
+            TTR_Observable.getInstance().updateStats("stats");
+        }
     }
 
     //Testing Phase:
     @Override
     public void addGameHistory(Request request) {
         System.out.println("COMMAND EXECUTING - addGameHistory");
-        //update the active game's gameHistory:
+        //updateStats the active game's gameHistory:
         ActiveGame.getInstance().getHistory().add(request.getAction());
         TTR_Observable.getInstance().updateHistory();
     }
@@ -49,7 +52,11 @@ public class GamePlayServices implements IGamePlay {
     public void discardDestCards(Request request) {
         System.out.println("COMMAND EXECUTING - discardDestCards");
         ActiveGame.getInstance().getPlayer(request.getUsername()).discardDestCards(request.getDiscardDest());
-        TTR_Observable.getInstance().updateStats("destinations");
+        if(Client.getInstance().getUserName().equals(request.getUsername()))
+        {
+            //only update this for the user
+            TTR_Observable.getInstance().updateStats("destinations");
+        }
         TTR_Observable.getInstance().updateStats("stats");
 //        if(ActiveGame.getInstance().getActivePlayer().equals(Client.getInstance().getUserName())){
 //            Client.getInstance().setCurState(new MyTurn());
@@ -97,9 +104,12 @@ public class GamePlayServices implements IGamePlay {
     }
 
     @Override
-    public void incTurn(Request request) {
-        System.out.println("COMMAND EXECUTING - incTurn");
-        ActiveGame.getInstance().incTurn();
+    public void endTurn(Request request) {
+        System.out.println("COMMAND EXECUTING - endTurn");
+        ActiveGame.getInstance().setActivePlayer(request.getUsername());
+//        ActiveGame.getInstance().incTurn();
+        TTR_Observable.getInstance().updateTurn();
+        TTR_Observable.getInstance().updateStats("stats");
         //username here is the name of the active player whose turn it is
         if(request.getUsername().equals(Client.getInstance().getUserName()))
         {
@@ -113,6 +123,10 @@ public class GamePlayServices implements IGamePlay {
                 System.out.println("It's your turn!");
                 Client.getInstance().setCurState(new MyTurn());
             }
+        }
+        else
+        {
+            Client.getInstance().setCurState(new NotMyTurn());
         }
     }
 

@@ -85,6 +85,7 @@ public class ChatFragment extends Fragment {
         }
     }
 
+
     public class ChatHolder extends RecyclerView.ViewHolder {
 
         private TextView mChatMessage;
@@ -106,12 +107,7 @@ public class ChatFragment extends Fragment {
 
         public ChatAdapter(ArrayList<Chat> chatList) {
             //what is this doing?
-            if (chats == null)
-            {
-                chats = new ArrayList<>();
-                Chat c = new Chat();
-                chats.add(c);
-            }
+            if (chats == null) { chats = new ArrayList<>(); }
             else
             { chats = chatList; }
         }

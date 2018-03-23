@@ -2,25 +2,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.fjameson.got_ttr.registerLogin.LoginFragment">
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="" />
+    tools:context="RegisterLogin.LoginFragment">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background = "@drawable/got"
-        >
+        android:background = "@drawable/background">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/scroll"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp">>
+        android:layout_marginBottom="50dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -30,9 +26,9 @@
             android:layout_marginRight="55dp"
             android:layout_marginTop="105dp">
             <TextView
-                android:text="Username"
+                android:text="@string/username"
                 android:layout_width="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_height="match_parent"
                 android:id="@+id/textView"
                 tools:text="Username" />
@@ -51,14 +47,14 @@
             android:layout_marginLeft="55dp"
             android:layout_marginRight="55dp">
             <TextView
-                android:text="Password"
+                android:text="@string/password"
                 android:layout_width="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_height="40dp"
                 android:id="@+id/textView3"
                 tools:text="Password" />
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
@@ -73,14 +69,14 @@
             android:layout_marginLeft="55dp"
             android:layout_marginRight="55dp">
             <TextView
-                android:text="Password"
+                android:text="@string/confirm_password"
                 android:layout_width="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_height="40dp"
-                android:id="@+id/textView4"
-                tools:text="Confirm Password" />
+                android:id="@+id/textView4"/>
+
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
@@ -89,27 +85,19 @@
                 android:text="FINES" />
         </LinearLayout>
 
-
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
-
-        </LinearLayout>
         <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:layout_marginTop="45dp"
             android:layout_height="67dp">
 
             <Button
                 android:id="@+id/button2_register1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.42"
                 android:gravity="center_horizontal"
                 android:layout_centerInParent="true"
-                android:text="Register"
+                android:text="@string/register_button"
                 android:backgroundTint="#A52A2A"/>
         </RelativeLayout>
         <LinearLayout
@@ -119,12 +107,21 @@
 
             <TextView
                 android:id="@+id/login1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_weight="2"
-                android:text="Would You Rather Login?" />
+                android:text="@string/switch_login" />
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:text="@string/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_title"
+        android:textSize="24sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:textAlignment="center"/>
 </FrameLayout>

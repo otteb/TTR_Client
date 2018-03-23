@@ -2,10 +2,7 @@ package AsyncTasks.LoginAndRegister;
 
 import android.os.AsyncTask;
 
-import java.sql.ClientInfoStatus;
-
 import Client_Server_Communication.ClientFacade;
-import Client_Server_Communication.Poller;
 import Models.Client;
 import Models.Request;
 import Models.Result;

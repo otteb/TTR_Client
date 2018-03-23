@@ -1,13 +1,11 @@
 package game;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.IGamePresenter;
-import Models.Gameplay.ActiveGame;
 import Models.Result;
 import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
@@ -36,9 +34,6 @@ public class GamePresenter implements IGamePresenter, Observer {
 
     public void switchToCards(Context c)
     {
-//        player = new Player();
-//        player.setName("kip");
-
         context = c;
         mainActivity = (MainActivity) context;
         mainActivity.switchToTrainCards();
@@ -49,6 +44,13 @@ public class GamePresenter implements IGamePresenter, Observer {
         context = c;
         mainActivity = (MainActivity) context;
         mainActivity.switchToDestCards();
+    }
+
+    public void switchToGameHistory(Context c)
+    {
+        context = c;
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToGameHistory();
     }
 
 
@@ -64,10 +66,10 @@ public class GamePresenter implements IGamePresenter, Observer {
 //        Route rt = new Route();
 //        ActiveGame.getInstance().getMyPlayer().getClaimedRoutes().add(rt);
 //
-//        //update player points
+//        //updateStats player points
 //        ActiveGame.getInstance().getMyPlayer().addPoints(7);
 //
-//        //update trains left
+//        //updateStats trains left
 //        ActiveGame.getInstance().getMyPlayer().decNumTrains(4);
 //
 //        ActiveGame.getInstance().getMyPlayer().getHand().clear();
@@ -79,9 +81,9 @@ public class GamePresenter implements IGamePresenter, Observer {
 //        GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
-        gui.incTurn();
-        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
-        Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
+        gui.endTurn();
+//        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
+//        Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
         return null;
     }
@@ -94,10 +96,10 @@ public class GamePresenter implements IGamePresenter, Observer {
 //        Route rt = new Route();
 //        ActiveGame.getInstance().getActivePlayerObj().getClaimedRoutes().add(rt);
 //
-//        //update player points
+//        //updateStats player points
 //        ActiveGame.getInstance().getActivePlayerObj().addPoints(4);
 //
-//        //update trains left
+//        //updateStats trains left
 //        ActiveGame.getInstance().getActivePlayerObj().decNumTrains(3);
 //
 //        ActiveGame.getInstance().getActivePlayerObj().getHand().remove(0);
@@ -112,9 +114,9 @@ public class GamePresenter implements IGamePresenter, Observer {
 //        GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
-        gui.incTurn();
-        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
-        Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
+        gui.endTurn();
+//        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
+//        Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
         return null;
     }
@@ -135,6 +137,5 @@ public class GamePresenter implements IGamePresenter, Observer {
     // We need this for updating the claimed routes
     @Override
     public void update(Observable observable, Object o) {
-
     }
 }

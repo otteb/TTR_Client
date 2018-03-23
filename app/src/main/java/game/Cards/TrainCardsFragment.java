@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Player;
+import StatePattern.Drew1Card;
 import StatePattern.GameSetup;
+import StatePattern.MyTurn;
 import StatePattern.NotMyTurn;
 import activities.R;
 
@@ -38,6 +40,8 @@ public class TrainCardsFragment extends Fragment {
     Button skipTurn;
     TextView title;
     Player player;
+
+    //TODO: Toast when a player tries to take a wild
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +72,7 @@ public class TrainCardsFragment extends Fragment {
         cardsPresenter = new CardsPresenter(getActivity());
 
         updateFaceUp();
+//        updateView();
 
         returnToGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,23 +229,6 @@ public class TrainCardsFragment extends Fragment {
         return view;
     }
 
-//    public void cardAlgorithm(LinearLayout card, int cardNum)
-//    {
-//        if (destinationCardSetup)
-//        {
-//            if(selectedCard != 0)
-//            {
-//                cards.get(selectedCard).setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.rainbow));
-//            }
-//            selectedCard=cardNum;
-//            card.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.got_highlight));
-//        }
-//        else
-//        {
-//            //if(selectedCard != 0 == card2Chosen !=0)
-//        }
-//    }
-
     public void updateFaceUp() {
         for(int i = 0; i < cards.size(); i++)
         {
@@ -277,6 +265,7 @@ public class TrainCardsFragment extends Fragment {
                     break;
             }
         }
+        updateView();
     }
 
     private void resetCard(int index) {
@@ -317,5 +306,18 @@ public class TrainCardsFragment extends Fragment {
     public void displayCard() {
         String color = ActiveGame.getInstance().getLastCard().getColor();
         Toast.makeText(getActivity(), "You drew a " + color + " train card", Toast.LENGTH_SHORT).show();
+    }
+
+    public void updateView() {
+        if(Client.getInstance().getCurState() instanceof MyTurn || Client.getInstance().getCurState() instanceof Drew1Card)
+        {
+            fromDeck.setVisibility(View.VISIBLE);
+            fromTable.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            fromDeck.setVisibility(View.GONE);
+            fromTable.setVisibility(View.GONE);
+        }
     }
 }

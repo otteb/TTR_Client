@@ -4,30 +4,23 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
-
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.ILobbyPresenter;
 import Models.Client;
 import Models.Request;
-import ObserverPattern.TTR_Observable;
 import activities.MainActivity;
 import Models.Gameplay.Game;
 import Services.GUI.GuiFacade;
 
-
-/**
- * Created by krommend on 2/1/18.
- */
 
 public class LobbyPresenter implements ILobbyPresenter, Observer {
 
     private GuiFacade guiFacade = new GuiFacade();
     private Context context;
     private Request user = new Request();
-    MainActivity lobbyFragment;
+    private MainActivity lobbyFragment;
 
     public LobbyPresenter(Context c)
     {

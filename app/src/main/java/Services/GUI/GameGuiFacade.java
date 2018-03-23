@@ -10,9 +10,7 @@ import AsyncTasks.GamePlay.DrawDestinationsTask;
 import AsyncTasks.GamePlay.DrawTrainTask;
 import AsyncTasks.GamePlay.FaceUpTask;
 import AsyncTasks.GamePlay.EndTurnTask;
-import Interfaces.IGamePlay;
 import Models.Cards.DestinationCard;
-import Models.Cards.TrainCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Chat;
@@ -59,7 +57,7 @@ public class GameGuiFacade {
         new DrawTrainTask().execute(setUpRequest());
     }
 
-    public void incTurn(){
+    public void endTurn(){
         new EndTurnTask().execute(setUpRequest());
     }
 

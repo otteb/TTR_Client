@@ -4,21 +4,14 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import Models.Result;
-import lobby.LobbyFragment;
-
 import activities.R;
 
-/**
- * Created by fjameson on 2/2/18.
- */
 
 public class LoginFragment extends Fragment {
     EditText username;

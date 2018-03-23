@@ -8,7 +8,6 @@ import java.util.Observer;
 import Interfaces.IChatPresenter;
 import Models.Client;
 import Models.Gameplay.Chat;
-import Models.Request;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
@@ -52,6 +51,13 @@ public class ChatPresenter implements IChatPresenter, Observer {
             mainActivity = (MainActivity) context;
             mainActivity.updateChat();
         }
+//        else if(o.equals("turn"))
+//        {
+//            mainActivity = (MainActivity) context;
+//            mainActivity.displayTurn();
+////            String username = ActiveGame.getInstance().getActivePlayer();
+////            Toast.makeText(getActivity(), "It's " + ActiveGame.getInstance().getActivePlayer() + "'s turn", Toast.LENGTH_SHORT).show();
+//        }
         observable.hasChanged();
     }
 }

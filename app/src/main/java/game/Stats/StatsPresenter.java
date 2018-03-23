@@ -6,10 +6,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.IStatesPresenter;
-import Models.Result;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
-import game.Chat.ChatFragment;
 
 
 public class StatsPresenter implements IStatesPresenter, Observer{
@@ -38,6 +36,13 @@ public class StatsPresenter implements IStatesPresenter, Observer{
         mainActivity = (MainActivity) context;
         mainActivity.switchToChat();
     }
+
+//    void viewHistory(Context c)
+//    {
+//        context=c;
+//        mainActivity = (MainActivity) context;
+//        mainActivity.switchToGameHistory();
+//    }
 
     @Override
     public void update(Observable observable, Object o) {

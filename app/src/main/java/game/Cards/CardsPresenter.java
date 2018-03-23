@@ -18,13 +18,13 @@ public class CardsPresenter implements ICardsPresenter, Observer {
     private GameGuiFacade gameGuiFacade = new GameGuiFacade();
     private boolean keepAll;
     //Constructor:
-    public CardsPresenter(Context c){
+    CardsPresenter(Context c){
         this.context = c;
         gameGuiFacade.addObserver(this);
     }
 
 
-    public void sendBackDestinationCard(Context context, int card){
+    void discardDestCard(Context context, int card){
         this.context=context;
         if (card == 0)
         {
@@ -44,16 +44,20 @@ public class CardsPresenter implements ICardsPresenter, Observer {
             keepAll = false;
             //draw from deck and append to player hand
             Client.getInstance().getCurState().returnDestCard(this, card-2);
-//            switchToGame(context);
         }
     }
 
+    void discard2DestCards(Context context, int card1, int card2) {
+        this.context=context;
+        Client.getInstance().getCurState().return2DestCards(this, card1-2, card2-2);
+    }
 
-    public void drawTrainCardFromDeck(){
+
+    void drawTrainCardFromDeck(){
         Client.getInstance().getCurState().drawTrainCard(this);
     }
 
-    public void drawTrainCardFromTable(int cardIndex) {
+    void drawTrainCardFromTable(int cardIndex) {
         if(cardIndex == 0)
         {
             Toast.makeText(context, "You haven't selected enough cards", Toast.LENGTH_SHORT).show();
@@ -70,14 +74,14 @@ public class CardsPresenter implements ICardsPresenter, Observer {
 
     //Navigating Views:
 
-    public void switchToGame(Context c){
+    void switchToGame(Context c){
         context=c;
         mainActivity = (MainActivity) context;
         mainActivity.openGame();
     }
 
     void skipTurn(){
-        gameGuiFacade.incTurn();
+        gameGuiFacade.endTurn();
     }
 
     //Observer:
@@ -98,6 +102,11 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         {
             mainActivity = (MainActivity) context;
             mainActivity.updateDestinations();
+        }
+        else if(o.equals("turn"))
+        {
+            mainActivity = (MainActivity) context;
+            mainActivity.updateFaceUp();
         }
         observable.hasChanged();
     }

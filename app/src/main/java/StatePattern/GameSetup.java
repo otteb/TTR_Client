@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Models.Cards.DestinationCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
+import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
 import game.Cards.CardsPresenter;
 
@@ -21,7 +22,6 @@ public class GameSetup extends State {
         if(cardIndex >= 0)
         {
             discard.add(ActiveGame.getInstance().getMyPlayer().getDrawnDestCards().get(cardIndex));
-//            ActiveGame.getInstance().getMyPlayer().getDestination_cards().remove(discard.get(0));
         }
         gui.discardDestinationCards(discard);
 
@@ -32,5 +32,6 @@ public class GameSetup extends State {
         {
             Client.getInstance().setCurState(new NotMyTurn());
         }
+        TTR_Observable.getInstance().updateTurn();
     }
 }
