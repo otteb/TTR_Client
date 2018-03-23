@@ -1,12 +1,14 @@
 package game.Chat;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.IChatPresenter;
 import Models.Client;
+import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Chat;
 import Models.Request;
 import Services.GUI.GameGuiFacade;
@@ -52,6 +54,13 @@ public class ChatPresenter implements IChatPresenter, Observer {
             mainActivity = (MainActivity) context;
             mainActivity.updateChat();
         }
+//        else if(o.equals("turn"))
+//        {
+//            mainActivity = (MainActivity) context;
+//            mainActivity.displayTurn();
+////            String username = ActiveGame.getInstance().getActivePlayer();
+////            Toast.makeText(getActivity(), "It's " + ActiveGame.getInstance().getActivePlayer() + "'s turn", Toast.LENGTH_SHORT).show();
+//        }
         observable.hasChanged();
     }
 }

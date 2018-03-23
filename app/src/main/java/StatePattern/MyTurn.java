@@ -24,7 +24,7 @@ public class MyTurn extends State {
         {
             gui.takeFaceUpCard(cardIndex);
             Client.getInstance().setCurState(new NotMyTurn());
-            gui.incTurn();
+            gui.endTurn();
         }
         else
         {

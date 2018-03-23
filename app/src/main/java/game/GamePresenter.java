@@ -79,7 +79,7 @@ public class GamePresenter implements IGamePresenter, Observer {
 //        GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
-        gui.incTurn();
+        gui.endTurn();
         String username = ActiveGame.getInstance().getActivePlayerObj().getName();
         Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
@@ -112,7 +112,7 @@ public class GamePresenter implements IGamePresenter, Observer {
 //        GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
-        gui.incTurn();
+        gui.endTurn();
         String username = ActiveGame.getInstance().getActivePlayerObj().getName();
         Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
@@ -122,6 +122,5 @@ public class GamePresenter implements IGamePresenter, Observer {
     // We need this for updating the claimed routes
     @Override
     public void update(Observable observable, Object o) {
-
     }
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Models.Cards.DestinationCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
+import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
 import game.Cards.CardsPresenter;
 
@@ -32,5 +33,6 @@ public class GameSetup extends State {
         {
             Client.getInstance().setCurState(new NotMyTurn());
         }
+        TTR_Observable.getInstance().updateTurn();
     }
 }

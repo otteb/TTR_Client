@@ -48,6 +48,7 @@ public class LobbyServices implements ILobby {
         //Check if the game starting is this user's game
         Game temp = Client.getInstance().getActiveGame();
         if(temp != null && Client.getInstance().getIsLoggedIn() && temp.getId().equals(request.getGameId()))
+//        if(temp != null && temp.getId().equals(request.getGameId()))
         {
             Client.getInstance().getGameById(request.getGameId()).setActive(true);
             ActiveGame.getInstance().setId(Client.getInstance().getActiveGame().getId());

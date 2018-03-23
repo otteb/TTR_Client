@@ -93,19 +93,5 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
             mainActivity.switchToLobby(user);
         }
         o.hasChanged();
-
-//        if (!authToken.equals("create") && !authToken.equals("join") && !authToken.equals("start")) {
-//            if (user != null) {
-//                if (authToken.equals("ERROR: Invalid Registration") || authToken.equals("ERROR: Incorrect username/password combination")) {
-//                    Toast.makeText(context, (CharSequence) authToken, Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    user.setAuthToken((String) authToken);
-//                    mainActivity = (MainActivity) context;
-//                    mainActivity.switchToLobby(user);
-//                    user = null;
-//                }
-//            }
-//        }
     }
 }

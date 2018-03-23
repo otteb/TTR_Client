@@ -11,6 +11,11 @@ public class TTR_Observable extends Observable {
 
     private TTR_Observable(){}
 
+    public void updateTurn(){
+        setChanged();
+        notifyObservers("turn");
+    }
+
     //msg can be "faceUp" or "deck" or "destinations"
     public void updateCards(String msg) {
         setChanged();
@@ -35,7 +40,7 @@ public class TTR_Observable extends Observable {
 
     public void updateHistory() {
         setChanged();
-        notifyObservers("updateHistory");
+        notifyObservers("history");
     }
 
     public void createGame() {

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -84,6 +85,10 @@ public class ChatFragment extends Fragment {
             chatAdapter.notifyDataSetChanged();
         }
     }
+
+//    public void displayTurn() {
+//        Toast.makeText(getActivity(), "It's " + ActiveGame.getInstance().getActivePlayer() + "'s turn", Toast.LENGTH_SHORT).show();
+//    }
 
     public class ChatHolder extends RecyclerView.ViewHolder {
 

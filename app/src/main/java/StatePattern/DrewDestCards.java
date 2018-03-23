@@ -7,7 +7,6 @@ import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
 import game.Cards.CardsPresenter;
-import game.GamePresenter;
 
 /**
  * Created by ferrell3 on 3/13/18.
@@ -25,7 +24,7 @@ public class DrewDestCards extends State {
             discard.add(ActiveGame.getInstance().getMyPlayer().getDrawnDestCards().get(cardIndex));
         }
         gui.discardDestinationCards(discard);
-        gui.incTurn();
+        gui.endTurn();
         Client.getInstance().setCurState(new NotMyTurn());
     }
 
