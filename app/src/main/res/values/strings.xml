@@ -6,4 +6,13 @@
     <string name="dest_cards">Destination Cards</string>
     <string name="chat_title">Chat</string>
     <string name="history_title">Game History</string>
+    <string name="stats_title">Stats</string>
+    <string name="return_to_game">Return to Game</string>
+    <string name="player_title">Player</string>
+    <string name="points_title">Points</string>
+    <string name="num_trains_title"># Trains</string>
+    <string name="num_cards_title"># Cards \n Train/Dest</string>
+    <string name="num_routes_title">#Routes</string>
+    <string name="zero">0</string>
+    <string name="game_chat_button">Game Chat</string>
 </resources>

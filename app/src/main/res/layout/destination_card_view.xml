@@ -3,11 +3,6 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -32,7 +27,7 @@
                 android:layout_marginTop="60dp">
 
                 <TextView
-                    android:text="DESTINATION CARDS"
+                    android:text="@string/dest_cards"
                     android:layout_width="wrap_content"
                     android:textSize="20sp"
                     android:layout_marginStart="20dp"
@@ -44,22 +39,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_marginStart="15dp">
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/destCardsLayout">
 
                 <LinearLayout
                     android:layout_weight="1"
-                    android:layout_width="60dp"
-                    android:layout_height="80dp"
+                    android:layout_width="55dp"
                     android:background="@drawable/rainbow"
                     android:layout_marginEnd="10dp"
                     android:id="@+id/cardViewCard2"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_height="100dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:id="@+id/cardViewCard2StartCity"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text=""
+                        android:layout_marginTop="7dp"
                         android:textStyle="bold"
                         android:layout_weight="1"/>
                     <TextView
@@ -67,14 +64,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/cardViewCard2Points"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="20dp"
                         android:textStyle="bold"
                         android:layout_weight="1"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
-                    android:layout_width="60dp"
-                    android:layout_height="80dp"
+                    android:layout_width="55dp"
+                    android:layout_height="100dp"
                     android:background="@drawable/rainbow"
                     android:id="@+id/cardViewCard3"
                     android:layout_marginEnd="10dp"
@@ -85,6 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text=""
+                        android:layout_marginTop="7dp"
                         android:textStyle="bold"
                         android:layout_weight="1"/>
                     <TextView
@@ -95,21 +100,29 @@
                         android:text=""
                         android:textStyle="bold"
                         android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/cardViewCard3Points"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="20dp"
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
-                    android:layout_height="80dp"
+                    android:layout_height="100dp"
                     android:background="@drawable/rainbow"
                     android:id="@+id/cardViewCard4"
-                    android:layout_marginEnd="10dp"
                     android:orientation="vertical"
-                    android:layout_width="60dp">
+                    android:layout_width="55dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:id="@+id/cardViewCard4StartCity"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text=""
+                        android:layout_marginTop="7dp"
                         android:textStyle="bold"
                         android:layout_weight="1"/>
                     <TextView
@@ -118,6 +131,14 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text=""
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/cardViewCard4Points"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="20dp"
                         android:textStyle="bold"
                         android:layout_weight="1"/>
                 </LinearLayout>

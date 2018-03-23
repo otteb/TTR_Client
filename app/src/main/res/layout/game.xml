@@ -21,11 +21,12 @@
         android:layout_height="wrap_content"
         android:text="Claim Route"
         android:backgroundTint="#A52A2A"/>
+
     <Button
     android:id="@+id/gameToDestCards"
     android:layout_column="0"
     android:layout_row="3"
-        android:layout_marginLeft="120dp"
+    android:layout_marginLeft="120dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Dest Cards"
@@ -41,19 +42,6 @@
     android:text="Train Cards"
     android:backgroundTint="#A52A2A"/>
 
-
-    <ImageButton
-        android:id="@+id/stats"
-        android:layout_column="0"
-        android:layout_row="3"
-        android:src="@drawable/rightarrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go to Stats"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:backgroundTint="#A52A2A"/>
-
     <Button
         android:text="Simulate Turn"
         android:layout_width="wrap_content"
@@ -63,6 +51,24 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="11dp"
         android:layout_marginBottom="16dp"/>
+
+    <ImageButton
+        android:id="@+id/gameToGameHistory"
+        android:src="@drawable/leftarrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#A52A2A"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"/>
+
+    <ImageButton
+        android:id="@+id/gameToStats"
+        android:src="@drawable/rightarrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#A52A2A"
+        android:layout_alignTop="@+id/gameToGameHistory"
+        android:layout_alignParentEnd="true"/>
 
     <!--<RelativeLayout-->
         <!--android:id="@+id/cardMenu"-->

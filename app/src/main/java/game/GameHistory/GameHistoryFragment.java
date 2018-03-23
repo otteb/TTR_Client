@@ -21,7 +21,7 @@ public class GameHistoryFragment extends Fragment {
     public GameHistoryAdapter historyAdapter;
     RecyclerView historyRecView;
     ImageButton leftToChat;
-    ImageButton rightToStats;
+    ImageButton rightToGame;
     View view;
 
     @Override
@@ -29,7 +29,7 @@ public class GameHistoryFragment extends Fragment {
         historyPresenter = new GameHistoryPresenter(getActivity());
         view = inflater.inflate(R.layout.game_history, container, false);// setting view
         leftToChat = (ImageButton) view.findViewById(R.id.historyToChat);
-        rightToStats = (ImageButton) view.findViewById(R.id.historyToStats);
+        rightToGame = (ImageButton) view.findViewById(R.id.historyToGame);
         TextView title = (TextView) view.findViewById(R.id.history_title);
         AssetManager am = getContext().getApplicationContext().getAssets();
         Typeface custom_font = Typeface.createFromAsset(am, "game_of_thrones.ttf");
@@ -48,10 +48,10 @@ public class GameHistoryFragment extends Fragment {
             }
         });
 
-        rightToStats.setOnClickListener(new View.OnClickListener() {
+        rightToGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                historyPresenter.switchToStats(getActivity());
+                historyPresenter.switchToGame(getActivity());
             }
         });
         update();

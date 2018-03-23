@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -9,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="4"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/scroll">
 
 
@@ -60,42 +63,40 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.84"/>
+            android:layout_weight="0.98"/>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_width="194dp"
+                    android:layout_height="29dp"
+                    android:inputType="text"
+                    android:hint="Message"
+                    android:ems="10"
+                    android:background="#FFFAFA"
+                    android:id="@+id/chatMessage"
+                    tools:layout_editor_absoluteY="3dp"
+                    android:layout_marginEnd="16dp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:id="@+id/addChat"
+                    android:text="Chat"
+                    android:backgroundTint="#A52A2A"
+                    tools:layout_editor_absoluteY="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"/>
+
+            </LinearLayout>
         </LinearLayout>
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_weight=".6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Message"
-            android:ems="10"
-            android:background="#FFFAFA"
-            android:layout_marginBottom="30dp"
-            android:id="@+id/chatMessage"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/addChat"
-            android:text="Chat"
-            android:backgroundTint="#A52A2A"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="30dp"
-            android:layout_marginRight="40dp"/>
 
-    </LinearLayout>
+    </RelativeLayout>
+
+
 
 </LinearLayout>
 

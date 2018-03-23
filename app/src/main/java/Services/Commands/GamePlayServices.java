@@ -19,7 +19,7 @@ public class GamePlayServices implements IGamePlay {
 
     private GamePlayServices() {}
     //reference the services in the server:
-    //update the Client and Game models with all of the information returned
+    //updateStats the Client and Game models with all of the information returned
     //from the Server - the Presenter will decide what information to display:
 
     @Override
@@ -42,7 +42,7 @@ public class GamePlayServices implements IGamePlay {
     @Override
     public void addGameHistory(Request request) {
         System.out.println("COMMAND EXECUTING - addGameHistory");
-        //update the active game's gameHistory:
+        //updateStats the active game's gameHistory:
         ActiveGame.getInstance().getHistory().add(request.getAction());
         TTR_Observable.getInstance().updateHistory();
     }

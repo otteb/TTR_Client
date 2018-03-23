@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Models.Cards.DestinationCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
+import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
 import game.Cards.CardsPresenter;
 
@@ -17,7 +18,6 @@ public class DrewDestCards extends State {
 
     @Override
     public void returnDestCard(CardsPresenter wrapper, int cardIndex) {
-        //TODO: finish this so the user can discard up to two cards
         ArrayList<DestinationCard> discard= new ArrayList<>();
         if(cardIndex >= 0)
         {
@@ -26,6 +26,19 @@ public class DrewDestCards extends State {
         gui.discardDestinationCards(discard);
         gui.endTurn();
         Client.getInstance().setCurState(new NotMyTurn());
+        TTR_Observable.getInstance().updateCards("destinations");
+    }
+
+    @Override
+    public void return2DestCards(CardsPresenter wrapper, int cardIndex, int cardIndex2) {
+        ArrayList<DestinationCard> discard= new ArrayList<>();
+        discard.add(ActiveGame.getInstance().getMyPlayer().getDrawnDestCards().get(cardIndex));
+        discard.add(ActiveGame.getInstance().getMyPlayer().getDrawnDestCards().get(cardIndex2));
+
+        gui.discardDestinationCards(discard);
+        gui.endTurn();
+        Client.getInstance().setCurState(new NotMyTurn());
+        TTR_Observable.getInstance().updateCards("destinations");
     }
 
 }

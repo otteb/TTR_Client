@@ -141,13 +141,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateChat() { chatFragment.update(); }
 
-    public void updateStats() { statsFragment.update(); }
+    public void updateStats() { statsFragment.updateStats(); }
 
     public void updateHand() { statsFragment.updateHand(); }
 
-    public void updateFaceUp() { trainCardsFragment.updateFaceUp(); }
+    public void updateFaceUp() {
+        if(trainCardsFragment != null)
+        {
+            trainCardsFragment.updateFaceUp();
+        }
+    }
 
-    public void updateDestinations() { destCardsFragment.updateView(); }
+    public void updateDestinations()
+    {
+        destCardsFragment.updateView();
+        if(statsFragment == null) { statsFragment = new StatsFragment(); }
+        statsFragment.updateDestCards();
+    }
 
     public void displayDrawnCard() { trainCardsFragment.displayCard(); }
 

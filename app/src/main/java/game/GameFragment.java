@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,10 +25,8 @@ import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Location;
 import Models.Result;
-import StatePattern.GameSetup;
 import activities.R;
 import lobby.LobbyFragment;
-import RegisterLogin.LoginRegisterPresenter;
 
 /**
  * Created by fjameson on 2/2/18.
@@ -45,6 +42,7 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
     Button viewTrainCards;
     Button simulateTurn;
     ImageButton goToStats;
+    ImageButton goToHistory;
     GamePresenter gamePresenter;
     Set<ImageButton> cities;
     ImageButton sunSpeare;
@@ -222,7 +220,7 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
         });
 
 
-        goToStats= (ImageButton)view.findViewById(R.id.stats);
+        goToStats= (ImageButton)view.findViewById(R.id.gameToStats);
         goToStats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -230,6 +228,15 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
 
             }
         });
+        goToHistory= (ImageButton)view.findViewById(R.id.gameToGameHistory);
+        goToHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gamePresenter.switchToGameHistory(getActivity());
+
+            }
+        });
+
         map.setOnTouchListener(this);
 
         String username = ActiveGame.getInstance().getActivePlayerObj().getName();
