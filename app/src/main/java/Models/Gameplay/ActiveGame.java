@@ -2,6 +2,7 @@ package Models.Gameplay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import Client_Server_Communication.Poller;
 import Models.Cards.TrainCard;
@@ -23,7 +24,7 @@ public class ActiveGame {
     private ArrayList<Player> players; //list of players
     private ArrayList<Chat> chats;  //List of all chats (format of "username: msg" )
     private List<TrainCard> faceUpCards;
-    private List<Route> Routes;
+    private Map<Integer, Route> Routes;
     private List<String> Cities;
     private int gameCMDNum = 0;
 //    private String activePlayer;
@@ -159,11 +160,11 @@ public class ActiveGame {
         this.chats = chat;
     }
 
-    public List<Route> getRoutes() {
+    public Map<Integer, Route> getRoutes() {
         return Routes;
     }
 
-    public void setRoutes(List<Route> routes) {
+    public void setRoutes(Map<Integer, Route> routes) {
         Routes = routes;
     }
 

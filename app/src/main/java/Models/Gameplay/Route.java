@@ -4,7 +4,7 @@ public class Route {
     private String owner;
     private int points;
     private int length;
-    private String name;
+    private int index;
     private City startCity;
     private City endCity;
 
@@ -34,12 +34,12 @@ public class Route {
         this.length = length;
     }
 
-    public String getName() {
-        return name;
+    public int getIndex() {
+        return index;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(int index) {
+        this.index = index;
     }
 
     public City getStartCity() {

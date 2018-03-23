@@ -1,9 +1,11 @@
 package game;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -32,7 +35,9 @@ import RegisterLogin.LoginRegisterPresenter;
  * Created by fjameson on 2/2/18.
  */
 
-public class GameFragment extends Fragment {
+public class GameFragment extends Fragment implements View.OnClickListener, View.OnTouchListener {
+
+    ImageView map;
     ImageButton city_one;
     ImageButton city_two;
     Button claimRoute;
@@ -44,7 +49,6 @@ public class GameFragment extends Fragment {
     Set<ImageButton> cities;
     ImageButton sunSpeare;
     ImageButton saltShore;
-
     public GameFragment()
     {
 //        LoginRegisterPresenter loginRegisterPresenter = new LoginRegisterPresenter(getActivity());
@@ -59,12 +63,14 @@ public class GameFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        gamePresenter = new GamePresenter(getContext());
         View view = inflater.inflate(R.layout.game, container, false);
-        final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
 
+        final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
+        map = (ImageView) view.findViewById(R.id.gameMap);
 //        sunSpeare = (ImageButton)view.findViewById(R.id.sunSpeare);
 //        saltShore = (ImageButton) view.findViewById(R.id.saltShore);
 
@@ -224,6 +230,7 @@ public class GameFragment extends Fragment {
 
             }
         });
+        map.setOnTouchListener(this);
 
         String username = ActiveGame.getInstance().getActivePlayerObj().getName();
         if(Client.getInstance().getUserName().equals(username))
@@ -268,6 +275,30 @@ public class GameFragment extends Fragment {
         });
 
     }
+
+
+
+    @Override
+    public void onClick(View v) {
+        v.getY();
+        v.getX();
+        String s = String.valueOf(v.getX())+" "+ String.valueOf(v.getY());
+        Toast.makeText(getContext(), String.valueOf(v.getTag()), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        v.getY();
+        v.getX();
+        if(event.getAction()== MotionEvent.ACTION_DOWN) {
+            String s = String.valueOf(event.getX()) + " " + String.valueOf(event.getY());
+            Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+            return true;
+        }return false;
+    }
+
+
+    //////LINE CLASS
     private class Line extends View{
 
         Paint paint;
