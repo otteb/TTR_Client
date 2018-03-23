@@ -11,10 +11,10 @@ public class TTR_Observable extends Observable {
 
     private TTR_Observable(){}
 
-    //msg is really just "faceUp"
-    public void updateCards() {
+    //msg can be "faceUp" or "deck" or "destinations"
+    public void updateCards(String msg) {
         setChanged();
-        notifyObservers("faceUp");
+        notifyObservers(msg);
         updateStats("stats");
     }
 

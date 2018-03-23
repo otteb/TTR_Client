@@ -17,6 +17,7 @@ public class DrawDestinationsTask extends AsyncTask<Request, Void, Result> {
     protected Result doInBackground(Request... requests) {
         return gamePlayFacade.drawDestCards(requests[0]);
     }
+
     //onPostExecute updates the Game model:
     @Override
     protected void onPostExecute(Result result) {

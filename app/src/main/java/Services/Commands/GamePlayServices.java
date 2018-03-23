@@ -49,37 +49,44 @@ public class GamePlayServices implements IGamePlay {
     public void discardDestCards(Request request) {
         System.out.println("COMMAND EXECUTING - discardDestCards");
         ActiveGame.getInstance().getPlayer(request.getUsername()).discardDestCards(request.getDiscardDest());
+        TTR_Observable.getInstance().updateStats("destinations");
         TTR_Observable.getInstance().updateStats("stats");
-        if(ActiveGame.getInstance().getActivePlayer().equals(Client.getInstance().getUserName())){
-            Client.getInstance().setCurState(new MyTurn());
-        }
-        else
-        {
-            Client.getInstance().setCurState(new NotMyTurn());
-        }
+//        if(ActiveGame.getInstance().getActivePlayer().equals(Client.getInstance().getUserName())){
+//            Client.getInstance().setCurState(new MyTurn());
+//        }
+//        else
+//        {
+//            Client.getInstance().setCurState(new NotMyTurn());
+//        }
     }
 
     @Override
     public void drawDestCards(Request request) {
-        System.out.println("COMMAND EXECUTING - drawTrainCard");
-        //TODO: add functionality to drawDestCards()
-        TTR_Observable.getInstance().updateStats("hand");
+        System.out.println("COMMAND EXECUTING - drawDestCards");
+        ActiveGame.getInstance().getPlayer(request.getUsername()).addDrawnDestCards(request.getDestCards());
+        if(request.getUsername().equals(Client.getInstance().getUserName()))
+        {
+            TTR_Observable.getInstance().updateCards("destinations");
+        }
     }
 
     @Override
     public void drawTrainCard(Request request) {
         System.out.println("COMMAND EXECUTING - drawTrainCard");
-        //TODO: add functionality to drawTrainCard()
+        ActiveGame.getInstance().getPlayer(request.getUsername()).getHand().add(request.getTrainCards().get(0));
+        if(request.getUsername().equals(Client.getInstance().getUserName()))
+        {
+            TTR_Observable.getInstance().updateCards("deck");
+        }
         TTR_Observable.getInstance().updateStats("hand");
     }
 
     @Override
     public void takeFaceUpCard(Request request) {
         System.out.println("COMMAND EXECUTING - takeFaceUpCard");
-        ActiveGame.getInstance().getMyPlayer().getHand().add(request.getTrainCards().get(0));
+        ActiveGame.getInstance().getPlayer(request.getUsername()).getHand().add(request.getTrainCards().get(0));
         ActiveGame.getInstance().replaceFaceUp(request.getCardIndex(), request.getTrainCards().get(1).getColor());
-        TTR_Observable.getInstance().updateCards();
-//        TTR_Observable.getInstance().updateStats("hand");
+        TTR_Observable.getInstance().updateCards("faceUp");
     }
 
     //Doesn't do anything... just looks pretty:
@@ -107,6 +114,13 @@ public class GamePlayServices implements IGamePlay {
                 Client.getInstance().setCurState(new MyTurn());
             }
         }
+    }
+
+    @Override
+    public void shuffleFaceUp(Request request) {
+        System.out.println("COMMAND EXECUTING - shufflefaceUp");
+        ActiveGame.getInstance().setFaceUpCards(request.getTrainCards());
+        TTR_Observable.getInstance().updateCards("faceUp");
     }
 
     @Override

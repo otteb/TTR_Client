@@ -43,10 +43,8 @@ public class GameGuiFacade {
         new DiscardDestinationsTask().execute(dDCRequest);
     }
 
-    public void drawDestinationCards(ArrayList<DestinationCard> destCards) //do we pass anything in?
+    public void drawDestinationCards()
     {
-//        Request dDCRequest = setUpRequest();
-        //execute the AsyncTask
         new DrawDestinationsTask().execute(setUpRequest());
     }
 
@@ -57,13 +55,11 @@ public class GameGuiFacade {
         new FaceUpTask().execute(request);
     }
 
-    public void drawTrainCard(TrainCard card) { //do we pass anything in?
-//        Request request = setUpRequest();
+    public void drawTrainCard() {
         new DrawTrainTask().execute(setUpRequest());
     }
 
     public void incTurn(){
-//        Request request = setUpRequest();
         new EndTurnTask().execute(setUpRequest());
     }
 

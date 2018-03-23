@@ -103,9 +103,6 @@ public class ClientFacade {
             Client.getInstance().setAuthToken(result.getAuthToken());
             System.out.println("Login successful!");
             System.out.println(result.getAuthToken());
-//            runCMD(result);
-           // Poller.LobbyPolling lobbyPoller = new Poller.LobbyPolling();
-            //lobbyPoller.execute();
         }
         else
         {
@@ -126,14 +123,12 @@ public class ClientFacade {
             Client.getInstance().setAuthToken(regResult.getAuthToken());
             System.out.println("Registration successful!");
             System.out.println(regResult.getAuthToken());
-//            runCMD(regResult);
         }
         else
         {
             System.out.println("Error:");
             System.out.println(regResult.getErrorMsg());
         }
-//        System.out.println();
         return regResult;
     }
 
@@ -141,35 +136,25 @@ public class ClientFacade {
         Command gameCommand = new Command("Interfaces.ILobby", "createGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
-        Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
-//        runCMD(gameResult);
-//        System.out.println();
-        return gameResult;
+        return ClientCommunicator.getInstance().sendCommand(gameCommand);
     }
 
     public Result joinGame(Request request){
         Command gameCommand = new Command("Interfaces.ILobby", "joinGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
-        Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
-//        runCMD(gameResult);
-//        System.out.println();
-        return gameResult;
+        return ClientCommunicator.getInstance().sendCommand(gameCommand);
     }
 
     public Result leaveGame(Request request) {
         Command gameCommand = new Command("Interfaces.ILobby", "leaveGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
-        Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
-//        runCMD(gameResult);
-//        System.out.println();
-        return gameResult;
+        return ClientCommunicator.getInstance().sendCommand(gameCommand);
     }
 
     public Result startGame(Request request){
         Command gameCommand = new Command("Interfaces.ILobby", "startGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
-        Result gameResult = ClientCommunicator.getInstance().sendCommand(gameCommand);
-        return gameResult;
+        return ClientCommunicator.getInstance().sendCommand(gameCommand);
     }
 
     Result updateClient(Request request){

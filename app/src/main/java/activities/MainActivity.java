@@ -6,18 +6,15 @@ import android.support.v4.app.FragmentManager;
 import Models.Client;
 import Models.Gameplay.Game;
 import Models.Request;
-import RegisterLogin.LoginFragment;
-//import game.GameHistory.GameHistoryFragment;
-
-import StatePattern.State;
-import game.Cards.CardsFragment;
+import game.Cards.TrainCardsFragment;
+import game.Cards.DestinationCardsFragment;
 import game.Chat.ChatFragment;
 import game.GameHistory.GameHistoryFragment;
 import game.Stats.StatsFragment;
-import lobby.LobbyFragment;
 import game.GameFragment;
-import RegisterLogin.LoginRegisterPresenter;
+import lobby.LobbyFragment;
 import RegisterLogin.RegisterFragment;
+import RegisterLogin.LoginFragment;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -32,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     public LoginFragment loginFragment;
     public StatsFragment statsFragment;
     public ChatFragment chatFragment;
-    public CardsFragment cardsFragment;
+    public TrainCardsFragment trainCardsFragment;
+    public DestinationCardsFragment destCardsFragment;
     public GameHistoryFragment gameHistoryFragment;
     public RegisterFragment registerFragment;
     FragmentManager headfrag = getSupportFragmentManager();
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        if (openMap.equals("true")) {
-//            switchToCards("kip", false);
+//            switchToTrainCards("kip", false);
 //        } else {
            switchToLogin();
 //
@@ -88,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
     public void updateCreate(Game currentGame)
     {
         //currentGame = lobbyP.createGame(getActivity(), play, gameName.getText().toString());
-
         lobbyFragment.createGame = currentGame;
         lobbyFragment.gameList = Client.getInstance().getGameList();
         lobbyFragment.getView();
@@ -97,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void switchToStats()
     {
-        //game
         statsFragment= new StatsFragment();
         headfrag.beginTransaction().replace(R.id.activity_main, statsFragment).commit();
 
@@ -109,23 +105,26 @@ public class MainActivity extends AppCompatActivity {
         headfrag.beginTransaction().replace(R.id.activity_main, chatFragment).commit();
     }
 
-    public void switchToCards(String player, boolean destinationCardSetup )
+    public void switchToTrainCards(String player, boolean destinationCardSetup )
     {
-        cardsFragment = new CardsFragment();
+        trainCardsFragment = new TrainCardsFragment();
         Bundle bundle = new Bundle();
 //        bundle.putString("username", player);
         bundle.putBoolean("destinationCardSetup", destinationCardSetup);
-        cardsFragment.setArguments(bundle);
-        headfrag.beginTransaction().replace(R.id.activity_main, cardsFragment).commit();
+        trainCardsFragment.setArguments(bundle);
+        headfrag.beginTransaction().replace(R.id.activity_main, trainCardsFragment).commit();
     }
 
-    public void switchToCards(boolean destinationCardSetup )
+    public void switchToTrainCards()
     {
-        cardsFragment = new CardsFragment();
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("destinationCardSetup", destinationCardSetup);
-        cardsFragment.setArguments(bundle);
-        headfrag.beginTransaction().replace(R.id.activity_main, cardsFragment).commit();
+        trainCardsFragment = new TrainCardsFragment();
+        headfrag.beginTransaction().replace(R.id.activity_main, trainCardsFragment).commit();
+    }
+
+    public void switchToDestCards()
+    {
+        destCardsFragment = new DestinationCardsFragment();
+        headfrag.beginTransaction().replace(R.id.activity_main, destCardsFragment).commit();
     }
 
     public void switchToGameHistory()
@@ -146,5 +145,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateHand() { statsFragment.updateHand(); }
 
-    public void updateFaceUp() { cardsFragment.updateFaceUp(); }
+    public void updateFaceUp() { trainCardsFragment.updateFaceUp(); }
+
+    public void updateDestinations() { destCardsFragment.updateView(); }
+
+    public void displayDrawnCard() { trainCardsFragment.displayCard(); }
 }

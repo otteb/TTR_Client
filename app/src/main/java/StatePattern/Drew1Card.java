@@ -22,17 +22,16 @@ public class Drew1Card extends State {
         }
         else
         {
-            Client.getInstance().setCurState(new NotMyTurn());
             gui.takeFaceUpCard(cardIndex);
             gui.incTurn();
+            Client.getInstance().setCurState(new NotMyTurn());
         }
     }
 
     @Override
     public void drawTrainCard(CardsPresenter wrapper) {
-        //add all functionality
-        //TODO: Finish drawTrainCard (from deck) full-stack
+        gui.drawTrainCard();
+        gui.incTurn();
         Client.getInstance().setCurState(new NotMyTurn());
-//        ActiveGame.getInstance().incTurn();
     }
 }

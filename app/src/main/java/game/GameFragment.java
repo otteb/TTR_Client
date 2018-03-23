@@ -207,7 +207,7 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
         viewDestCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePresenter.switchToCards(getActivity(), true);
+                gamePresenter.switchToDestCards(getActivity());
             }
         });
 
@@ -217,7 +217,7 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
 
             @Override
             public void onClick(View view) {
-                gamePresenter.switchToCards(getActivity(), false);
+                gamePresenter.switchToCards(getActivity());
             }
         });
 

@@ -1,8 +1,6 @@
 package Models.Gameplay;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
 
@@ -12,14 +10,16 @@ public class Player {
     private int points;
     private boolean turn;
     private int numTrains; //will be decremented when a route is claimed
-    private List<Route> claimedRoutes;
-    private List<TrainCard> hand;
-    private List<DestinationCard> destination_cards;
+    private ArrayList<Route> claimedRoutes;
+    private ArrayList<TrainCard> hand;
+    private ArrayList<DestinationCard> destination_cards;
+    private ArrayList<DestinationCard> drawnDestCards;
 
     public Player() {
         claimedRoutes = new ArrayList<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
+        drawnDestCards = new ArrayList<>();
         numTrains = 45;
     }
 
@@ -28,6 +28,7 @@ public class Player {
         claimedRoutes = new ArrayList<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
+        drawnDestCards = new ArrayList<>();
         numTrains = 45;
     }
 
@@ -68,27 +69,27 @@ public class Player {
         this.turn = turn;
     }
 
-    public List<Route> getClaimedRoutes() {
+    public ArrayList<Route> getClaimedRoutes() {
         return claimedRoutes;
     }
 
-    public void setClaimedRoutes(List<Route> claimedRoutes) {
+    public void setClaimedRoutes(ArrayList<Route> claimedRoutes) {
         this.claimedRoutes = claimedRoutes;
     }
 
-    public List<TrainCard> getHand() {
+    public ArrayList<TrainCard> getHand() {
         return hand;
     }
 
-    public void setHand(List<TrainCard> hand) {
+    public void setHand(ArrayList<TrainCard> hand) {
         this.hand = hand;
     }
 
-    public List<DestinationCard> getDestination_cards() {
+    public ArrayList<DestinationCard> getDestination_cards() {
         return destination_cards;
     }
 
-    public void setDestination_cards(List<DestinationCard> destination_cards) {
+    public void setDestination_cards(ArrayList<DestinationCard> destination_cards) {
         this.destination_cards = destination_cards;
     }
 
@@ -116,6 +117,7 @@ public class Player {
                 }
             }
         }
+        drawnDestCards.clear();
 
 //        destination_cards.removeAll(cards);
     }
@@ -130,5 +132,18 @@ public class Player {
             }
         }
         return count;
+    }
+
+    public ArrayList<DestinationCard> getDrawnDestCards() {
+        return drawnDestCards;
+    }
+
+    public void setDrawnDestCards(ArrayList<DestinationCard> drawnDestCards) {
+        this.drawnDestCards = drawnDestCards;
+    }
+
+    public void addDrawnDestCards(ArrayList<DestinationCard> destCards) {
+        drawnDestCards = destCards;
+        destination_cards.addAll(destCards);
     }
 }

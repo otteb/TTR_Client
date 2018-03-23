@@ -10,7 +10,7 @@ public class Game {
 
     private String id;
     private ArrayList<Player> players; //list of players
-    private List<TrainCard> faceUpCards;
+    private ArrayList<TrainCard> faceUpCards;
     private GameHistory history;
     private boolean active = false;    //Has the game started
 
@@ -120,11 +120,11 @@ public class Game {
 //        Cities = cities;
 //    }
 
-    public List<TrainCard> getFaceUpCards() {
+    public ArrayList<TrainCard> getFaceUpCards() {
         return faceUpCards;
     }
 
-    public void setFaceUpCards(List<TrainCard> faceUpCards) {
+    public void setFaceUpCards(ArrayList<TrainCard> faceUpCards) {
         this.faceUpCards = faceUpCards;
     }
 
