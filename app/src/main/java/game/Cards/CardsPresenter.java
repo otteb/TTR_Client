@@ -8,7 +8,6 @@ import java.util.Observer;
 
 import Interfaces.ICardsPresenter;
 import Models.Client;
-import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 

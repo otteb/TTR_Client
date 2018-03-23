@@ -1,7 +1,6 @@
 package Interfaces;
 
 import Models.Request;
-import Models.Result;
 
 public interface IGamePlay {
     void setupGame(Request request);

@@ -8,8 +8,6 @@
                                              android:layout_marginEnd="40dp"
                                              android:id="@+id/dcStats">
 
-    <!--TODO: check this, I added vertical constraints-->
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

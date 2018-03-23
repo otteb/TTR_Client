@@ -1,16 +1,13 @@
 package game.Chat;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.IChatPresenter;
 import Models.Client;
-import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Chat;
-import Models.Request;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 

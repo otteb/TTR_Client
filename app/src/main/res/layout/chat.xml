@@ -8,7 +8,7 @@
               android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="4"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:backgroundTint="#A52A2A"/>
 
         <LinearLayout
@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Chat"
+            android:text="@string/chat_title"
             android:id="@+id/chat_title"
             android:textStyle="bold"
             android:textAlignment="center"
@@ -85,7 +85,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:id="@+id/addChat"
-                    android:text="Chat"
+                    android:text="@string/chat_title"
                     android:backgroundTint="#A52A2A"
                     tools:layout_editor_absoluteY="0dp"
                     android:layout_height="wrap_content"
@@ -95,8 +95,6 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-
 
 </LinearLayout>
 

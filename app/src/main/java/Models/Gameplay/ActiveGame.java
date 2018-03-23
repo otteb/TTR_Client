@@ -2,7 +2,6 @@ package Models.Gameplay;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -132,7 +131,7 @@ public class ActiveGame {
     public void setActivePlayer(String username) {
         activePlayer = username;
         if(activePlayer.equals(Client.getInstance().getUserName())){
-            Client.getInstance().setCurState(new MyTurn());
+//            Client.getInstance().setCurState(new MyTurn());
         }
     }
 

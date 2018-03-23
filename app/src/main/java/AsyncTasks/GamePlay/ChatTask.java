@@ -2,9 +2,7 @@ package AsyncTasks.GamePlay;
 
 import android.os.AsyncTask;
 
-import Client_Server_Communication.ClientFacade;
 import Client_Server_Communication.GamePlayFacade;
-import Models.Client;
 import Models.Request;
 import Models.Result;
 import ObserverPattern.TTR_Observable;

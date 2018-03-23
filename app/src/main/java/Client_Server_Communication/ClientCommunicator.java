@@ -16,7 +16,7 @@ import Models.Result;
 
 import static java.net.HttpURLConnection.HTTP_OK;
 
-public class ClientCommunicator {
+class ClientCommunicator {
 
     private static ClientCommunicator myInstance = new ClientCommunicator();
 
@@ -29,7 +29,7 @@ public class ClientCommunicator {
 
     private ClientCommunicator() {}
 
-    public Result sendCommand(Command command){
+    Result sendCommand(Command command){
         String url = "http://" + serverHost + ":" + serverPort + "/";
 
         Gson gson = new GsonBuilder().create();

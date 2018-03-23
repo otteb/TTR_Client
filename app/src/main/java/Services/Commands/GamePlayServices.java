@@ -52,7 +52,11 @@ public class GamePlayServices implements IGamePlay {
     public void discardDestCards(Request request) {
         System.out.println("COMMAND EXECUTING - discardDestCards");
         ActiveGame.getInstance().getPlayer(request.getUsername()).discardDestCards(request.getDiscardDest());
-        TTR_Observable.getInstance().updateStats("destinations");
+        if(Client.getInstance().getUserName().equals(request.getUsername()))
+        {
+            //only update this for the user
+            TTR_Observable.getInstance().updateStats("destinations");
+        }
         TTR_Observable.getInstance().updateStats("stats");
 //        if(ActiveGame.getInstance().getActivePlayer().equals(Client.getInstance().getUserName())){
 //            Client.getInstance().setCurState(new MyTurn());

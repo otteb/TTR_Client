@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TTR_Client</string>
+    <string name="app_name">Ticket To Ride: Game of Thrones Edition</string>
     <string name="discard_dest">Discard Destination Card</string>
     <string name="draw_dest">Draw Destination Cards</string>
     <string name="train_cards">Train Cards</string>
@@ -15,4 +15,22 @@
     <string name="num_routes_title">#Routes</string>
     <string name="zero">0</string>
     <string name="game_chat_button">Game Chat</string>
+    <string name="title">Ticket to Ride:\nGame of Thrones</string>
+    <string name="login_button">Login</string>
+    <string name="register_button">Register</string>
+    <string name="switch_login">Already registered? Click here to login</string>
+    <string name="switch_register">New User? Click here to register</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="username">Username</string>
+    <string name="vacant">vacant</string>
+    <string name="create_game_button">Create Game</string>
+    <string name="start_game_button">Start Game</string>
+    <string name="join_game_button">Join Game</string>
+    <string name="games_list">Games:</string>
+    <string name="player_list">Players:</string>
+    <string name="current_game">Current Game:</string>
+    <string name="game_name">Game Name:</string>
+    <string name="done">Done</string>
+    <string name="claim_route_button">Claim Route</string>
 </resources>

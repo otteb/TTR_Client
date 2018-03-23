@@ -20,7 +20,6 @@ import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Player;
 import StatePattern.Drew1Card;
-import StatePattern.DrewDestCards;
 import StatePattern.GameSetup;
 import StatePattern.MyTurn;
 import StatePattern.NotMyTurn;
@@ -303,10 +302,6 @@ public class TrainCardsFragment extends Fragment {
                 break;
         }
     }
-
-//    public void displayTurn() {
-//        Toast.makeText(getActivity(), "It's " + ActiveGame.getInstance().getActivePlayer() + "'s turn", Toast.LENGTH_SHORT).show();
-//    }
 
     public void displayCard() {
         String color = ActiveGame.getInstance().getLastCard().getColor();

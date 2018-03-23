@@ -1,7 +1,6 @@
 package Interfaces;
 
 import Models.Request;
-import Models.Result;
 
 public interface ILobby {
     //for joinGame, the client might want to include the ability to add other usernames to the game

@@ -30,7 +30,6 @@ public class StatsFragment extends Fragment {
     TextView blackCards;
     TextView whiteCards;
     TextView wildCards;
-//    Button returnToGame;
     ImageButton goToChat;
     ImageButton goToGame;
     RecyclerView statsRecView;
@@ -39,7 +38,9 @@ public class StatsFragment extends Fragment {
     private StatsAdapter statsAdapter;
     private DestCardsAdapter destCardsAdapter;
 
-    public StatsFragment() {}
+    public StatsFragment() {
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,14 +57,6 @@ public class StatsFragment extends Fragment {
         AssetManager am = getContext().getApplicationContext().getAssets();
         Typeface custom_font = Typeface.createFromAsset(am, "game_of_thrones.ttf");
         title.setTypeface(custom_font);
-
-//        returnToGame= (Button)view.findViewById(R.id.statsToGameButton);
-//        returnToGame.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                statsPresenter.returnToGame(getActivity());
-//            }
-//        });
 
         goToChat= (ImageButton)view.findViewById(R.id.statsToChat);
         goToChat.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +148,7 @@ public class StatsFragment extends Fragment {
     public class StatsHolder extends RecyclerView.ViewHolder {
 
         private TextView mName;
-        private TextView mPoints; //TODO: populate points here with score.routePoints
+        private TextView mPoints;
         private TextView mTrains;
         private TextView mCards;
         private TextView mRoutes;
@@ -178,7 +171,6 @@ public class StatsFragment extends Fragment {
             mName.setText(mPlayer.getName());
             if(ActiveGame.getInstance().getActivePlayer().equals(mPlayer.getName()))
             {
-//                mName.setTypeface(null, Typeface.BOLD);
                 mName.setTypeface(null, Typeface.BOLD_ITALIC);
             }
             else
@@ -260,14 +252,14 @@ public class StatsFragment extends Fragment {
     }
 
     public class DestCardsAdapter extends RecyclerView.Adapter<StatsFragment.DestCardsHolder> {
-        private ArrayList<DestinationCard> cards;
+        ArrayList<DestinationCard> cards;
 
-        private DestCardsAdapter(ArrayList<DestinationCard> card_list) {
+        DestCardsAdapter(ArrayList<DestinationCard> card_list) {
             if (cards == null)
             {
                 cards = new ArrayList<>();
-                DestinationCard dc = new DestinationCard();
-                cards.add(dc);
+//                DestinationCard dc = new DestinationCard();
+//                cards.add(dc);
             }
             else
             { cards.addAll(card_list); }

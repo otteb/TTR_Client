@@ -2,34 +2,32 @@ package game.GameHistory;
 
 import android.app.Activity;
 import android.content.Context;
-import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
 import Interfaces.IGameHistoryPresenter;
-import Models.Gameplay.ActiveGame;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
 
-public class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
+class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
     public Context context;
     private GameGuiFacade gameGuiFacade = new GameGuiFacade();
     private MainActivity mainActivity;
 
     //Constructor:
-    public GameHistoryPresenter(Context c){
+    GameHistoryPresenter(Context c){
         this.context = c;
         gameGuiFacade.addObserver(this);
     }
 
-    public void switchToGame(Context c){
+    void switchToGame(Context c){
         context=c;
         mainActivity = (MainActivity) context;
         mainActivity.openGame();
     }
 
-    public void switchToChat(Context c){
+    void switchToChat(Context c){
         context=c;
         mainActivity = (MainActivity) context;
         mainActivity.switchToChat();

@@ -3,8 +3,6 @@ package activities;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-import Models.Client;
-import Models.Gameplay.Game;
 import Models.Request;
 import game.Cards.TrainCardsFragment;
 import game.Cards.DestinationCardsFragment;
@@ -17,12 +15,10 @@ import RegisterLogin.RegisterFragment;
 import RegisterLogin.LoginFragment;
 
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Button button;
 //    public final static String openMap= "false";
     public LobbyFragment lobbyFragment;
     public GameFragment gameFragment;
@@ -83,13 +79,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void updateCreate(Game currentGame)
-    {
-        //currentGame = lobbyP.createGame(getActivity(), play, gameName.getText().toString());
-        lobbyFragment.createGame = currentGame;
-        lobbyFragment.gameList = Client.getInstance().getGameList();
-        lobbyFragment.getView();
-    }
+//    public void updateCreate(Game currentGame)
+//    {
+//        //currentGame = lobbyP.createGame(getActivity(), play, gameName.getText().toString());
+//        lobbyFragment.createGame = currentGame;
+//        lobbyFragment.gameList = Client.getInstance().getGameList();
+//        lobbyFragment.getView();
+//    }
 
 
     public void switchToStats()
@@ -103,16 +99,6 @@ public class MainActivity extends AppCompatActivity {
     {
         chatFragment= new ChatFragment();
         headfrag.beginTransaction().replace(R.id.activity_main, chatFragment).commit();
-    }
-
-    public void switchToTrainCards(String player, boolean destinationCardSetup )
-    {
-        trainCardsFragment = new TrainCardsFragment();
-        Bundle bundle = new Bundle();
-//        bundle.putString("username", player);
-        bundle.putBoolean("destinationCardSetup", destinationCardSetup);
-        trainCardsFragment.setArguments(bundle);
-        headfrag.beginTransaction().replace(R.id.activity_main, trainCardsFragment).commit();
     }
 
     public void switchToTrainCards()
@@ -160,12 +146,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displayDrawnCard() { trainCardsFragment.displayCard(); }
-
-//    public void displayTurn() {
-//        gameFragment.displayTurn();
-//        chatFragment.displayTurn();
-//        statsFragment.displayTurn();
-//        destCardsFragment.displayTurn();
-//        trainCardsFragment.displayTurn();
-//    }
 }

@@ -15,42 +15,30 @@
 
     <Button
         android:id="@+id/claim"
-        android:layout_column="0"
-        android:layout_row="3"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Claim Route"
+        android:text="@string/claim_route_button"
         android:backgroundTint="#A52A2A"/>
 
     <Button
-    android:id="@+id/gameToDestCards"
-    android:layout_column="0"
-    android:layout_row="3"
-    android:layout_marginLeft="120dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Dest Cards"
-    android:backgroundTint="#A52A2A"/>
+        android:id="@+id/gameToDestCards"
 
-    <Button
-    android:id="@+id/gameToTrainCards"
-    android:layout_column="0"
-    android:layout_row="3"
-        android:layout_marginLeft="230dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Train Cards"
-    android:backgroundTint="#A52A2A"/>
-
-    <Button
-        android:text="Simulate Turn"
+        android:layout_marginStart="120dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/test_button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginBottom="16dp"/>
+        android:text="@string/dest_cards"
+        android:backgroundTint="#A52A2A"/>
+
+    <!--<Button-->
+        <!--android:text="Simulate Turn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/test_button"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginStart="11dp"-->
+        <!--android:layout_marginBottom="16dp"/>-->
 
     <ImageButton
         android:id="@+id/gameToGameHistory"
@@ -69,6 +57,17 @@
         android:backgroundTint="#A52A2A"
         android:layout_alignTop="@+id/gameToGameHistory"
         android:layout_alignParentEnd="true"/>
+
+    <Button
+        android:id="@+id/gameToTrainCards"
+        android:layout_column="0"
+        android:layout_row="3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/train_cards"
+        android:backgroundTint="#A52A2A"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/gameToDestCards"/>
 
     <!--<RelativeLayout-->
         <!--android:id="@+id/cardMenu"-->

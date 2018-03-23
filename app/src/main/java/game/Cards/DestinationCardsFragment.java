@@ -174,20 +174,23 @@ public class DestinationCardsFragment extends Fragment {
     }
 
     public void updateDestinationCards() {
-        card2.setBackgroundColor(Color.parseColor("#F5F5DC"));
-        card2Start.setText(ActiveGame.getInstance().getDrawnDestinations().get(0).getCity1());
-        card2End.setText(ActiveGame.getInstance().getDrawnDestinations().get(0).getCity2());
-        card2Points.setText(String.valueOf(ActiveGame.getInstance().getDrawnDestinations().get(0).getPoints()));
+        if(!ActiveGame.getInstance().getDrawnDestinations().isEmpty()) {
 
-        card3.setBackgroundColor(Color.parseColor("#F5F5DC"));
-        card3Start.setText(ActiveGame.getInstance().getDrawnDestinations().get(1).getCity1());
-        card3End.setText(ActiveGame.getInstance().getDrawnDestinations().get(1).getCity2());
-        card3Points.setText(String.valueOf(ActiveGame.getInstance().getDrawnDestinations().get(1).getPoints()));
+            card2.setBackgroundColor(Color.parseColor("#F5F5DC"));
+            card2Start.setText(ActiveGame.getInstance().getDrawnDestinations().get(0).getCity1());
+            card2End.setText(ActiveGame.getInstance().getDrawnDestinations().get(0).getCity2());
+            card2Points.setText(String.valueOf(ActiveGame.getInstance().getDrawnDestinations().get(0).getPoints()));
 
-        card4.setBackgroundColor(Color.parseColor("#F5F5DC"));
-        card4Start.setText(ActiveGame.getInstance().getDrawnDestinations().get(2).getCity1());
-        card4End.setText(ActiveGame.getInstance().getDrawnDestinations().get(2).getCity2());
-        card4Points.setText(String.valueOf(ActiveGame.getInstance().getDrawnDestinations().get(2).getPoints()));
+            card3.setBackgroundColor(Color.parseColor("#F5F5DC"));
+            card3Start.setText(ActiveGame.getInstance().getDrawnDestinations().get(1).getCity1());
+            card3End.setText(ActiveGame.getInstance().getDrawnDestinations().get(1).getCity2());
+            card3Points.setText(String.valueOf(ActiveGame.getInstance().getDrawnDestinations().get(1).getPoints()));
+
+            card4.setBackgroundColor(Color.parseColor("#F5F5DC"));
+            card4Start.setText(ActiveGame.getInstance().getDrawnDestinations().get(2).getCity1());
+            card4End.setText(ActiveGame.getInstance().getDrawnDestinations().get(2).getCity2());
+            card4Points.setText(String.valueOf(ActiveGame.getInstance().getDrawnDestinations().get(2).getPoints()));
+        }
     }
 
     public void updateView() {
