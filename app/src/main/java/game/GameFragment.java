@@ -288,11 +288,14 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        v.getY();
-        v.getX();
         if(event.getAction()== MotionEvent.ACTION_DOWN) {
             String s = String.valueOf(event.getX()) + " " + String.valueOf(event.getY());
             Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+            boolean getRoute = gamePresenter.selectingRoute(event.getX(), event.getY());
+            if (getRoute)
+            {
+                Toast.makeText(getContext(), "YOu claimed this route!!", Toast.LENGTH_SHORT).show();
+            }
             return true;
         }return false;
     }

@@ -119,6 +119,19 @@ public class GamePresenter implements IGamePresenter, Observer {
         return null;
     }
 
+    public boolean selectingRoute(float x, float y)
+    {
+        float m = (1907-1975)/(790-1227);
+        float b= 1907-(m*790);
+        float testY= m*x+b;
+        if( testY >= y-8 && testY <= y+8)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
     // We need this for updating the claimed routes
     @Override
     public void update(Observable observable, Object o) {
