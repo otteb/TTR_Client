@@ -22,7 +22,6 @@ public class GameSetup extends State {
         if(cardIndex >= 0)
         {
             discard.add(ActiveGame.getInstance().getMyPlayer().getDrawnDestCards().get(cardIndex));
-//            ActiveGame.getInstance().getMyPlayer().getDestination_cards().remove(discard.get(0));
         }
         gui.discardDestinationCards(discard);
 

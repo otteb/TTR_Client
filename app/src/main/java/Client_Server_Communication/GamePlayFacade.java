@@ -71,8 +71,6 @@ public class GamePlayFacade {
     }
 
 
-    //TODO still needs to be adjusted:
-    //Does it still need to be adjusted?
     Result updateClient(Request request){
         Command gameCommand = new Command("Interfaces.IGamePlay", "updateClient",
                 new String[]{ "Models.Request" }, new Request[]{ request });

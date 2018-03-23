@@ -86,9 +86,6 @@ public class ChatFragment extends Fragment {
         }
     }
 
-//    public void displayTurn() {
-//        Toast.makeText(getActivity(), "It's " + ActiveGame.getInstance().getActivePlayer() + "'s turn", Toast.LENGTH_SHORT).show();
-//    }
 
     public class ChatHolder extends RecyclerView.ViewHolder {
 
@@ -111,12 +108,7 @@ public class ChatFragment extends Fragment {
 
         public ChatAdapter(ArrayList<Chat> chatList) {
             //what is this doing?
-            if (chats == null)
-            {
-                chats = new ArrayList<>();
-                Chat c = new Chat();
-                chats.add(c);
-            }
+            if (chats == null) { chats = new ArrayList<>(); }
             else
             { chats = chatList; }
         }

@@ -25,8 +25,8 @@ public class TTR_Observable extends Observable {
 
     /*
     msg can be "hand" or "stats"
-    "hand" will update the number of each color train card and total destination and train cards
-    "stats" will update all stats
+    "hand" will updateStats the number of each color train card and total destination and train cards
+    "stats" will updateStats all stats
     */
     public void updateStats(String msg) {
         setChanged();

@@ -39,6 +39,13 @@ public class StatsPresenter implements IStatesPresenter, Observer{
         mainActivity.switchToChat();
     }
 
+    void viewHistory(Context c)
+    {
+        context=c;
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToGameHistory();
+    }
+
     @Override
     public void update(Observable observable, Object o) {
         if(o.equals("stats"))

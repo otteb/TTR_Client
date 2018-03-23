@@ -42,6 +42,8 @@ public class TrainCardsFragment extends Fragment {
     TextView title;
     Player player;
 
+    //TODO: Toast when a player tries to take a wild
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         player= ActiveGame.getInstance().getMyPlayer();

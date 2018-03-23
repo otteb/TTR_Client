@@ -166,6 +166,7 @@ public class ActiveGame {
 
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
+        setActivePlayer(getActivePlayerObj().getName());
     }
 
     public void addChat(Chat chat){

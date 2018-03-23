@@ -18,12 +18,10 @@ import java.util.ArrayList;
 
 import Models.Client;
 import Models.Gameplay.ActiveGame;
-import Models.Gameplay.Game;
 import Models.Gameplay.Player;
 import StatePattern.DrewDestCards;
 import StatePattern.GameSetup;
 import StatePattern.MyTurn;
-import StatePattern.NotMyTurn;
 import activities.R;
 
 /**
@@ -35,21 +33,22 @@ public class DestinationCardsFragment extends Fragment {
     LinearLayout card2;
     TextView card2Start;
     TextView card2End;
+    TextView card2Points;
     LinearLayout card3;
     TextView card3Start;
     TextView card3End;
+    TextView card3Points;
     LinearLayout card4;
     TextView card4Start;
     TextView card4End;
+    TextView card4Points;
     ArrayList<LinearLayout> cards;
-    int card1Chosen = 0;
-    int card2Chosen = 0;
-    int cardCount = 0;
+    int selected1 = 0;
+    int selected2 = 0;
     Button returnToGame;
     Button drawCards;
     Button sendDCardBack;
     TextView title;
-//    boolean destinationCardSetup;
     Player player;
 
     @Override
@@ -60,14 +59,17 @@ public class DestinationCardsFragment extends Fragment {
         card2 = (LinearLayout) view.findViewById(R.id.cardViewCard2);
         card2Start = (TextView) view.findViewById(R.id.cardViewCard2StartCity);
         card2End = (TextView) view.findViewById(R.id.cardViewCard2EndCity);
+        card2Points = (TextView) view.findViewById(R.id.cardViewCard2Points);
         cards.add(card2);
         card3 = (LinearLayout) view.findViewById(R.id.cardViewCard3);
         card3Start = (TextView) view.findViewById(R.id.cardViewCard3StartCity);
         card3End = (TextView) view.findViewById(R.id.cardViewCard3EndCity);
+        card3Points = (TextView) view.findViewById(R.id.cardViewCard3Points);
         cards.add(card3);
         card4 = (LinearLayout) view.findViewById(R.id.cardViewCard4);
         card4Start = (TextView) view.findViewById(R.id.cardViewCard4StartCity);
         card4End = (TextView) view.findViewById(R.id.cardViewCard4EndCity);
+        card4Points = (TextView) view.findViewById(R.id.cardViewCard4Points);
         cards.add(card4);
         title = (TextView) view.findViewById(R.id.cardViewName);
         AssetManager am = getContext().getApplicationContext().getAssets();
@@ -77,37 +79,9 @@ public class DestinationCardsFragment extends Fragment {
         sendDCardBack = (Button) view.findViewById(R.id.cardViewDCardToDeck);
         drawCards = (Button) view.findViewById(R.id.cardViewDrawDests);
 
-        final Bundle currentPlayer = getArguments();
-//        destinationCardSetup = currentPlayer.getBoolean("destinationCardSetup");
         cardsPresenter = new CardsPresenter(getActivity());
         title.setText(R.string.dest_cards);
         updateView();
-//        if (Client.getInstance().getCurState() instanceof GameSetup)
-//        {
-//            updateDestinationCards();
-//        }
-//        else if(Client.getInstance().getCurState() instanceof MyTurn)
-//        {
-//            //display return to game button and draw destination cards button
-//            //hide discard button and cards
-//            sendDCardBack.setVisibility(View.GONE);
-//            card2.setVisibility(View.GONE);
-//            card3.setVisibility(View.GONE);
-//            card4.setVisibility(View.GONE);
-//        }
-//        else if(Client.getInstance().getCurState() instanceof DrewDestCards)
-//        {
-//            updateDestinationCards();
-//        }
-//        else //NotMyTurn or //Drew1Card
-//        {
-//            //only display return to game button
-//            sendDCardBack.setVisibility(View.GONE);
-//            drawCards.setVisibility(View.GONE);
-//            card2.setVisibility(View.GONE);
-//            card3.setVisibility(View.GONE);
-//            card4.setVisibility(View.GONE);
-//        }
 
         returnToGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,43 +104,68 @@ public class DestinationCardsFragment extends Fragment {
         sendDCardBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardsPresenter.sendBackDestinationCard(getActivity(),card1Chosen);
+                if(selected2 == 0) {
+                    cardsPresenter.discardDestCard(getActivity(), selected1);
+                } else if (selected1 == 0) { //selected2 != 0 && selected1 == 0 //which means that only one is selected, but it is selected2
+                    cardsPresenter.discardDestCard(getActivity(), selected2);
+                } else {
+                    cardsPresenter.discard2DestCards(getActivity(), selected1, selected2);
+                }
             }
         });
 
         card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (card1Chosen == 0) {
-                    card1Chosen = 2;
+                if (selected1 == 0) {
+                    selected1 = 2;
                     card2.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                } else if (card1Chosen == 2) {
+                } else if (selected1 == 2) {
                     resetCard(0);
-                    card1Chosen = 0;
+                    selected1 = 0;
+                } else if(selected2 == 0 && Client.getInstance().getCurState() instanceof DrewDestCards) {
+                    selected2 = 2;
+                    card2.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+                } else if(selected2 == 2 && Client.getInstance().getCurState() instanceof DrewDestCards) {
+                    resetCard(0);
+                    selected2 = 0;
                 }
             }
         });
         card3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (card1Chosen == 0) {
-                    card1Chosen = 3;
+                if (selected1 == 0)
+                {
+                    selected1 = 3;
                     card3.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                } else if (card1Chosen == 3) {
+                } else if (selected1 == 3) {
                     resetCard(1);
-                    card1Chosen = 0;
+                    selected1 = 0;
+                }else if(selected2 == 0 && Client.getInstance().getCurState() instanceof DrewDestCards) {
+                    selected2 = 3;
+                    card3.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+                } else if(selected2 == 3 && Client.getInstance().getCurState() instanceof DrewDestCards) {
+                    resetCard(1);
+                    selected2 = 0;
                 }
             }
         });
         card4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (card1Chosen == 0) {
-                    card1Chosen = 4;
+                if (selected1 == 0) {
+                    selected1 = 4;
                     card4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
-                } else if (card1Chosen == 4) {
+                } else if (selected1 == 4) {
                     resetCard(2);
-                    card1Chosen = 0;
+                    selected1 = 0;
+                }else if(selected2 == 0 && Client.getInstance().getCurState() instanceof DrewDestCards) {
+                    selected2 = 4;
+                    card4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.got_highlight));
+                } else if(selected2 == 4 && Client.getInstance().getCurState() instanceof DrewDestCards) {
+                    resetCard(2);
+                    selected2 = 0;
                 }
             }
         });
@@ -178,12 +177,17 @@ public class DestinationCardsFragment extends Fragment {
         card2.setBackgroundColor(Color.parseColor("#F5F5DC"));
         card2Start.setText(ActiveGame.getInstance().getDrawnDestinations().get(0).getCity1());
         card2End.setText(ActiveGame.getInstance().getDrawnDestinations().get(0).getCity2());
+        card2Points.setText(String.valueOf(ActiveGame.getInstance().getDrawnDestinations().get(0).getPoints()));
+
         card3.setBackgroundColor(Color.parseColor("#F5F5DC"));
         card3Start.setText(ActiveGame.getInstance().getDrawnDestinations().get(1).getCity1());
         card3End.setText(ActiveGame.getInstance().getDrawnDestinations().get(1).getCity2());
+        card3Points.setText(String.valueOf(ActiveGame.getInstance().getDrawnDestinations().get(1).getPoints()));
+
         card4.setBackgroundColor(Color.parseColor("#F5F5DC"));
         card4Start.setText(ActiveGame.getInstance().getDrawnDestinations().get(2).getCity1());
         card4End.setText(ActiveGame.getInstance().getDrawnDestinations().get(2).getCity2());
+        card4Points.setText(String.valueOf(ActiveGame.getInstance().getDrawnDestinations().get(2).getPoints()));
     }
 
     public void updateView() {
@@ -206,7 +210,7 @@ public class DestinationCardsFragment extends Fragment {
             sendDCardBack.setVisibility(View.VISIBLE);
             updateDestinationCards();
         }
-        else //if(Client.getInstance().getCurState() instanceof NotMyTurn)
+        else
         {
             sendDCardBack.setVisibility(View.GONE);
             drawCards.setVisibility(View.GONE);

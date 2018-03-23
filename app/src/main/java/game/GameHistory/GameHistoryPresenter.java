@@ -23,10 +23,10 @@ public class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
         gameGuiFacade.addObserver(this);
     }
 
-    public void switchToStats(Context c){
+    public void switchToGame(Context c){
         context=c;
         mainActivity = (MainActivity) context;
-        mainActivity.switchToStats();
+        mainActivity.openGame();
     }
 
     public void switchToChat(Context c){

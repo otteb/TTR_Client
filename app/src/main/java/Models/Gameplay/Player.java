@@ -7,7 +7,7 @@ import Models.Cards.TrainCard;
 public class Player {
     private String color;
     private String name;
-    private int points;
+    private Score score;
     private boolean turn;
     private int numTrains; //will be decremented when a route is claimed
     private ArrayList<Route> claimedRoutes;
@@ -21,6 +21,7 @@ public class Player {
         destination_cards = new ArrayList<>();
         drawnDestCards = new ArrayList<>();
         numTrains = 45;
+        score = new Score();
     }
 
     public Player(String username){
@@ -30,6 +31,7 @@ public class Player {
         destination_cards = new ArrayList<>();
         drawnDestCards = new ArrayList<>();
         numTrains = 45;
+        score = new Score();
     }
 
     public String getColor() {
@@ -46,18 +48,6 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void addPoints(int pts) {
-        points += pts;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
     }
 
     public boolean isTurn() {
@@ -145,5 +135,17 @@ public class Player {
     public void addDrawnDestCards(ArrayList<DestinationCard> destCards) {
         drawnDestCards = destCards;
         destination_cards.addAll(destCards);
+    }
+
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
+
+    public int getRoutePoints() {
+        return score.getRoutePoints();
     }
 }
