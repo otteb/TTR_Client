@@ -81,7 +81,7 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
                 }
                 else {
                     Player player = ActiveGame.getInstance().getMyPlayer();
-                    makeLines(routeNumber, player);
+                    //makeLines(routeNumber, player);
                     gamePresenter.claimRoute(getActivity(), routeNumber);
 //                    Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
 //                    paint2.setStrokeWidth(10);

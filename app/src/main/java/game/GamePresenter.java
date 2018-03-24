@@ -174,7 +174,7 @@ public class GamePresenter implements IGamePresenter, Observer {
     public void update(Observable observable, Object o) {
         if(o.equals("claim")) {
             mainActivity = (MainActivity) context;
-            mainActivity.updateChat();
+            mainActivity.updateRoutes();
         }
         else if(o.equals("end"))
         {
