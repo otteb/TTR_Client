@@ -39,7 +39,6 @@ public class StatsFragment extends Fragment {
     private DestCardsAdapter destCardsAdapter;
 
     public StatsFragment() {
-
     }
 
     @Override
@@ -123,6 +122,10 @@ public class StatsFragment extends Fragment {
         updateCards.addAll(ActiveGame.getInstance().getMyPlayer().getDestination_cards());
         if(updateCards.size() > 0)
         {
+            if(destCardsAdapter.cards == null)
+            {
+                destCardsAdapter.cards = new ArrayList<>();
+            }
             destCardsAdapter.clearCardList();
             for(DestinationCard dc : updateCards)
             {

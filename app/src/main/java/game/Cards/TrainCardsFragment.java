@@ -41,6 +41,12 @@ public class TrainCardsFragment extends Fragment {
     TextView title;
     Player player;
 
+    public TrainCardsFragment() {
+        cards = new ArrayList<>();
+        player= ActiveGame.getInstance().getMyPlayer();
+
+    }
+
     //TODO: Toast when a player tries to take a wild
 
     @Override
