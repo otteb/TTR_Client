@@ -1,6 +1,7 @@
 package StatePattern;
 
 import Models.Client;
+import Models.Gameplay.Route;
 import game.Cards.CardsPresenter;
 import game.GamePresenter;
 
@@ -9,7 +10,7 @@ import game.GamePresenter;
  */
 
 public class State {
-    public void claimRoute(int claimRoute) {
+    public void claimRoute(Route claimRoute) {
         //toast it's not your turn
     }
     //public void takeFaceUpCard(GamePresenter wrapper) {}

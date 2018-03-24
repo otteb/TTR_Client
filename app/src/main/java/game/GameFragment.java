@@ -25,6 +25,7 @@ import java.util.Set;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Location;
+import Models.Gameplay.Route;
 import Models.Result;
 import activities.R;
 import lobby.LobbyFragment;
@@ -32,25 +33,21 @@ import lobby.LobbyFragment;
 
 public class GameFragment extends Fragment implements View.OnClickListener, View.OnTouchListener {
 
-    ImageView map;
+ RelativeLayout relativeLayout;
     ImageButton city_one;
     ImageButton city_two;
     Button claimRoute;
     Button viewDestCards;
-    int routeNumber= -1;
+    Route routeNumber= null;
     Button viewTrainCards;
 //    Button simulateTurn;
     ImageButton goToStats;
     ImageButton goToHistory;
     GamePresenter gamePresenter;
     Set<ImageButton> cities;
-    ImageButton sunSpeare;
-    ImageButton saltShore;
     public GameFragment()
     {
-//        LoginRegisterPresenter loginRegisterPresenter = new LoginRegisterPresenter(getActivity());
         gamePresenter = new GamePresenter(getContext());
-//        gamePresenter = new GamePresenter(getContext(), new GameSetup());
 
     }
 
@@ -64,13 +61,7 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.game, container, false);
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.hide();
-
-        final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
-        map = (ImageView) view.findViewById(R.id.gameMap);
-//        sunSpeare = (ImageButton)view.findViewById(R.id.sunSpeare);
-//        saltShore = (ImageButton) view.findViewById(R.id.saltShore);
+        relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
 
         final Location start1 = new Location(250, 1330);
         final Location end1 = new Location(480, 1265);
@@ -165,7 +156,6 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
                     Toast.makeText(getActivity(), "It's not your turn!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    gamePresenter.claimRoute(getActivity(), routeNumber);
                     Paint paint3 = new Paint(Paint.ANTI_ALIAS_FLAG);
                     paint3.setStrokeWidth(10);
                     if(ActiveGame.getInstance().getMyPlayer().getColor().equals("red"))
@@ -176,7 +166,8 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
                     {
                         paint3.setColor(Color.GREEN);
                     }
-                    relativeLayout.addView(new Line(getActivity(), start1.getX(), start1.getY(), end1.getX(), end1.getY(), paint3));
+                    relativeLayout.addView(new Line(getActivity(), (float)614.0, (float)965.0, (float)1063.0, (float)905.0, paint3));
+                    gamePresenter.claimRoute(getActivity(), routeNumber);
 //                    Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
 //                    paint2.setStrokeWidth(10);
 //                    paint2.setColor(Color.RED);
@@ -195,7 +186,7 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
                        // headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
                     //}
                 }
-                routeNumber =-1;
+                routeNumber = null;
                 claimRoute.setVisibility(View.GONE);
             }
         });
@@ -239,7 +230,7 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
             }
         });
 
-        map.setOnTouchListener(this);
+        relativeLayout.setOnTouchListener(this);
 
         String username = ActiveGame.getInstance().getActivePlayerObj().getName();
         if(Client.getInstance().getUserName().equals(username))
@@ -301,8 +292,8 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
             String s = String.valueOf(event.getX()) + " " + String.valueOf(event.getY());
             Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
             routeNumber = gamePresenter.selectingRoute(event.getX(), event.getY());
-            routeNumber= 1;
-            if (routeNumber != -1)
+            routeNumber= new Route();
+            if (routeNumber != null)
             {
                 claimRoute.setVisibility(v.VISIBLE);
                 Toast.makeText(getContext(), "YOu claimed this route!!", Toast.LENGTH_SHORT).show();
@@ -329,6 +320,11 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
             endX=eX;
             endY=eY;
             paint=p;
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas){
+            canvas.drawLine(startX, startY, endX, endY, paint);
         }
 
     }

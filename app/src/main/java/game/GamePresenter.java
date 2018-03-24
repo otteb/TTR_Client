@@ -60,7 +60,7 @@ public class GamePresenter implements IGamePresenter, Observer {
     }
 
 
-    public void claimRoute(Context c, int routeNumber)
+    public void claimRoute(Context c, Route routeNumber)
     {
         context =c;
         Client.getInstance().getCurState().claimRoute(routeNumber);
@@ -129,9 +129,9 @@ public class GamePresenter implements IGamePresenter, Observer {
         TTR_Observable.getInstance().updateStats("stats");
     }
 
-    public int selectingRoute(float x, float y)
+    public Route selectingRoute(float x, float y)
     {
-        int bestRoute= -1;
+        Route bestRoute= null;
         Map<Integer, Route> routes= ActiveGame.getInstance().getRoutes();
         for(Integer routeNumber: routes.keySet()) {
             float m = (float) ((routes.get(routeNumber).getStartCity().getYPosition() - routes.get(routeNumber).getEndCity().getYPosition()) /
@@ -139,7 +139,7 @@ public class GamePresenter implements IGamePresenter, Observer {
             float b = (float) (routes.get(routeNumber).getStartCity().getYPosition() - (m * routes.get(routeNumber).getStartCity().getXPosition()));
             float testY = m * x + b;
             if (testY >= y - 40 && testY <= y + 40) {
-                    bestRoute = routeNumber;
+                    bestRoute = routes.get(routeNumber);
             }
         }
         return  bestRoute;

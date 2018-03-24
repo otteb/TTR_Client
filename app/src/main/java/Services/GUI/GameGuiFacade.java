@@ -14,6 +14,7 @@ import Models.Cards.DestinationCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Chat;
+import Models.Gameplay.Route;
 import Models.Request;
 import ObserverPattern.TTR_Observable;
 
@@ -61,9 +62,9 @@ public class GameGuiFacade {
         new EndTurnTask().execute(setUpRequest());
     }
 
-    public void claimRoute(int routeNumber){
+    public void claimRoute(Route routeNumber){
         Request request = setUpRequest();
-        request.setRouteNumber(routeNumber);
+        request.setRoute(routeNumber);
 
         new ClaimRouteTask().execute(request);
     }

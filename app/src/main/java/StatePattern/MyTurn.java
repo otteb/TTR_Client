@@ -2,6 +2,7 @@ package StatePattern;
 
 import Models.Client;
 import Models.Gameplay.ActiveGame;
+import Models.Gameplay.Route;
 import Services.GUI.GameGuiFacade;
 import game.Cards.CardsPresenter;
 import game.GamePresenter;
@@ -10,7 +11,7 @@ public class MyTurn extends State {
     private GameGuiFacade gui = new GameGuiFacade();
 
     @Override
-    public void claimRoute(int routeNumber) {
+    public void claimRoute(Route routeNumber) {
         //TODO: implement claimRoute()
         gui.claimRoute(routeNumber);
         Client.getInstance().setCurState(new NotMyTurn());
