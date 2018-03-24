@@ -144,7 +144,21 @@ public class GamePresenter implements IGamePresenter, Observer {
             float b = (float) (routes.get(routeNumber).getStartY() - (m * routes.get(routeNumber).getStartX()));
             float testY = m * x + b;
             if (testY >= y - 10 && testY <= y + 10) {
-                if(abs(y-testY) < bestY)
+                float smallY = (float)routes.get(routeNumber).getEndY();
+                float smallX = (float)routes.get(routeNumber).getEndX();
+                float largeY = (float)routes.get(routeNumber).getStartY();
+                float largeX = (float)routes.get(routeNumber).getStartX();
+                if ((float)routes.get(routeNumber).getStartY()< (float)routes.get(routeNumber).getEndY())
+                {
+                    smallY = (float)routes.get(routeNumber).getStartY();
+                    largeY = (float)routes.get(routeNumber).getEndY();
+                }
+                if ((float)routes.get(routeNumber).getStartX()< (float)routes.get(routeNumber).getEndX())
+                {
+                    smallX = (float)routes.get(routeNumber).getStartX();
+                    largeX = (float)routes.get(routeNumber).getEndX();
+                }
+                if(abs(y-testY) < bestY && y> smallY && y < largeY && x > smallX && x < largeX)
                 {
                     bestRoute = routes.get(routeNumber);
                     bestY=testY;

@@ -73,9 +73,9 @@ public class TTR_Observable extends Observable {
         notifyObservers("login");
     }
 
-    public void claimRoute() {
+    public void claimRoute(String claim) {
         setChanged();
-        notifyObservers("claim");
+        notifyObservers(claim);
     }
 
 }

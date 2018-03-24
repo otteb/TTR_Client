@@ -161,7 +161,7 @@ public class GamePlayServices implements IGamePlay {
         temp.remove(request.getRoute().getRouteNumber());
         ActiveGame.getInstance().setRoutes(temp);
         ActiveGame.getInstance().getClaimedRoutes().put(request.getRoute().getRouteNumber(),routeToRemove);
-        TTR_Observable.getInstance().updateCards("claim");
+        TTR_Observable.getInstance().claimRoute("claim");
         //ActiveGame.getInstance().setClaimedRoutes(tempClaimed);
         //TTR_Observable.getInstance().updateStats("stats");
         //need to update gameHistory Probably
