@@ -1,6 +1,7 @@
 package Models.Gameplay;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import Models.Cards.TrainCard;
 import Models.Client;
@@ -11,11 +12,13 @@ public class Game {
     private ArrayList<Player> players; //list of players
     private ArrayList<TrainCard> faceUpCards;
     private GameHistory history;
+    private HashMap<Integer, Route> routeMap;
     private boolean active = false;    //Has the game started
 
     public Game(){
         players = new ArrayList<>();
         history = new GameHistory();
+        routeMap = new HashMap<>();
     }
 
     //constructor allowing to instantiate new game with given id
@@ -23,6 +26,7 @@ public class Game {
         this.id = id;
         players = new ArrayList<>();
         history = new GameHistory();
+        routeMap = new HashMap<>();
     }
 
     public String getId() {
@@ -133,5 +137,13 @@ public class Game {
 
     public void setHistory(GameHistory history) {
         this.history = history;
+    }
+
+    public HashMap<Integer, Route> getRouteMap() {
+        return routeMap;
+    }
+
+    public void setRouteMap(HashMap<Integer, Route> routeMap) {
+        this.routeMap = routeMap;
     }
 }

@@ -33,6 +33,8 @@ public class GamePlayServices implements IGamePlay {
             ActiveGame.getInstance().setHistory(request.getGame().getHistory());
             //faceupCards:
             ActiveGame.getInstance().setFaceUpCards(request.getGame().getFaceUpCards());
+            //routes:
+            ActiveGame.getInstance().setRoutes(request.getGame().getRouteMap());
             Client.getInstance().setCurState(new GameSetup());
             TTR_Observable.getInstance().updateStats("stats");
         }
