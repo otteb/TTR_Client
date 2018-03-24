@@ -6,6 +6,7 @@ import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
 import Models.Gameplay.Chat;
 import Models.Gameplay.Game;
+import Models.Gameplay.Route;
 
 public class Request {
 
@@ -25,6 +26,7 @@ public class Request {
     private int gameCMDNum;
     private int cardIndex;
     private int routeNumber;
+    private Route route;
 
     //Chat request Features:
     private Chat chat;
@@ -160,5 +162,13 @@ public class Request {
 
     public void setRouteNumber(int routeNumber) {
         this.routeNumber = routeNumber;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }
