@@ -158,10 +158,14 @@ public class GamePresenter implements IGamePresenter, Observer {
     // We need this for updating the claimed routes
     @Override
     public void update(Observable observable, Object o) {
-        if(o.equals("claim"))
-        {
+        if(o.equals("claim")) {
             mainActivity = (MainActivity) context;
             mainActivity.updateChat();
+        }
+        else if(o.equals("end"))
+        {
+            mainActivity = (MainActivity) context;
+//            mainActivity.switchToEndGame();
         }
     }
 }

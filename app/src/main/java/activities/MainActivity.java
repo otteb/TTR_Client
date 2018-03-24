@@ -129,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
         headfrag.beginTransaction().replace(R.id.activity_main, gameHistoryFragment).commit();
     }
 
+    //TODO: Create switchToEndGame()
+
     public void updateGamesList() { lobbyFragment.updateGameList(); }
 
     public void updatePlayers() { lobbyFragment.updatePlayers(); }
