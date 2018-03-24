@@ -155,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
 //        }
     }
 
+    public void updateRoutes() { gameFragment.updateRoutes(); }
+
     public void updateDestinations()
     {
         if(currentFrag.equals("destinations"))

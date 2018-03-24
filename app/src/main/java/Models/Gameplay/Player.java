@@ -1,6 +1,9 @@
 package Models.Gameplay;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
 
@@ -10,13 +13,13 @@ public class Player {
     private Score score;
     private boolean turn;
     private int numTrains; //will be decremented when a route is claimed
-    private ArrayList<Route> claimedRoutes;
+    private Map<Integer, Route> claimedRoutes;
     private ArrayList<TrainCard> hand;
     private ArrayList<DestinationCard> destination_cards;
     private ArrayList<DestinationCard> drawnDestCards;
 
     public Player() {
-        claimedRoutes = new ArrayList<>();
+        claimedRoutes = new HashMap<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
         drawnDestCards = new ArrayList<>();
@@ -26,7 +29,7 @@ public class Player {
 
     public Player(String username){
         this.name = username;
-        claimedRoutes = new ArrayList<>();
+        claimedRoutes = new HashMap<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
         drawnDestCards = new ArrayList<>();
@@ -59,11 +62,11 @@ public class Player {
         this.turn = turn;
     }
 
-    public ArrayList<Route> getClaimedRoutes() {
+    public Map<Integer,Route> getClaimedRoutes() {
         return claimedRoutes;
     }
 
-    public void setClaimedRoutes(ArrayList<Route> claimedRoutes) {
+    public void setClaimedRoutes(Map<Integer, Route> claimedRoutes) {
         this.claimedRoutes = claimedRoutes;
     }
 

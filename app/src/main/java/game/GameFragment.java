@@ -20,22 +20,26 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.Map;
 import java.util.Set;
 
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Location;
+import Models.Gameplay.Player;
 import Models.Gameplay.Route;
 import Models.Result;
 import activities.R;
 import lobby.LobbyFragment;
 
 
-public class GameFragment extends Fragment implements View.OnClickListener, View.OnTouchListener {
+public class GameFragment extends Fragment implements  View.OnTouchListener {
 
  RelativeLayout relativeLayout;
-    ImageButton city_one;
-    ImageButton city_two;
+    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    Paint greenPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    Paint yellowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    Paint redPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Button claimRoute;
     Button viewDestCards;
     Route routeNumber= null;
@@ -44,7 +48,6 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
     ImageButton goToStats;
     ImageButton goToHistory;
     GamePresenter gamePresenter;
-    Set<ImageButton> cities;
     public GameFragment()
     {
         gamePresenter = new GamePresenter(getContext());
@@ -60,90 +63,11 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
     @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        paint.setStrokeWidth(30);
+        paint.setColor(Color.WHITE);
         View view = inflater.inflate(R.layout.game, container, false);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
 
-        final Location start1 = new Location(250, 1330);
-        final Location end1 = new Location(480, 1265);
-
-        final Location start2 = new Location(470, 1500);
-        final Location end2 = new Location(847, 1665);
-
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setStrokeWidth(10);
-        paint.setColor(Color.WHITE);
-        relativeLayout.addView(new Line(getActivity(), start1.getX(), start1.getY(), end1.getX(), end1.getY(), paint));
-
-//        Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
-//        paint2.setStrokeWidth(10);
-//        paint2.setColor(Color.WHITE);
-        relativeLayout.addView(new Line(getActivity(), start2.getX(), start2.getY(), end2.getX(), end2.getY(), paint));
-
-        if(ActiveGame.getInstance().getMyPlayer().getClaimedRoutes().size() == 1) //current user
-        {
-            Paint paint3 = new Paint(Paint.ANTI_ALIAS_FLAG);
-            paint3.setStrokeWidth(10);
-            if(ActiveGame.getInstance().getMyPlayer().getColor().equals("red"))
-            {
-                paint3.setColor(Color.RED);
-            }
-            else
-            {
-                paint3.setColor(Color.GREEN);
-            }
-            relativeLayout.addView(new Line(getActivity(), start1.getX(), start1.getY(), end1.getX(), end1.getY(), paint3));
-        }
-        if(ActiveGame.getInstance().getOtherPlayer().getClaimedRoutes().size() == 1) //other player
-        {
-            Paint paint4 = new Paint(Paint.ANTI_ALIAS_FLAG);
-            paint4.setStrokeWidth(10);
-            if(ActiveGame.getInstance().getOtherPlayer().getColor().equals("red"))
-            {
-                paint4.setColor(Color.RED);
-            }
-            else
-            {
-                paint4.setColor(Color.GREEN);
-            }
-            relativeLayout.addView(new Line(getActivity(), start2.getX(), start2.getY(), end2.getX(), end2.getY(), paint4));
-        }
-
-
-//        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-//        final RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)sunSpeare.getLayoutParams();
-//        final RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams)saltShore.getLayoutParams();
-//        relativeLayout.addView(new Line(getActivity(), lp.leftMargin, lp.topMargin, lp2.leftMargin, lp2.topMargin, paint));
-//
-//        Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
-//        paint2.setStrokeWidth(10);
-//        paint2.setColor(Color.BLACK);
-//        relativeLayout.addView(new Line(getActivity(), lp.leftMargin+10,lp.topMargin+10, lp2.leftMargin+10, lp2.topMargin+10, paint2));
-
-//        simulateTurn = (Button) view.findViewById(R.id.test_button);
-//        simulateTurn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String username = ActiveGame.getInstance().getActivePlayerObj().getName();
-//                if(Client.getInstance().getUserName().equals(username))
-//                {
-//                    Toast.makeText(getActivity(), "It's not their turn!", Toast.LENGTH_SHORT).show();
-//                }
-//                else{
-//                    gamePresenter.claimOtherRoute(getActivity());
-//                    Paint paint4 = new Paint(Paint.ANTI_ALIAS_FLAG);
-//                    paint4.setStrokeWidth(10);
-//                    if(ActiveGame.getInstance().getOtherPlayer().getColor().equals("red"))
-//                    {
-//                        paint4.setColor(Color.RED);
-//                    }
-//                    else
-//                    {
-//                        paint4.setColor(Color.GREEN);
-//                    }
-//                    relativeLayout.addView(new Line(getActivity(), start2.getX(), start2.getY(), end2.getX(), end2.getY(), paint4));
-//                }
-//            }
-//        });
 
         claimRoute= (Button)view.findViewById(R.id.claim);
         claimRoute.setOnClickListener(new View.OnClickListener() {
@@ -156,17 +80,8 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
                     Toast.makeText(getActivity(), "It's not your turn!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Paint paint3 = new Paint(Paint.ANTI_ALIAS_FLAG);
-                    paint3.setStrokeWidth(10);
-                    if(ActiveGame.getInstance().getMyPlayer().getColor().equals("red"))
-                    {
-                        paint3.setColor(Color.RED);
-                    }
-                    else
-                    {
-                        paint3.setColor(Color.GREEN);
-                    }
-                    relativeLayout.addView(new Line(getActivity(), (float)614.0, (float)965.0, (float)1063.0, (float)905.0, paint3));
+                    Player player = ActiveGame.getInstance().getMyPlayer();
+                    makeLines(routeNumber, player);
                     gamePresenter.claimRoute(getActivity(), routeNumber);
 //                    Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
 //                    paint2.setStrokeWidth(10);
@@ -244,47 +159,33 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
         return view;
     }
 
-    public void claimingRoute(final ImageButton city){
-        city.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    //add highlight
-                    if (city == null)
-                        city_one =city;
-                    else if (city_two == null)
-                    {
-                        city_two=city;
-                    }
-                    else {
-                        Toast.makeText(getActivity(), "You need to deselect one of your cities", Toast.LENGTH_SHORT).show();
-                    }
-            }
-            else if(event.getAction() == MotionEvent.ACTION_UP){
-                    //remove highlight
-                    if(city_one.equals(city))
-                    {
-                        city_one=null;
-                    }
-                    else {
-                        city_two=null;
-                    }
-                }
-                return true;
+    public void makeLines(Route route, Player player)
+    {
+        if(player.getColor().equals("red"))
+        {
+            paint.setColor(Color.RED);
         }
-        });
-
+        else if(player.getColor().equals("green"))
+        {
+            paint.setColor(Color.GREEN);
+        }
+        else if(player.getColor().equals("blue"))
+        {
+            paint.setColor(Color.BLUE);
+        }
+        else if(player.getColor().equals("black"))
+        {
+            paint.setColor(Color.BLACK);
+        }
+        else
+        {
+            paint.setColor(Color.YELLOW);
+        }
+        relativeLayout.addView(new Line(getActivity(), (float)routeNumber.getStartX(), (float)routeNumber.getStartY(), (float)routeNumber.getEndX(),
+                (float)routeNumber.getEndY(), paint));
     }
 
 
-
-    @Override
-    public void onClick(View v) {
-        v.getY();
-        v.getX();
-        String s = String.valueOf(v.getX())+" "+ String.valueOf(v.getY());
-        Toast.makeText(getContext(), String.valueOf(v.getTag()), Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -292,15 +193,29 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
             String s = String.valueOf(event.getX()) + " " + String.valueOf(event.getY());
             Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
             routeNumber = gamePresenter.selectingRoute(event.getX(), event.getY());
-            routeNumber= new Route();
             if (routeNumber != null)
             {
                 claimRoute.setVisibility(v.VISIBLE);
-                Toast.makeText(getContext(), "YOu claimed this route!!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(getContext(), "You weren't close enough to claim this route", Toast.LENGTH_SHORT).show();
             }
             return true;
         }
         return false;
+    }
+
+    public void updateRoutes(){
+        Map<Integer, Route> updateClaimedRoutes = ActiveGame.getInstance().getClaimedRoutes();
+        if(updateClaimedRoutes != null && (updateClaimedRoutes.size() > 0))
+        {
+            for(Integer i : updateClaimedRoutes.keySet())
+            {
+                Player p = ActiveGame.getInstance().getPlayer(updateClaimedRoutes.get(i).getOwner());
+                makeLines(updateClaimedRoutes.get(i), p);
+            }
+        }
+        Toast.makeText(getContext(), "we are in updateClaimedRoutes", Toast.LENGTH_SHORT).show();
     }
 
 

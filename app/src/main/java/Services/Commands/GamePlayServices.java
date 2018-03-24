@@ -1,8 +1,12 @@
 package Services.Commands;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import Interfaces.IGamePlay;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
+import Models.Gameplay.Route;
 import Models.Request;
 import ObserverPattern.TTR_Observable;
 import StatePattern.GameSetup;
@@ -34,7 +38,7 @@ public class GamePlayServices implements IGamePlay {
             //faceupCards:
             ActiveGame.getInstance().setFaceUpCards(request.getGame().getFaceUpCards());
             //routes:
-            ActiveGame.getInstance().setRoutes(request.getGame().getRouteMap());
+            ActiveGame.getInstance().setMasterList(request.getGame().getRoutesMap());
             Client.getInstance().setCurState(new GameSetup());
             TTR_Observable.getInstance().updateStats("stats");
         }
@@ -142,6 +146,29 @@ public class GamePlayServices implements IGamePlay {
     @Override
     public void claimRoute(Request request){
         System.out.println("COMMAND EXECUTING - claimRoute");
+        ActiveGame.getInstance().setActivePlayer(request.getUsername());
+        Route routeToRemove = ActiveGame.getInstance().getRoutes().get(request.getRoute().getRouteNumber());
+
+        Map<Integer, Route> temp= ActiveGame.getInstance().getRoutes();
+        Map<Integer, Route> tempClaimed= new HashMap<>();
+
+
+        //add route to players claimed Routes
+        if(request.getUsername().equals(Client.getInstance().getUserName())){
+            ActiveGame.getInstance().getPlayer(request.getUsername()).getClaimedRoutes().put(request.getRoute().getRouteNumber(), routeToRemove);
+        }
+        //removing route from Active Game Routes and adding it to Claimed Routes
+        temp.remove(request.getRoute().getRouteNumber());
+        ActiveGame.getInstance().setRoutes(temp);
+        ActiveGame.getInstance().getClaimedRoutes().put(request.getRoute().getRouteNumber(),routeToRemove);
+        TTR_Observable.getInstance().updateCards("claim");
+        //ActiveGame.getInstance().setClaimedRoutes(tempClaimed);
+        //TTR_Observable.getInstance().updateStats("stats");
+        //need to update gameHistory Probably
+        //need to update gameView as well
+
+
+        //ActiveGame.getInstance().setRoutes(f);
         //TODO: implement claimRoute()
     }
 }

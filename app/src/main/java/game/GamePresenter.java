@@ -13,9 +13,12 @@ import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Route;
 import Models.Result;
 import ObserverPattern.TTR_Observable;
+import Services.Commands.GamePlayServices;
 import Services.GUI.GameGuiFacade;
 import StatePattern.MyTurn;
 import activities.MainActivity;
+
+import static java.lang.Math.abs;
 
 
 public class GamePresenter implements IGamePresenter, Observer {
@@ -94,6 +97,7 @@ public class GamePresenter implements IGamePresenter, Observer {
 //        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
 //        Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
+
     }
 
     public void claimOtherRoute(Context c)
@@ -132,14 +136,19 @@ public class GamePresenter implements IGamePresenter, Observer {
     public Route selectingRoute(float x, float y)
     {
         Route bestRoute= null;
+        float bestY= 100;
         Map<Integer, Route> routes= ActiveGame.getInstance().getRoutes();
         for(Integer routeNumber: routes.keySet()) {
-            float m = (float) ((routes.get(routeNumber).getStartCity().getYPosition() - routes.get(routeNumber).getEndCity().getYPosition()) /
-                    (routes.get(routeNumber).getStartCity().getXPosition()- routes.get(routeNumber).getEndCity().getXPosition()));
-            float b = (float) (routes.get(routeNumber).getStartCity().getYPosition() - (m * routes.get(routeNumber).getStartCity().getXPosition()));
+            float m =  (((float)routes.get(routeNumber).getStartY() - (float)routes.get(routeNumber).getEndY()) /
+                    ((float)routes.get(routeNumber).getStartX()- (float)routes.get(routeNumber).getEndX()));
+            float b = (float) (routes.get(routeNumber).getStartY() - (m * routes.get(routeNumber).getStartX()));
             float testY = m * x + b;
-            if (testY >= y - 40 && testY <= y + 40) {
+            if (testY >= y - 10 && testY <= y + 10) {
+                if(abs(y-testY) < bestY)
+                {
                     bestRoute = routes.get(routeNumber);
+                    bestY=testY;
+                }
             }
         }
         return  bestRoute;
@@ -149,5 +158,10 @@ public class GamePresenter implements IGamePresenter, Observer {
     // We need this for updating the claimed routes
     @Override
     public void update(Observable observable, Object o) {
+        if(o.equals("claim"))
+        {
+            mainActivity = (MainActivity) context;
+            mainActivity.updateChat();
+        }
     }
 }

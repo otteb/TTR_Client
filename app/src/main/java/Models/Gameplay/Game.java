@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import Models.Cards.TrainCard;
 import Models.Client;
+import activities.R;
 
 public class Game {
 
@@ -12,13 +13,15 @@ public class Game {
     private ArrayList<Player> players; //list of players
     private ArrayList<TrainCard> faceUpCards;
     private GameHistory history;
-    private HashMap<Integer, Route> routeMap;
+    private HashMap<Integer, Route> routesMap;
+    private HashMap<Integer, Route> masterMap;
+    private HashMap<Integer, Route> claimedRoutes;
     private boolean active = false;    //Has the game started
 
     public Game(){
         players = new ArrayList<>();
         history = new GameHistory();
-        routeMap = new HashMap<>();
+        routesMap = new HashMap<>();
     }
 
     //constructor allowing to instantiate new game with given id
@@ -26,7 +29,8 @@ public class Game {
         this.id = id;
         players = new ArrayList<>();
         history = new GameHistory();
-        routeMap = new HashMap<>();
+        routesMap = new HashMap<>();
+        masterMap= new HashMap<>();
     }
 
     public String getId() {
@@ -139,11 +143,27 @@ public class Game {
         this.history = history;
     }
 
-    public HashMap<Integer, Route> getRouteMap() {
-        return routeMap;
+    public HashMap<Integer, Route> getRoutesMap() {
+        return routesMap;
     }
 
-    public void setRouteMap(HashMap<Integer, Route> routeMap) {
-        this.routeMap = routeMap;
+    public void setRoutesMap(HashMap<Integer, Route> routesMap) {
+        this.routesMap = routesMap;
+    }
+
+    public HashMap<Integer, Route> getMasterMap() {
+        return masterMap;
+    }
+
+    public void setMasterMap(HashMap<Integer, Route> masterMap) {
+        this.masterMap = masterMap;
+    }
+
+    public HashMap<Integer, Route> getClaimedRoutes() {
+        return claimedRoutes;
+    }
+
+    public void setClaimedRoutes(HashMap<Integer, Route> claimedRoutes) {
+        this.claimedRoutes = claimedRoutes;
     }
 }

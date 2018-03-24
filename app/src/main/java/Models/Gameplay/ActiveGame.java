@@ -27,8 +27,9 @@ public class ActiveGame {
     private ArrayList<Chat> chats;  //List of all chats (format of "username: msg" )
     private ArrayList<TrainCard> faceUpCards;
     private Map<Integer, Route> Routes;
+    private Map<Integer, Route> masterList;
+    private Map<Integer, Route> claimedRoutes;
     private ArrayList<String> Cities;
-
     private int gameCMDNum = 0;
     private String activePlayer = "";
 
@@ -37,6 +38,8 @@ public class ActiveGame {
         chats = new ArrayList<>();
         history = new GameHistory();
         Routes = new HashMap<>();
+        masterList = new HashMap<>();
+        claimedRoutes= new HashMap<>();
     }
 
     public void incGameCMDNum(int num){
@@ -188,6 +191,25 @@ public class ActiveGame {
     public void setRoutes(Map<Integer, Route> routes) {
         Routes = routes;
     }
+
+    public Map<Integer, Route> getMasterList() {
+        return masterList;
+    }
+
+    public void setMasterList(Map<Integer, Route> masterList)
+    {
+        this.masterList= masterList;
+        setRoutes(masterList);
+    }
+
+    public Map<Integer, Route> getClaimedRoutes() {
+        return claimedRoutes;
+    }
+
+    public void setClaimedRoutes(Map<Integer, Route> claimedRoutes) {
+        this.claimedRoutes = claimedRoutes;
+    }
+
 
     public ArrayList<String> getCities() {
         return Cities;
