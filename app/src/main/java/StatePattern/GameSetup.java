@@ -9,10 +9,6 @@ import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
 import game.Cards.CardsPresenter;
 
-/**
- * Created by ferrell3 on 3/13/18.
- */
-
 public class GameSetup extends State {
     private GameGuiFacade gui = new GameGuiFacade();
 

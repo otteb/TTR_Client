@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public GameHistoryFragment gameHistoryFragment;
     public RegisterFragment registerFragment;
     FragmentManager headfrag = getSupportFragmentManager();
+    String currentFrag = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,12 +47,14 @@ public class MainActivity extends AppCompatActivity {
     public void switchToLogin()
     {
         loginFragment = new LoginFragment();
+        currentFrag = "login";
         headfrag.beginTransaction().replace(R.id.activity_main, loginFragment).commit();
     }
 
     public void switchToRegister()
     {
         registerFragment = new RegisterFragment();
+        currentFrag = "register";
         headfrag.beginTransaction().replace(R.id.activity_main, registerFragment).commit();
     }
 
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             lobbyFragment = new LobbyFragment();
+            currentFrag = "lobby";
             Bundle bundle = new Bundle();
             bundle.putString("username", r.getUsername());
             bundle.putString("password", r.getPassword());
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     public void openGame()
     {
         gameFragment = new GameFragment();
+        currentFrag = "game";
         headfrag.beginTransaction().replace(R.id.activity_main, gameFragment).commit();
     }
 
@@ -91,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
     public void switchToStats()
     {
         statsFragment= new StatsFragment();
+        currentFrag = "stats";
         headfrag.beginTransaction().replace(R.id.activity_main, statsFragment).commit();
 
     }
@@ -98,24 +104,28 @@ public class MainActivity extends AppCompatActivity {
     public void switchToChat()
     {
         chatFragment= new ChatFragment();
+        currentFrag = "chat";
         headfrag.beginTransaction().replace(R.id.activity_main, chatFragment).commit();
     }
 
     public void switchToTrainCards()
     {
         trainCardsFragment = new TrainCardsFragment();
+        currentFrag = "trains";
         headfrag.beginTransaction().replace(R.id.activity_main, trainCardsFragment).commit();
     }
 
     public void switchToDestCards()
     {
         destCardsFragment = new DestinationCardsFragment();
+        currentFrag = "destinations";
         headfrag.beginTransaction().replace(R.id.activity_main, destCardsFragment).commit();
     }
 
     public void switchToGameHistory()
     {
         gameHistoryFragment = new GameHistoryFragment();
+        currentFrag = "history";
         headfrag.beginTransaction().replace(R.id.activity_main, gameHistoryFragment).commit();
     }
 
@@ -132,18 +142,36 @@ public class MainActivity extends AppCompatActivity {
     public void updateHand() { statsFragment.updateHand(); }
 
     public void updateFaceUp() {
-        if(trainCardsFragment != null)
+        if(currentFrag.equals("trains"))
         {
             trainCardsFragment.updateFaceUp();
+            System.out.println("Face up cards updated");
         }
+        System.out.println("you're not in trains");
+//        if(trainCardsFragment != null)
+//        {
+//            trainCardsFragment.updateFaceUp();
+//
+//        }
     }
 
     public void updateDestinations()
     {
-        destCardsFragment.updateView();
-        if(statsFragment == null) { statsFragment = new StatsFragment(); }
-        statsFragment.updateDestCards();
+        if(currentFrag.equals("destinations"))
+        {
+            destCardsFragment.updateView();
+        }
+        if(currentFrag.equals("stats"))
+        {
+            statsFragment.updateDestCards();
+        }
+//        if(statsFragment != null) { statsFragment.updateDestCards(); }
     }
 
-    public void displayDrawnCard() { trainCardsFragment.displayCard(); }
+    public void displayDrawnCard() {
+        if(currentFrag.equals("trains"))
+        {
+            trainCardsFragment.displayCard();
+        }
+    }
 }
