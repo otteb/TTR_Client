@@ -24,6 +24,7 @@ public class Request {
     private ArrayList<DestinationCard> destCards;
     private int gameCMDNum;
     private int cardIndex;
+    private int routeNumber;
 
     //Chat request Features:
     private Chat chat;
@@ -151,5 +152,13 @@ public class Request {
 
     public void setDestCards(ArrayList<DestinationCard> destCards) {
         this.destCards = destCards;
+    }
+
+    public int getRouteNumber() {
+        return routeNumber;
+    }
+
+    public void setRouteNumber(int routeNumber) {
+        this.routeNumber = routeNumber;
     }
 }

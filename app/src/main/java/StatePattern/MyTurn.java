@@ -10,9 +10,11 @@ public class MyTurn extends State {
     private GameGuiFacade gui = new GameGuiFacade();
 
     @Override
-    public void claimRoute(GamePresenter wrapper) {
+    public void claimRoute(int routeNumber) {
         //TODO: implement claimRoute()
-        gui.claimRoute();
+        gui.claimRoute(routeNumber);
+        Client.getInstance().setCurState(new NotMyTurn());
+        gui.endTurn();
     }
 
     @Override
@@ -44,5 +46,6 @@ public class MyTurn extends State {
         gui.drawDestinationCards();
         Client.getInstance().setCurState(new DrewDestCards());
     }
+
 
 }

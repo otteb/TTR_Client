@@ -2,13 +2,19 @@ package game;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.IGamePresenter;
+import Models.Client;
+import Models.Gameplay.ActiveGame;
+import Models.Gameplay.Route;
 import Models.Result;
 import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
+import StatePattern.MyTurn;
 import activities.MainActivity;
 
 
@@ -54,8 +60,10 @@ public class GamePresenter implements IGamePresenter, Observer {
     }
 
 
-    public Result claimRoute(Context c)
+    public void claimRoute(Context c, int routeNumber)
     {
+        context =c;
+        Client.getInstance().getCurState().claimRoute(routeNumber);
 
 //        Client.getInstance().getCurState().claimRoute(this);
 //        //to implement the state pattern, do this in MyTurn?
@@ -81,15 +89,16 @@ public class GamePresenter implements IGamePresenter, Observer {
 //        GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
+
         gui.endTurn();
 //        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
 //        Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
-        return null;
     }
 
-    public Result claimOtherRoute(Context c)
+    public void claimOtherRoute(Context c)
     {
+        context=c;
         //draw line -- new color for that player
 
         //increment routes
@@ -118,19 +127,22 @@ public class GamePresenter implements IGamePresenter, Observer {
 //        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
 //        Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
-        return null;
     }
 
-    public boolean selectingRoute(float x, float y)
+    public int selectingRoute(float x, float y)
     {
-        float m = (1907-1975)/(790-1227);
-        float b= 1907-(m*790);
-        float testY= m*x+b;
-        if( testY >= y-8 && testY <= y+8)
-        {
-            return true;
+        int bestRoute= -1;
+        Map<Integer, Route> routes= ActiveGame.getInstance().getRoutes();
+        for(Integer routeNumber: routes.keySet()) {
+            float m = (float) ((routes.get(routeNumber).getStartCity().getYPosition() - routes.get(routeNumber).getEndCity().getYPosition()) /
+                    (routes.get(routeNumber).getStartCity().getXPosition()- routes.get(routeNumber).getEndCity().getXPosition()));
+            float b = (float) (routes.get(routeNumber).getStartCity().getYPosition() - (m * routes.get(routeNumber).getStartCity().getXPosition()));
+            float testY = m * x + b;
+            if (testY >= y - 40 && testY <= y + 40) {
+                    bestRoute = routeNumber;
+            }
         }
-        return false;
+        return  bestRoute;
     }
 
 

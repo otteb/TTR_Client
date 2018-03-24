@@ -9,7 +9,7 @@ import game.GamePresenter;
  */
 
 public class State {
-    public void claimRoute(GamePresenter wrapper) {
+    public void claimRoute(int claimRoute) {
         //toast it's not your turn
     }
     //public void takeFaceUpCard(GamePresenter wrapper) {}

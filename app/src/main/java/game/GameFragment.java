@@ -37,6 +37,7 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
     ImageButton city_two;
     Button claimRoute;
     Button viewDestCards;
+    int routeNumber= -1;
     Button viewTrainCards;
 //    Button simulateTurn;
     ImageButton goToStats;
@@ -164,7 +165,7 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
                     Toast.makeText(getActivity(), "It's not your turn!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Result r = gamePresenter.claimRoute(getActivity());
+                    gamePresenter.claimRoute(getActivity(), routeNumber);
                     Paint paint3 = new Paint(Paint.ANTI_ALIAS_FLAG);
                     paint3.setStrokeWidth(10);
                     if(ActiveGame.getInstance().getMyPlayer().getColor().equals("red"))
@@ -180,10 +181,10 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
 //                    paint2.setStrokeWidth(10);
 //                    paint2.setColor(Color.RED);
 //                    relativeLayout.addView(new Line(getActivity(), lp.leftMargin + 10, lp.topMargin + 10, lp2.leftMargin + 10, lp2.topMargin + 10, paint2));
-                    if (r != null) {
+                    //if (r != null) {
 
-                        FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                        Fragment fragment = new LobbyFragment();
+                      //  FragmentManager headfrag = getActivity().getSupportFragmentManager();
+                        //Fragment fragment = new LobbyFragment();
 
                         //need something along these lines for the game and users in it?
                     /*bundle.putString("username", username.getText().toString());
@@ -191,12 +192,14 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
                     bundle.putString("authToken", r.getAuthToken());
                     fragment.setArguments(bundle);*/
 
-                        headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
-                    }
+                       // headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
+                    //}
                 }
-
+                routeNumber =-1;
+                claimRoute.setVisibility(View.GONE);
             }
         });
+        claimRoute.setVisibility(View.GONE);
 
 
         //switch to the cards fragment with the bundle passed-in:
@@ -297,13 +300,16 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
         if(event.getAction()== MotionEvent.ACTION_DOWN) {
             String s = String.valueOf(event.getX()) + " " + String.valueOf(event.getY());
             Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
-            boolean getRoute = gamePresenter.selectingRoute(event.getX(), event.getY());
-            if (getRoute)
+            routeNumber = gamePresenter.selectingRoute(event.getX(), event.getY());
+            routeNumber= 1;
+            if (routeNumber != -1)
             {
+                claimRoute.setVisibility(v.VISIBLE);
                 Toast.makeText(getContext(), "YOu claimed this route!!", Toast.LENGTH_SHORT).show();
             }
             return true;
-        }return false;
+        }
+        return false;
     }
 
 
@@ -325,25 +331,5 @@ public class GameFragment extends Fragment implements View.OnClickListener, View
             paint=p;
         }
 
-        public void getPoints (int sX,int  sY,int eX, int eY)
-        {
-            startX=sX;
-            startY=sY;
-            endX=eX;
-            endY=eY;
-        }
-
-        @Override
-        protected void onDraw(Canvas canvas) {
-            canvas.drawLine(startX, startY, endX, endY, paint);
-
-        }
-
-        @Override
-        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-           // super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-            setMeasuredDimension(widthMeasureSpec,heightMeasureSpec);
-        }
     }
 }

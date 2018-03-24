@@ -61,9 +61,9 @@ public class GameGuiFacade {
         new EndTurnTask().execute(setUpRequest());
     }
 
-    public void claimRoute(){
+    public void claimRoute(int routeNumber){
         Request request = setUpRequest();
-        //TODO: (claimRoute) pass in some way to identify the route to be claimed
+        request.setRouteNumber(routeNumber);
 
         new ClaimRouteTask().execute(request);
     }
