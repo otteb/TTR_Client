@@ -126,7 +126,6 @@ public class GamePresenter implements IGamePresenter, Observer {
 //        GamePlayServices.getInstance().addGameHistory(fakeReq);
 
         //increment turn
-        gui.endTurn();
 //        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
 //        Toast.makeText(c, "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         TTR_Observable.getInstance().updateStats("stats");
