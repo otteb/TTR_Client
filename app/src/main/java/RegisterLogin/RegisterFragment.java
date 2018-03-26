@@ -15,6 +15,8 @@ public class RegisterFragment extends Fragment {
     EditText username;
     EditText password;
     EditText confpswd;
+    EditText ipAddress;
+    EditText port;
     Button register;
     TextView backToLogin;
     LoginRegisterPresenter loginRegisterPresenter;
@@ -28,11 +30,13 @@ public class RegisterFragment extends Fragment {
         confpswd= view.findViewById(R.id.editText2_passwordconf1);
         register= view.findViewById(R.id.button2_register1);
         backToLogin= view.findViewById(R.id.login1);
+        ipAddress = (EditText)view.findViewById(R.id.ipEditText);
+        port = (EditText)view.findViewById(R.id.portEditText);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginRegisterPresenter.register(getActivity(), username.getText().toString(), password.getText().toString(), confpswd.getText().toString());
+                loginRegisterPresenter.register(getActivity(), username.getText().toString(), password.getText().toString(), confpswd.getText().toString(), port.getText().toString(), ipAddress.getText().toString());
             }
         });
 
