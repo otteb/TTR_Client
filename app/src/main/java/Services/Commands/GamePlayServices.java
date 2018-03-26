@@ -147,10 +147,9 @@ public class GamePlayServices implements IGamePlay {
     public void claimRoute(Request request){
         System.out.println("COMMAND EXECUTING - claimRoute");
         ActiveGame.getInstance().setActivePlayer(request.getUsername());
-        Route routeToRemove = ActiveGame.getInstance().getRoutes().get(request.getRoute().getRouteNumber());
+        Route routeToRemove = request.getRoute();
 
         Map<Integer, Route> temp= ActiveGame.getInstance().getRoutes();
-        Map<Integer, Route> tempClaimed= new HashMap<>();
 
 
         //add route to players claimed Routes
@@ -160,9 +159,13 @@ public class GamePlayServices implements IGamePlay {
         //removing route from Active Game Routes and adding it to Claimed Routes
         temp.remove(request.getRoute().getRouteNumber());
         ActiveGame.getInstance().setRoutes(temp);
+
         ActiveGame.getInstance().getClaimedRoutes().put(request.getRoute().getRouteNumber(),routeToRemove);
         TTR_Observable.getInstance().claimRoute("claim");
-        //ActiveGame.getInstance().setClaimedRoutes(tempClaimed);
+
+        //need to update Player hands and trains for game stats
+
+
         //TTR_Observable.getInstance().updateStats("stats");
         //need to update gameHistory Probably
         //need to update gameView as well

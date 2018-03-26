@@ -80,7 +80,8 @@ public class ActiveGame {
 
     public Player getPlayer(String username){
         for(Player p: players){
-            if(p.getName().equals(username)){
+            String name = p.getName();
+            if(name.equals(username)){
                 return p;
             }
         }
