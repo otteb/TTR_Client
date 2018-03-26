@@ -33,4 +33,6 @@
     <string name="game_name">Game Name:</string>
     <string name="done">Done</string>
     <string name="claim_route_button">Claim Route</string>
+    <string name="ip_address">IP Address</string>
+    <string name="port">Port</string>
 </resources>
