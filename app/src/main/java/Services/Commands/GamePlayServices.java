@@ -179,6 +179,7 @@ public class GamePlayServices implements IGamePlay {
 
         ActiveGame.getInstance().getClaimedRoutes().put(request.getRoute().getRouteNumber(),routeToRemove);
 
+        TTR_Observable.getInstance().updateStats("stats");
         TTR_Observable.getInstance().claimRoute("claim");
 
         //need to update Player hands and trains for game stats
