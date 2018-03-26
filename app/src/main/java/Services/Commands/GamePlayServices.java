@@ -172,7 +172,7 @@ public class GamePlayServices implements IGamePlay {
         ActiveGame.getInstance().getPlayer(request.getUsername()).setNumTrains(curNumTrains);
         ActiveGame.getInstance().getPlayer(request.getUsername()).removeTrainCards(request.getRoute());
         Score curPlayerScore = ActiveGame.getInstance().getPlayer(request.getUsername()).getScore();
-        curPlayerScore.addRoutePoints(request.getRoute().getPoints());
+        curPlayerScore.addRoutePoints(request.getRoute().getLength());
         ActiveGame.getInstance().getPlayer(request.getUsername()).setScore(curPlayerScore);
        // ActiveGame.getInstance().getPlayer(request.getUsername()).setScore(request.);
 
