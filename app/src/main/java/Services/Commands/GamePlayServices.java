@@ -109,6 +109,16 @@ public class GamePlayServices implements IGamePlay {
         System.out.println("COMMAND EXECUTING - updateClient");
     }
 
+    //this function updates the player's endGame-specific information:
+    @Override
+    public void endGame(Request request) {
+        System.out.println("COMMAND EXECUTING - endGame");
+        //update the client's information AND/OR the ActiveGame:
+        ActiveGame.getInstance().setPlayers(request.getGame().getPlayers()); //these players have all the latest scores:
+        //Action that tells the client to change to the EndGameFragment:
+        TTR_Observable.getInstance().endGame();
+    }
+
     @Override
     public void endTurn(Request request) {
         System.out.println("COMMAND EXECUTING - endTurn");

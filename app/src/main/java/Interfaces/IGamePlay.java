@@ -15,4 +15,5 @@ public interface IGamePlay {
     void shuffleFaceUp(Request request);
     //include the updateClient:
     void updateClient(Request request); //(String authToken);
+    void endGame(Request request);
 }

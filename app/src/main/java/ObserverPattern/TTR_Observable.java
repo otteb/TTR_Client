@@ -63,6 +63,11 @@ public class TTR_Observable extends Observable {
         notifyObservers("start");
     }
 
+    public void endGame() {
+        setChanged();
+        notifyObservers("end");
+    }
+
     public void sendMessage(String m) {
         setChanged();
         notifyObservers(m);
