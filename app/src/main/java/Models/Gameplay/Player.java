@@ -160,4 +160,41 @@ public class Player {
     public void setPlayerRank(int playerRank) {
         this.playerRank = playerRank;
     }
+
+    public void removeTrainCards(Route route){
+        int routeLength = route.getLength();
+        String routeColor = route.getColor();
+        int count = 0;
+
+        for(int i = 0; i < hand.size(); i++){
+
+            if(hand.get(i).getColor().equals(routeColor)){
+                hand.remove(i);
+                count++;
+                i--;
+
+            }else if(hand.get(i).getColor().equals("wild")){
+                hand.remove(i);
+                count++;
+                i--;
+            }else if(routeColor.equals("wild")){
+                //TODO remove only cards of same color
+                hand.remove(i);
+                count++;
+                i--;
+
+            }
+            else if(routeColor.equals("wild"))
+            {
+                hand.remove(i);
+                count++;
+                i--;
+            }
+
+            if(routeLength == count){
+                break;
+            }
+        }
+
+    }
 }

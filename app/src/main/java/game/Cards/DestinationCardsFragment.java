@@ -204,6 +204,7 @@ public class DestinationCardsFragment extends Fragment {
         else if(Client.getInstance().getCurState() instanceof GameSetup)
         {
             updateDestinationCards();
+            drawCards.setVisibility(View.GONE);
         }
         else if(Client.getInstance().getCurState() instanceof DrewDestCards)
         {
