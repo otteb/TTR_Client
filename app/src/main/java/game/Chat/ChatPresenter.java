@@ -8,6 +8,7 @@ import java.util.Observer;
 import Interfaces.IChatPresenter;
 import Models.Client;
 import Models.Gameplay.Chat;
+import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
@@ -21,7 +22,7 @@ public class ChatPresenter implements IChatPresenter, Observer {
     //Constructor:
     public ChatPresenter(Context c){
         this.context = c;
-        gameGuiFacade.addObserver(this);
+        TTR_Observable.getInstance().addObserver(this);
     }
 
     //this grabs the text from the edit view the user presses enter in the view and sends a request to the server

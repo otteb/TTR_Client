@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import Interfaces.ICardsPresenter;
 import Models.Client;
+import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
@@ -20,7 +21,7 @@ public class CardsPresenter implements ICardsPresenter, Observer {
     //Constructor:
     CardsPresenter(Context c){
         this.context = c;
-        gameGuiFacade.addObserver(this);
+        TTR_Observable.getInstance().addObserver(this);
     }
 
 

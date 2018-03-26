@@ -9,7 +9,7 @@ public class TTR_Observable extends Observable {
         return theOneAndOnly;
     }
 
-    private TTR_Observable(){}
+    public TTR_Observable(){}
 
     public void updateTurn(){
         setChanged();

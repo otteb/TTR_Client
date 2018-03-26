@@ -14,8 +14,6 @@ public class MyTurn extends State {
     public void claimRoute(Route routeNumber) {
         //TODO: implement claimRoute()
         gui.claimRoute(routeNumber);
-        Client.getInstance().setCurState(new NotMyTurn());
-        gui.endTurn();
     }
 
     @Override

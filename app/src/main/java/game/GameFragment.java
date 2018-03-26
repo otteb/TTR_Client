@@ -30,12 +30,14 @@ import Models.Gameplay.Player;
 import Models.Gameplay.Route;
 import Models.Result;
 import StatePattern.NotMyTurn;
+import activities.MainActivity;
 import activities.R;
 import lobby.LobbyFragment;
 
 
 public class GameFragment extends Fragment implements  View.OnTouchListener {
 
+    MainActivity mainActivity;
  RelativeLayout relativeLayout;
     Paint blackPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Paint greenPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -52,8 +54,13 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
     GamePresenter gamePresenter;
     public GameFragment()
     {
-        gamePresenter = new GamePresenter(getContext());
+        gamePresenter = new GamePresenter(getActivity());
 
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainActivity = (MainActivity) context;
     }
 
     @Override
@@ -89,26 +96,7 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
                     Toast.makeText(getActivity(), "It's not your turn!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Player player = ActiveGame.getInstance().getMyPlayer();
-                    //makeLines(routeNumber, player);
                     gamePresenter.claimRoute(getActivity(), routeNumber);
-//                    Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
-//                    paint2.setStrokeWidth(10);
-//                    paint2.setColor(Color.RED);
-//                    relativeLayout.addView(new Line(getActivity(), lp.leftMargin + 10, lp.topMargin + 10, lp2.leftMargin + 10, lp2.topMargin + 10, paint2));
-                    //if (r != null) {
-
-                      //  FragmentManager headfrag = getActivity().getSupportFragmentManager();
-                        //Fragment fragment = new LobbyFragment();
-
-                        //need something along these lines for the game and users in it?
-                    /*bundle.putString("username", username.getText().toString());
-                    bundle.putString("password", password.getText().toString());
-                    bundle.putString("authToken", r.getAuthToken());
-                    fragment.setArguments(bundle);*/
-
-                       // headfrag.beginTransaction().replace(R.id.activity_main, fragment).commit();
-                    //}
                 }
                 routeNumber = null;
                 claimRoute.setVisibility(View.GONE);

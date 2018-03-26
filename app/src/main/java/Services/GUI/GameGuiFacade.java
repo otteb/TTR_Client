@@ -69,10 +69,6 @@ public class GameGuiFacade {
         new ClaimRouteTask().execute(request);
     }
 
-    public void addObserver(Observer o)
-    {
-        TTR_Observable.getInstance().addObserver(o);
-    }
 
     private Request setUpRequest() {
         Request request = new Request();

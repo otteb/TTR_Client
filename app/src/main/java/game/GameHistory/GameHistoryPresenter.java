@@ -6,6 +6,7 @@ import android.content.Context;
 import java.util.Observable;
 import java.util.Observer;
 import Interfaces.IGameHistoryPresenter;
+import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
@@ -18,7 +19,7 @@ class GameHistoryPresenter implements IGameHistoryPresenter, Observer {
     //Constructor:
     GameHistoryPresenter(Context c){
         this.context = c;
-        gameGuiFacade.addObserver(this);
+        TTR_Observable.getInstance().addObserver(this);
     }
 
     void switchToGame(Context c){

@@ -6,6 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.IStatesPresenter;
+import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
@@ -18,7 +19,7 @@ public class StatsPresenter implements IStatesPresenter, Observer{
     //Constructor:
     StatsPresenter(Context c){
         this.context = c;
-        gameGuiFacade.addObserver(this);
+        TTR_Observable.getInstance().addObserver(this);
     }
 
     //Navigation:

@@ -1,6 +1,7 @@
 package game;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -16,6 +17,7 @@ import ObserverPattern.TTR_Observable;
 import Services.Commands.GamePlayServices;
 import Services.GUI.GameGuiFacade;
 import StatePattern.MyTurn;
+import StatePattern.NotMyTurn;
 import activities.MainActivity;
 
 import static java.lang.Math.abs;
@@ -24,13 +26,12 @@ import static java.lang.Math.abs;
 public class GamePresenter implements IGamePresenter, Observer {
     private Context context;
     private MainActivity mainActivity;
-    private GameGuiFacade gui = new GameGuiFacade();
 //    private Player player;
 
     public GamePresenter(Context c) {
         context = c;
 //        player = ActiveGame.getInstance().getMyPlayer();
-        gui.addObserver(this);
+        TTR_Observable.getInstance().addObserver(this);
     }
 
 
@@ -111,14 +112,19 @@ public class GamePresenter implements IGamePresenter, Observer {
     // We need this for updating the claimed routes
     @Override
     public void update(Observable observable, Object o) {
-        if(o.equals("claim")) {
-            mainActivity = (MainActivity) context;
-            mainActivity.updateRoutes();
-        }
-        else if(o.equals("end"))
-        {
-            mainActivity = (MainActivity) context;
-            mainActivity.switchToEndGame();
+        if(context != null) {
+            if (o.equals("claim")) {
+                mainActivity = (MainActivity) context;
+                mainActivity.updateRoutes();
+                Client.getInstance().setCurState(new NotMyTurn());
+                GameGuiFacade gui = new GameGuiFacade();
+                gui.endTurn();
+                observable.hasChanged();
+            } else if (o.equals("end")) {
+                mainActivity = (MainActivity) context;
+                mainActivity.switchToEndGame();
+                observable.hasChanged();
+            }
         }
     }
 }

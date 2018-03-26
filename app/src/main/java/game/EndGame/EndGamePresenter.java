@@ -6,6 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.IEndGamePresenter;
+import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
@@ -22,7 +23,7 @@ public class EndGamePresenter implements IEndGamePresenter, Observer {
     //create Contructor that is able to handle the context:
     EndGamePresenter(Context c){
         this.context = c;
-        gameGuiFacade.addObserver(this);
+        TTR_Observable.getInstance().addObserver(this);
     }
 
     //This is where navigation buttons should be added in the future - I don't think we really want to do anything here correct??
