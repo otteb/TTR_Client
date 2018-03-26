@@ -28,13 +28,30 @@ public class User {
     private String username;
     private String password;
     private String authToken;
+    private String port;
+    private String ipAddress;
 
-    public User (String username, String password, String authToken){
-
+    public User (String username, String password, String authToken, String port, String ipAddress){
         this.username = username;
         this.password = password;
         this.authToken = authToken;
-
+        this.port = port;
+        this.ipAddress = ipAddress;
     }
 
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
 }
