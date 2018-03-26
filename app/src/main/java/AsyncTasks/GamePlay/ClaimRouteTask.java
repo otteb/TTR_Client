@@ -24,7 +24,7 @@ public class ClaimRouteTask extends AsyncTask<Request, Void, Result> {
         if (result.getErrorMsg() == null) {
             System.out.println("Claiming a route - This is the asyncTask");
             //this references the correct facade, and runs the command:
-            gamePlayFacade.runCMD(result);
+//            gamePlayFacade.runCMD(result);
         } else {
             //create an error message for the Active Game Model:
             TTR_Observable.getInstance().sendMessage(result.getErrorMsg());

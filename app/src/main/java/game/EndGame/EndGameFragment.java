@@ -51,10 +51,26 @@ public class EndGameFragment extends android.support.v4.app.Fragment {
         endGameAdapter = new EndGameAdapter(ActiveGame.getInstance().getPlayers());
         endGameRecyclerView.setAdapter(endGameAdapter);
 
+        fillPlayers();
         //This is where the onClick listeners should be for button navigation:
 
         //shouldn't be any information updated at this point - this fragment only launches when the server tells the clients to.
         return view;
+    }
+
+
+    public void fillPlayers() {
+        ArrayList<Player> updatePlayers = new ArrayList<>();
+        updatePlayers.addAll(ActiveGame.getInstance().getPlayers());
+        if(updatePlayers.size() > 0)
+        {
+            endGameAdapter.clearPlayerList();
+            for(Player p : updatePlayers)
+            {
+                endGameAdapter.addPlayerToView(p);
+            }
+            endGameAdapter.notifyDataSetChanged();
+        }
     }
 
 
@@ -93,15 +109,15 @@ public class EndGameFragment extends android.support.v4.app.Fragment {
             rankItem.setText(String.valueOf(player.getPlayerRank()));
             nameItem.setText(player.getName());
             //check for user's player and adjust font accordingly:
-            if(ActiveGame.getInstance().getActivePlayer().equals(player.getName())){
+            if(ActiveGame.getInstance().getMyPlayer().getName().equals(player.getName())){
                 nameItem.setTypeface(null, Typeface.BOLD_ITALIC);
             }else{
                 nameItem.setTypeface(null, Typeface.NORMAL);
             }
             //assign all of the points from the player argument:
-            routePtsItem.setText(player.getScore().getRoutePoints());
+            routePtsItem.setText(String.valueOf(player.getScore().getRoutePoints()));
             longestRoadPtsItem.setText(String.valueOf(player.getScore().getLongestRoad()));
-            destCardsPtsItem.setText(String.valueOf(player.getScore().getPosDestPoints() +"/"+ player.getScore().getNegDestPoints()));
+            destCardsPtsItem.setText(String.valueOf(player.getScore().getPosDestPoints()) +"/"+ String.valueOf(player.getScore().getNegDestPoints()));
             totalPtsItem.setText(String.valueOf(player.getScore().getTotal()));
         }
 
