@@ -176,31 +176,20 @@ public class GamePlayServices implements IGamePlay {
         ActiveGame.getInstance().getPlayer(request.getUsername()).setScore(curPlayerScore);
        // ActiveGame.getInstance().getPlayer(request.getUsername()).setScore(request.);
 
-        if(request.getUsername().equals(Client.getInstance().getUserName())){
-            //updating MyPlayer's stuff
-            ActiveGame.getInstance().getMyPlayer().setClaimedRoutes(ActiveGame.getInstance().getPlayer(request.getUsername()).getClaimedRoutes());
-            ActiveGame.getInstance().getMyPlayer().setNumTrains(curNumTrains);
-            ActiveGame.getInstance().getMyPlayer().removeTrainCards(request.getRoute());
-            ActiveGame.getInstance().getMyPlayer().setScore(ActiveGame.getInstance().getPlayer(request.getUsername()).getScore());
-        }
+//        if(request.getUsername().equals(Client.getInstance().getUserName())){
+//            //updating MyPlayer's stuff
+//            ActiveGame.getInstance().getMyPlayer().setClaimedRoutes(ActiveGame.getInstance().getPlayer(request.getUsername()).getClaimedRoutes());
+//            ActiveGame.getInstance().getMyPlayer().setNumTrains(curNumTrains);
+//            ActiveGame.getInstance().getMyPlayer().removeTrainCards(request.getRoute());
+//            ActiveGame.getInstance().getMyPlayer().setScore(ActiveGame.getInstance().getPlayer(request.getUsername()).getScore());
+//        }
         //removing route from Active Game Routes and adding it to Claimed Routes
         temp.remove(request.getRoute().getRouteNumber());
         ActiveGame.getInstance().setRoutes(temp);
 
         ActiveGame.getInstance().getClaimedRoutes().put(request.getRoute().getRouteNumber(),routeToRemove);
 
-        TTR_Observable.getInstance().updateStats("stats");
         TTR_Observable.getInstance().claimRoute("claim");
-
-        //need to update Player hands and trains for game stats
-
-
-        //TTR_Observable.getInstance().updateStats("stats");
-        //need to update gameHistory Probably
-        //need to update gameView as well
-
-
-        //ActiveGame.getInstance().setRoutes(f);
-        //TODO: implement claimRoute()
+        TTR_Observable.getInstance().updateStats("stats");
     }
 }

@@ -29,6 +29,7 @@ import Models.Gameplay.Location;
 import Models.Gameplay.Player;
 import Models.Gameplay.Route;
 import Models.Result;
+import StatePattern.NotMyTurn;
 import activities.R;
 import lobby.LobbyFragment;
 
@@ -36,10 +37,11 @@ import lobby.LobbyFragment;
 public class GameFragment extends Fragment implements  View.OnTouchListener {
 
  RelativeLayout relativeLayout;
-    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    Paint blackPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Paint greenPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Paint yellowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Paint redPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    Paint bluePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Button claimRoute;
     Button viewDestCards;
     Route routeNumber= null;
@@ -63,8 +65,16 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
     @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        paint.setStrokeWidth(30);
-        paint.setColor(Color.WHITE);
+        blackPaint.setStrokeWidth(30);
+        blackPaint.setColor(Color.BLACK);
+        yellowPaint.setStrokeWidth(30);
+        yellowPaint.setColor(Color.YELLOW);
+        bluePaint.setStrokeWidth(30);
+        bluePaint.setColor(Color.BLUE);
+        redPaint.setStrokeWidth(30);
+        redPaint.setColor(Color.RED);
+        greenPaint.setStrokeWidth(30);
+        greenPaint.setColor(Color.GREEN);
         View view = inflater.inflate(R.layout.game, container, false);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.gameView);
 
@@ -75,8 +85,7 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
             public void onClick(View v) {
 
                 String username = ActiveGame.getInstance().getActivePlayerObj().getName();
-                if(!Client.getInstance().getUserName().equals(username))
-                {
+                if(Client.getInstance().getCurState() instanceof NotMyTurn){
                     Toast.makeText(getActivity(), "It's not your turn!", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -147,7 +156,7 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
 
         relativeLayout.setOnTouchListener(this);
 
-        String username = ActiveGame.getInstance().getActivePlayerObj().getName();
+        String username = ActiveGame.getInstance().getActivePlayer();
         if(Client.getInstance().getUserName().equals(username))
         {
             Toast.makeText(getActivity(), "It's your turn!", Toast.LENGTH_SHORT).show();
@@ -164,26 +173,29 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
     {
         if(player.getColor().equals("red"))
         {
-            paint.setColor(Color.RED);
+            relativeLayout.addView(new Line(getActivity(), (float)route.getStartX(), (float)route.getStartY(), (float)route.getEndX(),
+                (float)route.getEndY(), redPaint));
         }
         else if(player.getColor().equals("green"))
         {
-            paint.setColor(Color.GREEN);
+            relativeLayout.addView(new Line(getActivity(), (float)route.getStartX(), (float)route.getStartY(), (float)route.getEndX(),
+                    (float)route.getEndY(), greenPaint));
         }
         else if(player.getColor().equals("blue"))
         {
-            paint.setColor(Color.BLUE);
+            relativeLayout.addView(new Line(getActivity(), (float)route.getStartX(), (float)route.getStartY(), (float)route.getEndX(),
+                    (float)route.getEndY(), bluePaint));
         }
         else if(player.getColor().equals("black"))
         {
-            paint.setColor(Color.BLACK);
+            relativeLayout.addView(new Line(getActivity(), (float)route.getStartX(), (float)route.getStartY(), (float)route.getEndX(),
+                    (float)route.getEndY(), blackPaint));
         }
         else
         {
-            paint.setColor(Color.YELLOW);
+            relativeLayout.addView(new Line(getActivity(), (float)route.getStartX(), (float)route.getStartY(), (float)route.getEndX(),
+                    (float)route.getEndY(), yellowPaint));
         }
-        relativeLayout.addView(new Line(getActivity(), (float)route.getStartX(), (float)route.getStartY(), (float)route.getEndX(),
-                (float)route.getEndY(), paint));
     }
 
 
