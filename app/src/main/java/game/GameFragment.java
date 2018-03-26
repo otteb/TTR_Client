@@ -156,6 +156,7 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
         {
             Toast.makeText(getActivity(), "It\'s " + username + "\'s turn!", Toast.LENGTH_SHORT).show();
         }
+        updateRoutes();
         return view;
     }
 
@@ -181,8 +182,8 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
         {
             paint.setColor(Color.YELLOW);
         }
-        relativeLayout.addView(new Line(getActivity(), (float)routeNumber.getStartX(), (float)routeNumber.getStartY(), (float)routeNumber.getEndX(),
-                (float)routeNumber.getEndY(), paint));
+        relativeLayout.addView(new Line(getActivity(), (float)route.getStartX(), (float)route.getStartY(), (float)route.getEndX(),
+                (float)route.getEndY(), paint));
     }
 
 
@@ -190,14 +191,13 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if(event.getAction()== MotionEvent.ACTION_DOWN) {
-            String s = String.valueOf(event.getX()) + " " + String.valueOf(event.getY());
-            Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
             routeNumber = gamePresenter.selectingRoute(event.getX(), event.getY());
             if (routeNumber != null)
             {
                 claimRoute.setVisibility(v.VISIBLE);
             }
             else {
+                //debatebly we should remove this
                 Toast.makeText(getContext(), "You weren't close enough to claim this route", Toast.LENGTH_SHORT).show();
             }
             return true;
@@ -207,15 +207,12 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
 
     public void updateRoutes(){
         Map<Integer, Route> updateClaimedRoutes = ActiveGame.getInstance().getClaimedRoutes();
-        if(updateClaimedRoutes != null && (updateClaimedRoutes.size() > 0))
-        {
-            for(Integer i : updateClaimedRoutes.keySet())
-            {
+        if(updateClaimedRoutes != null && (updateClaimedRoutes.size() > 0)) {
+            for (Integer i : updateClaimedRoutes.keySet()) {
                 Player p = ActiveGame.getInstance().getPlayer(updateClaimedRoutes.get(i).getOwner());
                 makeLines(updateClaimedRoutes.get(i), p);
             }
         }
-        Toast.makeText(getContext(), "we are in updateClaimedRoutes", Toast.LENGTH_SHORT).show();
     }
 
 
