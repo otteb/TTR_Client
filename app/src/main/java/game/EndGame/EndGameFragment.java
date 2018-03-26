@@ -25,7 +25,7 @@ import activities.R;
 
 
 //This class looks like it is built correctly, but I have no idea how to test it...
-public class EndGameFragment extends Fragment {
+public class EndGameFragment extends android.support.v4.app.Fragment {
     //holds the view elements:
     public EndGamePresenter endGamePresenter;
     public EndGameAdapter endGameAdapter;
@@ -99,10 +99,10 @@ public class EndGameFragment extends Fragment {
                 nameItem.setTypeface(null, Typeface.NORMAL);
             }
             //assign all of the points from the player argument:
-            routePtsItem.setText(player.getRoutePts());
-            longestRoadPtsItem.setText(String.valueOf(player.getLongestRoadPts()));
-            destCardsPtsItem.setText(String.valueOf(player.getDestCardsPts()));
-            totalPtsItem.setText(String.valueOf(player.getTotalPts()));
+            routePtsItem.setText(player.getScore().getRoutePoints());
+            longestRoadPtsItem.setText(String.valueOf(player.getScore().getLongestRoad()));
+            destCardsPtsItem.setText(String.valueOf(player.getScore().getPosDestPoints() +"/"+ player.getScore().getNegDestPoints()));
+            totalPtsItem.setText(String.valueOf(player.getScore().getTotal()));
         }
 
     }

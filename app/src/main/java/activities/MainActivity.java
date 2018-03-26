@@ -7,6 +7,7 @@ import Models.Request;
 import game.Cards.TrainCardsFragment;
 import game.Cards.DestinationCardsFragment;
 import game.Chat.ChatFragment;
+import game.EndGame.EndGameFragment;
 import game.GameHistory.GameHistoryFragment;
 import game.Stats.StatsFragment;
 import game.GameFragment;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public DestinationCardsFragment destCardsFragment;
     public GameHistoryFragment gameHistoryFragment;
     public RegisterFragment registerFragment;
+    public EndGameFragment endGameFragment;
     FragmentManager headfrag = getSupportFragmentManager();
     String currentFrag = "";
 
@@ -129,7 +131,11 @@ public class MainActivity extends AppCompatActivity {
         headfrag.beginTransaction().replace(R.id.activity_main, gameHistoryFragment).commit();
     }
 
-    //TODO: Create switchToEndGame()
+    public void switchToEndGame(){
+        endGameFragment = new EndGameFragment();
+        currentFrag = "end";
+        headfrag.beginTransaction().replace(R.id.activity_main, endGameFragment).commit();
+    }
 
     public void updateGamesList() { lobbyFragment.updateGameList(); }
 

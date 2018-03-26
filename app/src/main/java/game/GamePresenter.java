@@ -179,7 +179,7 @@ public class GamePresenter implements IGamePresenter, Observer {
         else if(o.equals("end"))
         {
             mainActivity = (MainActivity) context;
-//            mainActivity.switchToEndGame();
+            mainActivity.switchToEndGame();
         }
     }
 }

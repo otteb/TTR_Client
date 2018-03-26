@@ -17,10 +17,6 @@ public class Player {
     private ArrayList<TrainCard> hand;
     private ArrayList<DestinationCard> destination_cards;
     private ArrayList<DestinationCard> drawnDestCards;
-    private int routePts;
-    private int destCardsPts;
-    private int longestRoadPts;
-    private int totalPts;
     private int playerRank;
 
     public Player() {
@@ -155,38 +151,6 @@ public class Player {
 
     public int getRoutePoints() {
         return score.getRoutePoints();
-    }
-
-    public int getRoutePts() {
-        return routePts;
-    }
-
-    public void setRoutePts(int routePts) {
-        this.routePts = routePts;
-    }
-
-    public int getDestCardsPts() {
-        return destCardsPts;
-    }
-
-    public void setDestCardsPts(int destCardsPts) {
-        this.destCardsPts = destCardsPts;
-    }
-
-    public int getLongestRoadPts() {
-        return longestRoadPts;
-    }
-
-    public void setLongestRoadPts(int longestRoadPts) {
-        this.longestRoadPts = longestRoadPts;
-    }
-
-    public int getTotalPts() {
-        return totalPts;
-    }
-
-    public void setTotalPts(int totalPts) {
-        this.totalPts = totalPts;
     }
 
     public int getPlayerRank() {
