@@ -163,15 +163,20 @@ public class GamePlayServices implements IGamePlay {
 
 
         //add route to players claimed Routes
-        if(request.getUsername().equals(Client.getInstance().getUserName())){
-            ActiveGame.getInstance().getPlayer(request.getUsername()).getClaimedRoutes().put(request.getRoute().getRouteNumber(), routeToRemove);
-            //updating the number of trains current player has
-            int curNumTrains= ActiveGame.getInstance().getPlayer(request.getUsername()).getNumTrains();
-            curNumTrains -= request.getRoute().getLength();
-            ActiveGame.getInstance().getPlayer(request.getUsername()).setNumTrains(curNumTrains);
-            //
-            ActiveGame.getInstance().getPlayer(request.getUsername()).removeTrainCards(request.getRoute());
 
+        ActiveGame.getInstance().getPlayer(request.getUsername()).getClaimedRoutes().put(request.getRoute().getRouteNumber(), routeToRemove);
+        //updating the number of trains current player has
+        int curNumTrains= ActiveGame.getInstance().getPlayer(request.getUsername()).getNumTrains();
+        curNumTrains -= request.getRoute().getLength();
+        ActiveGame.getInstance().getPlayer(request.getUsername()).setNumTrains(curNumTrains);
+        ActiveGame.getInstance().getPlayer(request.getUsername()).removeTrainCards(request.getRoute());
+       // ActiveGame.getInstance().getPlayer(request.getUsername()).setScore(request.);
+
+        if(request.getUsername().equals(Client.getInstance().getUserName())){
+            //updating MyPlayer's stuff
+            ActiveGame.getInstance().getMyPlayer().setClaimedRoutes(ActiveGame.getInstance().getPlayer(request.getUsername()).getClaimedRoutes());
+            ActiveGame.getInstance().getMyPlayer().setNumTrains(curNumTrains);
+            ActiveGame.getInstance().getMyPlayer().removeTrainCards(request.getRoute());
         }
         //removing route from Active Game Routes and adding it to Claimed Routes
         temp.remove(request.getRoute().getRouteNumber());
