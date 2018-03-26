@@ -16,7 +16,7 @@ import Models.Result;
 
 import static java.net.HttpURLConnection.HTTP_OK;
 
-class ClientCommunicator {
+public class ClientCommunicator {
 
     private static ClientCommunicator myInstance = new ClientCommunicator();
 
@@ -82,5 +82,21 @@ class ClientCommunicator {
             response.setSuccess(false);
         }
         return response;
+    }
+
+    public String getServerHost() {
+        return serverHost;
+    }
+
+    public void setServerHost(String serverHost) {
+        this.serverHost = serverHost;
+    }
+
+    public String getServerPort(){
+        return serverPort;
+    }
+
+    public void setServerPort(String serverPort){
+        this.serverPort = serverPort;
     }
 }

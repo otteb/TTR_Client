@@ -23,6 +23,8 @@ public class Client {// extends Observable {
     private boolean isLoggedIn;
     private String userName;
     private String password;
+    private String ipAddress;
+    private String port;
     private String authToken;
     private Request loginRequest;
     private Request registerRequest;
@@ -192,5 +194,21 @@ public class Client {// extends Observable {
 
     public void setCurState(State curState) {
         this.curState = curState;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
     }
 }

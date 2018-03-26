@@ -6,6 +6,7 @@ import android.widget.Toast;
 import java.util.Observable;
 import java.util.Observer;
 
+import Client_Server_Communication.ClientCommunicator;
 import Interfaces.ILoginRegisterPresenter;
 import Models.Client;
 import activities.MainActivity;
@@ -44,7 +45,7 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
      * @post user.password = password
      * @post username && passed onto the guiFacade
      */
-    public void login(Context c, String username, String password)
+    public void login(Context c, String username, String password, String port, String ipAddress)
     {
         context=c;
         if(username.equals("") || password.equals("")){
@@ -55,6 +56,11 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
 //            user = new Request();
             user.setUsername(username);
             user.setPassword(password);
+            user.setPort(port);
+            user.setIpAddress(ipAddress);
+            //set the port and ipAddress in the client communicator:
+            ClientCommunicator.getInstance().setServerHost(ipAddress);
+            ClientCommunicator.getInstance().setServerPort(port);
             guiFacade.login(username, password);
         }
     }
@@ -89,7 +95,7 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
      * @post user.password = password
      * @post username && passed onto the guiFacade
      */
-    public void register(Context c, String username, String password, String confpswd)
+    public void register(Context c, String username, String password, String confpswd, String port, String ipAddress)
     {
         context = c;
         if (password.equals(confpswd) && !username.equals("") & !password.equals(""))
@@ -97,6 +103,10 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
             user = new Request();
             user.setUsername(username);
             user.setPassword(password);
+            user.setPort(port);
+            user.setIpAddress(ipAddress);
+            ClientCommunicator.getInstance().setServerHost(ipAddress);
+            ClientCommunicator.getInstance().setServerPort(port);
             guiFacade.register(username, password);
         }
         else

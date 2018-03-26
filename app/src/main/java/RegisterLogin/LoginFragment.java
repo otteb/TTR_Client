@@ -16,6 +16,8 @@ import activities.R;
 public class LoginFragment extends Fragment {
     EditText username;
     EditText password;
+    EditText ipAddress;
+    EditText port;
     Button login;
     LoginRegisterPresenter loginRegisterPresenter;
     TextView register;
@@ -32,13 +34,15 @@ public class LoginFragment extends Fragment {
 
         username= (EditText)view.findViewById(R.id.editText_username);
         password= (EditText)view.findViewById(R.id.editText2_password);
+        ipAddress = (EditText)view.findViewById(R.id.ipEditText);
+        port = (EditText)view.findViewById(R.id.portEditText);
 
         login= (Button)view.findViewById(R.id.button_login);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginRegisterPresenter.login(getActivity(), username.getText().toString(), password.getText().toString());
+                loginRegisterPresenter.login(getActivity(), username.getText().toString(), password.getText().toString(), port.getText().toString(), ipAddress.getText().toString());
             }
         });
 
