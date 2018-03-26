@@ -117,7 +117,7 @@ public class EndGameFragment extends android.support.v4.app.Fragment {
             //assign all of the points from the player argument:
             routePtsItem.setText(String.valueOf(player.getScore().getRoutePoints()));
             longestRoadPtsItem.setText(String.valueOf(player.getScore().getLongestRoad()));
-            destCardsPtsItem.setText(String.valueOf(player.getScore().getPosDestPoints() +"/"+ player.getScore().getNegDestPoints()));
+            destCardsPtsItem.setText(String.valueOf(player.getScore().getPosDestPoints()) +"/"+ String.valueOf(player.getScore().getNegDestPoints()));
             totalPtsItem.setText(String.valueOf(player.getScore().getTotal()));
         }
 

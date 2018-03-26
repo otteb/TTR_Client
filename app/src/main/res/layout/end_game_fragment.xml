@@ -84,8 +84,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Dest. Cards"
-                    android:textSize="12sp" />
+                    android:text="Dest. Cards \n Pos/Neg"
+                    android:textSize="12sp"
+                    android:textAlignment="center"/>
 
                 <TextView
                     android:id="@+id/totalPts"
