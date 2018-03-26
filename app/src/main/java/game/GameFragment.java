@@ -192,8 +192,11 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
         if(event.getAction()== MotionEvent.ACTION_DOWN) {
             routeNumber = gamePresenter.selectingRoute(event.getX(), event.getY());
+            String s = String.valueOf(event.getX())+" "+String.valueOf(event.getY());
+            Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
             if (routeNumber != null)
             {
+                Toast.makeText(getContext(), routeNumber.getName(), Toast.LENGTH_SHORT).show();
                 claimRoute.setVisibility(v.VISIBLE);
             }
             else {
