@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import Interfaces.ICardsPresenter;
 import Models.Client;
+import Models.Gameplay.ActiveGame;
 import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
@@ -33,6 +34,7 @@ public class CardsPresenter implements ICardsPresenter, Observer {
             {
                 Toast.makeText(context, "You haven't selected a card, press again to keep all three cards.", Toast.LENGTH_SHORT).show();
                 keepAll = true;
+                ActiveGame.getInstance().getMyPlayer().setInitDestCard(true);
             }
             else //keepAll is true, they pressed it a second time
             {

@@ -18,6 +18,7 @@ public class Player {
     private ArrayList<DestinationCard> destination_cards;
     private ArrayList<DestinationCard> drawnDestCards;
     private int playerRank;
+    private boolean initDestCard = false;
 
     public Player() {
         claimedRoutes = new HashMap<>();
@@ -197,4 +198,16 @@ public class Player {
         }
 
     }
+
+    public void setInitDestCard (boolean b)
+    {
+        initDestCard= b;
+    }
+
+    public boolean getInitDestCard()
+    {
+        return initDestCard;
+    }
+
+
 }

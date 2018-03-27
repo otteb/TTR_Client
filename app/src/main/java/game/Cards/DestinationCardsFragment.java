@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import Models.Client;
 import Models.Gameplay.ActiveGame;
+import Models.Gameplay.Game;
 import Models.Gameplay.Player;
 import StatePattern.DrewDestCards;
 import StatePattern.GameSetup;
@@ -86,7 +87,23 @@ public class DestinationCardsFragment extends Fragment {
         returnToGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardsPresenter.switchToGame(getActivity());
+                if(Client.getInstance().getCurState() instanceof  GameSetup){
+                    if(selected2 == 0) {
+                        cardsPresenter.discardDestCard(getActivity(), selected1);
+                    } else if (selected1 == 0) { //selected2 != 0 && selected1 == 0 //which means that only one is selected, but it is selected2
+                        cardsPresenter.discardDestCard(getActivity(), selected2);
+                    } else {
+                        cardsPresenter.discard2DestCards(getActivity(), selected1, selected2);
+                    }
+                    if(ActiveGame.getInstance().getMyPlayer().getInitDestCard() == true)
+                    {
+                        cardsPresenter.switchToGame(getActivity());
+                    }
+                    ActiveGame.getInstance().getMyPlayer().setInitDestCard(true);
+                }
+                else {
+                    cardsPresenter.switchToGame(getActivity());
+                }
             }
         });
 
