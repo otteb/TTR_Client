@@ -17,6 +17,9 @@ public class MyTurn extends State {
     public void claimRoute(Route routeNumber, ArrayList<TrainCard> cards) {
         gui.claimRoute(routeNumber, cards);
         Client.getInstance().setCurState(new NotMyTurn());
+        ActiveGame.getInstance().getMyPlayer().setSelectedRoute(null);
+     //   ActiveGame.getInstance().getMyPlayer().setIsinProcessofClaimingRoute(false);
+        ActiveGame.getInstance().getMyPlayer().setSelectedRoute(null);
         gui.endTurn();
     }
 

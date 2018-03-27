@@ -19,6 +19,8 @@ public class Player {
     private ArrayList<DestinationCard> drawnDestCards;
     private int playerRank;
     private boolean initDestCard = false;
+    private boolean inProcessofClaimingRoute = false;
+    private Route selectedRoute;
 
     public Player() {
         claimedRoutes = new HashMap<>();
@@ -204,7 +206,7 @@ public class Player {
         ArrayList<TrainCard> cards = new ArrayList<>();
         if(getNumColorCards(color) >= num)
         {
-            for (int i = 0; i < num; i++)
+            for (int i = 0; i < hand.size(); i++)
             {
                 if (hand.get(i).getColor().equals(color))
                 {
@@ -225,5 +227,24 @@ public class Player {
         return initDestCard;
     }
 
+    public void setIsinProcessofClaimingRoute (boolean b)
+    {
+        inProcessofClaimingRoute= b;
+    }
+
+    public boolean isInProcessofClaimingRoute()
+    {
+        return inProcessofClaimingRoute;
+    }
+
+    public void setSelectedRoute (Route r)
+    {
+        selectedRoute= r;
+    }
+
+    public Route getSelectedRoute()
+    {
+        return selectedRoute;
+    }
 
 }

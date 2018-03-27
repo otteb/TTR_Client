@@ -3,15 +3,18 @@ package game;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import Models.Gameplay.ActiveGame;
 import activities.R;
 
 /**
@@ -29,6 +32,7 @@ public class ClaimRouteFragment extends Fragment {
     Spinner wild_num_spinner;
     Button claimRoute;
     Button returnToGame;
+    ImageButton goToStats;
     String color = "";
     int numRegular = 0;
     int numWild = 0;
@@ -61,6 +65,18 @@ public class ClaimRouteFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 claimRoutePresenter.claimRoute(getActivity(), routeNum, color, numRegular, numWild);
+                if(ActiveGame.getInstance().getMyPlayer().getSelectedRoute()==null)
+                {
+                    claimRoutePresenter.switchToGame(getActivity());
+                }
+            }
+        });
+
+        goToStats= (ImageButton)view.findViewById(R.id.claimToStats);
+        goToStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                claimRoutePresenter.switchToStats(getActivity());
             }
         });
 

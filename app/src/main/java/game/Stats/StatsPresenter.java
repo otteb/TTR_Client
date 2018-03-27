@@ -1,11 +1,13 @@
 package game.Stats;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.IStatesPresenter;
+import Models.Gameplay.ActiveGame;
 import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
@@ -30,6 +32,14 @@ public class StatsPresenter implements IStatesPresenter, Observer{
         mainActivity = (MainActivity) context;
         mainActivity.openGame();
     }
+
+    void returnToClaimRoute(Context c)
+    {
+        context=c;
+        mainActivity= (MainActivity)context;
+        mainActivity.switchToClaimRoute(ActiveGame.getInstance().getMyPlayer().getSelectedRoute());
+    }
+
 
     void viewChat(Context c)
     {

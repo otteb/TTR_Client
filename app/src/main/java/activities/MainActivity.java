@@ -3,6 +3,7 @@ package activities;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
+import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Route;
 import Models.Request;
 import game.Cards.TrainCardsFragment;
@@ -151,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString("color", route.getColor());
         bundle.putInt("length", route.getLength());
         claimRouteFragment.setArguments(bundle);
+        ActiveGame.getInstance().getMyPlayer().setSelectedRoute(route);
 
         headfrag.beginTransaction().replace(R.id.activity_main, claimRouteFragment).commit();
     }

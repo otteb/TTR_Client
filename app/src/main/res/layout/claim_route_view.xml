@@ -15,6 +15,15 @@
         android:weightSum="1"
         android:baselineAligned="false">
 
+        <ImageButton
+            android:id="@+id/claimToStats"
+            android:src="@drawable/rightarrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#A52A2A"
+            android:layout_alignTop="@+id/gameToGameHistory"
+            android:layout_alignParentEnd="true"/>
+
         <TextView
             android:text="Claim Route"
             android:layout_width="match_parent"
@@ -61,6 +70,7 @@
             android:entries="@array/card_colors"
             android:layout_alignTop="@+id/color_name"
             android:layout_alignEnd="@+id/routeInfo"/>
+
 
         <TextView
             android:text="Wild"

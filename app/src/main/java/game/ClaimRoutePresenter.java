@@ -1,6 +1,7 @@
 package game;
 
 import android.content.Context;
+import android.text.method.Touch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ public class ClaimRoutePresenter implements Observer{
     private GameGuiFacade gameGuiFacade = new GameGuiFacade();
 
     public ClaimRoutePresenter(Context c){
+        ActiveGame.getInstance().getMyPlayer().setIsinProcessofClaimingRoute(true);
         this.context = c;
-//        gameGuiFacade.addObserver(this);
     }
 
     void claimRoute(Context c, int routeNum, String color, int numReg, int numWild){
@@ -54,8 +55,11 @@ public class ClaimRoutePresenter implements Observer{
             }
         }
 
-        if(!cards.isEmpty())
+        if(cards.size()< ActiveGame.getInstance().getRoutes().get(routeNum).getLength())
         {
+            Toast.makeText(context, "You dont have enough cards to claim this route", Toast.LENGTH_SHORT).show();
+        }
+        else {
             Client.getInstance().getCurState().claimRoute(ActiveGame.getInstance().getRoutes().get(routeNum), cards);
         }
 //        String str = "You have selected " + numReg + " " + color + " cards and " + numWild + " wild cards.";
@@ -67,6 +71,12 @@ public class ClaimRoutePresenter implements Observer{
         context=c;
         mainActivity = (MainActivity) context;
         mainActivity.openGame();
+    }
+
+    void switchToStats(Context c){
+        context=c;
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToStats();
     }
 
     @Override
