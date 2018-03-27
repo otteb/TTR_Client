@@ -1,5 +1,8 @@
 package StatePattern;
 
+import java.util.ArrayList;
+
+import Models.Cards.TrainCard;
 import Models.Client;
 import Models.Gameplay.Route;
 import game.Cards.CardsPresenter;
@@ -10,7 +13,7 @@ import game.GamePresenter;
  */
 
 public class State {
-    public void claimRoute(Route claimRoute) {
+    public void claimRoute(Route claimRoute, ArrayList<TrainCard> cards) {
         //toast it's not your turn
     }
     //public void takeFaceUpCard(GamePresenter wrapper) {}

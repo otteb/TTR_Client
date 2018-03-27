@@ -64,10 +64,12 @@ public class GamePresenter implements IGamePresenter, Observer {
     }
 
 
-    public void claimRoute(Context c, Route routeNumber)
+    public void claimRoute(Context c, Route route)
     {
         context =c;
-        Client.getInstance().getCurState().claimRoute(routeNumber);
+        mainActivity = (MainActivity) context;
+        mainActivity.switchToClaimRoute(route);
+//        Client.getInstance().getCurState().claimRoute(routeNumber);
 
     }
 

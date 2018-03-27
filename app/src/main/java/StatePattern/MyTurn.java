@@ -1,5 +1,8 @@
 package StatePattern;
 
+import java.util.ArrayList;
+
+import Models.Cards.TrainCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Route;
@@ -11,9 +14,10 @@ public class MyTurn extends State {
     private GameGuiFacade gui = new GameGuiFacade();
 
     @Override
-    public void claimRoute(Route routeNumber) {
-        //TODO: implement claimRoute()
-        gui.claimRoute(routeNumber);
+    public void claimRoute(Route routeNumber, ArrayList<TrainCard> cards) {
+        gui.claimRoute(routeNumber, cards);
+        Client.getInstance().setCurState(new NotMyTurn());
+        gui.endTurn();
     }
 
     @Override
