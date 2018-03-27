@@ -11,6 +11,7 @@ import AsyncTasks.GamePlay.DrawTrainTask;
 import AsyncTasks.GamePlay.FaceUpTask;
 import AsyncTasks.GamePlay.EndTurnTask;
 import Models.Cards.DestinationCard;
+import Models.Cards.TrainCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Chat;
@@ -62,9 +63,10 @@ public class GameGuiFacade {
         new EndTurnTask().execute(setUpRequest());
     }
 
-    public void claimRoute(Route routeNumber){
+    public void claimRoute(Route routeNumber, ArrayList<TrainCard> cards){
         Request request = setUpRequest();
         request.setRoute(routeNumber);
+        request.setTrainCards(cards);
 
         new ClaimRouteTask().execute(request);
     }

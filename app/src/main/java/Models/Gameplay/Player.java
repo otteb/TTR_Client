@@ -197,4 +197,20 @@ public class Player {
         }
 
     }
+
+    //pass in the color and the number of cards
+    public ArrayList<TrainCard> discardTrainCards(String color, int num) {
+        ArrayList<TrainCard> cards = new ArrayList<>();
+        if(getNumColorCards(color) >= num)
+        {
+            for (int i = 0; i < num; i++)
+            {
+                if (hand.get(i).getColor().equals(color))
+                {
+                    cards.add(hand.get(i));
+                }
+            }
+        }
+        return cards;
+    }
 }

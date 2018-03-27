@@ -3,10 +3,12 @@ package activities;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
+import Models.Gameplay.Route;
 import Models.Request;
 import game.Cards.TrainCardsFragment;
 import game.Cards.DestinationCardsFragment;
 import game.Chat.ChatFragment;
+import game.ClaimRouteFragment;
 import game.EndGame.EndGameFragment;
 import game.GameHistory.GameHistoryFragment;
 import game.Stats.StatsFragment;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public GameHistoryFragment gameHistoryFragment;
     public RegisterFragment registerFragment;
     public EndGameFragment endGameFragment;
+    public ClaimRouteFragment claimRouteFragment;
     FragmentManager headfrag = getSupportFragmentManager();
     String currentFrag = "";
 
@@ -135,6 +138,21 @@ public class MainActivity extends AppCompatActivity {
         endGameFragment = new EndGameFragment();
         currentFrag = "end";
         headfrag.beginTransaction().replace(R.id.activity_main, endGameFragment).commit();
+    }
+
+    public void switchToClaimRoute(Route route)
+    {
+        claimRouteFragment = new ClaimRouteFragment();
+        currentFrag = "claimRoute";
+        Bundle bundle = new Bundle();
+        bundle.putInt("routeNumber", route.getRouteNumber());
+        bundle.putString("start", route.getStartCity());
+        bundle.putString("end", route.getEndCity());
+        bundle.putString("color", route.getColor());
+        bundle.putInt("length", route.getLength());
+        claimRouteFragment.setArguments(bundle);
+
+        headfrag.beginTransaction().replace(R.id.activity_main, claimRouteFragment).commit();
     }
 
     public void updateGamesList() { lobbyFragment.updateGameList(); }

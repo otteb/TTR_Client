@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:background = "@drawable/got"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:background="@drawable/scroll"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:baselineAligned="false">
+
+        <TextView
+            android:text="Claim Route"
+            android:layout_width="match_parent"
+            android:textSize="24sp"
+            android:layout_marginEnd="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/claim_route_title"
+            android:textStyle="normal|bold"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="15dp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:text="Start --> End -- Color -- Length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="70dp"
+            android:id="@+id/routeInfo"/>
+
+        <TextView
+            android:text="Color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:id="@+id/color_name"
+            android:layout_below="@+id/routeInfo"
+            android:layout_alignStart="@+id/routeInfo"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/number_spinner"
+            android:entries="@array/card_numbers"
+            android:layout_below="@+id/color_spinner"
+            android:layout_alignStart="@+id/color_spinner"
+            android:layout_marginTop="8dp"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/color_spinner"
+            android:entries="@array/card_colors"
+            android:layout_alignTop="@+id/color_name"
+            android:layout_alignEnd="@+id/routeInfo"/>
+
+        <TextView
+            android:text="Wild"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wild_name"
+            android:layout_below="@+id/number_spinner"
+            android:layout_alignStart="@+id/color_name"
+            android:layout_marginTop="28dp"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wild_num_spinner"
+            android:entries="@array/card_numbers"
+            android:layout_alignBottom="@+id/wild_name"
+            android:layout_alignStart="@+id/number_spinner"/>
+
+        <Button
+            android:id="@+id/claimRouteToGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/return_to_game"
+            android:backgroundTint="#A52A2A"
+            android:layout_below="@+id/claimRouteButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"/>
+
+        <Button
+            android:id="@+id/claimRouteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/claim_route_button"
+            android:backgroundTint="#A52A2A"
+            android:layout_marginTop="81dp"
+            android:layout_below="@+id/wild_num_spinner"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+</RelativeLayout>
