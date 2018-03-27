@@ -74,7 +74,7 @@ public class TrainCardsFragment extends Fragment {
         fromDeck= (Button)view.findViewById(R.id.cardViewFromDeck);
         fromTable= (Button)view.findViewById(R.id.cardViewFromTable);
         skipTurn = (Button) view.findViewById(R.id.cardViewSkipTurn);
-        skipTurn.setVisibility(View.GONE);
+//        skipTurn.setVisibility(View.GONE);
 
         cardsPresenter = new CardsPresenter(getActivity());
 

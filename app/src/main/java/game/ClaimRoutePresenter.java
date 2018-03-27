@@ -24,20 +24,40 @@ public class ClaimRoutePresenter implements Observer{
 
     public ClaimRoutePresenter(Context c){
         this.context = c;
-        gameGuiFacade.addObserver(this);
+//        gameGuiFacade.addObserver(this);
     }
 
     void claimRoute(Context c, int routeNum, String color, int numReg, int numWild){
         context=c;
         //TODO: finish this
-        ArrayList<TrainCard> cards = ActiveGame.getInstance().getMyPlayer().discardTrainCards(color, numReg);
-        ArrayList<TrainCard> wilds = ActiveGame.getInstance().getMyPlayer().discardTrainCards("wild", numWild);
-        if(!wilds.isEmpty())
+        ArrayList<TrainCard> cards = new ArrayList<>();
+        int num = ActiveGame.getInstance().getMyPlayer().getNumColorCards(color);
+        if(num <= numReg)
         {
-            cards.addAll(wilds);
+            for(int i = 0; i < numReg; i++)
+            {
+                cards.add(new TrainCard(color));
+            }
+        }
+//        ArrayList<TrainCard> cards = ActiveGame.getInstance().getMyPlayer().discardTrainCards(color, numReg);
+//        ArrayList<TrainCard> wilds = ActiveGame.getInstance().getMyPlayer().discardTrainCards("wild", numWild);
+//        for(TrainCard w : wilds)
+//        {
+//            cards.add(w);
+//        }
+        num = ActiveGame.getInstance().getMyPlayer().getNumColorCards("wild");
+        if(num <= numWild)
+        {
+            for(int i = 0; i < numWild; i++)
+            {
+                cards.add(new TrainCard("wild"));
+            }
         }
 
-        Client.getInstance().getCurState().claimRoute(ActiveGame.getInstance().getRoutes().get(routeNum), cards);
+        if(!cards.isEmpty())
+        {
+            Client.getInstance().getCurState().claimRoute(ActiveGame.getInstance().getRoutes().get(routeNum), cards);
+        }
 //        String str = "You have selected " + numReg + " " + color + " cards and " + numWild + " wild cards.";
 //        Toast.makeText(c, str, Toast.LENGTH_SHORT).show();
 
