@@ -68,6 +68,7 @@ public class GamePresenter implements IGamePresenter, Observer {
     {
         context =c;
         mainActivity = (MainActivity) context;
+        ActiveGame.getInstance().getMyPlayer().setSelectedRoute(route);
         mainActivity.switchToClaimRoute(route);
 //        Client.getInstance().getCurState().claimRoute(routeNumber);
 
