@@ -33,7 +33,7 @@ public class ClaimRoutePresenter implements Observer{
         int numRegCards = ActiveGame.getInstance().getMyPlayer().getNumColorCards(color);
         int numWildCards = ActiveGame.getInstance().getMyPlayer().getNumColorCards("wild");
         String routeColor = ActiveGame.getInstance().getRoutes().get(routeNum).getColor();
-        if(!routeColor.equals(color) && !routeColor.equals("wild"))
+        if(!routeColor.equals(color) && !routeColor.equals("wild") && (numReg != 0))
         {
             //check if the route color matches the selected color or is wild
             //advise the user they cannot claim this route with the wrong color and return from this method

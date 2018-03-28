@@ -129,9 +129,9 @@ public class GamePresenter implements IGamePresenter, Observer {
             if (o.equals("claim")) {
                 mainActivity = (MainActivity) context;
                 mainActivity.updateRoutes();
-                Client.getInstance().setCurState(new NotMyTurn());
-                GameGuiFacade gui = new GameGuiFacade();
-                gui.endTurn();
+//                Client.getInstance().setCurState(new NotMyTurn());
+//                GameGuiFacade gui = new GameGuiFacade();
+//                gui.endTurn();
                 observable.hasChanged();
             } else if (o.equals("end")) {
                 mainActivity = (MainActivity) context;
