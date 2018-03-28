@@ -21,50 +21,54 @@ import activities.MainActivity;
 public class ClaimRoutePresenter implements Observer{
     public Context context;
     private MainActivity mainActivity;
-    private GameGuiFacade gameGuiFacade = new GameGuiFacade();
 
     public ClaimRoutePresenter(Context c){
         ActiveGame.getInstance().getMyPlayer().setIsinProcessofClaimingRoute(true);
         this.context = c;
     }
 
-    void claimRoute(Context c, int routeNum, String color, int numReg, int numWild){
+    boolean claimRoute(Context c, int routeNum, String color, int numReg, int numWild){
         context=c;
-        //TODO: finish this
         ArrayList<TrainCard> cards = new ArrayList<>();
-        int num = ActiveGame.getInstance().getMyPlayer().getNumColorCards(color);
-        if(num <= numReg)
+        int numRegCards = ActiveGame.getInstance().getMyPlayer().getNumColorCards(color);
+        int numWildCards = ActiveGame.getInstance().getMyPlayer().getNumColorCards("wild");
+        String routeColor = ActiveGame.getInstance().getRoutes().get(routeNum).getColor();
+        if(!routeColor.equals(color) && !routeColor.equals("wild"))
+        {
+            //check if the route color matches the selected color or is wild
+            //advise the user they cannot claim this route with the wrong color and return from this method
+            Toast.makeText(context, "You cannot claim this route with the color you have selected.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if((numReg <= numRegCards) && (numWild <= numWildCards))
         {
             for(int i = 0; i < numReg; i++)
             {
                 cards.add(new TrainCard(color));
             }
-        }
-//        ArrayList<TrainCard> cards = ActiveGame.getInstance().getMyPlayer().discardTrainCards(color, numReg);
-//        ArrayList<TrainCard> wilds = ActiveGame.getInstance().getMyPlayer().discardTrainCards("wild", numWild);
-//        for(TrainCard w : wilds)
-//        {
-//            cards.add(w);
-//        }
-        num = ActiveGame.getInstance().getMyPlayer().getNumColorCards("wild");
-        if(num <= numWild)
-        {
-            for(int i = 0; i < numWild; i++)
+            for(int w = 0; w < numWild; w++)
             {
                 cards.add(new TrainCard("wild"));
             }
-        }
 
-        if(cards.size()< ActiveGame.getInstance().getRoutes().get(routeNum).getLength())
+            if(cards.size() < ActiveGame.getInstance().getRoutes().get(routeNum).getLength())
+            {
+                Toast.makeText(context, "You have not selected enough cards to claim this route", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Client.getInstance().getCurState().claimRoute(ActiveGame.getInstance().getRoutes().get(routeNum), cards);
+                Toast.makeText(context, "Route claimed!", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+        else
         {
-            Toast.makeText(context, "You dont have enough cards to claim this route", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "You do not have enough cards to claim this route", Toast.LENGTH_SHORT).show();
         }
-        else {
-            Client.getInstance().getCurState().claimRoute(ActiveGame.getInstance().getRoutes().get(routeNum), cards);
-        }
+        return false;
 //        String str = "You have selected " + numReg + " " + color + " cards and " + numWild + " wild cards.";
 //        Toast.makeText(c, str, Toast.LENGTH_SHORT).show();
-
     }
 
     void switchToGame(Context c){
