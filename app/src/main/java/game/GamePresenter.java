@@ -21,6 +21,7 @@ import StatePattern.NotMyTurn;
 import activities.MainActivity;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.max;
 
 
 public class GamePresenter implements IGamePresenter, Observer {
@@ -82,30 +83,39 @@ public class GamePresenter implements IGamePresenter, Observer {
         float bestY= 100;
         Map<Integer, Route> routes= ActiveGame.getInstance().getRoutes();
         for(Integer routeNumber: routes.keySet()) {
-            float m =  (((float)routes.get(routeNumber).getStartY() - (float)routes.get(routeNumber).getEndY()) /
-                    ((float)routes.get(routeNumber).getStartX()- (float)routes.get(routeNumber).getEndX()));
-            float b = (float) (routes.get(routeNumber).getStartY() - (m * routes.get(routeNumber).getStartX()));
-            float testY = m * x + b;
-            if (testY >= y - 30 && testY <= y + 30) {
                 float smallY = (float)routes.get(routeNumber).getEndY();
                 float smallX = (float)routes.get(routeNumber).getEndX();
                 float largeY = (float)routes.get(routeNumber).getStartY();
                 float largeX = (float)routes.get(routeNumber).getStartX();
-                if ((float)routes.get(routeNumber).getStartY()< (float)routes.get(routeNumber).getEndY())
-                {
-                    smallY = (float)routes.get(routeNumber).getStartY();
-                    largeY = (float)routes.get(routeNumber).getEndY();
-                }
-                if ((float)routes.get(routeNumber).getStartX()< (float)routes.get(routeNumber).getEndX())
-                {
-                    smallX = (float)routes.get(routeNumber).getStartX();
-                    largeX = (float)routes.get(routeNumber).getEndX();
-                }
-                if(abs(y-testY) < bestY && y> smallY && y < largeY && x > smallX && x < largeX)
-                {
-                    bestRoute = routes.get(routeNumber);
-                    bestY=testY;
-                }
+
+            float A = x - smallX;
+            float B = y - smallY;
+            float C = largeX - smallX;
+            float D = largeY - smallY;
+            float dot = A * C + B * D;
+            float len_sq = C * C + D * D;
+            float param = dot/len_sq;
+            float xx, yy;
+
+            if (param < 0) {
+                xx = smallX;
+                yy = smallY;
+            }
+            else if (param > 1) {
+                xx = largeX;
+                yy = largeY;
+            }
+            else {
+                xx = smallX + param * C;
+                yy = smallY + param * D;
+            }
+            float dx = x - xx;
+            float dy = y - yy;
+            float distance = (float) Math.sqrt(dx * dx + dy * dy);
+            if(distance <= 20 && distance< bestY)
+            {
+                bestRoute=routes.get(routeNumber);
+                bestY= distance;
             }
         }
         return  bestRoute;
