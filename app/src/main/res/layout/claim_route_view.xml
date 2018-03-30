@@ -15,15 +15,6 @@
         android:weightSum="1"
         android:baselineAligned="false">
 
-        <ImageButton
-            android:id="@+id/claimToStats"
-            android:src="@drawable/rightarrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#A52A2A"
-            android:layout_alignTop="@+id/gameToGameHistory"
-            android:layout_alignParentEnd="true"/>
-
         <TextView
             android:text="Claim Route"
             android:layout_width="match_parent"
@@ -37,19 +28,10 @@
             android:textAlignment="center"/>
 
         <TextView
-            android:text="Start --> End -- Color -- Length"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="57dp"
-            android:layout_marginTop="70dp"
-            android:id="@+id/routeInfo"/>
-
-        <TextView
             android:text="Color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/color_name"
             android:layout_below="@+id/routeInfo"
             android:layout_alignStart="@+id/routeInfo"/>
@@ -62,14 +44,6 @@
             android:layout_below="@+id/color_spinner"
             android:layout_alignStart="@+id/color_spinner"
             android:layout_marginTop="8dp"/>
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/color_spinner"
-            android:entries="@array/card_colors"
-            android:layout_alignTop="@+id/color_name"
-            android:layout_alignEnd="@+id/routeInfo"/>
 
 
         <TextView
@@ -110,6 +84,124 @@
             android:layout_marginTop="81dp"
             android:layout_below="@+id/wild_num_spinner"
             android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:text="Start --> End -- Color -- Length"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:id="@+id/routeInfo"
+            android:layout_marginStart="60dp"
+            android:layout_below="@+id/claim_route_title"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/numCards"
+            android:layout_above="@+id/color_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="11dp">
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#A52A2A"/>
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_height="40dp"
+                android:id="@+id/numRedCards" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#FF8C00"/>
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_height="40dp"
+                android:id="@+id/numOrangeCards" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#FFD700"/>
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_height="40dp"
+                android:id="@+id/numYellowCards" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#3CB371"/>
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_height="40dp"
+                android:id="@+id/numGreenCards" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#4169E1"/>
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_height="40dp"
+                android:id="@+id/numBlueCards" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#DDA0DD"/>
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_height="40dp"
+                android:id="@+id/numPurpleCards" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#000000"/>
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_height="40dp"
+                android:id="@+id/numBlackCards" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#FFFAFA"/>
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_height="40dp"
+                android:id="@+id/numWhiteCards" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/rainbow"/>
+            <TextView
+                android:text="@string/zero"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_height="40dp"
+                android:id="@+id/numWildCards" />
+        </LinearLayout>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/color_spinner"
+            android:entries="@array/card_colors"
+            android:layout_alignTop="@+id/color_name"
+            android:layout_toEndOf="@+id/color_name"
+            android:layout_marginStart="18dp"/>
 
     </RelativeLayout>
 </RelativeLayout>

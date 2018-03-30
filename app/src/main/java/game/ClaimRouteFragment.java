@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import Models.Gameplay.ActiveGame;
+import Models.Gameplay.Player;
 import activities.R;
 
 /**
@@ -27,12 +28,21 @@ public class ClaimRouteFragment extends Fragment {
     TextView routeInfo;
     TextView wildTitle;
     TextView colorTitle;
+    TextView redCards;
+    TextView orangeCards;
+    TextView yellowCards;
+    TextView greenCards;
+    TextView blueCards;
+    TextView purpleCards;
+    TextView blackCards;
+    TextView whiteCards;
+    TextView wildCards;
     Spinner color_spinner;
     Spinner number_spinner;
     Spinner wild_num_spinner;
     Button claimRoute;
     Button returnToGame;
-    ImageButton goToStats;
+//    ImageButton goToStats;
     String color = "";
     int numRegular = 0;
     int numWild = 0;
@@ -72,13 +82,13 @@ public class ClaimRouteFragment extends Fragment {
             }
         });
 
-        goToStats= (ImageButton)view.findViewById(R.id.claimToStats);
-        goToStats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                claimRoutePresenter.switchToStats(getActivity());
-            }
-        });
+//        goToStats= (ImageButton)view.findViewById(R.id.claimToStats);
+//        goToStats.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                claimRoutePresenter.switchToStats(getActivity());
+//            }
+//        });
 
 
         routeInfo = (TextView) view.findViewById(R.id.routeInfo);
@@ -129,6 +139,30 @@ public class ClaimRouteFragment extends Fragment {
                     }
                 });
 
+        redCards = (TextView) view.findViewById(R.id.numRedCards);
+        orangeCards = (TextView) view.findViewById(R.id.numOrangeCards);
+        yellowCards = (TextView) view.findViewById(R.id.numYellowCards);
+        greenCards = (TextView) view.findViewById(R.id.numGreenCards);
+        blueCards = (TextView) view.findViewById(R.id.numBlueCards);
+        purpleCards = (TextView) view.findViewById(R.id.numPurpleCards);
+        blackCards = (TextView) view.findViewById(R.id.numBlackCards);
+        whiteCards = (TextView) view.findViewById(R.id.numWhiteCards);
+        wildCards = (TextView) view.findViewById(R.id.numWildCards);
+
+        updateHand();
         return view;
+    }
+
+    public void updateHand() {
+        Player player = ActiveGame.getInstance().getMyPlayer();
+        redCards.setText(String.valueOf(player.getNumColorCards("red")));
+        orangeCards.setText(String.valueOf(player.getNumColorCards("orange")));
+        yellowCards.setText(String.valueOf(player.getNumColorCards("yellow")));
+        greenCards.setText(String.valueOf(player.getNumColorCards("green")));
+        blueCards.setText(String.valueOf(player.getNumColorCards("blue")));
+        purpleCards.setText(String.valueOf(player.getNumColorCards("purple")));
+        blackCards.setText(String.valueOf(player.getNumColorCards("black")));
+        whiteCards.setText(String.valueOf(player.getNumColorCards("white")));
+        wildCards.setText(String.valueOf(player.getNumColorCards("wild")));
     }
 }

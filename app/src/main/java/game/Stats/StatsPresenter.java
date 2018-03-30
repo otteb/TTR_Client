@@ -33,12 +33,12 @@ public class StatsPresenter implements IStatesPresenter, Observer{
         mainActivity.openGame();
     }
 
-    void returnToClaimRoute(Context c)
-    {
-        context=c;
-        mainActivity= (MainActivity)context;
-        mainActivity.switchToClaimRoute(ActiveGame.getInstance().getMyPlayer().getSelectedRoute());
-    }
+//    void returnToClaimRoute(Context c)
+//    {
+//        context=c;
+//        mainActivity= (MainActivity)context;
+//        mainActivity.switchToClaimRoute(ActiveGame.getInstance().getMyPlayer().getSelectedRoute());
+//    }
 
 
     void viewChat(Context c)

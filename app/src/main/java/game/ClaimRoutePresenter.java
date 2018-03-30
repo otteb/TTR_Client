@@ -11,12 +11,10 @@ import java.util.Observer;
 import Models.Cards.TrainCard;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
+import Models.Gameplay.Route;
 import Services.GUI.GameGuiFacade;
 import activities.MainActivity;
 
-/**
- * Created by ferrell3 on 3/26/18.
- */
 
 public class ClaimRoutePresenter implements Observer{
     public Context context;
@@ -30,18 +28,20 @@ public class ClaimRoutePresenter implements Observer{
     boolean claimRoute(Context c, int routeNum, String color, int numReg, int numWild){
         context=c;
         ArrayList<TrainCard> cards = new ArrayList<>();
-        int numRegCards = ActiveGame.getInstance().getMyPlayer().getNumColorCards(color);
-        int numWildCards = ActiveGame.getInstance().getMyPlayer().getNumColorCards("wild");
-        String routeColor = ActiveGame.getInstance().getRoutes().get(routeNum).getColor();
-        if(!routeColor.equals(color) && !routeColor.equals("wild") && (numReg != 0))
+        int numRegHand = ActiveGame.getInstance().getMyPlayer().getNumColorCards(color);
+        int numWildHand = ActiveGame.getInstance().getMyPlayer().getNumColorCards("wild");
+        Route route = ActiveGame.getInstance().getRoutes().get(routeNum);
+        if(!route.getColor().equals(color) && !route.getColor().equals("wild") && (numReg != 0))
         {
             //check if the route color matches the selected color or is wild
             //advise the user they cannot claim this route with the wrong color and return from this method
             Toast.makeText(context, "You cannot claim this route with the color you have selected.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if((numReg <= numRegCards) && (numWild <= numWildCards))
+        if((numReg <= numRegHand) && (numWild <= numWildHand)
+                && (route.getLength() <= ActiveGame.getInstance().getMyPlayer().getNumTrains()))
         {
+            //add selected cards to list to send to the server to claim the route
             for(int i = 0; i < numReg; i++)
             {
                 cards.add(new TrainCard(color));
@@ -51,7 +51,8 @@ public class ClaimRoutePresenter implements Observer{
                 cards.add(new TrainCard("wild"));
             }
 
-            if(cards.size() < ActiveGame.getInstance().getRoutes().get(routeNum).getLength())
+            //check to make sure the user has selected enough/the correct cards for the selected route
+            if(cards.size() < route.getLength())
             {
                 Toast.makeText(context, "You have not selected enough cards to claim this route", Toast.LENGTH_SHORT).show();
             }
@@ -64,7 +65,7 @@ public class ClaimRoutePresenter implements Observer{
         }
         else
         {
-            Toast.makeText(context, "You do not have enough cards to claim this route", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "You do not have enough cards or trains to claim this route", Toast.LENGTH_SHORT).show();
         }
         return false;
 //        String str = "You have selected " + numReg + " " + color + " cards and " + numWild + " wild cards.";
@@ -77,11 +78,11 @@ public class ClaimRoutePresenter implements Observer{
         mainActivity.openGame();
     }
 
-    void switchToStats(Context c){
-        context=c;
-        mainActivity = (MainActivity) context;
-        mainActivity.switchToStats();
-    }
+//    void switchToStats(Context c){
+//        context=c;
+//        mainActivity = (MainActivity) context;
+//        mainActivity.switchToStats();
+//    }
 
     @Override
     public void update(Observable observable, Object o) {
