@@ -52,6 +52,8 @@ public class DestinationCardsFragment extends Fragment {
     TextView title;
     Player player;
 
+    //TODO: check for less than 3 drawn destinations
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         player = ActiveGame.getInstance().getMyPlayer();
@@ -95,13 +97,17 @@ public class DestinationCardsFragment extends Fragment {
                     } else {
                         cardsPresenter.discard2DestCards(getActivity(), selected1, selected2);
                     }
-                    if(ActiveGame.getInstance().getMyPlayer().getInitDestCard() == true)
+                    if(ActiveGame.getInstance().getMyPlayer().getInitDestCard())
                     {
                         cardsPresenter.switchToGame(getActivity());
                     }
                     ActiveGame.getInstance().getMyPlayer().setInitDestCard(true);
                 }
                 else {
+                    if(Client.getInstance().getCurState() instanceof DrewDestCards && ActiveGame.getInstance().getDrawnDestinations().isEmpty())
+                    {
+                        Client.getInstance().setCurState(new MyTurn());
+                    }
                     cardsPresenter.switchToGame(getActivity());
                 }
             }
@@ -110,7 +116,7 @@ public class DestinationCardsFragment extends Fragment {
         drawCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Client.getInstance().getCurState() instanceof GameSetup)
+                if(Client.getInstance().getCurState() instanceof GameSetup || Client.getInstance().getCurState() instanceof DrewDestCards)
                 {
                     Toast.makeText(getActivity(), "You cannot draw any more cards this turn", Toast.LENGTH_SHORT).show();
                 }
@@ -121,6 +127,10 @@ public class DestinationCardsFragment extends Fragment {
         sendDCardBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Client.getInstance().getCurState() instanceof DrewDestCards && ActiveGame.getInstance().getDrawnDestinations().isEmpty())
+                {
+                    Client.getInstance().setCurState(new MyTurn());
+                }
                 if(selected2 == 0) {
                     cardsPresenter.discardDestCard(getActivity(), selected1);
                 } else if (selected1 == 0) { //selected2 != 0 && selected1 == 0 //which means that only one is selected, but it is selected2
@@ -192,7 +202,6 @@ public class DestinationCardsFragment extends Fragment {
 
     public void updateDestinationCards() {
         if(!ActiveGame.getInstance().getDrawnDestinations().isEmpty()) {
-
             card2.setBackgroundColor(Color.parseColor("#F5F5DC"));
             card2Start.setText(ActiveGame.getInstance().getDrawnDestinations().get(0).getCity1());
             card2End.setText(ActiveGame.getInstance().getDrawnDestinations().get(0).getCity2());
@@ -239,14 +248,9 @@ public class DestinationCardsFragment extends Fragment {
             card3.setVisibility(View.GONE);
             card4.setVisibility(View.GONE);
         }
-
     }
 
     private void resetCard(int index) {
         cards.get(index).setBackgroundColor(Color.parseColor("#F5F5DC"));
     }
-
-//    public void displayTurn() {
-//        Toast.makeText(getActivity(), "It's " + ActiveGame.getInstance().getActivePlayer() + "'s turn", Toast.LENGTH_SHORT).show();
-//    }
 }

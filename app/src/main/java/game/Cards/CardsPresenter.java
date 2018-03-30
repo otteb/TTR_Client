@@ -11,6 +11,7 @@ import Models.Client;
 import Models.Gameplay.ActiveGame;
 import ObserverPattern.TTR_Observable;
 import Services.GUI.GameGuiFacade;
+import StatePattern.Drew1Card;
 import activities.MainActivity;
 
 public class CardsPresenter implements ICardsPresenter, Observer {
@@ -67,6 +68,10 @@ public class CardsPresenter implements ICardsPresenter, Observer {
         }
         else
         {
+            if(Client.getInstance().getCurState() instanceof Drew1Card && ActiveGame.getInstance().getFaceUpCards().get(cardIndex-1).getColor().equals("wild"))
+            {
+                Toast.makeText(context, "You can't take that card", Toast.LENGTH_SHORT).show();
+            }
             Client.getInstance().getCurState().takeFaceUpCard(this, cardIndex-1);
         }
     }
