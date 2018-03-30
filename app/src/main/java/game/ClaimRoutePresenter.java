@@ -78,11 +78,6 @@ public class ClaimRoutePresenter implements Observer{
         mainActivity.openGame();
     }
 
-//    void switchToStats(Context c){
-//        context=c;
-//        mainActivity = (MainActivity) context;
-//        mainActivity.switchToStats();
-//    }
 
     @Override
     public void update(Observable observable, Object o) {

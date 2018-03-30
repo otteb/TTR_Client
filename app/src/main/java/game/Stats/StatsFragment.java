@@ -37,7 +37,6 @@ public class StatsFragment extends Fragment {
     private StatsPresenter statsPresenter;
     private StatsAdapter statsAdapter;
     private DestCardsAdapter destCardsAdapter;
-//    ImageButton goToClaimRoute;
 
     public StatsFragment() {
     }
@@ -74,22 +73,6 @@ public class StatsFragment extends Fragment {
             }
         });
 
-//        goToClaimRoute = (ImageButton)view.findViewById(R.id.statsToClaim);
-//        goToClaimRoute.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                statsPresenter.returnToClaimRoute(getActivity());
-//            }
-//        });
-//        if(ActiveGame.getInstance().getMyPlayer().getSelectedRoute() == null)
-//        {
-//            goToClaimRoute.setVisibility(View.GONE);
-//        }
-//        else
-//        {
-//            goToGame.setVisibility(View.GONE);
-//            goToChat.setVisibility(View.GONE);
-//        }
 
         ArrayList<Player> players = new ArrayList<>();
         players.addAll(ActiveGame.getInstance().getPlayers());
@@ -279,8 +262,6 @@ public class StatsFragment extends Fragment {
             if (cards == null)
             {
                 cards = new ArrayList<>();
-//                DestinationCard dc = new DestinationCard();
-//                cards.add(dc);
             }
             else
             { cards.addAll(card_list); }
