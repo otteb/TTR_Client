@@ -71,7 +71,7 @@ public class LoginRegisterPresenter implements ILoginRegisterPresenter, Observer
     public void switchToRegister(Context c)
     {
         context=c;
-        Toast.makeText(c, "Switching to Login", Toast.LENGTH_SHORT).show();
+        Toast.makeText(c, "Switching to Register", Toast.LENGTH_SHORT).show();
         mainActivity = (MainActivity) context;
         mainActivity.switchToRegister();
     }
