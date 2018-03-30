@@ -197,11 +197,12 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
             if (routeNumber != null)
             {
                // Toast.makeText(getContext(), routeNumber.getName(), Toast.LENGTH_SHORT).show();
-                claimRoute.setVisibility(v.VISIBLE);
+                claimRoute.setVisibility(View.VISIBLE);
             }
             else {
                 //debatebly we should remove this
                 Toast.makeText(getContext(), "You weren't close enough to claim this route", Toast.LENGTH_SHORT).show();
+                claimRoute.setVisibility(View.GONE);
             }
             return true;
         }
