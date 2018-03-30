@@ -13,7 +13,7 @@ public class Route {
     private int startY;
     private int endX;
     private int endY;
-
+    private boolean doubleRoute;
 
     public Route() {}
 
@@ -119,5 +119,9 @@ public class Route {
 
     public void setEndY(int endY) {
         this.endY = endY;
+    }
+
+    public boolean isDoubleRoute() {
+        return doubleRoute;
     }
 }

@@ -191,7 +191,7 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if(event.getAction()== MotionEvent.ACTION_DOWN) {
-            routeNumber = gamePresenter.selectingRoute(event.getX(), event.getY());
+            routeNumber = gamePresenter.selectingRoute(getActivity(), event.getX(), event.getY());
             String s = String.valueOf(event.getX())+" "+String.valueOf(event.getY());
            // Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
             if (routeNumber != null)

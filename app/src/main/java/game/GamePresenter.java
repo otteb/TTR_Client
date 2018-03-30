@@ -2,6 +2,7 @@ package game;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -77,8 +78,9 @@ public class GamePresenter implements IGamePresenter, Observer {
 
 
 
-    public Route selectingRoute(float x, float y)
+    public Route selectingRoute(Context c, float x, float y)
     {
+        context =c;
         Route bestRoute= null;
         float bestY= 100;
         Map<Integer, Route> routes= ActiveGame.getInstance().getRoutes();
@@ -118,8 +120,32 @@ public class GamePresenter implements IGamePresenter, Observer {
                 bestY= distance;
             }
         }
-        return  bestRoute;
+        if(bestRoute.isDoubleRoute()) {
+            Route claimedRoute = findClaimedDoubleRoute(bestRoute.getStartCity());
+            String curPlayer = ActiveGame.getInstance().getMyPlayer().getName();
+            if (claimedRoute != null && claimedRoute.getOwner().equals(curPlayer)) {
+                Toast.makeText(context, "You can't claim adjacent double routes", Toast.LENGTH_SHORT).show();
+                return null;
+            }
+            else {
+                return bestRoute;
+            }
+        }
+        return bestRoute;
     }
+
+    public Route findClaimedDoubleRoute(String startCity)
+    {
+        Map<Integer, Route> routes= ActiveGame.getInstance().getClaimedRoutes();
+        for(Integer routeNumber: routes.keySet()){
+            if(routes.get(routeNumber).getStartCity().equals(startCity))
+            {
+                return routes.get(routeNumber);
+            }
+        }
+        return null;
+    }
+
 
 
     // We need this for updating the claimed routes
