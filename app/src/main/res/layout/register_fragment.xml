@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="FINN"
+                android:text="reggie"
                 android:ems="10"
                 android:id="@+id/editText_username1" />
         </LinearLayout>
@@ -60,7 +60,7 @@
                 android:ems="10"
                 android:id="@+id/editText2_password1"
                 android:layout_weight="1"
-                android:text="FINES" />
+                android:text="aa" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -82,7 +82,7 @@
                 android:ems="10"
                 android:id="@+id/editText2_passwordconf1"
                 android:layout_weight="1"
-                android:text="FINES" />
+                android:text="aa" />
         </LinearLayout>
 
         <LinearLayout
@@ -125,7 +125,7 @@
                 android:ems="10"
                 android:id="@+id/ipEditText"
                 android:layout_weight="1"
-                android:text="" />
+                android:text="192.168.2.169" />
         </LinearLayout>
 
 

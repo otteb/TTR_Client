@@ -1,38 +1,25 @@
 package game;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
 import Interfaces.IGamePresenter;
-import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Route;
-import Models.Result;
 import ObserverPattern.TTR_Observable;
-import Services.Commands.GamePlayServices;
-import Services.GUI.GameGuiFacade;
-import StatePattern.MyTurn;
-import StatePattern.NotMyTurn;
 import activities.MainActivity;
-
-import static java.lang.Math.abs;
-import static java.lang.Math.max;
 
 
 public class GamePresenter implements IGamePresenter, Observer {
     private Context context;
     private MainActivity mainActivity;
-//    private Player player;
 
     public GamePresenter(Context c) {
         context = c;
-//        player = ActiveGame.getInstance().getMyPlayer();
         TTR_Observable.getInstance().addObserver(this);
     }
 
@@ -72,8 +59,6 @@ public class GamePresenter implements IGamePresenter, Observer {
         mainActivity = (MainActivity) context;
         ActiveGame.getInstance().getMyPlayer().setSelectedRoute(route);
         mainActivity.switchToClaimRoute(route);
-//        Client.getInstance().getCurState().claimRoute(routeNumber);
-
     }
 
 
@@ -120,7 +105,7 @@ public class GamePresenter implements IGamePresenter, Observer {
                 bestY= distance;
             }
         }
-        if(bestRoute.isDoubleRoute()) {
+        if(bestRoute != null && bestRoute.isDoubleRoute()) {
             Route claimedRoute = findClaimedDoubleRoute(bestRoute.getStartCity());
             String curPlayer = ActiveGame.getInstance().getMyPlayer().getName();
             if (claimedRoute != null && claimedRoute.getOwner().equals(curPlayer)) {
@@ -155,9 +140,6 @@ public class GamePresenter implements IGamePresenter, Observer {
             if (o.equals("claim")) {
                 mainActivity = (MainActivity) context;
                 mainActivity.updateRoutes();
-//                Client.getInstance().setCurState(new NotMyTurn());
-//                GameGuiFacade gui = new GameGuiFacade();
-//                gui.endTurn();
                 observable.hasChanged();
             } else if (o.equals("end")) {
                 mainActivity = (MainActivity) context;

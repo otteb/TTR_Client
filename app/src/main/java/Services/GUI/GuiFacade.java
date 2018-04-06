@@ -2,6 +2,7 @@ package Services.GUI;
 
 import AsyncTasks.Lobby.CreateGameAsyncTask;
 import AsyncTasks.Lobby.JoinGameAsyncTask;
+import AsyncTasks.Lobby.RejoinGameAsyncTask;
 import AsyncTasks.LoginAndRegister.LoginAsyncTask;
 import AsyncTasks.LoginAndRegister.RegisterAsyncTask;
 import AsyncTasks.Lobby.StartGameAsyncTask;
@@ -42,8 +43,8 @@ public class GuiFacade {
     public void joinGame (Game game, String player)
     {
         Request request = new Request();
-        request.setAuthToken(Client.getInstance().getAuthToken());
         request.setGameId(game.getId());
+        request.setAuthToken(Client.getInstance().getAuthToken());
         request.setUsername(player);
         request.setCommandNum(Client.getInstance().getCommandNum());
         new JoinGameAsyncTask().execute(request);
@@ -59,6 +60,18 @@ public class GuiFacade {
         request.setCommandNum(Client.getInstance().getCommandNum());
         new StartGameAsyncTask().execute(request);
     }
+
+
+    public void rejoinGame (String gameId)
+    {
+        Request request = new Request();
+        request.setGameId(gameId);
+        request.setAuthToken(Client.getInstance().getAuthToken());
+        request.setUsername(Client.getInstance().getUserName());
+        request.setCommandNum(Client.getInstance().getCommandNum());
+        new RejoinGameAsyncTask().execute(request);
+    }
+
 
     public void addObserver(Observer o)
     {

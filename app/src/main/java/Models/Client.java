@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import Client_Server_Communication.Poller;
+import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Game;
 import Models.Gameplay.Player;
 import ObserverPattern.TTR_Observable;
@@ -92,6 +93,11 @@ public class Client {// extends Observable {
     public void addGameToMap(String gameId, Game game) {
         gameMap.put(gameId, game);
        TTR_Observable.getInstance().createGame();
+    }
+
+    public void removeGameFromMap(String gameId) {
+        gameMap.remove(gameId);
+        TTR_Observable.getInstance().createGame();
     }
 
 
@@ -210,5 +216,10 @@ public class Client {// extends Observable {
 
     public void setPort(String port) {
         this.port = port;
+    }
+
+    public void resetActiveGame() {
+        activeGame = null;
+        ActiveGame.getInstance().reset();
     }
 }

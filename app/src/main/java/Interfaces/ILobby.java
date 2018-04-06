@@ -15,5 +15,9 @@ public interface ILobby {
 
     void startGame(Request request); //(String authToken, String gameId);
 
+    void rejoinGame(Request request);
+
     void updateClient(Request request); //(String authToken);
+
+    void removeGame(Request request);
 }

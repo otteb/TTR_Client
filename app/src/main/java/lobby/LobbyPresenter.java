@@ -10,6 +10,7 @@ import java.util.Observer;
 import Interfaces.ILobbyPresenter;
 import Models.Client;
 import Models.Request;
+import ObserverPattern.TTR_Observable;
 import activities.MainActivity;
 import Models.Gameplay.Game;
 import Services.GUI.GuiFacade;
@@ -60,6 +61,12 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
     }
 
     @Override
+    public void rejoinGame(Context context, Game game) {
+        Toast.makeText(context, "Rejoining game", Toast.LENGTH_SHORT).show();
+        guiFacade.rejoinGame(game.getId());
+    }
+
+    @Override
     public Game createGame(Context context, String id) {
         Game myGame = new Game(id);
         Client.getInstance().setAuthToken(user.getAuthToken());
@@ -76,11 +83,11 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
     }
 
 
-    public void setUser(String username, String password, String authToken)
+    public void setUser()
     {
-        user.setAuthToken(authToken);
-        user.setPassword(password);
-        user.setUsername(username);
+        user.setAuthToken(Client.getInstance().getAuthToken());
+        user.setPassword(Client.getInstance().getPassword());
+        user.setUsername(Client.getInstance().getUserName());
     }
 
 
@@ -90,7 +97,6 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
         {
             lobbyFragment= (MainActivity)((Activity)context);
             lobbyFragment.updateGamesList();
-            //lobbyFragment.updatePlayers();
         }
         else if(result.equals("join"))
         {
@@ -102,6 +108,11 @@ public class LobbyPresenter implements ILobbyPresenter, Observer {
             //start a game
             MainActivity mainActivity = (MainActivity) context;
             mainActivity.switchToDestCards();
+        }
+        else if(result.equals("rejoin"))
+        {
+            MainActivity mainActivity = (MainActivity) context;
+            mainActivity.openGame();
         }
         observable.hasChanged();
     }

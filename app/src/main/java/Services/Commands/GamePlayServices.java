@@ -182,7 +182,7 @@ public class GamePlayServices implements IGamePlay {
 
         ActiveGame.getInstance().getClaimedRoutes().put(request.getRoute().getRouteNumber(),routeToRemove);
 
-        TTR_Observable.getInstance().claimRoute("claim");
+        TTR_Observable.getInstance().claimRoute();
         TTR_Observable.getInstance().updateStats("stats");
     }
 }

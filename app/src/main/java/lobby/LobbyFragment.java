@@ -79,7 +79,7 @@ public class LobbyFragment extends Fragment {
         newGame = view.findViewById(R.id.newGame);
         gameName = view.findViewById(R.id.gName);
         mGamesRecView = view.findViewById(R.id.game_list);
-        lobbyPresenter.setUser(acceptedUser.getString("username"), acceptedUser.getString("password"), acceptedUser.getString("authToken"));
+        lobbyPresenter.setUser();
         mGamesRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         final ArrayList<Game> games = Client.getInstance().getGameList();
@@ -113,20 +113,21 @@ public class LobbyFragment extends Fragment {
                     }
                     else if(Client.getInstance().getActiveGame() == currentGame)
                     {
-                        TTR_Observable.getInstance().startGame();
+//                        TTR_Observable.getInstance().startGame();
                         start.setEnabled(true);
                         System.out.println("GetActiveGame == game");
-                        Request temp = new Request(); // Jordan-Approved
-                        temp.setUsername(Client.getInstance().getUserName());
-                        temp.setGameId(currentGame.getId());
-                        LobbyServices.getInstance().startGame(temp);
+//                        Request temp = new Request(); // Jordan-Approved
+//                        temp.setUsername(Client.getInstance().getUserName());
+//                        temp.setGameId(currentGame.getId());
+//                        LobbyServices.getInstance().startGame(temp);
+                        lobbyPresenter.rejoinGame(getActivity(), currentGame);
                     }
-                    else if(Client.getInstance().getActiveGame().getId().equals(currentGame.getId()))
-                    {
-                        TTR_Observable.getInstance().startGame();
-                        start.setEnabled(true);
-                        System.out.println("GetActiveGameId.equals(game.getId())");
-                    }
+//                    else if(Client.getInstance().getActiveGame().getId().equals(currentGame.getId()))
+//                    {
+//                        start.setEnabled(true);
+//                        TTR_Observable.getInstance().startGame();
+//                        System.out.println("GetActiveGameId.equals(game.getId())");
+//                    }
                     else
                     {
                         Toast.makeText(getActivity(), "You cannot start that game", Toast.LENGTH_LONG).show();

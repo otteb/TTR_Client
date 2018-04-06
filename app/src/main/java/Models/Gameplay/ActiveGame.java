@@ -42,6 +42,10 @@ public class ActiveGame {
         claimedRoutes= new HashMap<>();
     }
 
+    public void reset() {
+        theGame = new ActiveGame();
+    }
+
     public void incGameCMDNum(int num){
         this.gameCMDNum += num;
     }

@@ -62,6 +62,34 @@ public class LobbyServices implements ILobby {
         }
     }
 
+    @Override
+    public void rejoinGame(Request request) {
+        System.out.println("COMMAND EXECUTING - " + request.getUsername() + " IS REJOINING GAME: " + request.getGameId());
+        Game temp = Client.getInstance().getActiveGame();
+        if(temp != null && Client.getInstance().getIsLoggedIn() && temp.getId().equals(request.getGameId()))
+        {
+            Client.getInstance().getGameById(request.getGameId()).setActive(true);
+            ActiveGame.getInstance().setId(Client.getInstance().getActiveGame().getId());
+            Client.getInstance().getPoller().stopLobbyCommands();
+            ActiveGame.getInstance().getPoller().runGamePlayCommands();
+            TTR_Observable.getInstance().rejoinGame();
+        }
+        else
+        {
+            Client.getInstance().getGameById(request.getGameId()).setActive(true);
+        }
+    }
+
+    @Override
+    public void removeGame(Request request) {
+        System.out.println("COMMAND EXECUTING - REMOVE GAME: " + request.getGameId());
+        if(Client.getInstance().getActiveGame().getId().equals(request.getGameId()))
+        {
+            Client.getInstance().resetActiveGame();
+        }
+        Client.getInstance().removeGameFromMap(request.getGameId());
+    }
+
     @Override //polling response
     public void updateClient(Request request) { //(String authToken);
         System.out.println("COMMAND EXECUTED - UPDATE CLIENT GAME");

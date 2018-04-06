@@ -3,6 +3,7 @@ package activities;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
+import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Route;
 import Models.Request;
@@ -75,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
             lobbyFragment = new LobbyFragment();
             currentFrag = "lobby";
             Bundle bundle = new Bundle();
-            bundle.putString("username", r.getUsername());
-            bundle.putString("password", r.getPassword());
-            bundle.putString("authToken", r.getAuthToken());
+            bundle.putString("username", Client.getInstance().getUserName()); //r.getUsername());
+            bundle.putString("password", Client.getInstance().getPassword()); //r.getPassword());
+            bundle.putString("authToken", Client.getInstance().getAuthToken()); //r.getAuthToken());
             lobbyFragment.setArguments(bundle);
             headfrag.beginTransaction().replace(R.id.activity_main, lobbyFragment).commit();}
     }

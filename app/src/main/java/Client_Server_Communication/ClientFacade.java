@@ -157,6 +157,12 @@ public class ClientFacade {
         return ClientCommunicator.getInstance().sendCommand(gameCommand);
     }
 
+    public Result rejoinGame(Request request) {
+        Command gameCommand = new Command("Interfaces.ILobby", "rejoinGame",
+                new String[]{ "Models.Request" }, new Request[]{ request });
+        return ClientCommunicator.getInstance().sendCommand(gameCommand);
+    }
+
     Result updateClient(Request request){
         Command gameCommand = new Command("Interfaces.ILobby", "updateClient",
                 new String[]{ "Models.Request" }, new Request[]{ request });

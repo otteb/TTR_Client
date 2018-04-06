@@ -55,8 +55,8 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
     public GameFragment()
     {
         gamePresenter = new GamePresenter(getActivity());
-
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -72,6 +72,7 @@ public class GameFragment extends Fragment implements  View.OnTouchListener {
     @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        gamePresenter = new GamePresenter(getActivity());
         blackPaint.setStrokeWidth(30);
         blackPaint.setColor(Color.BLACK);
         yellowPaint.setStrokeWidth(30);

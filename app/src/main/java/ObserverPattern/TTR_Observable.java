@@ -63,6 +63,11 @@ public class TTR_Observable extends Observable {
         notifyObservers("start");
     }
 
+    public void rejoinGame() {
+        setChanged();
+        notifyObservers("rejoin");
+    }
+
     public void endGame() {
         setChanged();
         notifyObservers("end");
@@ -78,9 +83,9 @@ public class TTR_Observable extends Observable {
         notifyObservers("login");
     }
 
-    public void claimRoute(String claim) {
+    public void claimRoute() {
         setChanged();
-        notifyObservers(claim);
+        notifyObservers("claim");
     }
 
 }
