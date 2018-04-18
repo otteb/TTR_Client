@@ -7,6 +7,8 @@ import Models.Gameplay.Game;
 import Models.Gameplay.Player;
 import Models.Request;
 import ObserverPattern.TTR_Observable;
+import StatePattern.MyTurn;
+import StatePattern.NotMyTurn;
 
 public class LobbyServices implements ILobby {
     private static LobbyServices theOne = new LobbyServices();
@@ -83,6 +85,14 @@ public class LobbyServices implements ILobby {
                 ActiveGame.getInstance().setClaimedRoutes(plyr.getClaimedRoutes());
             }
 
+            if(currentGame.getMyPlayer().isTurn())
+            {
+                Client.getInstance().setCurState(new MyTurn());
+            }
+            else
+            {
+                Client.getInstance().setCurState(new NotMyTurn());
+            }
 
             Client.getInstance().getPoller().stopLobbyCommands();
             ActiveGame.getInstance().getPoller().runGamePlayCommands();

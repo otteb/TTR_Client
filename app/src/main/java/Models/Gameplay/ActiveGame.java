@@ -212,7 +212,7 @@ public class ActiveGame {
     }
 
     public void setClaimedRoutes(Map<Integer, Route> claimedRoutes) {
-        if(claimedRoutes.isEmpty())
+        if(this.claimedRoutes.isEmpty())
         {
             this.claimedRoutes = claimedRoutes;
         }

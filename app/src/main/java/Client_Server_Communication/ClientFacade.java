@@ -194,7 +194,14 @@ public class ClientFacade {
         else
         {
             System.out.println("Error:");
-            System.out.println(result.getErrorMsg());
+            if(result.getErrorMsg() == null)
+            {
+                Client.getInstance().setCommandNum(0);
+            }
+            else
+            {
+                System.out.println(result.getErrorMsg());
+            }
         }
     }
 }
