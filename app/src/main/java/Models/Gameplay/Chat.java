@@ -4,6 +4,12 @@ public class Chat {
     private String username = "";
     private String message = "";
 
+    public Chat() {
+    }
+
+    public Chat(String msg){
+        message = msg;
+    }
 
     public String getUsername() {
         return username;
@@ -23,9 +29,8 @@ public class Chat {
 
 
     public String displayChat(){
-
+        if(username.equals("")) { return message; }
         return username + ": "+ message;
-
     }
 
 

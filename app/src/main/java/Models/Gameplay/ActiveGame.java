@@ -212,9 +212,15 @@ public class ActiveGame {
     }
 
     public void setClaimedRoutes(Map<Integer, Route> claimedRoutes) {
-        this.claimedRoutes = claimedRoutes;
+        if(claimedRoutes.isEmpty())
+        {
+            this.claimedRoutes = claimedRoutes;
+        }
+        else
+        {
+            this.claimedRoutes.putAll(claimedRoutes);
+        }
     }
-
 
     public ArrayList<String> getCities() {
         return Cities;

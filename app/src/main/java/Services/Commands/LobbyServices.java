@@ -4,6 +4,7 @@ import Interfaces.ILobby;
 import Models.Client;
 import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Game;
+import Models.Gameplay.Player;
 import Models.Request;
 import ObserverPattern.TTR_Observable;
 
@@ -68,8 +69,21 @@ public class LobbyServices implements ILobby {
         Game temp = Client.getInstance().getActiveGame();
         if(temp != null && Client.getInstance().getIsLoggedIn() && temp.getId().equals(request.getGameId()))
         {
+            Game currentGame = request.getGame();
             Client.getInstance().getGameById(request.getGameId()).setActive(true);
+
             ActiveGame.getInstance().setId(Client.getInstance().getActiveGame().getId());
+            ActiveGame.getInstance().setPlayers(currentGame.getPlayers());
+            ActiveGame.getInstance().setChats(currentGame.getChats());
+            ActiveGame.getInstance().setHistory(currentGame.getHistory());
+            ActiveGame.getInstance().setFaceUpCards(currentGame.getFaceUpCards());
+            ActiveGame.getInstance().setMasterList(currentGame.getRoutesMap());
+            for(Player plyr : currentGame.getPlayers())
+            {
+                ActiveGame.getInstance().setClaimedRoutes(plyr.getClaimedRoutes());
+            }
+
+
             Client.getInstance().getPoller().stopLobbyCommands();
             ActiveGame.getInstance().getPoller().runGamePlayCommands();
             TTR_Observable.getInstance().rejoinGame();

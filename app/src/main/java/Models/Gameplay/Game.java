@@ -16,12 +16,14 @@ public class Game {
     private HashMap<Integer, Route> routesMap;
     private HashMap<Integer, Route> masterMap;
     private HashMap<Integer, Route> claimedRoutes;
+    private ArrayList<String> chats;
     private boolean active = false;    //Has the game started
 
     public Game(){
         players = new ArrayList<>();
         history = new GameHistory();
         routesMap = new HashMap<>();
+        chats = new ArrayList<>();
     }
 
     //constructor allowing to instantiate new game with given id
@@ -31,6 +33,7 @@ public class Game {
         history = new GameHistory();
         routesMap = new HashMap<>();
         masterMap= new HashMap<>();
+        chats = new ArrayList<>();
     }
 
     public String getId() {
@@ -85,6 +88,19 @@ public class Game {
 
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
+    }
+
+    public ArrayList<Chat> getChats() {
+        ArrayList<Chat> chatList = new ArrayList<>();
+        for(String msg : chats)
+        {
+            chatList.add(new Chat(msg));
+        }
+        return chatList;
+    }
+
+    public void setChats(ArrayList<String> chats) {
+        this.chats = chats;
     }
 
     public boolean isJoinable() {
