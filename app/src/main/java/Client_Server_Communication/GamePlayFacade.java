@@ -80,6 +80,13 @@ public class GamePlayFacade {
         {
             System.out.println("Error:");
             System.out.println(gameResult.getErrorMsg());
+            if(gameResult.getErrorMsg().equals("Connection refused"))
+            {
+//                System.out.println("The connection was refused.");
+                ActiveGame.getInstance().setGameCMDNum(0);
+                System.out.println("GameCMDNum reset");
+            }
+//            System.out.println("IN GAMEPLAY FACADE UPDATE CLIENT");
         }
         return gameResult;
     }
@@ -102,6 +109,7 @@ public class GamePlayFacade {
         {
             System.out.println("Error:");
             System.out.println(result.getErrorMsg());
+//            System.out.println("IN GAMEPLAY FACADE runCMD");
         }
     }
 }

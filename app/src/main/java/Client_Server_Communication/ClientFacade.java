@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Models.Cards.DestinationCard;
 import Models.Client;
 import Models.Command;
+import Models.Gameplay.ActiveGame;
 import Models.Gameplay.Chat;
 import Models.Gameplay.Game;
 import Models.Request;
@@ -172,6 +173,7 @@ public class ClientFacade {
         {
             System.out.println("Error:");
             System.out.println(gameResult.getErrorMsg());
+            System.out.println("IN CLIENT FACADE UPDATE CLIENT");
         }
         return gameResult;
     }
@@ -194,14 +196,17 @@ public class ClientFacade {
         else
         {
             System.out.println("Error:");
-            if(result.getErrorMsg() == null)
-            {
-                Client.getInstance().setCommandNum(0);
-            }
-            else
-            {
-                System.out.println(result.getErrorMsg());
-            }
+            System.out.println("IN CLIENT FACADE RUNCMD");
+            System.out.println(result.getErrorMsg());
+//            if(result.getErrorMsg() == null)
+//            {
+//                ActiveGame.getInstance().setGameCMDNum(0);
+//                System.out.println("GameCMDNum reset");
+//            }
+//            else
+//            {
+//
+//            }
         }
     }
 }
